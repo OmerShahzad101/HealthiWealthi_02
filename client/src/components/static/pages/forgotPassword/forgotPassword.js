@@ -1,143 +1,106 @@
-import { useEffect, useRef, useState } from "react";
-import { Button, Form, FloatingLabel, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+// import auth from "../../services/auth.service";
+// import { ENV } from "../../env";
+import $ from "jquery";
 
-// import Logo from '../../common/logo/Logo';
-import Toast from "../../../common/toast/Toast";
+const ForgotPassword = () => {
+  const InitialValues = { email: "" };
+  const [forgotpass, setForgotpass] = useState(InitialValues);
+  let history = useHistory();
 
-import { cancelOngoingHttpRequest, postHttpRequest } from "../../../../axios";
-import validate from "../../../../utils/form-validation/authFormValidation";
-import { LOGIN } from "../../../../router/constants/ROUTES";
+  // JQuery for Input
+  $(".floating").on("focus blur", function (e) {
+    $(this)
+      .parents(".form-focus")
+      .toggleClass("focused", e.type === "focus" || this.value.length > 0);
+  });
 
-import styles from "./forgetPassword.module.scss";
-import Logo from "../../../../assets/img/Logo.svg";
-import LoginBanner from "../../../../assets/img/login-banner.png";
+  //Handle Changes to Get Values
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForgotpass({
+      ...forgotpass,
+      [name]: value,
+    });
+  };
 
-export default function ForgotPassword() {
-  const emailRef = useRef();
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [validationErrors, setValidationErrors] = useState({});
-
-  // Cancel company creation HTTP call in case component is unmounted due to route change
-  useEffect(() => {
-    return cancelOngoingHttpRequest;
-  }, []);
-
-  function forgetPasswordUserHandler(event) {
-    event.preventDefault();
-    const email = emailRef.current.value;
-    const inputData = {
-      email,
-    };
-
-    const errors = validate(inputData);
-
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors({ ...errors });
-      return;
-    } else {
-      setValidationErrors({});
-    }
-
-    setIsLoading(true);
-    postHttpRequest("/auth//forgot-password", { ...inputData })
-      .then((response) => {
-        const data = response.data;
-
-        if (data && data.success) {
-          Toast.fire({
-            icon: "info",
-            title: data.message,
-          });
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: data.message,
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
+  //API call
+  const ForgotPasswordCall = async () => {
+    // const res = await auth.forgot(`${ENV.API_URL}api/auth/forgot-password` , forgotpass);
+    // if (res.success == true) {
+      // toast.success(res.message);
+      // history("/login");
+    // } else {
+      // toast.error(res.message);
+    // }
+  };
   return (
-    <section className="form">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6 col-12 p-0">
-            <div className="main-img-text">
-              <div className="main-img">
-                {/* <img src={LoginBanner} className="img-fluid side" /> */}
-              </div>
-              <div className="heading-paragraph">
-                <h1 className="welcome-heading">Welcome to Healthi Wealthi</h1>
-                <p className="building">Your Health Care Partner</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 col-12 p-0 order-1 order-md-0">
-            <div className="form-wrapper">
-              <div className="fix-height">
-                <div className="top-logo">
-                  <img src={Logo} className="img-fluid" />
-                </div>
-                <div className="heading-login">
-                  <h1 className="login">Forgot Password?</h1>
-                </div>
-                <Form noValidate onSubmit={forgetPasswordUserHandler}>
-                  <div className="d-flex">
-                    <Form.Group
-                      className="mb-12  w-100"
-                      controlId="input-company-email"
-                    >
-                      <FloatingLabel
-                        controlId="floating-input-email"
-                        label="Email"
-                        className="dg-mb-24 w-100 text-muted"
-                      >
-                        <span className="icon fa fa-envelope"></span>
-
-                        <Form.Control
-                          type="email"
-                          ref={emailRef}
-                          placeholder="henry.octane@gmail.com"
-                          autoComplete="email"
-                          name="email"
-                          required
-                        />
-                        <span className="errors">
-                          {validationErrors?.email}
-                        </span>
-                      </FloatingLabel>
-                    </Form.Group>
+    <div className="account-page">
+      <div className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <div className="account-content">
+                <div className="row align-items-center justify-content-center">
+                  <div className="col-md-7 col-lg-6 login-left">
+                    <ToastContainer
+                      position="top-center"
+                      autoClose={600}
+                      hideProgressBar
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      theme="colored"
+                    />
+                    <img
+                      src="assets/img/login-banner.png"
+                      className="img-fluid"
+                      alt="Login Banner"
+                    />
                   </div>
+                  <div className="col-md-12 col-lg-6 login-right">
+                    <div className="login-header">
+                      <h3>Forgot Password?</h3>
+                      <p className="small text-muted">
+                        Enter your email to get a password reset link
+                      </p>
+                    </div>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn btn-block"
-                    disabled={isLoading}
-                  >
-                    {isLoading && (
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                        className="dg-mr-8"
-                      />
-                    )}
-                    <span>Reset Password</span>
-                  </Button>
-                </Form>
+                    <form action="#">
+                      <div className="form-group form-focus">
+                        <input
+                          type="email"
+                          name="email"
+                          value={forgotpass.email}
+                          onChange={handleChange}
+                          className="form-control floating"
+                        />
+                        <label className="focus-label">Email</label>
+                      </div>
+                      <div className="text-right">
+                        <Link className="forgot-link" to="/login">
+                          Remember your password?
+                        </Link>
+                      </div>
+                      <button
+                        className="btn btn-primary btn-block btn-lg login-btn"
+                        type="button"
+                        onClick={ForgotPasswordCall}
+                      >
+                        Reset Password
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default ForgotPassword;
