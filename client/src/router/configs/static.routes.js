@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import withSuspense from '../../hoc/withSuspense';
-import { ROOT, ABOUT, CONTACT ,SEARCHCOACH} from '../constants/ROUTES';
+import { ROOT, ABOUT, CONTACT ,SEARCH_COACH} from '../constants/ROUTES';
 
 // Home
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ `../../components/static/pages/home/Home`));
@@ -43,7 +43,7 @@ function getRouteConfigs() {
         },
         {
             // SearchCoach
-            path: SEARCHCOACH,
+            path: SEARCH_COACH,
             exact: true,
             element: <SearchCoachWithSuspense />,
         },

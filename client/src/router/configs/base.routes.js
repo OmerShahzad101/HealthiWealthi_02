@@ -85,16 +85,7 @@ function getRouteConfigs() {
             },
         },
 
-        {
-            // RESET PASSWORD
-            path: RESET_PASSWORD,
-            exact: true,
-            element: <ResetPasswordWithSuspense />,
-            beforeEnter: authCheckMiddleware,
-            meta: {
-                title: 'Reset Password',
-            },
-        },
+  
 
       
 

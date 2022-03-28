@@ -5,12 +5,13 @@ export const APP = '/app';
  * OPEN ROUTES
  */
 
+//Static Routes
  export const ABOUT = '/about';
  export const CONTACT = '/contact-us';
- export const SEARCHCOACH = '/search-coach';
+ export const SEARCH_COACH = '/search-coach';
  
 
-// ------------------------------------
+// Base Routes
 export const LOGIN = '/login';
 export const SIGNUP = '/signup';
 export const FORGOT_PASSWORD = '/forgot-password';
@@ -21,6 +22,24 @@ export const SIGN_DOCUMENT = '/sign-document/:docId';
 /**
  * GUARDED ROUTES
  */
+
+// Our ROutes
+//Coach Routes
+export const COACH_DASHBOARD = `${APP}/coach-dashboard`;
+export const COACH_PROFILE_SETTING = `${APP}/coach-profile-setting`;
+export const COACH_PROFILE = `${APP}/coach-profile`;
+export const COACH_CHANGE_PASSWORD = `${APP}/coach-change-password`;
+
+//Clients Routes
+
+export const APPOINTMENTS = `${APP}/coach-change-password`;
+export const BOOK_APPOINTMENTS = `${APP}/coach-change-password`;
+export const BOOK_SUCCESSFUL = `${APP}/coach-change-password`;
+export const CHECKOUT = `${APP}/coach-change-password`;
+export const CLIENT_DASHBOARD = `${APP}/coach-change-password`;
+
+
+
 
 // DASHBOARD
 export const DASHBOARD = `${APP}/dashboard`;
