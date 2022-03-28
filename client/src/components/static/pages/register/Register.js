@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import $ from "jquery";
-import auth from "../../services/auth.service";
+// import auth from "../../services/auth.service";
 // import { ENV } from "../../env";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -40,12 +40,12 @@ const Register = () => {
       //   `http://localhost:8080/api/auth/signup`,
       //   user
       // );
-      if (res.success == true) {
-        history.push("/login");
-        alert(res.message);
-      }
+      // if (res.success == true) {
+      //   history.push("/login");
+        //alert(res.message);
+      //}
     }
-    navigate("/login");
+    // history.push("/login");
   };
 
   return (

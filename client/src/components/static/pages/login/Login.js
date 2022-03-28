@@ -38,16 +38,16 @@ const Login = () => {
       //   `http://localhost:8080/api/auth/login`,
       //   loginUser
       // );
-      if (res.success == true) {
-        localStorage.setItem(
-          "accessToken",
-          JSON.stringify(res.user.accessToken)
-        );
-        history.push("/");
-        alert(res.message);
-      }
+      // if (res.success == true) {
+      //   localStorage.setItem(
+      //     "accessToken",
+      //     JSON.stringify(res.user.accessToken)
+      //   );
+      //   history.push("/");
+      //   alert(res.message);
+      // }
     }
-    navigate("/");
+    history.push("/");
   };
 
   return (
@@ -129,7 +129,7 @@ const Login = () => {
                       </div>
                       <div className="text-center dont-have">
                         Don’t have an account?{" "}
-                        <Link to="/register">Register</Link>
+                        <Link to="/signup">Register</Link>
                       </div>
                     </form>
                   </div>
