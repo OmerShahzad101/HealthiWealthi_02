@@ -16,11 +16,10 @@ const CoachProfileWithSuspense = withSuspense(CoachProfile);
 const CoachProfileSetting = lazy(() =>import( /* webpackChunkName: "CoachProfileSetting" */ "../../components/app/pages/CoachProfileSetting/CoachProfileSetting"));
 const CoachProfileSettingWithSuspense = withSuspense(CoachProfileSetting);
 
-
+// --------------------------- Client Routes ----------------------------
 
 const Appointments = lazy(() =>import( /* webpackChunkName: "Appointments" */ "../../components/app/pages/Appointments/Appointments"));
 const AppointmentsWithSuspense = withSuspense(Appointments);
-
 
 const BookAppointment = lazy(() =>import( /* webpackChunkName: "BookAppointment" */ "../../components/app/pages/BookAppointment/BookAppointment"));
 const BookAppointmentWithSuspense = withSuspense(BookAppointment);
@@ -34,6 +33,23 @@ const CheckoutWithSuspense = withSuspense(Checkout);
 const ClientDashboard = lazy(() =>import( /* webpackChunkName: "ClientDashboard" */ "../../components/app/pages/ClientDashboard/ClientDashboard"));
 const ClientDashboardWithSuspense = withSuspense(ClientDashboard);
 
+const ClientProfile = lazy(() =>import( /* webpackChunkName: "ClientProfile" */ "../../components/app/pages/ClientProfile/ClientProfile"));
+const ClientProfileWithSuspense = withSuspense(ClientProfile);
+
+const Favourites = lazy(() =>import( /* webpackChunkName: "Favourites" */ "../../components/app/pages/Favourites/Favourites"));
+const FavouritesWithSuspense = withSuspense(Favourites);
+
+const Invoice = lazy(() =>import( /* webpackChunkName: "Invoice" */ "../../components/app/pages/Invoice/Invoice"));
+const InvoiceWithSuspense = withSuspense(Invoice);
+
+const InvoicesView = lazy(() =>import( /* webpackChunkName: "InvoicesView" */ "../../components/app/pages/InvoicesView/InvoicesView"));
+const InvoicesViewWithSuspense = withSuspense(InvoicesView);
+
+const MyClient = lazy(() =>import( /* webpackChunkName: "MyClient" */ "../../components/app/pages/MyClient/MyClient"));
+const MyClientWithSuspense = withSuspense(MyClient);
+
+const Reviews = lazy(() =>import( /* webpackChunkName: "Reviews" */ "../../components/app/pages/Reviews/Reviews"));
+const ReviewsWithSuspense = withSuspense(Reviews);
 
 
 // Route configurations for the app
@@ -93,11 +109,47 @@ function getRouteConfigs() {
         exact: true,
         element: <CheckoutWithSuspense />,
     },
-     {
+    {
         // ClientDashboard ROUTE
         path: routes.CLIENT_DASHBOARD,
         exact: true,
         element: <ClientDashboardWithSuspense />,
+    },
+    {
+        // ClientProfile ROUTE
+        path: routes.CLIENT_PROFILE,
+        exact: true,
+        element: <ClientProfileWithSuspense />,
+    },
+    {
+        // Favourites ROUTE
+        path: routes.FAVOURITES,
+        exact: true,
+        element: <FavouritesWithSuspense />,
+    },
+    {
+        // Invoice ROUTE
+        path: routes.INVOICE,
+        exact: true,
+        element: <InvoiceWithSuspense />,
+    },
+    {
+        // InvoicesView ROUTE
+        path: routes.INVOICE_VIEW,
+        exact: true,
+        element: <InvoicesViewWithSuspense />,
+    },
+    {
+        // MyClient ROUTE
+        path: routes.MY_CLIENTS,
+        exact: true,
+        element: <MyClientWithSuspense />,
+    },
+    {
+        // Reviews ROUTE
+        path: routes.REVIEWS,
+        exact: true,
+        element: <ReviewsWithSuspense />,
     },
     
     {
@@ -110,199 +162,3 @@ function getRouteConfigs() {
 
 export default getRouteConfigs;
 
-
-
-// import userHasPermission from "../../utils/auth/userHasPermission";
-// import userHasRoleAndPermission from "../../utils/auth/userHasRoleAndPermission";
-// // Super Admin Dashboard
-
-// const SuperAdminDashboard = lazy(() =>import( /* webpackChunkName: "SuperAdminDashboard" */ "../../components/app/pages/dashboard/super-admin/SuperAdminDashboard"));
-
-// const SuperAdminDashboardWithSuspense = withSuspense(SuperAdminDashboard);
-
-
-
-
-/**
- * Dynamic Component Selection for rendering based on user role
- */
-//  function getDashboardElement() {
-//     let element = <SuperAdminDashboardWithSuspense />;
-  
-//     return element;
-//   }
-
-
-
-// {
-    //   // DASHBOARD ROUTE
-    //   path: routes.NEW_WORK_FLOW,
-    //   exact: true,
-    //   element: <NewWorkFlowWithSuspense />,
-     
-    // },
-
-// {
-//     // DASHBOARD ROUTE
-//     path: routes.DASHBOARD,
-//     exact: true,
-//     element: getDashboardElement(),
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-dashboard')) {
-//             return next();
-//         } else {
-//             return next(routes.SETTINGS);
-//         }
-//     },
-//     meta: {
-//         title: 'Dashboard',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // DASHBOARD ROUTE
-//     path: routes.NEW_WORK_FLOW,
-//     exact: true,
-//     element: <NewWorkFlowWithSuspense/>,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('create-workflow')) {
-//             return next();
-//         } else {
-//             return next(routes.NEW_WORK_FLOW);
-//         }
-//     },
-//     meta: {
-//         title: 'New Work Flow',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // COMPANIES ROUTE
-//     path: routes.TEMPLATE,
-//     exact: true,
-//     element: <CompaniesWithSuspense />,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-all-template-listing')) {
-//             return next();
-//         } else {
-//             return next(routes.DASHBOARD);
-//         }
-//     },
-//     meta: {
-//         title: 'Template',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // CREATE NEW COMPANY ROUTE
-//     path: routes.CREATE_NEW_Template,
-//     exact: true,
-//     element: <CreateCompanyWithSuspense />,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-all-template-listing')) {
-//             return next();
-//         } else {
-//             return next(routes.CREATE_NEW_Template);
-//         }
-//     },
-//     meta: {
-//         title: 'Create New Template',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // EDIT COMPANY ROUTE
-//     path: routes.EDIT_Template,
-//     exact: true,
-//     redirect: routes.TEMPLATE,
-// },
-// {
-//     path: routes.EDIT_Template_ROUTE,
-//     exact: true,
-//     element: <EditCompanyWithSuspense />,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-all-template-listing')) {
-//             return next();
-//         } else {
-//             return next(routes.TEMPLATE);
-//         }
-//     },
-//     meta: {
-//         title: 'Edit Company',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // COMPANY DETAILS ROUTE
-//     path: routes.COMPANY_DETAILS,
-//     exact: true,
-//     redirect: routes.TEMPLATE,
-// },
-// {
-//     // PORTFOLIO
-//     path: routes.DOCUMENT,
-//     exact: true,
-//     element: <DocumentWithSuspense />,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-document-listing')) {
-//             return next();
-//         } else {
-//             return next(routes.DASHBOARD);
-//         }
-//     },
-//     meta: {
-//         title: 'Document',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // USERS ROUTE
-//     path: routes.USERS,
-//     exact: true,
-//     element: <UsersWithSuspense />,
-//     beforeEnter: (next) => {
-//         if (userHasPermission('view-company-users-listing')) {
-//             return next();
-//         } else {
-//             return next(routes.DASHBOARD);
-//         }
-//     },
-//     meta: {
-//         title: 'Users',
-//         requiresAuth: true,
-//     },
-// },
-// {
-//     // SETTINGS ROUTE
-//     path: routes.SETTINGS,
-//     element: <SettingsWithSuspense />,
-//     meta: {
-//         requiresAuth: true,
-//     },
-// },
-
-// // Portfolio
-// const NewWorkFlow = lazy(() => import(/* webpackChunkName: "Portfolio" */ '../../components/app/pages/NewWorkFlow/newWorkFlow'));
-// const NewWorkFlowWithSuspense = withSuspense(NewWorkFlow);
-
-// // Templates
-// const Companies = lazy(() => import(/* webpackChunkName: "Companies" */ '../../components/app/pages/templates/view/template'));
-// const CompaniesWithSuspense = withSuspense(Companies);
-
-// const CreateCompany = lazy(() => import(/* webpackChunkName: "CreateCompany" */ '../../components/app/pages/templates/createTemplates/Create'));
-// const CreateCompanyWithSuspense = withSuspense(CreateCompany);
-
-// const EditCompany = lazy(() => import(/* webpackChunkName: "EditCompany" */ '../../components/app/pages/templates/editTemplates/Edit'));
-// const EditCompanyWithSuspense = withSuspense(EditCompany);
-
-// // Portfolio
-// const Document = lazy(() => import(/* webpackChunkName: "Portfolio" */ '../../components/app/pages/document/document'));
-// const DocumentWithSuspense = withSuspense(Document);
-
-// // Users
-// const Users = lazy(() => import(/* webpackChunkName: "Users" */ '../../components/app/pages/users/view'));
-// const UsersWithSuspense = withSuspense(Users);
-
-// // Settings
-// const Settings = lazy(() => import(/* webpackChunkName: "Settings" */ '../../components/app/pages/settings/Settings'));
-// const SettingsWithSuspense = withSuspense(Settings);

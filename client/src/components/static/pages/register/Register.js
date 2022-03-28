@@ -42,7 +42,7 @@ const Register = () => {
       // );
       // if (res.success == true) {
       //   history.push("/login");
-        //alert(res.message);
+      //alert(res.message);
       //}
     }
     // history.push("/login");
@@ -102,8 +102,16 @@ const Register = () => {
                         />
                         <label className="focus-label">Create Password</label>
                       </div>
+                      <div className="form-group form-focus">
+                        <select class="form-control floating">
+                        <option selected disabled></option>
+                          <option>Coach</option>
+                          <option>Client</option>
+                        </select>
+                        <label className="focus-label">Register as a</label>
+                      </div>
 
-                      <div className="col ps-1" md="6">
+                      {/* <div className="col ps-1" md="6">
                         <label>Register as a </label>
                         <div className="form-group">
                           <label>Coach</label>
@@ -123,7 +131,7 @@ const Register = () => {
                             onChange={handleChange}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                       <div className="text-right">
                         <Link className="forgot-link" to="/login">
