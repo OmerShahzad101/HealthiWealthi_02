@@ -12,8 +12,7 @@ export default function Home() {
         variableWidth: true,
       };
     return <>
-        <div className="main-wrapper">
-          <Header/>
+
           <section className="section section-search">
             <div className="container-fluid">
                 <div className="banner-wrapper">
@@ -577,8 +576,6 @@ export default function Home() {
                 </div>
             </div>
         </section>
-            <Footer/>
-        </div>
 
     </>;
 }
