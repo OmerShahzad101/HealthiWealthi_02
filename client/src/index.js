@@ -11,8 +11,8 @@ import ErrorBoundary from './hoc/ErrorBoundary';
 import store, { persistor } from './store';
 import * as serviceWorker from './serviceWorker';
 import './styles.css';
-import './assets/css/slick.css';
-import './assets/css/slick-theme.css';
+// import './assets/css/slick.css';
+// import './assets/css/slick-theme.css';
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
