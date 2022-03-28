@@ -4,6 +4,10 @@ export const APP = '/app';
 /**
  * OPEN ROUTES
  */
+
+ export const ABOUT = '/about';
+
+// ------------------------------------
 export const LOGIN = '/login';
 export const SIGNUP = '/signup';
 export const FORGOT_PASSWORD = '/forgot-password';

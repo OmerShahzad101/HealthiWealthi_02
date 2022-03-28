@@ -1,11 +1,17 @@
 import { lazy } from 'react';
 
 import withSuspense from '../../hoc/withSuspense';
-import { ROOT, EMAIL_VERIFICATION, SIGN_DOCUMENT } from '../constants/ROUTES';
+import { ROOT, ABOUT, EMAIL_VERIFICATION, SIGN_DOCUMENT } from '../constants/ROUTES';
 
 // Home
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ '../../components/static/pages/home/Home'));
 const HomeWithSuspense = withSuspense(Home);
+
+
+// About
+const About = lazy(() => import(/* webpackChunkName: "About" */ '../../components/static/pages/about/About'));
+const AboutWithSuspense = withSuspense(About);
+
 
 // Reset Password
 const MultipleSigne = lazy(() => import(/* webpackChunkName: "changePassword" */ '../../components/static/pages/SignPagesPreview/MultipleSigner'));
@@ -26,6 +32,12 @@ function getRouteConfigs() {
             path: ROOT,
             exact: true,
             element: <HomeWithSuspense />,
+        },
+        {
+            // About
+            path: ABOUT,
+            exact: true,
+            element: <AboutWithSuspense />,
         },
         {
             // RESET PASSWORD
