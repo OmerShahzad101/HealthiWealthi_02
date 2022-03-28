@@ -1,0 +1,5 @@
+[
+    { "value": "manufacturing", "label": "Manufacturing" },
+    { "value": "engineering", "label": "Engineering" },
+    { "value": "tech-support", "label": "Tech Support" }
+]

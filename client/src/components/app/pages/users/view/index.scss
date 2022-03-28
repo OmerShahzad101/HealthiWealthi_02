@@ -1,0 +1,188 @@
+@import '../../../../../assets/css/mixins';
+
+.company-management-wrapper {
+    @include medium(max-width) {
+        .UserManage {
+            padding-right: 32px;
+        }
+    }
+    .drop-search-wrapper {
+        gap: 12px;
+        // @include medium(max-width) {
+        //     padding-right: 16px;
+        // }
+    }
+    .dropdown-wrap {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 230px);
+        max-width: 730px;
+        gap: 12px;
+        // width: 100%;
+        .form-group {
+            min-width: 320px;
+        }
+        .select__control {
+            background: #f4f6f8;
+            border-radius: 6px;
+            border: none !important;
+        }
+    }
+
+    .company-title {
+        h3 {
+            // font-size: clamp(1rem, 0.7359rem + 1.1268vw, 1.75rem);
+            font-size: clamp(1rem, 0.8786rem + 0.5178vw, 1.5rem);
+            line-height: 1;
+            color: var(--black);
+            // @include xSmall(max-width){
+            //     font-size: 16px;
+            //     line-height: 18px;
+            // }
+        }
+    }
+    .company-detail {
+        display: flex;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--black);
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            // line-height: 26px;
+            // height: 53px;
+            @include xSmall(max-width) {
+                span {
+                    display: none !important;
+                }
+                svg {
+                    margin-right: 0 !important;
+                }
+            }
+            svg {
+                margin-right: 6px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+        .ExportBtn {
+            background-color: var(--dark-border) !important;
+        }
+    }
+    .search-wrap {
+        display: flex;
+
+        flex-wrap: wrap;
+        gap: 12px;
+        .export-btn {
+            padding: 14px;
+            font-size: 12px;
+            line-height: 20px;
+            color: #272b31;
+            background: #242429;
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--white);
+            // height: 53px;
+            // &:active {
+            //     background-color: var(--white) !important;
+            //     color: #272b31 !important;
+            // }
+            svg {
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+        }
+        .company-btn {
+            font-size: 16px;
+            line-height: 20px;
+            background-color: var(--btn-bg-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 17px 24px;
+            color: var(--white);
+            text-decoration: none;
+            &:active {
+                background-color: var(--btn-bg-gray) !important;
+            }
+        }
+        .search-bar input {
+            background: #f4f6f8;
+            border-radius: 6px;
+            border: none !important;
+        }
+        @include xSmall(max-width) {
+            .search-bar {
+                display: none;
+            }
+
+            .export-btn {
+                height: 46px;
+                svg {
+                    margin-right: 0;
+                }
+                span {
+                    display: none;
+                }
+            }
+        }
+        // @include xSmall(max-width) {
+        //     .SmallSearch {
+        //         display: block;
+        //     }
+        //     .SearchIcon {
+        //         background-color: #f4f6f8;
+        //         display: flex;
+        //         justify-content: center;
+        //         align-items: center;
+        //         padding: 15px;
+        //         border-radius: 6px;
+        //         height: 46px;
+        //     }
+        // }
+    }
+}
+
+// .custom-listing-wrapper {
+//     @include medium(max-width) {
+//         padding-left: 16px;
+//     }
+// }
+.users-tabs {
+    .nav-item {
+        button {
+            border: none !important;
+            // padding-left: 0;
+            margin-bottom: 0px;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            color: #828285;
+            font-size: clamp(0.75rem, 0.39rem + 0.3883vw, 1.125rem);
+            &:after {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 3px;
+                background-color: var(--btn-bg-green);
+                bottom: -1px;
+                left: 0;
+                opacity: 0;
+            }
+            &.active {
+                font-family: var(--Graphik-Semibold);
+                color: var(--black);
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+@include xSmall(max-width) {
+    .isPaddingSmall{
+        padding-left: 16px;
+    }
+}

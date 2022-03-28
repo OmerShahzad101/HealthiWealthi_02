@@ -1,0 +1,16 @@
+.customSelectWrap {
+    display: flex;
+    align-items: center;
+    .customSelectImg {
+        width: 22px;
+        height: 22px;
+        border-radius: 16px;
+        overflow: hidden;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 100%;
+        }
+    }
+}

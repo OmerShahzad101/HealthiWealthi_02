@@ -1,0 +1,34 @@
+.containerFluid {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--white);
+    .websiteNavbarWrapper {
+        max-width: 1465px;
+        margin: 0 auto;
+        height: 80px;
+        .container{
+            height: 80px;
+        }
+        .customBtn{
+            .loginBtn{
+                background-color: var(--white);
+                color: var(--regular-gray-text-color);
+                border: 1px solid var(--border-color);
+                padding: 10px 24px;
+                text-decoration: none;
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+            .startedBtn {
+                background-color: var(--btn-bg-green);
+                color: var(--white);
+                border: none;
+                padding: 10px 24px;
+                text-decoration: none;
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+        }
+    }
+}

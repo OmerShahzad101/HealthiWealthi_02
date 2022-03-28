@@ -1,0 +1,43 @@
+<html>
+
+    <head>
+    <script src="./final-script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    </body>
+</html>
+<script>
+    // var frame = document.getElementById('eSignPandaXFrame'); 
+    // frame.contentWindow.postMessage("http://example.com", "*");
+    eSignPanda.setApiKey("5c471cd075b9262768cf856b");
+    
+    const opts = {
+        test_mode: 1,
+        clientId: '5c45d889bcbb7f14f9d6f678',
+        templatesArray: ["5cb6dea596b20b55650f8db4"],
+        subject: 'The NDA we talked about',
+        message: 'Please sign this NDA and then we can discuss more.',
+        signers: [
+            {
+            email_address: 'm.rehmangames@gmail.com',
+            name: 'Alice'
+            }
+        ],
+        files: ['NDA.pdf'],
+        onSuccess:function(res){
+            console.log(res);
+        },
+        onCancel:function(res){
+            console.log(res);
+        }
+    };
+    eSignPanda.createEmbededSignatureRequest(opts);
+   // eSignPanda.setDocumentId("5c45dd95c9c6d20cab9a4f40");
+    setTimeout(function(){
+        eSignPanda.open({
+            url: "SIGN_URL",     
+            allowCancel: true
+        });
+    }, 500);
+</script>

@@ -1,0 +1,62 @@
+@import '../../../../../assets/css/mixins';
+
+
+.companyManagementWrapper {
+    @include medium(max-width){
+        padding: 16px;
+    }
+    .companyTitle{
+        font-size: 32px;
+        line-height: 38px;
+        color: var(--black);
+    }
+    // .company-detail {
+    //     font-size: 16px;
+    //     line-height: 20px;
+    //     color: var(--black);
+    // }
+    // .search-wrap {
+    //     .export-btn {
+    //         padding: 14px 20px;
+    //         font-size: 16px;
+    //         line-height: 20px;
+    //         color: #272b31;
+    //         background-color: var(--white);
+    //         border: 1px solid var(--border-color);
+    //         border-radius: 6px;
+    //         &:active {
+    //             background-color: var(--white) !important;
+    //             color: #272b31 !important;
+    //         }
+    //     }
+    //     .company-btn {
+    //         font-size: 16px;
+    //         line-height: 20px;
+    //         background-color: var(--btn-bg-gray);
+    //         border: 1px solid var(--border-color);
+    //         border-radius: 6px;
+    //         padding: 17px 24px;
+    //         color: var(--white);
+    //         text-decoration: none;
+    //         &:active {
+    //             background-color: var(--btn-bg-gray) !important;
+    //         }
+    //     }
+    // }
+    // .select__control {
+    //     padding: 10px 20px;
+    //     font-size: 16px;
+    //     line-height: 20px;
+    //     color: var(--black);
+    // }
+    // .select__indicator {
+    //     svg {
+    //         fill: var(--black);
+    //     }
+    // }
+    // .select__placeholder {
+    //     font-size: 16px;
+    //     line-height: 20px;
+    //     color: var(--black);
+    // }
+}

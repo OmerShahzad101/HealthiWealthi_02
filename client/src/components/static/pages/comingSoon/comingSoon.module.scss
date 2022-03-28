@@ -1,0 +1,85 @@
+.ComingSoonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+    .comingSoonContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        padding: 24px;
+        margin-top: clamp(1.875rem, -0.0971rem + 8.4142vw, 10rem);
+        h4 {
+            font-size: clamp(2rem, 1.2718rem + 3.1068vw, 5rem);
+            line-height: 100px;
+            letter-spacing: 0.4em;
+            font-family: var(--Graphik-Bold);
+            color: #161621;
+            margin-top: 24px;
+            margin-bottom: clamp(1.75rem, 0.3544rem + 5.9547vw, 7.5rem);
+            @media screen and (max-width: 480px) {
+               letter-spacing: normal;
+              }
+        }
+        p {
+            font-size: clamp(1rem, 0.7573rem + 1.0356vw, 2rem);
+            line-height: clamp(1.4rem, 0.3556rem + 1.6828vw, 2.375rem);
+            color: #161621;
+            text-align: center;
+        }
+        .email {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 4px;
+            max-width: 520px;
+            width: 100%;
+            margin-top: 16px;
+            > div {
+                flex: 1;
+                height: 100%;
+            }
+            input {
+                margin-bottom: 0 !important;
+                border: none;
+                flex: 1;
+            }
+            button {
+                padding: 4px !important;
+                max-width: 117px;
+            }
+            .subscribeBtn {
+                padding: 8px !important;
+            }
+        }
+        .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .social {
+                border: 1px solid var(--border-color);
+                border-radius: 50px;
+                padding: 8px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 24px;
+                margin-right: 12px;
+                svg {
+                    color: #161621;
+                }
+            }
+        }
+        .notification {
+            font-size: 16px;
+            line-height: 18px;
+            color: #161621;
+        }
+    }
+}

@@ -1,0 +1,112 @@
+
+@import '../../../../assets/css/mixins';
+.portfolioWrapper {
+    .title {
+        @include xSmall(max-width){
+            padding-inline: 32px;
+        }
+        h3 {
+            font-size: clamp(1rem, 0.8786rem + 0.5178vw, 1.5rem);
+            line-height: 1;
+            margin-bottom: 8px;
+            color: var(--black);
+        }
+        p {
+            font-size: clamp(0.75rem, 0.6893rem + 0.2589vw, 1rem);
+            line-height: 1;
+            color: #4d4d53;
+        }
+    }
+    .dropSearchWrapper{
+        gap: 12px;
+        @include xSmall(max-width){
+            padding-inline: 32px;
+        }
+        .dropdownWrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 230px);
+            max-width: 730px;
+            gap: 12px;
+            width: 100%;
+            .form-group {
+                min-width: 320px;
+
+            }
+        }
+        .select__control{
+            background: #F4F6F8;
+            border-radius: 6px;
+            border: none !important;
+        }
+        .search-bar input{
+            background: #F4F6F8;
+            border-radius: 6px;
+            border: none !important;
+        }
+        .addPortfolioBtn{
+            // font-family: var(--Graphik-Semibold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // height: 53px;
+            // border-radius: 5px;
+            // padding: 8px 12px;
+            font-size: 12px;
+            // line-height: 20px;
+
+            svg{
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+        }
+
+    }
+}
+
+
+    .modal-content {
+        border-radius: 20px;
+        .modal-title {
+            h3 {
+                font-size: 32px !important;
+                line-height: 38px;
+                color: #242429;
+                margin-bottom: 8px;
+            }
+        }
+    }
+    .tag{
+        font-size: 16px;
+        line-height: 20px;
+        color: #4d4d53;
+        margin-bottom: 16px;
+
+    }
+
+    .checkboxSection {
+        span {
+            font-size: 16px;
+            line-height: 16px;
+            color: var(--dark-border);
+        }
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        color: rgba(0, 0, 0, 0);
+        opacity: 1;
+        display: block;
+        background: url(../../../../assets/images/calenderIcon.svg) no-repeat;
+        width: 20px;
+        height: 20px;
+        border-width: thin;
+    }
+
+
+
+    @include xSmall(max-width) {
+        .smallListing{
+            padding-left: 32px;
+        }
+    }
+
