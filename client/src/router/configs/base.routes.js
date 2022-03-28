@@ -32,7 +32,9 @@ const PublicMainWithSuspense = withSuspense(PublicMain);
 
 // Before enter callback for all auth routes
 const authCheckMiddleware = (next) => {
-    const isAuthenticated = validateAuthState();
+    // const isAuthenticated = validateAuthState();
+
+    const isAuthenticated = true;
 
     if (isAuthenticated) {
         return next(DASHBOARD);
