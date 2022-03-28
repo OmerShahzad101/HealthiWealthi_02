@@ -2232,6 +2232,9 @@ html.menu-opened body {
 
 .account-page {
   background-color: #fff;
+  height: 100vh;
+  display: grid;
+  align-items: center;
 }
 .account-page .content {
   padding: 50px 0;
@@ -2267,7 +2270,7 @@ html.menu-opened body {
   color: #d32986;
 }
 .login-btn {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
 }
 .login-or {
@@ -6981,109 +6984,111 @@ html.menu-opened body {
 /* --------------------------------website css ------------------------- */
 /* --------------------------------website css ------------------------- */
 
-
-
 .trending-property {
-	text-align: center;
-  }
-  .trending-property p {
-	font-size: 16px;
-	color: #d32986;
-	font-weight: 400;
-	margin: 0 0 5px 0;
-	text-transform: uppercase;
-  }
-  .trending-property h3 {
-	font-weight: 700;
-	font-size: 26px;
-	margin-bottom: 25px;
-	color: #242432;
-	text-transform: uppercase;
-  }
-  .our-team-item {
-	border-radius: 3px;
-	border: 1px solid #ededed;
-	background: #fff;
-	margin-bottom: 30px;
-  }
-  .our-team-item .agent-info {
-	background: #ededed;
-	text-align: center;
-	padding: 15px;
-	border-radius: 3px 3px 0px 0px;
-  }
-  .our-team-item .agent-info .agent-title {
-	font-size: 18px;
-	color: #242432;
-	display: block;
-	font-weight: 500;
-	margin-top: 15px;
-  }
-  .our-team-item .agent-info .agent-designation {
-	font-size: 14px;
-	color: #242432;
-	display: block;
-  }
-  .our-team-item .agent-content {
-	padding: 15px;
-  }
-  .our-team-item .agent-content p {
-	color: #868686;
-	font-size: 14px;
-	text-align: center;
-	margin-bottom: 20px;
-  }
-  .our-team-item .agent-content .agent-social-icons {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 10px;
-	background: #d32986;
-  }
-  .our-team-item .agent-content .agent-social-icons a {
-	color: #fff;
-	text-decoration: none;
-	transition: all 0.3s ease;
-	margin-right: 30px;
-  }
-  .our-team-item .agent-content .agent-social-icons a:hover {
-	color: #404040;
-	transition: all 0.3s ease;
-  }
-  .our-team-item .agent-content .agent-social-icons a:last-child {
-	margin: 0;
-  }
-  .website-banner {
-	background: url("assets/img/search-bg.png");
-	background-size: cover;
-	background-position: center;
-	padding: 130px 0;
-  }
-  .website-banner .banner-heading {
-	margin: 0;
-	text-align: center;
-  }
-  .contactus-form button {
-	background: #d32986;
-	border: 1px solid #d32986;
-	color: #fff;
-  }
-  .contactus-form button:hover {
-	background: #fff;
-	border: 1px solid #d32986;
-	color: #d32986;
-  }
-  .contactus-form label {
-	font-size: 12px;
-	margin: 0;
-  }
-  .blogs-main button {
-	background: #d32986;
-	border: 2px solid #d32986;
-	color: #fff;
-  }
-  .blogs-main button:hover {
-	background: #fff;
-	border: 2px solid #d32986;
-	color: #d32986;
-  }
+  text-align: center;
+}
+.trending-property p {
+  font-size: 16px;
+  color: #d32986;
+  font-weight: 400;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+.trending-property h3 {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #242432;
+  text-transform: uppercase;
+}
+.our-team-item {
+  border-radius: 3px;
+  border: 1px solid #ededed;
+  background: #fff;
+  margin-bottom: 30px;
+}
+.our-team-item .agent-info {
+  background: #ededed;
+  text-align: center;
+  padding: 15px;
+  border-radius: 3px 3px 0px 0px;
+}
+.our-team-item .agent-info .agent-title {
+  font-size: 18px;
+  color: #242432;
+  display: block;
+  font-weight: 500;
+  margin-top: 15px;
+}
+.our-team-item .agent-info .agent-designation {
+  font-size: 14px;
+  color: #242432;
+  display: block;
+}
+.our-team-item .agent-content {
+  padding: 15px;
+}
+.our-team-item .agent-content p {
+  color: #868686;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.our-team-item .agent-content .agent-social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #d32986;
+}
+.our-team-item .agent-content .agent-social-icons a {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-right: 30px;
+}
+.our-team-item .agent-content .agent-social-icons a:hover {
+  color: #404040;
+  transition: all 0.3s ease;
+}
+.our-team-item .agent-content .agent-social-icons a:last-child {
+  margin: 0;
+}
+.website-banner {
+  background: url("assets/img/search-bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 130px 0;
+}
+.website-banner .banner-heading {
+  margin: 0;
+  text-align: center;
+}
+.contactus-form button {
+  background: #d32986;
+  border: 1px solid #d32986;
+  color: #fff;
+}
+.contactus-form button:hover {
+  background: #fff;
+  border: 1px solid #d32986;
+  color: #d32986;
+}
+.contactus-form label {
+  font-size: 12px;
+  margin: 0;
+}
+.blogs-main button {
+  background: #d32986;
+  border: 2px solid #d32986;
+  color: #fff;
+}
+.blogs-main button:hover {
+  background: #fff;
+  border: 2px solid #d32986;
+  color: #d32986;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
