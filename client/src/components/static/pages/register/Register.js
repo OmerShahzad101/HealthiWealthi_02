@@ -1,254 +1,167 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, FloatingLabel, Form, Spinner } from "react-bootstrap";
-import Swal from "sweetalert2";
+import $ from "jquery";
+// import auth from "../../services/auth.service";
+// import { ENV } from "../../env";
+import { ToastContainer, toast } from "react-toastify";
 
-import FormImg from "../../../../assets/images/formImg.png";
-import Google from "../../common/Google";
-import Toast from "../../../common/toast/Toast";
+const Register = () => {
+  // Initial Values
+  const InitialValues = {
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+  };
+  //state
+  const [user, setUser] = useState(InitialValues);
+  let history = useHistory();
 
-import validate from "../../../../utils/form-validation/authFormValidation";
-import { cancelOngoingHttpRequest, postHttpRequest } from "../../../../axios";
-import { LOGIN } from "../../../../router/constants/ROUTES";
+  // JQuery for Input Field
+  $(".floating").on("focus blur", function (e) {
+    $(this)
+      .parents(".form-focus")
+      .toggleClass("focused", e.type === "focus" || this.value.length > 0);
+  });
+  // Handel Input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
 
-import industriesData from "../../../../data/industries.json";
-import noOfEmployeesData from "../../../../data/no-of-employees.json";
-
-import SelectDropdown from "../../../common/react-select/SelectDropdown/SelectDropdown";
-import { LightDigno } from "../../../../assets/SVGs/SVGs";
-
-import Logo from "../../../../assets/img/Logo.svg";
-import LoginBanner from "../../../../assets/img/login-banner.png";
-
-export default function Register() {
-  const history = useHistory();
-
-  const userNameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [validationErrors, setValidationErrors] = useState({});
-
-  // Cancel company creation HTTP call in case component is unmounted due to route change
-  useEffect(() => {
-    return cancelOngoingHttpRequest;
-  }, []);
-
-  function registerUserHandler(event) {
-    event.preventDefault();
-
-    const userName = userNameRef.current.value;
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const confirmPassword = confirmPasswordRef.current.value;
-
-    const inputData = {
-      userName,
-      email,
-      password,
-      confirmPassword,
-    };
-
-    const errors = validate(inputData);
-
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors({ ...errors });
-      return;
-    } else {
-      setValidationErrors({});
+  //API call
+  const RegisterCall = async () => {
+    const { name, email, password } = user;
+    if (name && email && password) {
+      // const res = await auth.register(
+      //   `http://localhost:8080/api/auth/signup`,
+      //   user
+      // );
+      // if (res.success == true) {
+      //   history.push("/login");
+        //alert(res.message);
+      //}
     }
-
-    setIsLoading(true);
-    postHttpRequest("/auth/signup", {
-      ...inputData,
-      confirmPassword: undefined,
-    })
-      .then((response) => {
-        setIsLoading(false);
-
-        if (!response) {
-          console.log("Something went wrong with response...");
-          return;
-        }
-
-        if (response.data.success === true) {
-          setValidationErrors({});
-
-          Swal.fire({
-            customClass: {
-              denyButton: "deny-class",
-              confirmButton: "confirm-class",
-              title: "title",
-              htmlContainer: "text",
-            },
-            width: "645px",
-            padding: "35px 60px",
-            title: `Registered Successfully!`,
-            confirmButtonText: `OK`,
-            text: `${response.data.message}`,
-          }).then(() => {
-            history.push(LOGIN);
-          });
-        } else {
-          setValidationErrors(response.data.errorObj);
-          Toast.fire({
-            icon: "error",
-            title: response.data.message,
-          });
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
-  }
+    // history.push("/login");
+  };
 
   return (
-    <section className="form">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6 col-12 p-0">
-            <div className="main-img-text">
-              <div className="main-img">
-                <Link to="/">
-                  {/* <img src={LoginBanner} className="img-fluid side" />{" "} */}
-                </Link>
-              </div>
-              <div className="heading-paragraph">
-                <h1 className="welcome-heading">Welcome to Healthi Wealthi</h1>
-                <p className="building">Your Health Care Partner</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6  col-12 p-0 order-1 order-md-0">
-            <div className="form-wrapper">
-              <div className="fix-height">
-                <div className="top-logo">
-                  <Link to="/">
-                    <img src={Logo} className="img-fluid" />{" "}
-                  </Link>
-                </div>
-                <div className="heading-login">
-                  <h1 className="login">Sign up</h1>
-                  <span className="sub-heading">
-                    Discover a Better way to Become Healthi
-                  </span>
-                </div>
-                <Form noValidate onSubmit={registerUserHandler}>
-                  <FloatingLabel
-                    controlId="input-user-name"
-                    label="Full Name"
-                    className=" dg-mb-16 w-100 text-muted"
-                  >
-                    <span className="icon fa fa-user"></span>
-                    <Form.Control
-                      type="text"
-                      ref={userNameRef}
-                      placeholder="Henry Octane"
-                      autoComplete="name"
-                      name="userName"
-                      required
-                    />
-                    <span className="errors">{validationErrors?.userName}</span>
-                  </FloatingLabel>
-
-                  <FloatingLabel
-                    controlId="input-email"
-                    label="Email"
-                    className=" w-100 text-muted"
-                  >
-                    <span className="icon fa fa-envelope"></span>
-                    <Form.Control
-                      type="email"
-                      ref={emailRef}
-                      placeholder="henry.octane@gmail.com"
-                      autoComplete="email"
-                      name="email"
-                      required
-                    />
-                    <span className="errors">{validationErrors?.email}</span>
-                  </FloatingLabel>
-
-                  <FloatingLabel
-                    controlId="input-password"
-                    label="Password"
-                    className="dg-mb-16 w-100 dg-mr-12 text-muted"
-                  >
-                    <span className="icon fa fa-lock"></span>
-                    <Form.Control
-                      type="password"
-                      ref={passwordRef}
-                      placeholder="Password"
-                      autoComplete="new-password"
-                      name="password"
-                      required
-                    />
-                    <span className="errors">{validationErrors?.password}</span>
-                  </FloatingLabel>
-
-                  <FloatingLabel
-                    controlId="input-confirm-password"
-                    label="Confirm Password"
-                    className="dg-mb-16 w-100 dg-ml-12 text-muted"
-                  >
-                    <span className="icon fa fa-lock"></span>
-                    <Form.Control
-                      type="password"
-                      ref={confirmPasswordRef}
-                      placeholder="Confirm Password"
-                      autoComplete="new-password"
-                      name="confirmPassword"
-                      required
-                    />
-                    <span className="errors">
-                      {validationErrors?.confirmPassword}
-                    </span>
-                  </FloatingLabel>
-                  <div className={` d-flex justify-content-between`}>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                      <Form.Check type="checkbox" label="Remember me" />
-                    </Form.Group>
-                  </div>
-
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="dg-mt-16"
-                    disabled={isLoading}
-                  >
-                    {isLoading && (
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                        className="dg-mr-8"
-                      />
-                    )}
-                    <span>Sign up</span>
-                  </Button>
-                  <div className="not-creat d-flex justify-content-center align-items-center">
-                    <span className="not-member">Already have account?</span>
-                    <Link className="account" to="/login">
-                      <strong className="creat-account">Login</strong>
-                    </Link>
-                  </div>
-                  <button className="btn btn-google">
+    <div className="account-page">
+      <div className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <div className="account-content">
+                <div className="row align-items-center justify-content-center">
+                  <div className="col-md-7 col-lg-6 login-left">
                     <img
-                      src="/images/google.svg"
-                      alt="Google image"
+                      src="assets/img/login-banner.png"
                       className="img-fluid"
+                      alt="Register"
                     />
-                    Google
-                  </button>
-                </Form>
+                  </div>
+
+                  <div className="col-md-12 col-lg-6 login-right">
+                    <div className="login-header">
+                      <h3>Register </h3>
+                    </div>
+
+                    <form action="#">
+                      <div className="form-group form-focus">
+                        <input
+                          type="text"
+                          name="name"
+                          value={user.name}
+                          onChange={handleChange}
+                          className="form-control floating"
+                        />
+                        <label className="focus-label">Name</label>
+                      </div>
+                      <div className="form-group form-focus">
+                        <input
+                          type="text"
+                          name="email"
+                          value={user.email}
+                          onChange={handleChange}
+                          className="form-control floating"
+                        />
+                        <label className="focus-label">
+                          Email / Mobile Number
+                        </label>
+                      </div>
+                      <div className="form-group form-focus">
+                        <input
+                          type="password"
+                          name="password"
+                          value={user.password}
+                          onChange={handleChange}
+                          className="form-control floating"
+                        />
+                        <label className="focus-label">Create Password</label>
+                      </div>
+
+                      <div className="col ps-1" md="6">
+                        <label>Register as a </label>
+                        <div className="form-group">
+                          <label>Coach</label>
+                          <input
+                            type="radio"
+                            name="role"
+                            value="coach"
+                            checked={user.role == "coach" ? true : false}
+                            onChange={handleChange}
+                          />
+                          <label>Client</label>
+                          <input
+                            type="radio"
+                            name="role"
+                            value="client"
+                            checked={user.role == "client" ? true : false}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <Link className="forgot-link" to="/login">
+                          Already have an account?
+                        </Link>
+                      </div>
+                      <button
+                        className="btn btn-primary btn-block btn-lg login-btn"
+                        type="button"
+                        onClick={RegisterCall}
+                      >
+                        Signup
+                      </button>
+                      <div className="login-or">
+                        <span className="or-line"></span>
+                        <span className="span-or">or</span>
+                      </div>
+                      <div className="row form-row social-login">
+                        {/* <div className="col-6">
+                          <a href="#" className="btn btn-facebook btn-block">
+                            <i className="fab fa-facebook-f mr-1"></i> Login
+                          </a>
+                        </div> */}
+                        <div className="col-12">
+                          <a href="#" className="btn btn-google btn-block">
+                            <i className="fab fa-google mr-1"></i> Login
+                          </a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+export default Register;

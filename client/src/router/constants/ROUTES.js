@@ -6,6 +6,9 @@ export const APP = '/app';
  */
 
  export const ABOUT = '/about';
+ export const CONTACT = '/contact-us';
+ export const SEARCHCOACH = '/search-coach';
+ 
 
 // ------------------------------------
 export const LOGIN = '/login';
