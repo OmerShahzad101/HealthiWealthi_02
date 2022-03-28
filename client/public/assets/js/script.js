@@ -47,7 +47,7 @@ setTimeout(function(){
 		// Sidebar Initiate
 		init();
 		}
-}, 200);
+}, 10000);
 	
 	
 	// Textarea Text Count
