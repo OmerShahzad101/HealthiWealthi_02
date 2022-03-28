@@ -5,12 +5,13 @@ export const APP = '/app';
  * OPEN ROUTES
  */
 
+//Static ROutes
  export const ABOUT = '/about';
  export const CONTACT = '/contact-us';
- export const SEARCHCOACH = '/search-coach';
+ export const SEARCH_COACH = '/search-coach';
  
 
-// ------------------------------------
+// Base Routes
 export const LOGIN = '/login';
 export const SIGNUP = '/signup';
 export const FORGOT_PASSWORD = '/forgot-password';
