@@ -6,6 +6,7 @@ export const APP = '/app';
  */
 
  export const ABOUT = '/about';
+ export const CONTACT = '/contact-us';
 
 // ------------------------------------
 export const LOGIN = '/login';
