@@ -32,11 +32,17 @@ export const COACH_CHANGE_PASSWORD = `${APP}/coach-change-password`;
 
 //Clients Routes
 
-export const APPOINTMENTS = `${APP}/coach-change-password`;
-export const BOOK_APPOINTMENTS = `${APP}/coach-change-password`;
-export const BOOK_SUCCESSFUL = `${APP}/coach-change-password`;
-export const CHECKOUT = `${APP}/coach-change-password`;
-export const CLIENT_DASHBOARD = `${APP}/coach-change-password`;
+export const APPOINTMENTS = `${APP}/appointments`;
+export const BOOK_APPOINTMENTS = `${APP}/book-appointment`;
+export const BOOK_SUCCESSFUL = `${APP}/booking-successful`;
+export const CHECKOUT = `${APP}/checkout`;
+export const CLIENT_DASHBOARD = `${APP}/client-dashboard`;
+export const CLIENT_PROFILE = `${APP}/client-profile`;
+export const FAVOURITES = `${APP}/favourites`;
+export const INVOICE = `${APP}/invoice`;
+export const INVOICE_VIEW = `${APP}/invoices-view`;
+export const MY_CLIENTS = `${APP}/my-clients`;
+export const REVIEWS = `${APP}/reviews`;
 
 
 
