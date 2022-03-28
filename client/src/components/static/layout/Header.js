@@ -4,7 +4,8 @@ import Logo from '../common/logo/Logo';
 import { Form, Container, Nav, Navbar } from 'react-bootstrap';
 
 import { LOGIN, SIGNUP } from '../../../router/constants/ROUTES';
-
+import { useEffect } from "react";
+import $ from "jquery";
 // import './header.scss';
 
 export default function Header() {
@@ -12,6 +13,29 @@ export default function Header() {
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
+
+
+    useEffect(() => {
+        $('body').append('<div class="sidebar-overlay"></div>');
+        $(document).on('click', '#mobile_btn', function() {
+            $('main-wrapper').toggleClass('slide-nav');
+            $('.sidebar-overlay').toggleClass('opened');
+            $('html').addClass('menu-opened');
+            return false;
+        });
+        
+        $(document).on('click', '.sidebar-overlay', function() {
+            $('html').removeClass('menu-opened');
+            $(this).removeClass('opened');
+            $('main-wrapper').removeClass('slide-nav');
+        });
+        
+        $(document).on('click', '#menu_close', function() {
+            $('html').removeClass('menu-opened');
+            $('.sidebar-overlay').removeClass('opened');
+            $('main-wrapper').removeClass('slide-nav');
+        });
+    },[])
 
     return (
         <>
