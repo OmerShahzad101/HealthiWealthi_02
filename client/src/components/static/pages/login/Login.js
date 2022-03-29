@@ -14,12 +14,6 @@ const Login = () => {
   };
   const [loginUser, setLoginUser] = useState(InitialValues);
   let history = useHistory();
-  // JQuery for Input
-  $(".floating").on("focus blur", function (e) {
-    $(this)
-      .parents(".form-focus")
-      .toggleClass("focused", e.type === "focus" || this.value.length > 0);
-  });
 
   //Handle Changes to Get Values
   const handleChange = (e) => {

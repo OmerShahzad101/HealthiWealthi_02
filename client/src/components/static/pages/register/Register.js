@@ -18,12 +18,6 @@ const Register = () => {
   const [user, setUser] = useState(InitialValues);
   let history = useHistory();
 
-  // JQuery for Input Field
-  $(".floating").on("focus blur", function (e) {
-    $(this)
-      .parents(".form-focus")
-      .toggleClass("focused", e.type === "focus" || this.value.length > 0);
-  });
   // Handel Input change
   const handleChange = (e) => {
     const { name, value } = e.target;
