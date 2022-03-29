@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import DarkDigno from '../../../../assets/images/darkDigno.svg';
 import { ROOT } from '../../../../router/constants/ROUTES';
 
 const Logo = () => {
