@@ -20,6 +20,8 @@ const SearchCoachWithSuspense = withSuspense(SearchCoach);
 
 
 
+
+
 // Route configurations for settings
 function getRouteConfigs() {
     return [
@@ -47,7 +49,7 @@ function getRouteConfigs() {
             exact: true,
             element: <SearchCoachWithSuspense />,
         },
-
+        
 
         {
             // NOT FOUND ROUTE
@@ -62,10 +64,6 @@ export default getRouteConfigs;
 
 // Coming Soon
 
-
-// Email Verification
-// const EmailVerification = lazy(() => import(/* webpackChunkName: "emailVerified" */ '../../components/static/pages/emailVerified/emailVerified'));
-// const EmailVerificationWithSuspense = withSuspense(EmailVerification);
 
 
 // Reset Password

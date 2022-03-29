@@ -51,6 +51,9 @@ const MyClientWithSuspense = withSuspense(MyClient);
 const Reviews = lazy(() =>import( /* webpackChunkName: "Reviews" */ "../../components/app/pages/Reviews/Reviews"));
 const ReviewsWithSuspense = withSuspense(Reviews);
 
+const ClientProfileSetting = lazy(() =>import( /* webpackChunkName: "ClientProfileSetting" */ "../../components/app/pages/ClientProfileSetting/ClientProfileSetting"));
+const ClientProfileSettingWithSuspense = withSuspense(ClientProfileSetting);
+
 
 // Route configurations for the app
 function getRouteConfigs() {
@@ -151,7 +154,12 @@ function getRouteConfigs() {
         exact: true,
         element: <ReviewsWithSuspense />,
     },
-    
+    {
+        // Client Profile Setting ROUTE
+        path: routes.CLIENT_PROFILE_SETTING,
+        exact: true,
+        element: <ClientProfileSettingWithSuspense />,
+    },
     {
       // NOT FOUND ROUTE
       path: "*",

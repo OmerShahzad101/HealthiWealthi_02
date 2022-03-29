@@ -72,7 +72,7 @@ export default function Header() {
                 <Link to="/search-coach">Search Coach</Link>
               </li>
               <li>
-                <Link to="/coach-dashboard">Coach Dashboard</Link>
+                <Link to="/app/coach-dashboard">Coach Dashboard</Link>
               </li>
               <li>
                 <Link to="/client-dashboard">Client Dashboard</Link>

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import withSuspense from '../../hoc/withSuspense';
 import validateAuthState from '../../utils/auth/validateAuthState';
-import { APP, ROOT, LOGIN, SIGNUP, FORGOT_PASSWORD, RESET_PASSWORD, DASHBOARD,  } from '../constants/ROUTES';
+import { APP, ROOT, LOGIN, SIGNUP, FORGOT_PASSWORD, RESET_PASSWORD, DASHBOARD, EMAIL_VERIFICATION } from '../constants/ROUTES';
 
 // Login
 const Login = lazy(() => import(/* webpackChunkName: "Login" */ '../../components/static/pages/login/Login'));
@@ -20,6 +20,9 @@ const ForgotPasswordWithSuspense = withSuspense(ForgotPassword);
 const ResetPassword = lazy(() => import(/* webpackChunkName: "changePassword" */ '../../components/static/pages/changePassword/changePassword'));
 const ResetPasswordWithSuspense = withSuspense(ResetPassword);
 
+// Email Verification
+const EmailVerification = lazy(() => import(/* webpackChunkName: "emailVerified" */ '../../components/static/pages/emailVerified/EmailVerified'));
+const EmailVerificationWithSuspense = withSuspense(EmailVerification); 
 
 
 // App Main
@@ -37,7 +40,7 @@ const authCheckMiddleware = (next) => {
     //const isAuthenticated = true;
 
     if (isAuthenticated) {
-        return next(DASHBOARD);
+        return next(ROOT);
     } else {
         return next();
     }
@@ -86,11 +89,15 @@ function getRouteConfigs() {
                 title: 'Reset Password',
             },
         },
-
-  
-
-      
-
+        {
+            // EMAIL VERIFICATION
+            path: EMAIL_VERIFICATION,
+            exact: true,
+            element: <EmailVerificationWithSuspense />,
+            meta: {
+                title: 'Email Verified',
+            },
+        },
         // THESE `APP` AND `ROOT` ROUTES MUST BE THE LAST ROUTES SINCE THEY ARE MATCHED ANYWHERE (THEY ARE NOT EXACT MATCH ROUTES)
         {
             // APP MAIN
