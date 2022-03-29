@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const CoachProfileSetting = () => {
+
+  const history = useHistory();
+
+  const Upgrade = () => {
+    history.push("/coach-upgrade-profile")
+    console.log("dssd")
+  }
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -30,6 +38,11 @@ const CoachProfileSetting = () => {
                         Allowed JPG, GIF or PNG. Max size of 2MB
                       </small>
                     </div>
+                    <button className="change-account"
+                      onClick={Upgrade}
+                    >
+                      Upgrade Account
+                    </button>
                   </div>
                 </div>
               </div>
@@ -237,7 +250,7 @@ const CoachProfileSetting = () => {
             <div
               className="row custom_price_cont"
               id="custom_price_cont"
-              // style="display: none;"
+            // style="display: none;"
             >
               <div className="col-md-4">
                 <input

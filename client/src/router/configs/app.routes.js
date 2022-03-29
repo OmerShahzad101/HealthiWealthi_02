@@ -13,6 +13,9 @@ const CoachChangePasswordWithSuspense = withSuspense(CoachChangePassword);
 const CoachProfile = lazy(() =>import( /* webpackChunkName: "CoachProfile" */ "../../components/app/pages/CoachProfile/CoachProfile"));
 const CoachProfileWithSuspense = withSuspense(CoachProfile);
 
+const UpgradeProfile = lazy(() =>import( /* webpackChunkName: "CoachProfile" */ "../../components/app/pages/UpgradeProfile/UpgradeProfile"));
+const UpgradeProfileWithSuspense = withSuspense(UpgradeProfile);
+
 const CoachProfileSetting = lazy(() =>import( /* webpackChunkName: "CoachProfileSetting" */ "../../components/app/pages/CoachProfileSetting/CoachProfileSetting"));
 const CoachProfileSettingWithSuspense = withSuspense(CoachProfileSetting);
 
@@ -87,7 +90,12 @@ function getRouteConfigs() {
         exact: true,
         element: <CoachProfileSettingWithSuspense />,
     },
-    
+    {
+        // Coach Upgrade Profile ROUTE
+        path: routes.COACH_UPGRADE_PROFILE,
+        exact: true,
+        element: <UpgradeProfileWithSuspense />,
+    },
     {
         // Appointments ROUTE
         path: routes.APPOINTMENTS,
