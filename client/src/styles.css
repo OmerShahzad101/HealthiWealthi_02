@@ -2231,10 +2231,11 @@ html.menu-opened body {
 -----------------------*/
 
 .account-page {
-  background-color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   align-items: center;
+  background: url(assets/img/bg-ath.png) no-repeat 50% 50%, #eaf3fc;
+    background-size: cover;
 }
 .account-page .content {
   padding: 50px 0;
@@ -2243,7 +2244,21 @@ html.menu-opened body {
   background-color: #fff;
   border: 1px solid #f0f0f0;
   border-radius: 4px;
-  padding: 25px;
+  padding: 40px;
+  position: relative;
+}
+.login-right:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 5px;
+  width: 100%;
+  content: '';
+  background: repeating-linear-gradient(90deg, #00bffa 0%, #00bffa 33.34%, #1b57fe 33.35%, #1b57fe 66.68%, #8255fd 66.69%, #8255fd 100%);
+  background-size: 50.5%;
+  overflow: hidden;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .login-header {
   margin-bottom: 20px;
@@ -2254,6 +2269,7 @@ html.menu-opened body {
 .login-header h3 {
   font-size: 18px;
   margin-bottom: 3px;
+  color: #d32986;
 }
 .login-header h3 a {
   color: #d32986;
@@ -7092,3 +7108,4 @@ html.menu-opened body {
   display: block;
   width: 100%;
 }
+ 
