@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { CgPhone } from 'react-icons/cg'
 import $ from "jquery";
 
 export default function Header() {
@@ -84,8 +85,9 @@ export default function Header() {
           <ul className="nav header-navbar-rht">
             <li className="nav-item contact-item">
               <div className="header-contact-img">
-                <i className="far fa-hospital"></i>
+              <CgPhone size={28}/>
               </div>
+              
               <div className="header-contact-detail">
                 <p className="contact-header">Contact</p>
                 <p className="contact-info-header">+1 315 369 5943</p>
