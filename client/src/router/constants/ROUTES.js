@@ -43,6 +43,7 @@ export const INVOICE = `${APP}/invoice`;
 export const INVOICE_VIEW = `${APP}/invoices-view`;
 export const MY_CLIENTS = `${APP}/my-clients`;
 export const REVIEWS = `${APP}/reviews`;
+export const CLIENT_PROFILE_SETTING = `${APP}/client-profile-setting`
 
 
 
