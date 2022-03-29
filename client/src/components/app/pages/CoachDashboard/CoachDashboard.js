@@ -88,7 +88,7 @@ const CoachDashboard = () => {
                 <li className="nav-item">
                   <a
                     className="nav-link"
-                    href="#today-appointments"
+                    href="#/today-appointments"
                     data-toggle="tab"
                   >
                     Today
@@ -125,7 +125,7 @@ const CoachDashboard = () => {
                                   >
                                     <img
                                       className="avatar-img rounded-circle"
-                                      src="assets/img/patients/patient.jpg"
+                                      src="/assets/img/patients/patient.jpg"
                                       alt="User Image"
                                     />
                                   </a>
@@ -177,7 +177,7 @@ const CoachDashboard = () => {
                                   >
                                     <img
                                       className="avatar-img rounded-circle"
-                                      src="assets/img/patients/patient3.jpg"
+                                      src="/assets/img/patients/patient3.jpg"
                                       alt="User Image"
                                     />
                                   </a>
@@ -228,7 +228,7 @@ const CoachDashboard = () => {
                                   >
                                     <img
                                       className="avatar-img rounded-circle"
-                                      src="assets/img/patients/patient4.jpg"
+                                      src="/assets/img/patients/patient4.jpg"
                                       alt="User Image"
                                     />
                                   </a>
@@ -279,7 +279,7 @@ const CoachDashboard = () => {
                                   >
                                     <img
                                       className="avatar-img rounded-circle"
-                                      src="assets/img/patients/patient5.jpg"
+                                      src="/assets/img/patients/patient5.jpg"
                                       alt="User Image"
                                     />
                                   </a>

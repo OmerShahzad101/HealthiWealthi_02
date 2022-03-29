@@ -9,12 +9,12 @@ const CoachSideBar = () => {
             <div className="profile-info-widget">
               <a href="#" className="booking-doc-img">
                 <img
-                  src="/assets/img/doctors/doctor-01.jpg"
+                  src="/assets/img/doctors/doctor-02.jpg"
                   alt="User Image"
                 />
               </a>
               <div className="profile-det-info">
-                <h3>Dr. Darren Elder</h3>
+                <h3>Dr. Omer Shahzad</h3>
 
                 <div className="patient-details">
                   <h5 className="mb-0">
@@ -28,63 +28,63 @@ const CoachSideBar = () => {
             <nav className="dashboard-menu">
               <ul>
                 <li className="active">
-                  <Link to="/coach-dashboard">
+                  <Link to="/app/coach-dashboard">
                     <i className="fas fa-columns"></i>
                     <span>Dashboard</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/appointments">
+                  <Link to="/app/appointments">
                     <i className="fas fa-calendar-check"></i>
                     <span>Appointments</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/my-clients">
+                  <Link to="/app/my-clients">
                     <i className="fas fa-user-injured"></i>
                     <span>My Clients</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invoices-view">
+                  <Link to="/app/invoices-view">
                     <i className="fas fa-file-invoice"></i>
                     <span>Invoices</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/reviews">
+                  <Link to="/app/reviews">
                     <i className="fas fa-star"></i>
                     <span>Reviews</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/chat">
+                  <Link to="/app/chat">
                     <i className="fas fa-comments"></i>
                     <span>Message</span>
                     <small className="unread-msg">23</small>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/videocall">
+                  <Link to="/app/videocall">
                     <i className="fas fa-comments"></i>
                     <span>Video Call</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/audiocall">
+                  <Link to="/app/audiocall">
                     <i className="fas fa-comments"></i>
                     <span>Voice Call</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/coach-profile-setting">
+                  <Link to="/app/coach-profile-setting">
                     <i className="fas fa-user-cog"></i>
                     <span>Profile Settings</span>
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/coach-change-password">
+                  <Link to="/app/coach-change-password">
                     <i className="fas fa-lock"></i>
                     <span>Change Password</span>
                   </Link>
