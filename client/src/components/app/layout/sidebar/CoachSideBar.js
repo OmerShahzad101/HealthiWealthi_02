@@ -40,6 +40,12 @@ const CoachSideBar = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/app/appointments">
+                    <i className="fas fa-calendar-check"></i>
+                    <span>Coach Wealth Club</span>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/app/my-clients">
                     <i className="fas fa-user-injured"></i>
                     <span>My Clients</span>
