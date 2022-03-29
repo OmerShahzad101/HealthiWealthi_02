@@ -13,7 +13,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-01.jpg"
+                    src="/assets/img/doctors/doctor-01.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -59,7 +59,7 @@ const Favourites = () => {
                     </Link>
                   </div>
                   <div className="col-6">
-                    <Link to="/book-appointment" className="btn book-btn">
+                    <Link to="/app/book-appointment" className="btn book-btn">
                       Book Now
                     </Link>
                   </div>
@@ -75,7 +75,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-02.jpg"
+                    src="/assets/img/doctors/doctor-02.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -137,7 +137,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-03.jpg"
+                    src="/assets/img/doctors/doctor-03.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -199,7 +199,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-04.jpg"
+                    src="/assets/img/doctors/doctor-04.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -261,7 +261,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-05.jpg"
+                    src="/assets/img/doctors/doctor-05.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -323,7 +323,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-06.jpg"
+                    src="/assets/img/doctors/doctor-06.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
@@ -385,7 +385,7 @@ const Favourites = () => {
                   <img
                     className="img-fluid"
                     alt="User Image"
-                    src="assets/img/doctors/doctor-07.jpg"
+                    src="/assets/img/doctors/doctor-07.jpg"
                   />
                 </Link>
                 <a href="#" className="fav-btn">
