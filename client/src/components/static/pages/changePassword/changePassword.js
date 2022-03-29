@@ -9,7 +9,6 @@ import { LOGIN } from "../../../../router/constants/ROUTES";
 import { cancelOngoingHttpRequest, postHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 
-import styles from "./changePassword.module.scss";
 
 export default function ChangePassword() {
   let { token } = useParams();

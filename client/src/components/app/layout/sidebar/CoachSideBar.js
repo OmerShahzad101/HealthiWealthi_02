@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const CoachSideBar = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  const splitLocation = pathname.split("/");
   return (
       <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
         <div className="profile-sidebar">
