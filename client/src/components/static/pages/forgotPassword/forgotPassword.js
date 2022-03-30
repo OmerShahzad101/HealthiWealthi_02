@@ -48,15 +48,15 @@ const ForgotPassword = () => {
                 </div>
 
                 <form action="#">
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="email"
                       name="email"
                       value={forgotpass.email}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
                     />
-                    <label className="focus-label">Email</label>
+                    <label>Email</label>
                   </div>
                   <div className="text-right">
                     <Link className="forgot-link" to="/login">

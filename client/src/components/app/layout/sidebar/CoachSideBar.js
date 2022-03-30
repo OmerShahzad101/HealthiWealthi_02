@@ -1,10 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const CoachSideBar = () => {
-  const location = useLocation();
-  const { pathname } = location;
-  const splitLocation = pathname.split("/");
+  
   return (
       <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
         <div className="profile-sidebar">
@@ -30,73 +28,73 @@ const CoachSideBar = () => {
           <div className="dashboard-widget">
             <nav className="dashboard-menu">
               <ul>
-                <li className="active">
-                  <Link to="/app/coach-dashboard">
+                <li>
+                  <NavLink to="/app/coach-dashboard">
                     <i className="fas fa-columns"></i>
                     <span>Dashboard</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/appointments">
+                  <NavLink to="/app/appointments">
                     <i className="fas fa-calendar-check"></i>
                     <span>Appointments</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/my-clients">
+                  <NavLink to="/app/my-clients">
                     <i className="fas fa-user-injured"></i>
                     <span>My Clients</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/invoices-view">
+                  <NavLink to="/app/invoices-view">
                     <i className="fas fa-file-invoice"></i>
                     <span>Invoices</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/reviews">
+                  <NavLink to="/app/reviews">
                     <i className="fas fa-star"></i>
                     <span>Reviews</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/chat">
+                  <NavLink to="/app/chat">
                     <i className="fas fa-comments"></i>
                     <span>Message</span>
                     <small className="unread-msg">23</small>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/videocall">
+                  <NavLink to="/app/videocall">
                     <i className="fas fa-comments"></i>
                     <span>Video Call</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/audiocall">
+                  <NavLink to="/app/audiocall">
                     <i className="fas fa-comments"></i>
                     <span>Voice Call</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/coach-profile-setting">
+                  <NavLink to="/app/coach-profile-setting">
                     <i className="fas fa-user-cog"></i>
                     <span>Profile Settings</span>
-                  </Link>
+                  </NavLink>
                 </li>
 
                 <li>
-                  <Link to="/app/coach-change-password">
+                  <NavLink to="/app/coach-change-password">
                     <i className="fas fa-lock"></i>
                     <span>Change Password</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/">
+                  <NavLink to="/asd">
                     <i className="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </nav>

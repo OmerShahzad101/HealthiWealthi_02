@@ -5285,7 +5285,7 @@ html.menu-opened body {
   padding: 16px 20px;
 }
 .dashboard-menu > ul > li:hover > a,
-.dashboard-menu > ul > li.active > a {
+.dashboard-menu > ul > li > a.active {
   color: #d32986;
 }
 .dashboard-menu ul li a i {
@@ -7108,4 +7108,7 @@ html.menu-opened body {
   display: block;
   width: 100%;
 }
- 
+.account-page .form-floating label{
+  color: #ccc;
+  font-size: 14px;
+}

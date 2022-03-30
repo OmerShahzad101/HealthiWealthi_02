@@ -118,7 +118,7 @@ const Register = () => {
                     <label className="focus-label">Name</label>
                     <span className="errors">{validationErrors?.userName}</span>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="email"
                       ref={emailRef}
@@ -130,7 +130,7 @@ const Register = () => {
                     <label className="focus-label">Email / Mobile Number</label>
                     <span className="errors">{validationErrors?.email}</span>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
                       ref={passwordRef}
@@ -161,11 +161,12 @@ const Register = () => {
                   </div>
 
                   <div className="form-group form-focus">
-                    <select
-                      className="form-control floating"
-                      ref={roleRef}
-                    >
-                      <option value="" defaultValue="selected" disabled></option>
+                    <select className="form-control floating" ref={roleRef}>
+                      <option
+                        value=""
+                        defaultValue="selected"
+                        disabled
+                      ></option>
                       <option name="coach" value="coach">
                         Coach
                       </option>
@@ -173,7 +174,7 @@ const Register = () => {
                         Client
                       </option>
                     </select>
-                    <label className="focus-label">Register as a</label>
+                    <label>Register as a</label>
                   </div>
 
                   <div className="text-right">
@@ -202,7 +203,6 @@ const Register = () => {
                     <span className="span-or">or</span>
                   </div>
                   <div className="row form-row social-login">
-                   
                     <div className="col-12">
                       <a href="#" className="btn btn-google btn-block">
                         <i className="fab fa-google mr-1"></i> Login
