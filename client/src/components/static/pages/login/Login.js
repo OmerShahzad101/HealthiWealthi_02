@@ -1,49 +1,143 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-// import auth from "../../services/auth.service";
-// import { ENV } from "../../env";
-import $ from "jquery";
+import { useEffect, useRef, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Spinner } from "react-bootstrap";
+
+import Toast from "../../../common/toast/Toast";
+
+import validate from "../../../../utils/form-validation/authFormValidation";
+import { cancelOngoingHttpRequest, getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
+import {
+  setUserRole,
+  setUserPermissions,
+  setAccessToken,
+} from "../../../../store/slices/auth";
+import { setInfoData } from "../../../../store/slices/user";
+import { DASHBOARD } from "../../../../router/constants/ROUTES";
+
 import Logo from "../../common/logo/Logo";
 
 const Login = () => {
-  // Initial Values
-  const InitialValues = {
-    email: "",
-    password: "",
-  };
-  const [loginUser, setLoginUser] = useState(InitialValues);
-  let history = useHistory();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  //Handle Changes to Get Values
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginUser({
-      ...loginUser,
-      [name]: value,
-    });
-  };
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  //API call
-  const LoginCall = async () => {
-  //   const { email, password } = loginUser;
-  //   if (email && password) {
-  //     console.log(loginUser);
-  //     const res = await auth.login(
-  //       `http://localhost:8080/api/auth/login`,
-  //       loginUser
-  //     );
-  //     if (res.success == true) {
-  //       localStorage.setItem(
-  //         "accessToken",
-  //         JSON.stringify(res.user.accessToken)
-  //       );
-  //       history.push("/");
-  //       alert(res.message);
-  //     }
-  //   }
-  //   history.push("/");
-  };
+  const [validationErrors, setValidationErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const access_path = params.get("access_path"); // access_path
+
+    if (access_path) {
+      setIsLoading(true);
+      getHttpRequest(`/auth/googleLogin/${access_path}`)
+        .then((response) => {
+          if (!response) {
+            console.log("Something went wrong with response...");
+            return;
+          }
+
+          if (response.data.success === true) {
+            const userRole = {
+              role: response.data.permission.value,
+              roleId: response.data.permission.key,
+            };
+
+            // Save auth data in Redux store
+            dispatch(setUserRole(userRole));
+            dispatch(setUserPermissions(response.data.permission.permissions));
+            dispatch(setAccessToken(response.data.accessToken));
+
+            // Update user data as well in the Redux store
+            dispatch(setInfoData(response.data.user));
+
+            history.replace(DASHBOARD);
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+
+    // Cancel company creation HTTP call in case component is unmounted due to route change
+    return cancelOngoingHttpRequest;
+  }, [dispatch, history, location.search]);
+
+  function loginHandler(event) {
+    event.preventDefault();
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    const loginData = {
+      email,
+      password,
+    };
+
+    const errors = validate(loginData);
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({ ...errors });
+      return;
+    } else {
+      setValidationErrors({});
+    }
+
+    setIsLoading(true);
+    postHttpRequest("/auth/login", loginData)
+      .then((response) => {
+        setIsLoading(false);
+
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+
+        if (response.data.success === true) {
+          const userRole = {
+            role: response.data.permission.value,
+            roleId: response.data.permission.key,
+          };
+
+          // Save auth data in Redux store
+          dispatch(setUserRole(userRole));
+          dispatch(setUserPermissions(response.data.permission.permissions));
+          dispatch(setAccessToken(response.data.accessToken));
+
+          // Update user data as well in the Redux store
+          dispatch(setInfoData(response.data.user));
+
+          // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
+          const destination = location.state?.location;
+
+          if (destination) {
+            history.replace(destination);
+          } else {
+            history.replace(DASHBOARD);
+          }
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }
 
   return (
     <div className="account-page">
@@ -56,39 +150,30 @@ const Login = () => {
             <div className="col-lg-5 col-md-7 text-center ">
               <div className="account-content login-right">
                 <div className="login-header">
-                  <ToastContainer
-                    position="top-center"
-                    autoClose={300}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    theme="colored"
-                  />
                   <h3>Login</h3>
                 </div>
-                <form action="#">
+                <form action="#" noValidate onSubmit={loginHandler}>
                   <div className="form-floating mb-3">
                     <input
                       type="email"
                       name="email"
-                      value={loginUser.email}
-                      onChange={handleChange}
+                      ref={emailRef}
                       className="form-control"
                       placeholder="Email"
                     />
                     <label>Email</label>
+                    <span className="errors">{validationErrors.email}</span>
                   </div>
                   <div className="form-floating mb-3">
                     <input
                       type="password"
                       name="password"
-                      value={loginUser.password}
-                      onChange={handleChange}
+                      ref={passwordRef}
                       className="form-control"
                       placeholder="Password"
                     />
                     <label>Password</label>
+                    <span className="errors">{validationErrors.password}</span>
                   </div>
                   <div className="text-right">
                     <Link className="forgot-link" to="/forgot-password">
@@ -97,9 +182,19 @@ const Login = () => {
                   </div>
                   <button
                     className="btn btn-primary btn-block btn-lg login-btn"
-                    type="button"
-                    onClick={LoginCall}
+                    type="submit"
+                    disabled={isLoading}
                   >
+                    {isLoading && (
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="dg-mr-8"
+                      />
+                    )}
                     Login
                   </button>
                   <div className="login-or">
@@ -107,11 +202,6 @@ const Login = () => {
                     <span className="span-or">or</span>
                   </div>
                   <div className="row form-row social-login">
-                    {/* <div className="col-6">
-                          <a href="#" className="btn btn-facebook btn-block">
-                            <i className="fab fa-facebook-f mr-1"></i> Login
-                          </a>
-                        </div> */}
                     <div className="col-12">
                       <a href="#" className="btn btn-google btn-block">
                         <i className="fab fa-google mr-1"></i> Login
