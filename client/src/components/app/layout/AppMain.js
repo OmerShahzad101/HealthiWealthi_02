@@ -10,8 +10,8 @@ export default function AppMain(props) {
       <div className="content">
         <div className="container-fluid">
           <div className="row">
-            {/* <CoachSideBar /> */}
-            <ClientSideBar/>
+            <CoachSideBar />
+            {/* <ClientSideBar/> */}
             <RouterConfig />
           </div>
         </div>
