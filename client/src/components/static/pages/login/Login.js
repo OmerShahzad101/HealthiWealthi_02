@@ -6,7 +6,9 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { cancelOngoingHttpRequest, getHttpRequest,
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
   postHttpRequest,
 } from "../../../../axios";
 import {
@@ -21,8 +23,8 @@ import Logo from "../../common/logo/Logo";
 
 const Login = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const emailRef = useRef();
   const passwordRef = useRef();

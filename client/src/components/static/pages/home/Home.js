@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
-export default function Home() {
+export default function Home(props) {
+  console.log(props);
   const settings = {
     dots: false,
     autoplay: false,
