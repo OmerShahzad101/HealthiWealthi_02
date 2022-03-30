@@ -26,23 +26,23 @@ const Login = () => {
 
   //API call
   const LoginCall = async () => {
-    const { email, password } = loginUser;
-    if (email && password) {
-      console.log(loginUser);
-      // const res = await auth.login(
-      //   `http://localhost:8080/api/auth/login`,
-      //   loginUser
-      // );
-      // if (res.success == true) {
-      //   localStorage.setItem(
-      //     "accessToken",
-      //     JSON.stringify(res.user.accessToken)
-      //   );
-      //   history.push("/");
-      //   alert(res.message);
-      // }
-    }
-    history.push("/");
+  //   const { email, password } = loginUser;
+  //   if (email && password) {
+  //     console.log(loginUser);
+  //     const res = await auth.login(
+  //       `http://localhost:8080/api/auth/login`,
+  //       loginUser
+  //     );
+  //     if (res.success == true) {
+  //       localStorage.setItem(
+  //         "accessToken",
+  //         JSON.stringify(res.user.accessToken)
+  //       );
+  //       history.push("/");
+  //       alert(res.message);
+  //     }
+  //   }
+  //   history.push("/");
   };
 
   return (

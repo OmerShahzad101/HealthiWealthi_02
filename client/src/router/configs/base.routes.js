@@ -37,7 +37,7 @@ const PublicMainWithSuspense = withSuspense(PublicMain);
 const authCheckMiddleware = (next) => {
     //  const isAuthenticated = validateAuthState();
 
-    const isAuthenticated = true;
+    const isAuthenticated = false;
 
     if (isAuthenticated) {
         return next(ROOT);

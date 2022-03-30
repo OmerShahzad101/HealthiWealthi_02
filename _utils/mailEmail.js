@@ -1,4 +1,3 @@
-const Company = require('../models/company');
 const mailHelper = require('./mailHelper');
 const htmlHelper = require('./dynamicHtmlHelper');
 // const { adminConfig } = require('../config');
