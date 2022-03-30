@@ -39,6 +39,12 @@ const ClientSideBar = () => {
                 <li>
                   <Link to="/app/favourites">
                     <i className="fas fa-bookmark"></i>
+                    <span>Client Longevity Club</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/app/favourites">
+                    <i className="fas fa-bookmark"></i>
                     <span>Favourites</span>
                   </Link>
                 </li>
