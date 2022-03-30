@@ -1,27 +1,27 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CoachSideBar = () => {
-  const location = useLocation();
-  const { pathname } = location;
-  const splitLocation = pathname.split("/");
-  return (
-      <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+const ClientSideBar = () => {
+    return (
+        <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
         <div className="profile-sidebar">
           <div className="widget-profile pro-widget-content">
             <div className="profile-info-widget">
               <a href="#" className="booking-doc-img">
                 <img
-                  src="/assets/img/doctors/doctor-02.jpg"
+                  src="/assets/img/patients/patient.jpg"
                   alt="User Image"
                 />
               </a>
               <div className="profile-det-info">
-                <h3>Dr. Omer Shahzad</h3>
-
+                <h3>Richard Wilson</h3>
                 <div className="patient-details">
+                  <h5>
+                    <i className="fas fa-birthday-cake"></i> 24 Jul 1983,
+                    38 years
+                  </h5>
                   <h5 className="mb-0">
-                    Donec sollicitudin molestie malesuada.
+                    <i className="fas fa-map-marker-alt"></i> Newyork, USA
                   </h5>
                 </div>
               </div>
@@ -31,33 +31,15 @@ const CoachSideBar = () => {
             <nav className="dashboard-menu">
               <ul>
                 <li className="active">
-                  <Link to="/app/coach-dashboard">
+                  <Link to="/app/client-dashboard">
                     <i className="fas fa-columns"></i>
                     <span>Dashboard</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/app/appointments">
-                    <i className="fas fa-calendar-check"></i>
-                    <span>Appointments</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/my-clients">
-                    <i className="fas fa-user-injured"></i>
-                    <span>My Clients</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/invoices-view">
-                    <i className="fas fa-file-invoice"></i>
-                    <span>Invoices</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/app/reviews">
-                    <i className="fas fa-star"></i>
-                    <span>Reviews</span>
+                  <Link to="/app/favourites">
+                    <i className="fas fa-bookmark"></i>
+                    <span>Favourites</span>
                   </Link>
                 </li>
                 <li>
@@ -77,17 +59,18 @@ const CoachSideBar = () => {
                   <Link to="/app/audiocall">
                     <i className="fas fa-comments"></i>
                     <span>Voice Call</span>
+                    
                   </Link>
                 </li>
                 <li>
-                  <Link to="/app/coach-profile-setting">
+                  <Link to="/app/client-profile-setting">
                     <i className="fas fa-user-cog"></i>
                     <span>Profile Settings</span>
                   </Link>
                 </li>
-
                 <li>
-                  <Link to="/app/coach-change-password">
+                    
+                  <Link to="/app/client-change-password">
                     <i className="fas fa-lock"></i>
                     <span>Change Password</span>
                   </Link>
@@ -103,7 +86,7 @@ const CoachSideBar = () => {
           </div>
         </div>
       </div>
-  );
+    );
 };
 
-export default CoachSideBar;
+export default ClientSideBar;
