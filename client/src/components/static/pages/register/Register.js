@@ -107,13 +107,14 @@ const Register = () => {
                 </div>
 
                 <form noValidate onSubmit={registerUserHandler}>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       ref={userNameRef}
                       name="userName"
                       required
                       type="text"
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Name"
                     />
                     <label className="focus-label">Name</label>
                     <span className="errors">{validationErrors?.userName}</span>
@@ -125,7 +126,8 @@ const Register = () => {
                       autoComplete="email"
                       name="email"
                       required
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Email"
                     />
                     <label className="focus-label">Email / Mobile Number</label>
                     <span className="errors">{validationErrors?.email}</span>
@@ -138,13 +140,13 @@ const Register = () => {
                       autoComplete="new-password"
                       name="password"
                       required
-                      className="form-control floating"
+                      className="form-control"
                     />
                     <label className="focus-label">Create Password</label>
                     <span className="errors">{validationErrors?.password}</span>
                   </div>
 
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
                       ref={confirmPasswordRef}
@@ -152,21 +154,21 @@ const Register = () => {
                       autoComplete="new-password"
                       name="confirmPassword"
                       required
-                      className="form-control floating"
+                      className="form-control"
                     />
-                    <label className="focus-label">confirm Password</label>
+                    <label className="focus-label">Confirm Password</label>
                     <span className="errors">
                       {validationErrors?.confirmPassword}
                     </span>
                   </div>
 
-                  <div className="form-group form-focus">
-                    <select className="form-control floating" ref={roleRef}>
+                  <div className="form-floating mb-3">
+                    <select className="form-select" ref={roleRef}>
                       <option
                         value=""
-                        defaultValue="selected"
+                        selected
                         disabled
-                      ></option>
+                      >Open this select menu</option>
                       <option name="coach" value="coach">
                         Coach
                       </option>
