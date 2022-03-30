@@ -1,47 +1,96 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import $ from "jquery";
-// import auth from "../../services/auth.service";
-// import { ENV } from "../../env";
-import { ToastContainer, toast } from "react-toastify";
 import Logo from "../../common/logo/Logo";
-
+import validate from "../../../../utils/form-validation/authFormValidation";
+import { cancelOngoingHttpRequest, postHttpRequest } from "../../../../axios";
+import { useEffect, useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
+import Toast from "../../../common/toast/Toast";
 const Register = () => {
-  // Initial Values
-  const InitialValues = {
-    name: "",
-    email: "",
-    password: "",
-    role: "",
-  };
-  //state
-  const [user, setUser] = useState(InitialValues);
-  let history = useHistory();
+  const history = useHistory();
 
-  // Handel Input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
+  const userNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+  const roleRef = useRef();
 
-  //API call
-  const RegisterCall = async () => {
-    const { name, email, password } = user;
-    if (name && email && password) {
-      // const res = await auth.register(
-      //   `http://localhost:8080/api/auth/signup`,
-      //   user
-      // );
-      // if (res.success == true) {
-      //   history.push("/login");
-      //alert(res.message);
-      //}
+  const [isLoading, setIsLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  // Cancel company creation HTTP call in case component is unmounted due to route change
+  useEffect(() => {
+    return cancelOngoingHttpRequest;
+  }, []);
+
+  function registerUserHandler(event) {
+    event.preventDefault();
+
+    const userName = userNameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+    const role = roleRef.current.value;
+
+    const inputData = {
+      userName,
+      email,
+      password,
+      confirmPassword,
+      role,
+    };
+
+    const errors = validate(inputData);
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({ ...errors });
+      return;
+    } else {
+      setValidationErrors({});
     }
-    // history.push("/login");
-  };
+
+    setIsLoading(true);
+    postHttpRequest("/auth/signup", {
+      ...inputData,
+      confirmPassword: undefined,
+    })
+      .then((response) => {
+        setIsLoading(false);
+
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+
+        if (response.data.success === true) {
+          setValidationErrors({});
+          alert("sucessfully");
+          // Swal.fire({
+          //   customClass: {
+          //     denyButton: "deny-class",
+          //     confirmButton: "confirm-class",
+          //     title: "title",
+          //     htmlContainer: "text",
+          //   },
+          //   width: "645px",
+          //   padding: "35px 60px",
+          //   title: `Registered Successfully!`,
+          //   confirmButtonText: `OK`,
+          //   text: `${response.data.message}`,
+          // }).then(() => {
+          //   history.push(LOGIN);
+          // });
+        } else {
+          setValidationErrors(response.data.errorObj);
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }
 
   return (
     <div className="account-page">
@@ -57,67 +106,76 @@ const Register = () => {
                   <h3>Register </h3>
                 </div>
 
-                <form action="#">
+                <form noValidate onSubmit={registerUserHandler}>
                   <div className="form-group form-focus">
                     <input
+                      ref={userNameRef}
+                      name="userName"
+                      required
                       type="text"
-                      name="name"
-                      value={user.name}
-                      onChange={handleChange}
                       className="form-control floating"
                     />
                     <label className="focus-label">Name</label>
+                    <span className="errors">{validationErrors?.userName}</span>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
-                      type="text"
+                      type="email"
+                      ref={emailRef}
+                      autoComplete="email"
                       name="email"
-                      value={user.email}
-                      onChange={handleChange}
+                      required
                       className="form-control floating"
                     />
                     <label className="focus-label">Email / Mobile Number</label>
+                    <span className="errors">{validationErrors?.email}</span>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
+                      ref={passwordRef}
+                      placeholder="Password"
+                      autoComplete="new-password"
                       name="password"
-                      value={user.password}
-                      onChange={handleChange}
+                      required
                       className="form-control floating"
                     />
                     <label className="focus-label">Create Password</label>
-                  </div>
-                  <div className="form-group form-focus">
-                    <select class="form-control floating">
-                      <option selected disabled></option>
-                      <option>Coach</option>
-                      <option>Client</option>
-                    </select>
-                    <label className="focus-label">Register as a</label>
+                    <span className="errors">{validationErrors?.password}</span>
                   </div>
 
-                  {/* <div className="col ps-1" md="6">
-                        <label>Register as a </label>
-                        <div className="form-group">
-                          <label>Coach</label>
-                          <input
-                            type="radio"
-                            name="role"
-                            value="coach"
-                            checked={user.role == "coach" ? true : false}
-                            onChange={handleChange}
-                          />
-                          <label>Client</label>
-                          <input
-                            type="radio"
-                            name="role"
-                            value="client"
-                            checked={user.role == "client" ? true : false}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div> */}
+                  <div className="form-group form-focus">
+                    <input
+                      type="password"
+                      ref={confirmPasswordRef}
+                      placeholder="Confirm Password"
+                      autoComplete="new-password"
+                      name="confirmPassword"
+                      required
+                      className="form-control floating"
+                    />
+                    <label className="focus-label">confirm Password</label>
+                    <span className="errors">
+                      {validationErrors?.confirmPassword}
+                    </span>
+                  </div>
+
+                  <div className="form-group form-focus">
+                    <select className="form-control floating" ref={roleRef}>
+                      <option
+                        value=""
+                        defaultValue="selected"
+                        disabled
+                      ></option>
+                      <option name="coach" value="coach">
+                        Coach
+                      </option>
+                      <option name="client" value="client">
+                        Client
+                      </option>
+                    </select>
+                    <label>Register as a</label>
+                  </div>
 
                   <div className="text-right">
                     <Link className="forgot-link" to="/login">
@@ -126,9 +184,18 @@ const Register = () => {
                   </div>
                   <button
                     className="btn btn-primary btn-block btn-lg login-btn"
-                    type="button"
-                    onClick={RegisterCall}
+                    type="submit"
                   >
+                    {isLoading && (
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="dg-mr-8"
+                      />
+                    )}
                     Signup
                   </button>
                   <div className="login-or">
@@ -136,11 +203,6 @@ const Register = () => {
                     <span className="span-or">or</span>
                   </div>
                   <div className="row form-row social-login">
-                    {/* <div className="col-6">
-                          <a href="#" className="btn btn-facebook btn-block">
-                            <i className="fab fa-facebook-f mr-1"></i> Login
-                          </a>
-                        </div> */}
                     <div className="col-12">
                       <a href="#" className="btn btn-google btn-block">
                         <i className="fab fa-google mr-1"></i> Login

@@ -3,10 +3,7 @@ const bcrypt = require('bcrypt');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const User = require('../models/user');
-const Company = require('../models/company');
-const Subscription = require('../models/subscription');
-const SubscriptionPlan = require('../models/subscriptionPlan');
-const Department = require('../models/department');
+
 const AccessToken = require('../models/accessToken');
 
 const roles = require('../_helper/roles');
@@ -22,8 +19,11 @@ const saltRounds = 10;
 
 exports.signup = async (req, res) => {
     try {
-        const { email, userName, password } = req.body;
+        const { email, userName, password , role } = req.body;
 
+        if (!role) {
+            return res.status(200).send({ success: false, message: 'Role is required!' });
+        }
         if (!email) {
             return res.status(200).send({ success: false, message: 'Email is required!' });
         }
@@ -42,16 +42,13 @@ exports.signup = async (req, res) => {
             email,
             userName,
             password: hash,
+            role,
         };
 
         // create user
         const createdUser = await User.create(userObj);
 
-            // create new company
-        const newCompany = {
-                userId: createdUser._id,
-        };
-        await Company.create(newCompany);
+       
 
      
         // Send account verification email to the user

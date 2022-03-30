@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 // import { ENV } from "../../env";
 import $ from "jquery";
 import Logo from "../../common/logo/Logo";
-
 const ForgotPassword = () => {
   const InitialValues = { email: "" };
   const [forgotpass, setForgotpass] = useState(InitialValues);
@@ -48,15 +47,15 @@ const ForgotPassword = () => {
                 </div>
 
                 <form action="#">
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="email"
                       name="email"
                       value={forgotpass.email}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
                     />
-                    <label className="focus-label">Email</label>
+                    <label>Email</label>
                   </div>
                   <div className="text-right">
                     <Link className="forgot-link" to="/login">

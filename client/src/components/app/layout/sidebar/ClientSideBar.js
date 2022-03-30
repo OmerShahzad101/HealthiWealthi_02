@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ClientSideBar = () => {
     return (
@@ -30,62 +30,62 @@ const ClientSideBar = () => {
           <div className="dashboard-widget">
             <nav className="dashboard-menu">
               <ul>
-                <li className="active">
-                  <Link to="/app/client-dashboard">
+                <li>
+                  <NavLink to="/app/client-dashboard">
                     <i className="fas fa-columns"></i>
                     <span>Dashboard</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/favourites">
+                  <NavLink to="/app/favourites">
                     <i className="fas fa-bookmark"></i>
                     <span>Client Longevity Club</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/favourites">
+                  <NavLink to="/app/favourites">
                     <i className="fas fa-bookmark"></i>
                     <span>Favourites</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/chat">
+                  <NavLink to="/app/chat">
                     <i className="fas fa-comments"></i>
                     <span>Message</span>
                     <small className="unread-msg">23</small>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/videocall">
+                  <NavLink to="/app/videocall">
                     <i className="fas fa-comments"></i>
                     <span>Video Call</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/audiocall">
+                  <NavLink to="/app/audiocall">
                     <i className="fas fa-comments"></i>
                     <span>Voice Call</span>
                     
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/app/client-profile-setting">
+                  <NavLink to="/app/client-profile-setting">
                     <i className="fas fa-user-cog"></i>
                     <span>Profile Settings</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
                     
-                  <Link to="/app/client-change-password">
+                  <NavLink to="/app/client-change-password">
                     <i className="fas fa-lock"></i>
                     <span>Change Password</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/">
+                  <NavLink to="/qwerty">
                     <i className="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </nav>
