@@ -9,7 +9,7 @@ const ClientSideBar = () => {
             <div className="profile-info-widget">
               <a href="#" className="booking-doc-img">
                 <img
-                  src="assets/img/patients/patient.jpg"
+                  src="/assets/img/patients/patient.jpg"
                   alt="User Image"
                 />
               </a>

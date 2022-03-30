@@ -10,7 +10,7 @@ const Appointments = () => {
           <div className="appointment-list">
             <div className="profile-info-widget">
               <Link to="client-dashboard" className="booking-doc-img">
-                <img src="assets/img/patients/patient.jpg" alt="User Image" />
+                <img src="/assets/img/patients/patient.jpg" alt="User Image" />
               </Link>
               <div className="profile-det-info">
                 <h3>
