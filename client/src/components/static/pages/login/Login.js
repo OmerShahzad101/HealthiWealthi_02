@@ -68,25 +68,27 @@ const Login = () => {
                   <h3>Login</h3>
                 </div>
                 <form action="#">
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="email"
                       name="email"
                       value={loginUser.email}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Email"
                     />
-                    <label className="focus-label">Email</label>
+                    <label>Email</label>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
                       name="password"
                       value={loginUser.password}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Password"
                     />
-                    <label className="focus-label">Password</label>
+                    <label>Password</label>
                   </div>
                   <div className="text-right">
                     <Link className="forgot-link" to="/forgot-password">

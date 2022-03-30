@@ -91,7 +91,7 @@ const CoachSideBar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="/asd">
                     <i className="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                   </NavLink>

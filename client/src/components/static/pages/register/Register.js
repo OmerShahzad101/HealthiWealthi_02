@@ -58,43 +58,47 @@ const Register = () => {
                 </div>
 
                 <form action="#">
-                  <div className="form-group form-focus">
+                  
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       name="name"
                       value={user.name}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Name"
                     />
                     <label className="focus-label">Name</label>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       name="email"
                       value={user.email}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Email"
                     />
-                    <label className="focus-label">Email / Mobile Number</label>
+                    <label>Email / Mobile Number</label>
                   </div>
-                  <div className="form-group form-focus">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
                       name="password"
                       value={user.password}
                       onChange={handleChange}
-                      className="form-control floating"
+                      className="form-control"
+                      placeholder="Password"
                     />
                     <label className="focus-label">Create Password</label>
                   </div>
-                  <div className="form-group form-focus">
-                    <select class="form-control floating">
-                      <option selected disabled></option>
+                  <div className="form-floating mb-3">
+                    <select class="form-select">
+                      <option selected disabled>Open this select menu</option>
                       <option>Coach</option>
                       <option>Client</option>
                     </select>
-                    <label className="focus-label">Register as a</label>
+                    <label>Register as a</label>
                   </div>
 
                   {/* <div className="col ps-1" md="6">

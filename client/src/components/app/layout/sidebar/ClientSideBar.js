@@ -76,7 +76,7 @@ const ClientSideBar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to="/qwerty">
                     <i className="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                   </NavLink>
