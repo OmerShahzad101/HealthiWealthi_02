@@ -7112,3 +7112,6 @@ html.menu-opened body {
   color: #ccc;
   font-size: 14px;
 }
+.account-page .form-floating .form-select{
+  font-size: 14px;
+}
