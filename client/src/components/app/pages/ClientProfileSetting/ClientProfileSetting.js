@@ -14,7 +14,7 @@ const ClientProfileSetting = () => {
                     <div className="change-avatar">
                       <div className="profile-img">
                         <img
-                          src="assets/img/patients/patient.jpg"
+                          src="/assets/img/patients/patient.jpg"
                           alt="User Image"
                         />
                       </div>

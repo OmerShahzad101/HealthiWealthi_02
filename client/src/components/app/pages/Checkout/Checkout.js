@@ -4,33 +4,11 @@ import { Link } from "react-router-dom";
 const Checkout = () => {
   return (
     <div>
-      {/* <!-- Breadcrumb --> */}
-      <div className="breadcrumb-bar">
-        <div className="container-fluid">
-          <div className="row align-items-center">
-            <div className="col-md-12 col-12">
-              <nav aria-label="breadcrumb" className="page-breadcrumb">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Checkout
-                  </li>
-                </ol>
-              </nav>
-              <h2 className="breadcrumb-title">Checkout</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <!-- /Breadcrumb --> */}
+    
 
         {/* <!-- Page Content --> */}
-        <div className="content">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7 col-lg-8">
+    
+            <div className="col-md-7 col-lg-8 col-xl-9">
               <div className="card">
                 <div className="card-body">
                   {/* <!-- Checkout Form --> */}
@@ -250,9 +228,7 @@ const Checkout = () => {
               </div>
               {/* <!-- /Booking Summary --> */}
             </div>
-          </div>
-        </div>
-      </div>
+         
       {/* <!-- /Page Content --> */}
     </div>
   );
