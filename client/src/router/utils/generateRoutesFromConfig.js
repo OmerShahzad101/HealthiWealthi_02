@@ -1,9 +1,6 @@
 import { Redirect, Route, Switch } from 'react-router';
-
 import Page from '../middleware/Page';
-
 export default function generateRoutesFromConfig(config) {
-    
     return (
         <Switch>
             {config.map((route) => (

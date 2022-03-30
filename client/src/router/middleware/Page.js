@@ -3,7 +3,6 @@ import { Redirect, useLocation } from 'react-router-dom';
 
 import { LOGIN } from '../constants/ROUTES';
 import validateAuthState from '../../utils/auth/validateAuthState';
-
 export default function Page({ route }) {
     const location = useLocation();
 
