@@ -19,7 +19,8 @@ import { DASHBOARD } from "../../../../router/constants/ROUTES";
 
 import Logo from "../../common/logo/Logo";
 
-const Login = () => {
+const Login = (props) => {
+  
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -32,6 +33,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(props)
     const params = new URLSearchParams(location.search);
     const access_path = params.get("access_path"); // access_path
 
@@ -153,7 +155,7 @@ const Login = () => {
                   <h3>Login</h3>
                 </div>
                 <form action="#" noValidate onSubmit={loginHandler}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="email"
                       name="email"
@@ -164,7 +166,7 @@ const Login = () => {
                     <label>Email</label>
                     <span className="errors">{validationErrors.email}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       name="password"

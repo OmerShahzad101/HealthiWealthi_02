@@ -55,6 +55,7 @@ const ForgotPassword = () => {
                       value={forgotpass.email}
                       onChange={handleChange}
                       className="form-control"
+                      placeholder="Email"
                     />
                     <label>Email</label>
                   </div>
