@@ -14,7 +14,7 @@ const CoachDashboard = () => {
                       <div className="circle-bar circle-bar1">
                         <div className="circle-graph1" data-percent="75">
                           <img
-                            src="assets/img/icon-01.png"
+                            src="/assets/img/icon-01.png"
                             className="img-fluid"
                             alt="patient"
                           />
@@ -33,7 +33,7 @@ const CoachDashboard = () => {
                       <div className="circle-bar circle-bar2">
                         <div className="circle-graph2" data-percent="65">
                           <img
-                            src="assets/img/icon-02.png"
+                            src="/assets/img/icon-02.png"
                             className="img-fluid"
                             alt="Patient"
                           />
@@ -52,7 +52,7 @@ const CoachDashboard = () => {
                       <div className="circle-bar circle-bar3">
                         <div className="circle-graph3" data-percent="50">
                           <img
-                            src="assets/img/icon-03.png"
+                            src="/assets/img/icon-03.png"
                             className="img-fluid"
                             alt="Patient"
                           />
