@@ -30,7 +30,7 @@ const Register = () => {
   }
 
   const history = useHistory();
-  const userNameRef = useRef();
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -47,7 +47,7 @@ const Register = () => {
   function registerUserHandler(event) {
     event.preventDefault();
 
-    const username = userNameRef.current.value;
+    const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
@@ -69,62 +69,62 @@ const Register = () => {
     } else {
       setValidationErrors({});
     }
-
     setIsLoading(true);
     postHttpRequest("/front/auth/register", {
       ...inputData,
       confirmPassword: undefined,
-    }).then((response) => {
-      setIsLoading(false);
+    })
+      .then((response) => {
+        setIsLoading(false);
 
-      if (!response) {
-        console.log("Something went wrong with response...");
-        return;
-      }
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
 
-      if (response.data.success === true) {
-        setValidationErrors({});
-        Toast.fire({
-          customClass: {
-            denyButton: "deny-class",
-            confirmButton: "confirm-class",
-            title: "title",
-            htmlContainer: "text",
-          },
-          icon: "success",
-          width: "450px",
-          padding: "20px 10px",
-          title: `Registered Successfully!`,
-          confirmButtonText: `OK`,
-          text: `${response.data.message}`,
-        }).then(() => {
-          history.push(LOGIN);
-        });
-      } else {
-        setValidationErrors(response.data.errorObj);
-
-        Toast.fire({
-          icon: "error",
-          title: response.data.message,
-        });
-      }
-    });
-    // .catch((e) => {
-    //   console.log(e)
-
-    //   Toast.fire({
-    //     icon: "error",
-    //     title: "Email Already Exist",
-    //   });
-    //   setIsLoading(false);
-    // });
+        if (response.data.status === true) {
+          setValidationErrors({});
+          Toast.fire({
+            customClass: {
+              denyButton: "deny-class",
+              confirmButton: "confirm-class",
+              title: "title",
+              htmlContainer: "text",
+            },
+            icon: "success",
+            width: "450px",
+            padding: "20px 10px",
+            title: `Registered Successfully!`,
+            confirmButtonText: `OK`,
+            text: `${response.data.message}`,
+          }).then(() => {
+            history.push(LOGIN);
+          });
+        } else {
+          setValidationErrors(response.data.errorObj);
+         
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      })
+      // .catch((e) => {
+      //   console.log(e)
+     
+      //   Toast.fire({
+      //     icon: "error",
+      //     title: "Email Already Exist",
+      //   });
+      //   setIsLoading(false);
+      // });
   }
 
   return (
     <div className="account-page">
       <div className="content">
         <div className="text-center mb-md-5 mb-3">
-          <Logo />
+          {/* <Logo /> */}
         </div>
         <div className="container">
           <div className="row justify-content-center">
@@ -137,15 +137,15 @@ const Register = () => {
                 <form noValidate onSubmit={registerUserHandler}>
                   <div className="form-floating mb-4">
                     <input
-                      ref={userNameRef}
-                      name="userName"
+                      ref={usernameRef}
+                      name="username"
                       required
                       type="text"
                       className="form-control"
                       placeholder="Name"
                     />
                     <label className="focus-label">Name</label>
-                    <span className="errors">{validationErrors?.userName}</span>
+                    <span className="errors">{validationErrors?.username}</span>
                   </div>
                   <div className="form-floating mb-4">
                     <input
@@ -190,7 +190,7 @@ const Register = () => {
                     </span>
                   </div>
 
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <select className="form-select" ref={typeRef}>
                       <option value="" selected disabled>
                         Open this select menu
@@ -203,6 +203,9 @@ const Register = () => {
                       </option>
                     </select>
                     <label>Register as a</label>
+                    <span className="errors">
+                      {validationErrors?.type}
+                    </span>
                   </div>
 
                   <div className="text-right">

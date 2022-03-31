@@ -28,15 +28,15 @@ export default function validate(form) {
         errors.noEmployee = 'Company size is required';
     }
 
-    if ('userName' in form) {
-        if (!form.userName) {
-            errors.userName = 'Name is required';
-        } else if (!NAME_PATTERN.test(form.userName)) {
-            errors.userName = 'Name seems to be invalid. Only English alphabets are allowed in name.';
-        } else if (form.userName.trim().length < 2) {
-            errors.userName = 'Name should have at least 2 characters.';
-        } else if (form.userName.trim().length > 50) {
-            errors.userName = 'Name should be lesser than 50 characters.';
+    if ('username' in form) {
+        if (!form.username) {
+            errors.username = 'Name is required';
+        } else if (!NAME_PATTERN.test(form.username)) {
+            errors.username = 'Name seems to be invalid. Only English alphabets are allowed in name.';
+        } else if (form.username.trim().length < 2) {
+            errors.username = 'Name should have at least 2 characters.';
+        } else if (form.username.trim().length > 50) {
+            errors.username = 'Name should be lesser than 50 characters.';
         }
     }
 
@@ -73,7 +73,7 @@ export default function validate(form) {
     }
 
     if ('type' in form && !form.type) {
-        errors.type = 'Designation is required';
+        errors.type = 'Role is required';
     }
     
     if ('publicApiKey' in form && !form.publicApiKey) {
