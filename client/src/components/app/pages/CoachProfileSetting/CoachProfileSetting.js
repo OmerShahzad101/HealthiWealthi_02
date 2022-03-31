@@ -1,15 +1,96 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import Toast from "../../../common/toast/Toast";
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
+import validate from "../../../../utils/form-validation/authFormValidation";
 
 const CoachProfileSetting = () => {
-
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const UserNameRef = useRef();
+  const emailRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const phoneNumberRef = useRef();
+  const genderRef = useRef();
+  const DobRef = useRef();
+
+  function updateProfileHandler(event) {
+    event.preventDefault();
+    const userName = UserNameRef.current.value;
+    const email = emailRef.current.value;
+    const firstName = firstNameRef.current.value;
+    const lastName = lastNameRef.current.value;
+    const phoneNumber = phoneNumberRef.current.value;
+    const gender = genderRef.current.value;
+    const DOB = DobRef.current.value;
+
+    const loginData = {
+      userName,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+      gender,
+      DOB,
+    };
+    console.log( userName,
+      email,
+      firstName,
+      lastName,)
+
+    // const errors = validate(loginData);
+
+    // if (Object.keys(errors).length > 0) {
+    //   setValidationErrors({ ...errors });
+    //   return;
+    // } else {
+    //   setValidationErrors({});
+    // }
+
+    // setIsLoading(true);
+    // postHttpRequest("/front/auth/login", loginData)
+    //   .then((response) => {
+    //     setIsLoading(false);
+
+    //     if (!response) {
+    //       alert("Something went wrong with response...");
+    //       console.log("Something went wrong with response...");
+    //       return;
+    //     }
+
+    //     if (response.data.success === true) {
+    //       Toast.fire({
+    //         icon: "success",
+    //         title: response.data.message,
+    //       });
+    //     } else {
+    //       Toast.fire({
+    //         icon: "error",
+    //         title: response.data.message,
+    //       });
+    //     }
+    //   })
+    //   .catch(() => {
+    //     setIsLoading(false);
+    //     Toast.fire({
+    //       icon: "error",
+    //       title: "Something went wrong...",
+    //     });
+    //   });
+  }
 
   const Upgrade = () => {
-    history.push("/coach-upgrade-profile")
-    console.log("dssd")
-  }
+    history.push("/coach-upgrade-profile");
+    console.log("dssd");
+  };
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -23,7 +104,7 @@ const CoachProfileSetting = () => {
                   <div className="change-avatar">
                     <div className="profile-img">
                       <img
-                        src="assets/img/doctors/doctor-thumb-02.jpg"
+                        src="/assets/img/doctors/doctor-thumb-02.jpg"
                         alt="User Image"
                       />
                     </div>
@@ -38,9 +119,7 @@ const CoachProfileSetting = () => {
                         Allowed JPG, GIF or PNG. Max size of 2MB
                       </small>
                     </div>
-                    <button className="change-account"
-                      onClick={Upgrade}
-                    >
+                    <button className="change-account" onClick={Upgrade}>
                       Upgrade Account
                     </button>
                   </div>
@@ -51,7 +130,13 @@ const CoachProfileSetting = () => {
                   <label>
                     Username <span className="text-danger">*</span>
                   </label>
-                  <input type="text" className="form-control" readonly />
+                  <input
+                    type="text"
+                    name="Username"
+                    ref={UserNameRef}
+                    className="form-control"
+                    readonly
+                  />
                 </div>
               </div>
               <div className="col-md-6">
@@ -59,7 +144,7 @@ const CoachProfileSetting = () => {
                   <label>
                     Email <span className="text-danger">*</span>
                   </label>
-                  <input type="email" className="form-control" readonly />
+                  <input type="email" name="email" ref={emailRef} className="form-control" readonly />
                 </div>
               </div>
               <div className="col-md-6">
@@ -67,7 +152,7 @@ const CoachProfileSetting = () => {
                   <label>
                     First Name <span className="text-danger">*</span>
                   </label>
-                  <input type="text" className="form-control" />
+                  <input type="text" name="firstName" ref={firstNameRef} className="form-control" />
                 </div>
               </div>
               <div className="col-md-6">
@@ -75,13 +160,13 @@ const CoachProfileSetting = () => {
                   <label>
                     Last Name <span className="text-danger">*</span>
                   </label>
-                  <input type="text" className="form-control" />
+                  <input type="text" name="lastName" ref={lastNameRef} className="form-control" />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Phone Number</label>
-                  <input type="text" className="form-control" />
+                  <input type="text" name="phoneNumber" ref={phoneNumberRef} className="form-control" />
                 </div>
               </div>
               <div className="col-md-6">
@@ -250,7 +335,7 @@ const CoachProfileSetting = () => {
             <div
               className="row custom_price_cont"
               id="custom_price_cont"
-            // style="display: none;"
+              // style="display: none;"
             >
               <div className="col-md-4">
                 <input
@@ -421,60 +506,12 @@ const CoachProfileSetting = () => {
         </div>
         {/* <!-- /Awards --> */}
 
-        {/* <!-- Memberships --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Memberships</h4>
-            <div className="membership-info">
-              <div className="row form-row membership-cont">
-                <div className="col-12 col-md-10 col-lg-5">
-                  <div className="form-group">
-                    <label>Memberships</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="add-more">
-              <a href="#" className="add-membership">
-                <i className="fa fa-plus-circle"></i> Add More
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Memberships --> */}
-
-        {/* <!-- Registrations --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Registrations</h4>
-            <div className="registrations-info">
-              <div className="row form-row reg-cont">
-                <div className="col-12 col-md-5">
-                  <div className="form-group">
-                    <label>Registrations</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-                <div className="col-12 col-md-5">
-                  <div className="form-group">
-                    <label>Year</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="add-more">
-              <a href="#" className="add-reg">
-                <i className="fa fa-plus-circle"></i> Add More
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Registrations --> */}
-
         <div className="submit-section submit-btn-bottom">
-          <button type="submit" className="btn btn-primary submit-btn">
+          <button
+            type="button"
+            onClick={updateProfileHandler}
+            className="btn btn-primary submit-btn"
+          >
             Save Changes
           </button>
         </div>
