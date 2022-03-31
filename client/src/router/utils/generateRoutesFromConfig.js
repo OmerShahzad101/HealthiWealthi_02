@@ -3,7 +3,6 @@ import Page from '../middleware/Page';
 export default function generateRoutesFromConfig(config) {
     return (
         <>
-        {console.log("xx" , config)}
         <Switch>
             {config.map((route) => (
                 <Route
@@ -14,8 +13,8 @@ export default function generateRoutesFromConfig(config) {
                         if (route.redirect) {
                             return <Redirect to={route.redirect} />;
                         }
-                        {console.log(route)}
-                        return <Page abc={"ddj"} route={route} />;
+                        
+                        return <Page route={route} />;
                     }}
                 />
             ))}

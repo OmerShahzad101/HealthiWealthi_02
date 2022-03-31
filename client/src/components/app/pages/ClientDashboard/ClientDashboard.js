@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ClientDashboard = () => {
+const ClientDashboard = (props) => {
+  console.log("dfdf", props);
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">

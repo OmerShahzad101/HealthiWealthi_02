@@ -8,7 +8,7 @@ export default function AppMain(props) {
  console.log('role',role)
   let content = (
     <>
-      <BreadCrumb />
+      <BreadCrumb  name={props}/>
       <div className="content">
         <div className="container-fluid">
           <div className="row">

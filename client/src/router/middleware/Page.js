@@ -4,9 +4,8 @@ import { Redirect, useLocation } from "react-router-dom";
 import { LOGIN } from "../constants/ROUTES";
 import validateAuthState from "../../utils/auth/validateAuthState";
 
-export default function Page({ route }) {
-  console.log(route);
-  console.log(route.element);
+export default function Page({ route, abc }) {
+  console.log(abc);
   const location = useLocation();
 
   useEffect(() => {
