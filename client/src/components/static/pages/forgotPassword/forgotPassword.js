@@ -1,35 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-// import auth from "../../services/auth.service";
-// import { ENV } from "../../env";
-import $ from "jquery";
 import Logo from "../../common/logo/Logo";
+import Toast from "../../../common/toast/Toast";
+import validate from "../../../../utils/form-validation/authFormValidation";
+import { Spinner } from "react-bootstrap";
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
 
 const ForgotPassword = () => {
-  const InitialValues = { email: "" };
-  const [forgotpass, setForgotpass] = useState(InitialValues);
-  let history = useHistory();
+  const emailRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
 
-  //Handle Changes to Get Values
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForgotpass({
-      ...forgotpass,
-      [name]: value,
-    });
-  };
+  // Cancel company creation HTTP call in case component is unmounted due to route change
+  useEffect(() => {
+    return cancelOngoingHttpRequest;
+  }, []);
 
-  //API call
-  const ForgotPasswordCall = async () => {
-    // const res = await auth.forgot(`${ENV.API_URL}api/auth/forgot-password` , forgotpass);
-    // if (res.success == true) {
-    // toast.success(res.message);
-    // history("/login");
-    // } else {
-    // toast.error(res.message);
-    // }
-  };
+  function forgetPasswordUserHandler(event) {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const inputData = {
+      email,
+    };
+
+    const errors = validate(inputData);
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({ ...errors });
+      return;
+    } else {
+      setValidationErrors({});
+    }
+
+    setIsLoading(true);
+    postHttpRequest('/auth//forgot-password', { ...inputData })
+      .then((response) => {
+        const data = response.data;
+
+        if (data && data.success) {
+          Toast.fire({
+            icon: 'info',
+            title: data.message,
+          });
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: data.message,
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   return (
     <div className="account-page">
       <div className="content">
@@ -47,16 +75,17 @@ const ForgotPassword = () => {
                   </p>
                 </div>
 
-                <form action="#">
+                <form noValidate onSubmit={forgetPasswordUserHandler}>
                   <div className="form-floating mb-3">
                     <input
                       type="email"
                       name="email"
-                      value={forgotpass.email}
-                      onChange={handleChange}
                       className="form-control"
+                      placeholder="Email"
+                      ref={emailRef}
                     />
                     <label>Email</label>
+                    <span className="errors">{validationErrors?.email}</span>
                   </div>
                   <div className="text-right">
                     <Link className="forgot-link" to="/login">
@@ -64,10 +93,11 @@ const ForgotPassword = () => {
                     </Link>
                   </div>
                   <button
+                   disabled={isLoading}
                     className="btn btn-primary btn-block btn-lg login-btn"
                     type="button"
-                    onClick={ForgotPasswordCall}
                   >
+                    {isLoading && <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="dg-mr-8" />}
                     Reset Password
                   </button>
                 </form>

@@ -10,7 +10,8 @@ import validate from "../../../../utils/form-validation/authFormValidation";
 import { cancelOngoingHttpRequest, getHttpRequest, postHttpRequest} from "../../../../axios";
 import { setUserRole, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
 
-const Login = () => {
+const Login = (props) => {
+  
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(props)
     const params = new URLSearchParams(location.search);
     const access_path = params.get("access_path"); // access_path
 
@@ -92,6 +94,7 @@ const Login = () => {
         setIsLoading(false);
 
         if (!response) {
+         alert("Something went wrong with response...")
           console.log("Something went wrong with response...");
           return;
         }
@@ -127,6 +130,10 @@ const Login = () => {
       })
       .catch(() => {
         setIsLoading(false);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong...",
+        });
       });
   }
 
@@ -144,7 +151,7 @@ const Login = () => {
                   <h3>Login</h3>
                 </div>
                 <form action="#" noValidate onSubmit={loginHandler}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="email"
                       name="email"
@@ -155,7 +162,7 @@ const Login = () => {
                     <label>Email</label>
                     <span className="errors">{validationErrors.email}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       name="password"

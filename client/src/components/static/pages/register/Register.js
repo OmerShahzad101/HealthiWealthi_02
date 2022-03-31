@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
+import { LOGIN } from "../../../../router/constants/ROUTES";
+//import Swal from "sweetalert2";
 const Register = () => {
   const history = useHistory();
 
@@ -63,33 +65,40 @@ const Register = () => {
 
         if (response.data.success === true) {
           setValidationErrors({});
-          alert("sucessfully");
-          // Swal.fire({
-          //   customClass: {
-          //     denyButton: "deny-class",
-          //     confirmButton: "confirm-class",
-          //     title: "title",
-          //     htmlContainer: "text",
-          //   },
-          //   width: "645px",
-          //   padding: "35px 60px",
-          //   title: `Registered Successfully!`,
-          //   confirmButtonText: `OK`,
-          //   text: `${response.data.message}`,
-          // }).then(() => {
-          //   history.push(LOGIN);
-          // });
+          Toast.fire({
+            customClass: {
+              denyButton: "deny-class",
+              confirmButton: "confirm-class",
+              title: "title",
+              htmlContainer: "text",
+            },
+            icon: "success",
+            width: "450px",
+            padding: "20px 10px",
+            title: `Registered Successfully!`,
+            confirmButtonText: `OK`,
+            text: `${response.data.message}`,
+          }).then(() => {
+            history.push(LOGIN);
+          });
         } else {
           setValidationErrors(response.data.errorObj);
+         
           Toast.fire({
             icon: "error",
             title: response.data.message,
           });
         }
       })
-      .catch(() => {
-        setIsLoading(false);
-      });
+      // .catch((e) => {
+      //   console.log(e)
+     
+      //   Toast.fire({
+      //     icon: "error",
+      //     title: "Email Already Exist",
+      //   });
+      //   setIsLoading(false);
+      // });
   }
 
   return (
@@ -107,7 +116,7 @@ const Register = () => {
                 </div>
 
                 <form noValidate onSubmit={registerUserHandler}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       ref={userNameRef}
                       name="userName"
@@ -119,7 +128,7 @@ const Register = () => {
                     <label className="focus-label">Name</label>
                     <span className="errors">{validationErrors?.userName}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="email"
                       ref={emailRef}
@@ -132,7 +141,7 @@ const Register = () => {
                     <label className="focus-label">Email / Mobile Number</label>
                     <span className="errors">{validationErrors?.email}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       ref={passwordRef}
@@ -146,7 +155,7 @@ const Register = () => {
                     <span className="errors">{validationErrors?.password}</span>
                   </div>
 
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       ref={confirmPasswordRef}
