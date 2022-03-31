@@ -9,7 +9,6 @@ import { LOGIN } from "../../../../router/constants/ROUTES";
 //import Swal from "sweetalert2";
 const Register = () => {
   const history = useHistory();
-
   const userNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();

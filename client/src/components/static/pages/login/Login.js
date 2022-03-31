@@ -101,10 +101,11 @@ const Login = (props) => {
         }
 
         if (response.data.success === true) {
-          // const userRole = {
-          //   role: response.data.permission.value,
-          //   roleId: response.data.permission.key,
-          // };
+          const userRole = {
+            role: response?.data?.user?.role ,//response.data.permission.value
+            // roleId: response.data.permission.key,
+          };
+          console.log("userRole", response?.data?.user?.role)
 
           // Save auth data in Redux store
           // dispatch(setUserRole(userRole));

@@ -6,7 +6,6 @@ const initialState = {
     company: null,
     departments: [],
 };
-
 export const authSlice = createSlice({
     name: 'user',
     initialState,
