@@ -5423,7 +5423,7 @@ font-size: 16px;
   padding: 16px 20px;
 }
 .dashboard-menu > ul > li:hover > a,
-.dashboard-menu > ul > li.active > a {
+.dashboard-menu > ul > li > a.active {
   color: #d32986;
 }
 .dashboard-menu ul li a i {
@@ -7246,4 +7246,18 @@ font-size: 16px;
   display: block;
   width: 100%;
 }
- 
+.account-page .form-floating label{
+  color: #ccc;
+  font-size: 14px;
+}
+.account-page .form-floating .form-select{
+  font-size: 14px;
+}
+.form-floating .errors {
+  color: red;
+  font-size: 12px;
+  bottom: -18px;
+  display: inline-block;
+  position: absolute;
+  left: 5px;
+}

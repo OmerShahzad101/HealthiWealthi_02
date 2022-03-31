@@ -2,9 +2,6 @@ const { Strategy: GoogleStrategy } = require('passport-google-oauth2');
 
 // const { googleConfig } = require('../config/vars');
 const User = require('../models/user');
-const Company = require('../models/company');
-const SubscriptionPlan = require('../models/subscriptionPlan');
-const Subscription = require('../models/subscription');
 const { generateUniqueId } = require('../_helper/uniqueIdGeneration');
 
 

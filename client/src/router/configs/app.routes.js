@@ -72,7 +72,7 @@ function getRouteConfigs() {
       // Coach Dashboard ROUTE
       path: routes.COACH_DASHBOARD,
       exact: true,
-      element: <CoachDashboardWithSuspense />,
+      element: <CoachDashboardWithSuspense  />,
     },
     {
       // Coach Change Password  ROUTE
@@ -126,7 +126,7 @@ function getRouteConfigs() {
       // ClientDashboard ROUTE
       path: routes.CLIENT_DASHBOARD,
       exact: true,
-      element: <ClientDashboardWithSuspense />,
+      element: <ClientDashboardWithSuspense name="Dashboard" />,
     },
     {
       // ClientProfile ROUTE
