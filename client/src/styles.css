@@ -7115,3 +7115,11 @@ html.menu-opened body {
 .account-page .form-floating .form-select{
   font-size: 14px;
 }
+.form-floating .errors {
+  color: red;
+  font-size: 12px;
+  bottom: -18px;
+  display: inline-block;
+  position: absolute;
+  left: 5px;
+}

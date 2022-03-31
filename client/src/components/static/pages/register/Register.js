@@ -5,13 +5,15 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
+import { LOGIN } from "../../../../router/constants/ROUTES";
+//import Swal from "sweetalert2";
 const Register = () => {
   const history = useHistory();
   const userNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-  const roleRef = useRef();
+  const typeRef = useRef();
 
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -24,18 +26,18 @@ const Register = () => {
   function registerUserHandler(event) {
     event.preventDefault();
 
-    const userName = userNameRef.current.value;
+    const username = userNameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    const role = roleRef.current.value;
+    const type = typeRef.current.value;
 
     const inputData = {
-      userName,
+      username,
       email,
       password,
       confirmPassword,
-      role,
+      type,
     };
 
     const errors = validate(inputData);
@@ -48,7 +50,7 @@ const Register = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest("/auth/signup", {
+    postHttpRequest("/front/auth/register", {
       ...inputData,
       confirmPassword: undefined,
     })
@@ -62,33 +64,40 @@ const Register = () => {
 
         if (response.data.success === true) {
           setValidationErrors({});
-          alert("sucessfully");
-          // Swal.fire({
-          //   customClass: {
-          //     denyButton: "deny-class",
-          //     confirmButton: "confirm-class",
-          //     title: "title",
-          //     htmlContainer: "text",
-          //   },
-          //   width: "645px",
-          //   padding: "35px 60px",
-          //   title: `Registered Successfully!`,
-          //   confirmButtonText: `OK`,
-          //   text: `${response.data.message}`,
-          // }).then(() => {
-          //   history.push(LOGIN);
-          // });
+          Toast.fire({
+            customClass: {
+              denyButton: "deny-class",
+              confirmButton: "confirm-class",
+              title: "title",
+              htmlContainer: "text",
+            },
+            icon: "success",
+            width: "450px",
+            padding: "20px 10px",
+            title: `Registered Successfully!`,
+            confirmButtonText: `OK`,
+            text: `${response.data.message}`,
+          }).then(() => {
+            history.push(LOGIN);
+          });
         } else {
           setValidationErrors(response.data.errorObj);
+         
           Toast.fire({
             icon: "error",
             title: response.data.message,
           });
         }
       })
-      .catch(() => {
-        setIsLoading(false);
-      });
+      // .catch((e) => {
+      //   console.log(e)
+     
+      //   Toast.fire({
+      //     icon: "error",
+      //     title: "Email Already Exist",
+      //   });
+      //   setIsLoading(false);
+      // });
   }
 
   return (
@@ -106,7 +115,7 @@ const Register = () => {
                 </div>
 
                 <form noValidate onSubmit={registerUserHandler}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       ref={userNameRef}
                       name="userName"
@@ -118,7 +127,7 @@ const Register = () => {
                     <label className="focus-label">Name</label>
                     <span className="errors">{validationErrors?.userName}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="email"
                       ref={emailRef}
@@ -131,7 +140,7 @@ const Register = () => {
                     <label className="focus-label">Email / Mobile Number</label>
                     <span className="errors">{validationErrors?.email}</span>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       ref={passwordRef}
@@ -145,7 +154,7 @@ const Register = () => {
                     <span className="errors">{validationErrors?.password}</span>
                   </div>
 
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       ref={confirmPasswordRef}
@@ -162,16 +171,16 @@ const Register = () => {
                   </div>
 
                   <div className="form-floating mb-3">
-                    <select className="form-select" ref={roleRef}>
+                    <select className="form-select" ref={typeRef}>
                       <option
                         value=""
                         selected
                         disabled
                       >Open this select menu</option>
-                      <option name="coach" value="coach">
+                      <option name="3" value="3">
                         Coach
                       </option>
-                      <option name="client" value="client">
+                      <option name="1" value="1">
                         Client
                       </option>
                     </select>

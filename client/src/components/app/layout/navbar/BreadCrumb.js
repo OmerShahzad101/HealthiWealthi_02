@@ -1,6 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import breadCrumb from "../../../../utils/breadcrumb/breadcrumb"
+
 const BreadCrumb = (props) => {
+  
+  const location = useLocation();
+  const { pathname } = location;
+  const  TITLE_NAME = breadCrumb(pathname)
+  console.log(TITLE_NAME)
   return (
     <div className="breadcrumb-bar">
       <div className="container-fluid">
@@ -12,15 +19,15 @@ const BreadCrumb = (props) => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  Dashboard
+                  {/* {TITLE_NAME.associatedName} */}
                 </li>
               </ol>
             </nav>
-            <h2 className="breadcrumb-title">Dashboard</h2>
+            {/* <h2 className="breadcrumb-title">{TITLE_NAME.associatedName}</h2> */}
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default BreadCrumb
+export default BreadCrumb;
