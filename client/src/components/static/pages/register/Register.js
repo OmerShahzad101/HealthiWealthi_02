@@ -9,6 +9,7 @@ import { LOGIN } from "../../../../router/constants/ROUTES";
 import Google from "../../common/Google";
 import GoogleLogin from "react-google-login";
 import { JsonWebTokenError } from "jsonwebtoken";
+
 //import Swal from "sweetalert2";
 const Register = () => {
   const handleLogin = (result) => {
