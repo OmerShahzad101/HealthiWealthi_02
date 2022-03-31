@@ -13,7 +13,7 @@ export default function AppMain(props) {
         <div className="container-fluid">
           <div className="row">
             {
-              role === 'client' ?  <ClientSideBar/> : <CoachSideBar />
+              role === '3' ?  <ClientSideBar/> : <CoachSideBar />
             }
             <RouterConfig />
           </div>
