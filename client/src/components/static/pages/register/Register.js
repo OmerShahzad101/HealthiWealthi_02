@@ -7,7 +7,6 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 const Register = () => {
   const history = useHistory();
-
   const userNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
