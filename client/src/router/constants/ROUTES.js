@@ -27,6 +27,7 @@ export const SIGN_DOCUMENT = '/sign-document/:docId';
 //Coach Routes
 export const COACH_DASHBOARD = `${APP}/coach-dashboard`;
 export const COACH_PROFILE_SETTING = `${APP}/coach-profile-setting`;
+export const COACH_UPGRADE_PROFILE = `${APP}/coach-upgrade-profile`;
 export const COACH_PROFILE = `${APP}/coach-profile`;
 export const COACH_CHANGE_PASSWORD = `${APP}/coach-change-password`;
 

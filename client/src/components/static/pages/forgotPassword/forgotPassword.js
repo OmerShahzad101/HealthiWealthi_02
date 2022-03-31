@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useEffect, useRef, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Logo from "../../common/logo/Logo";
-import Toast from "../../../common/toast/Toast";
-import validate from "../../../../utils/form-validation/authFormValidation";
-import { Spinner } from "react-bootstrap";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-} from "../../../../axios";
+
+import Toast from '../../../common/toast/Toast';
+
+import { cancelOngoingHttpRequest, postHttpRequest } from '../../../../axios';
+import validate from '../../../../utils/form-validation/authFormValidation';
 
 const ForgotPassword = () => {
   const emailRef = useRef();
+
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -37,7 +36,7 @@ const ForgotPassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest('/auth//forgot-password', { ...inputData })
+    postHttpRequest('front/auth//forgot-password', { ...inputData })
       .then((response) => {
         const data = response.data;
 
@@ -57,6 +56,7 @@ const ForgotPassword = () => {
         setIsLoading(false);
       });
   }
+
 
   return (
     <div className="account-page">
@@ -78,11 +78,12 @@ const ForgotPassword = () => {
                 <form noValidate onSubmit={forgetPasswordUserHandler}>
                   <div className="form-floating mb-3">
                     <input
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      placeholder="Email"
-                      ref={emailRef}
+                    className="form-control"
+                       type="email"
+                       ref={emailRef}
+                       name="email"
+                       required
+                       placeholder='Email'
                     />
                     <label>Email</label>
                     <span className="errors">{validationErrors?.email}</span>
@@ -93,11 +94,20 @@ const ForgotPassword = () => {
                     </Link>
                   </div>
                   <button
-                   disabled={isLoading}
+                    disabled={isLoading}
                     className="btn btn-primary btn-block btn-lg login-btn"
-                    type="button"
+                    type="submit"
                   >
-                    {isLoading && <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="dg-mr-8" />}
+                    {isLoading && (
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="dg-mr-8"
+                      />
+                    )}
                     Reset Password
                   </button>
                 </form>

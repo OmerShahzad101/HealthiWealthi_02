@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 
-import GoogleLogo from '../../../assets/images/googleLogo.svg';
+import GoogleLogo from '../../../assets/img/googleLogo.svg';
 // import styles from '../../static/pages/login/Login.module.scss';
 
 export default function Google(props) {

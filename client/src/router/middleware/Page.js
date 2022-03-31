@@ -5,7 +5,6 @@ import { LOGIN } from "../constants/ROUTES";
 import validateAuthState from "../../utils/auth/validateAuthState";
 
 export default function Page({ route, abc }) {
-  console.log(abc);
   const location = useLocation();
 
   useEffect(() => {

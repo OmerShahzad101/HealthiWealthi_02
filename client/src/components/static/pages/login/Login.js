@@ -91,7 +91,7 @@ const Login = (props) => {
     setIsLoading(true);
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
-        debugger;
+    
         setIsLoading(false);
 
         if (!response) {
@@ -143,7 +143,7 @@ const Login = (props) => {
     <div className="account-page">
       <div className="content">
         <div className="text-center mb-md-5 mb-3">
-          <Logo />
+          {/* <Logo /> */}
         </div>
         <div className="container">
           <div className="row justify-content-center">
