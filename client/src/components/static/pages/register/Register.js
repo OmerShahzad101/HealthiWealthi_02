@@ -12,7 +12,7 @@ const Register = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-  const roleRef = useRef();
+  const typeRef = useRef();
 
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -25,18 +25,18 @@ const Register = () => {
   function registerUserHandler(event) {
     event.preventDefault();
 
-    const userName = userNameRef.current.value;
+    const username = userNameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    const role = roleRef.current.value;
+    const type = typeRef.current.value;
 
     const inputData = {
-      userName,
+      username,
       email,
       password,
       confirmPassword,
-      role,
+      type,
     };
 
     const errors = validate(inputData);
@@ -49,7 +49,7 @@ const Register = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest("/auth/signup", {
+    postHttpRequest("/front/auth/register", {
       ...inputData,
       confirmPassword: undefined,
     })
@@ -163,16 +163,16 @@ const Register = () => {
                   </div>
 
                   <div className="form-floating mb-3">
-                    <select className="form-select" ref={roleRef}>
+                    <select className="form-select" ref={typeRef}>
                       <option
                         value=""
                         selected
                         disabled
                       >Open this select menu</option>
-                      <option name="coach" value="coach">
+                      <option name="3" value="3">
                         Coach
                       </option>
-                      <option name="client" value="client">
+                      <option name="1" value="1">
                         Client
                       </option>
                     </select>
