@@ -4,6 +4,10 @@ export default function breadCrumb(path) {
     const URI = urlArray.pop();
     var schema = [
       {
+        path: "coach-dashboard",
+        associatedName: "Dashboard",
+      },
+      {
         path: "client-dashboard",
         associatedName: "Dashboard",
       },
@@ -20,10 +24,26 @@ export default function breadCrumb(path) {
         associatedName: "Book Appointment",
       },
       {
-        path: "/booking-successful",
-        associatedName: "Booking Successfull",
+        path: "my-clients",
+        associatedName: "My Clients",
       },
-   
+      {
+        path: "invoices-view",
+        associatedName: "Invoices",
+      },
+      {
+        path: "reviews",
+        associatedName: "Reviews",
+      },
+      {
+        path: "coach-profile-setting",
+        associatedName: "Profile Setting",
+      },
+      {
+        path: "coach-change-password",
+        associatedName: "Change Password",
+      },
+      
     ];
     const result = schema.filter((schema) => schema.path == URI);
     const res = result.pop();

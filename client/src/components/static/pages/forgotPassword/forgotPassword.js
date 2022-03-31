@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Form, FloatingLabel, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Logo from "../../common/logo/Logo";
 
 import Toast from '../../../common/toast/Toast';
 
@@ -61,6 +62,7 @@ const ForgotPassword = () => {
     <div className="account-page">
       <div className="content">
         <div className="text-center mb-md-5 mb-3">
+          <Logo />
         </div>
         <div className="container">
           <div className="row justify-content-center">
