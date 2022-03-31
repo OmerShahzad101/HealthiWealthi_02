@@ -12,9 +12,14 @@ export default function AppMain(props) {
       <div className="content">
         <div className="container-fluid">
           <div className="row">
+<<<<<<< HEAD
+            <CoachSideBar />
+            {/* <ClientSideBar/> */}
+=======
             {
               role === 'client' ?  <ClientSideBar/> : <CoachSideBar />
             }
+>>>>>>> f220ddc39f8e92125fcce5996d1c6b80191fff53
             <RouterConfig />
           </div>
         </div>

@@ -6,8 +6,28 @@ import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
-
+import Google from "../../common/Google";
+import GoogleLogin from "react-google-login";
+import { JsonWebTokenError } from "jsonwebtoken";
+//import Swal from "sweetalert2";
 const Register = () => {
+  const handleLogin = (result) => {
+    console.log(result);
+  };
+  const [loginData, setLoginData] = useState(
+  localStorage.getItem("loginData")
+    ? JSON.parse(localStorage.getItem("loginData"))
+    : null
+);
+
+  const handleFail = (googleData) => {
+    console.log(googleData);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("loginData")
+    setLoginData(null)
+  }
+
   const history = useHistory();
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -171,11 +191,9 @@ const Register = () => {
 
                   <div className="form-floating mb-4">
                     <select className="form-select" ref={typeRef}>
-                      <option
-                        value=""
-                        selected
-                        disabled
-                      >Open this select menu</option>
+                      <option value="" selected disabled>
+                        Open this select menu
+                      </option>
                       <option name="3" value="3">
                         Coach
                       </option>
@@ -216,9 +234,25 @@ const Register = () => {
                   </div>
                   <div className="row form-row social-login">
                     <div className="col-12">
-                      <a href="#" className="btn btn-google btn-block">
+                      {loginData ? (
+                        <div>
+                          <h3>YOu log in {loginData.email}</h3>
+                          <button onClick={handleLogout}>logout</button>
+                        </div>
+                      ) : (
+                        <GoogleLogin
+                          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                          buttonText="Sign in with Google"
+                          className="ct-button ct-button--secondary"
+                          onSuccess={handleLogin}
+                          onFailure={handleFail}
+                          cookiePolicy="single_host_origin"
+                        ></GoogleLogin>
+                      )}
+
+                      {/* <button  className="btn btn-google btn-block">
                         <i className="fab fa-google mr-1"></i> Login
-                      </a>
+                      </button> */}
                     </div>
                   </div>
                 </form>
