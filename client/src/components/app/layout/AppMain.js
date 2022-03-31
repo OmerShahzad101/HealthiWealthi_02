@@ -6,7 +6,7 @@ import ClientSideBar from "./sidebar/ClientSideBar";
 export default function AppMain(props) {
   let content = (
     <>
-      <BreadCrumb />
+      <BreadCrumb  name={props}/>
       <div className="content">
         <div className="container-fluid">
           <div className="row">

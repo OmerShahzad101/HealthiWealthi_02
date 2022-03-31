@@ -91,6 +91,7 @@ const Login = (props) => {
     setIsLoading(true);
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
+        debugger;
         setIsLoading(false);
 
         if (!response) {
@@ -100,18 +101,18 @@ const Login = (props) => {
         }
 
         if (response.data.success === true) {
-          const userRole = {
-            role: response.data.permission.value,
-            roleId: response.data.permission.key,
-          };
+          // const userRole = {
+          //   role: response.data.permission.value,
+          //   roleId: response.data.permission.key,
+          // };
 
           // Save auth data in Redux store
-          dispatch(setUserRole(userRole));
-          dispatch(setUserPermissions(response.data.permission.permissions));
-          dispatch(setAccessToken(response.data.accessToken));
+          // dispatch(setUserRole(userRole));
+          // dispatch(setUserPermissions(response.data.permission.permissions));
+          dispatch(setAccessToken(response.data.data.accessToken));
 
           // Update user data as well in the Redux store
-          dispatch(setInfoData(response.data.user));
+          dispatch(setInfoData(response.data.data));
 
           // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
           const destination = location.state?.location;
