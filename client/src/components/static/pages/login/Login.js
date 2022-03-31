@@ -105,6 +105,7 @@ const Login = (props) => {
         setIsLoading(false);
 
         if (!response) {
+         alert("Something went wrong with response...")
           console.log("Something went wrong with response...");
           return;
         }
@@ -140,6 +141,10 @@ const Login = (props) => {
       })
       .catch(() => {
         setIsLoading(false);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong...",
+        });
       });
   }
 
