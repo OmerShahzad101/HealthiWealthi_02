@@ -9,7 +9,6 @@ import {
   getHttpRequest,
   postHttpRequest,
 } from "../../../../axios";
-
 const ForgotPassword = () => {
   const emailRef = useRef();
   const [isLoading, setIsLoading] = useState(false);

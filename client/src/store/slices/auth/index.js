@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
     userRole: null,
     userRoleId: null,
     permissions: [],
     accessToken: null,
+    acessPageDashboard:null
 };
-
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -16,6 +15,8 @@ export const authSlice = createSlice({
 
             state.userRole = role;
             state.userRoleId = roleId;
+        }, setDashboardName(state, { name }) {
+            state.acessPageDashboard = name;
         },
         setUserPermissions(state, { payload: permissions }) {
             state.permissions = permissions;
@@ -29,6 +30,6 @@ export const authSlice = createSlice({
     extraReducers: {},
 });
 
-export const { setUserRole, setUserPermissions, setAccessToken } = authSlice.actions;
+export const { setUserRole, setUserPermissions, setAccessToken ,setDashboardName} = authSlice.actions;
 
 export default authSlice.reducer;

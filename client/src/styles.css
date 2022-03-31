@@ -7123,3 +7123,7 @@ html.menu-opened body {
   position: absolute;
   left: 5px;
 }
+.contact-form-errors {
+  color: red;
+  font-size: 12px;
+}
