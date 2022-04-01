@@ -16,7 +16,7 @@ const CoachChangePassword = () => {
 
   function changePasswordHandler(event) {
     event.preventDefault();
-///just something
+
     let payload = {
       current: currentRef.current.value,
       new: newRef.current.value,
