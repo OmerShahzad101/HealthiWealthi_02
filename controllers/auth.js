@@ -232,7 +232,7 @@ exports.googleLogin = async (req, res) => {
           .status(200)
           .send({
             success: false,
-            message: "Company Disable Contact with Digno Support!",
+            message: "Company Disable Contact with Healthi Wealthi Support!",
           });
       }
 
@@ -291,7 +291,7 @@ exports.forgotPassword = async (req, res) => {
         .status(200)
         .json({
           success: false,
-          message: `Sorry, the address ${email} is not known to Digno.`,
+          message: `Sorry, the address ${email} is not known to Healthi Wealthi.`,
         });
     }
 

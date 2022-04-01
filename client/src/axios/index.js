@@ -20,6 +20,15 @@ export async function postHttpRequest(url, data, config = {}) {
     return Axios.post(url, data, requestConfig);
 }
 
+export async function putHttpRequest(url, data, config = {}) {
+    const requestConfig = {
+        signal: abortController.signal,
+        ...config,
+    };
+
+    return Axios.put(url, data, requestConfig);
+}
+
 export function cancelOngoingHttpRequest() {
     abortController.abort();
 
