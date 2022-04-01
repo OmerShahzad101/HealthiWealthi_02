@@ -80,7 +80,7 @@ const CoachChangePassword = () => {
                       type="password"
                       name="password"
                       ref={currentRef}
-                      className="form-control"
+                      className="form-control mb-2"
                       placeholder="Password"
                       autoComplete="Current Password"
                     />
@@ -92,7 +92,7 @@ const CoachChangePassword = () => {
                       type="password"
                       name="password"
                       ref={newRef}
-                      className="form-control"
+                      className="form-control mb-2"
                       placeholder="New Password"
                       autoComplete="New Password"
                     />
@@ -104,7 +104,7 @@ const CoachChangePassword = () => {
                       type="password"
                       name="password"
                       ref={newconfirmPasswordRef}
-                      className="form-control"
+                      className="form-control mb-2"
                       placeholder="New Password"
                       autoComplete="New Password"
                     />
