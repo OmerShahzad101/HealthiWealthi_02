@@ -36,7 +36,7 @@ const ForgotPassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest('front/auth//forgot-password', { ...inputData })
+    postHttpRequest('front/auth/forgot-password', { ...inputData })
       .then((response) => {
         const data = response.data;
 
