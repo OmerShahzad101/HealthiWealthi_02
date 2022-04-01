@@ -19,11 +19,11 @@ const BreadCrumb =  (props)  => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  {TITLE_NAME.associatedName}
+                  {/* {TITLE_NAME.associatedName} */}
                 </li>
               </ol>
             </nav>
-            <h2 className="breadcrumb-title">{TITLE_NAME.associatedName}</h2>
+            {/* <h2 className="breadcrumb-title">{TITLE_NAME.associatedName}</h2> */}
           </div>
         </div>
       </div>

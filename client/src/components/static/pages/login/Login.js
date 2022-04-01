@@ -42,6 +42,7 @@ const Login = (props) => {
               role: response.data.permission.value,
               roleId: response.data.permission.key,
             };
+            console.log(userRole)
 
             // Save auth data in Redux store
             dispatch(setUserRole(userRole));
