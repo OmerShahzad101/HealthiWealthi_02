@@ -1,16 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
-
+import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-} from "../../../../axios";
+import { postHttpRequest } from "../../../../axios";
 
 const CoachChangePassword = () => {
   const currentRef = useRef();
+  const role = useSelector((state) => state.auth);
+  const _id = role._id;
+  console.log(_id);
   const newRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
@@ -22,9 +21,9 @@ const CoachChangePassword = () => {
 
     let payload = {
       current: currentRef.current.value,
-      new : newRef.current.value,
-    }
-   
+      new: newRef.current.value,
+      _id,
+    };
 
     const errors = validate(payload);
 
@@ -76,14 +75,14 @@ const CoachChangePassword = () => {
               <div className="col-md-12 col-lg-6">
                 {/* <!-- Change Password Form --> */}
                 <form onSubmit={changePasswordHandler}>
-                <div className="form-floating mb-4">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       name="password"
                       ref={currentRef}
                       className="form-control"
                       placeholder="Password"
-                      autoComplete="current password"
+                      autoComplete="Current Password"
                     />
                     <label>Old Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -94,9 +93,8 @@ const CoachChangePassword = () => {
                       name="password"
                       ref={newRef}
                       className="form-control"
-                      placeholder="Password"
-                      autoComplete="new password"
-
+                      placeholder="New Password"
+                      autoComplete="New Password"
                     />
                     <label>New Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -106,14 +104,13 @@ const CoachChangePassword = () => {
                       type="password"
                       name="password"
                       className="form-control"
-                      placeholder="Password"
-                      autoComplete="new password"
-
+                      placeholder="New Password"
+                      autoComplete="New Password"
                     />
                     <label>Confirm New Password</label>
                     <span className="errors">{validationErrors.password}</span>
                   </div>
-                 
+
                   <div className="submit-section">
                     <button
                       className="btn btn-primary submit-btn"
