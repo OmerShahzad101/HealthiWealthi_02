@@ -14,7 +14,7 @@ const Reviews = () => {
                 <img
                   className="avatar rounded-circle"
                   alt="User Image"
-                  src="assets/img/patients/patient.jpg"
+                  src="/assets/img/patients/patient.jpg"
                 />
                 <div className="comment-body">
                   <div className="meta-data">
@@ -62,7 +62,7 @@ const Reviews = () => {
                     <img
                       className="avatar rounded-circle"
                       alt="User Image"
-                      src="assets/img/doctors/doctor-thumb-02.jpg"
+                      src="/assets/img/doctors/doctor-thumb-02.jpg"
                     />
                     <div className="comment-body">
                       <div className="meta-data">
@@ -97,7 +97,7 @@ const Reviews = () => {
                 <img
                   className="avatar rounded-circle"
                   alt="User Image"
-                  src="assets/img/patients/patient2.jpg"
+                  src="/assets/img/patients/patient2.jpg"
                 />
                 <div className="comment-body">
                   <div className="meta-data">

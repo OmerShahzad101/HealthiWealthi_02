@@ -66,14 +66,14 @@ const CoachSideBar = () => {
                     <span>Reviews</span>
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="/app/chat">
                     <i className="fas fa-comments"></i>
                     <span>Message</span>
                     <small className="unread-msg">23</small>
                   </NavLink>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <NavLink to="/app/videocall">
                     <i className="fas fa-comments"></i>
                     <span>Video Call</span>
@@ -84,7 +84,7 @@ const CoachSideBar = () => {
                     <i className="fas fa-comments"></i>
                     <span>Voice Call</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="/app/coach-profile-setting">
                     <i className="fas fa-user-cog"></i>

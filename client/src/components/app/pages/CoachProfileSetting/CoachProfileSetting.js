@@ -21,6 +21,11 @@ const CoachProfileSetting = () => {
   const phoneNumberRef = useRef();
   const genderRef = useRef();
   const DobRef = useRef();
+  const biographyRef = useRef();
+  const addressRef = useRef();
+  const postalCodeRef = useRef();
+  const priceRef = useRef();
+  
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -30,7 +35,10 @@ const CoachProfileSetting = () => {
     const lastName = lastNameRef.current.value;
     const phoneNumber = phoneNumberRef.current.value;
     const gender = genderRef.current.value;
-    const DOB = DobRef.current.value;
+    const biography = biographyRef.current.value;
+    const address = addressRef.current.value;
+    const postalCode = postalCodeRef.current.value;
+    const price = priceRef.current.value;
 
     const loginData = {
       userName,
@@ -39,12 +47,12 @@ const CoachProfileSetting = () => {
       lastName,
       phoneNumber,
       gender,
-      DOB,
+      biography,
+      address,
+      postalCode,
+      price
     };
-    console.log( userName,
-      email,
-      firstName,
-      lastName,)
+    console.log(loginData);
 
     // const errors = validate(loginData);
 
@@ -132,7 +140,7 @@ const CoachProfileSetting = () => {
                   </label>
                   <input
                     type="text"
-                    name="Username"
+                    name="userName"
                     ref={UserNameRef}
                     className="form-control"
                     readonly
@@ -144,7 +152,13 @@ const CoachProfileSetting = () => {
                   <label>
                     Email <span className="text-danger">*</span>
                   </label>
-                  <input type="email" name="email" ref={emailRef} className="form-control" readonly />
+                  <input
+                    type="email"
+                    name="email"
+                    ref={emailRef}
+                    className="form-control"
+                    readonly
+                  />
                 </div>
               </div>
               <div className="col-md-6">
@@ -152,7 +166,12 @@ const CoachProfileSetting = () => {
                   <label>
                     First Name <span className="text-danger">*</span>
                   </label>
-                  <input type="text" name="firstName" ref={firstNameRef} className="form-control" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    ref={firstNameRef}
+                    className="form-control"
+                  />
                 </div>
               </div>
               <div className="col-md-6">
@@ -160,29 +179,33 @@ const CoachProfileSetting = () => {
                   <label>
                     Last Name <span className="text-danger">*</span>
                   </label>
-                  <input type="text" name="lastName" ref={lastNameRef} className="form-control" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    ref={lastNameRef}
+                    className="form-control"
+                  />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Phone Number</label>
-                  <input type="text" name="phoneNumber" ref={phoneNumberRef} className="form-control" />
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    ref={phoneNumberRef}
+                    className="form-control"
+                  />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Gender</label>
-                  <select className="form-control select">
+                  <select ref={genderRef} className="form-control select">
                     <option>Select</option>
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option name="male">Male</option>
+                    <option name="female">Female</option>
                   </select>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group mb-0">
-                  <label>Date of Birth</label>
-                  <input type="text" className="form-control" />
                 </div>
               </div>
             </div>
@@ -196,77 +219,33 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">About Me</h4>
             <div className="form-group mb-0">
               <label>Biography</label>
-              <textarea className="form-control" rows="5"></textarea>
+              <textarea
+                className="form-control"
+                ref={biographyRef}
+                rows="5"
+              ></textarea>
             </div>
           </div>
         </div>
         {/* <!-- /About Me --> */}
-
-        {/* <!-- Clinic Info --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Clinic Info</h4>
-            <div className="row form-row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Clinic Name</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Clinic Address</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="form-group">
-                  <label>Clinic Images</label>
-                  <form action="#" className="dropzone"></form>
-                </div>
-                <div className="upload-wrap">
-                  <div className="upload-images">
-                    <img
-                      src="assets/img/features/feature-06.jpg"
-                      alt="Upload Image"
-                    />
-                    <a href="#" className="btn btn-icon btn-danger btn-sm">
-                      <i className="far fa-trash-alt"></i>
-                    </a>
-                  </div>
-                  <div className="upload-images">
-                    <img
-                      src="assets/img/features/feature-05.jpg"
-                      alt="Upload Image"
-                    />
-                    <a href="#" className="btn btn-icon btn-danger btn-sm">
-                      <i className="far fa-trash-alt"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Clinic Info --> */}
 
         {/* <!-- Contact Details --> */}
         <div className="card contact-card">
           <div className="card-body">
             <h4 className="card-title">Contact Details</h4>
             <div className="row form-row">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group">
-                  <label>Address Line 1</label>
-                  <input type="text" className="form-control" />
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    name="address"
+                    ref={addressRef}
+                    className="form-control"
+                  />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">Address Line 2</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
+
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label">City</label>
@@ -289,7 +268,12 @@ const CoachProfileSetting = () => {
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label">Postal Code</label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    name="postalCode"
+                    ref={postalCodeRef}
+                    className="form-control"
+                  />
                 </div>
               </div>
             </div>
@@ -305,26 +289,7 @@ const CoachProfileSetting = () => {
             <div className="form-group mb-0">
               <div id="pricing_select">
                 <div className="custom-control custom-radio custom-control-inline">
-                  <input
-                    type="radio"
-                    id="price_free"
-                    name="rating_option"
-                    className="custom-control-input"
-                    value="price_free"
-                    checked
-                  />
-                  <label className="custom-control-label" for="price_free">
-                    Free
-                  </label>
-                </div>
-                <div className="custom-control custom-radio custom-control-inline">
-                  <input
-                    type="radio"
-                    id="price_custom"
-                    name="rating_option"
-                    value="custom_price"
-                    className="custom-control-input"
-                  />
+                 
                   <label className="custom-control-label" for="price_custom">
                     Custom Price (per hour)
                   </label>
@@ -342,8 +307,8 @@ const CoachProfileSetting = () => {
                   type="text"
                   className="form-control"
                   id="custom_rating_input"
-                  name="custom_rating_count"
-                  value=""
+                  name="price"
+                  ref={priceRef}
                   placeholder="20"
                 />
                 <small className="form-text text-muted">
