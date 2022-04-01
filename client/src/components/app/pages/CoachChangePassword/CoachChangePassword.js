@@ -10,9 +10,8 @@ import {
 } from "../../../../axios";
 
 const CoachChangePassword = () => {
-  const currentPasswordRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const currentRef = useRef();
+  const newRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,17 +20,13 @@ const CoachChangePassword = () => {
   function changePasswordHandler(event) {
     event.preventDefault();
 
-    const currentPassword = currentPasswordRef.current.value;
-    const password = passwordRef.current.value;
-    const confirmPassword = confirmPasswordRef.current.value;
+    let payload = {
+      current: currentRef.current.value,
+      new : newRef.current.value,
+    }
+   
 
-    const changePasswordData = {
-      currentPassword,
-      password,
-      confirmPassword
-    };
-
-    const errors = validate(changePasswordData);
+    const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors({ ...errors });
@@ -41,7 +36,7 @@ const CoachChangePassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest("/front/auth/changePassword", changePasswordData)
+    postHttpRequest("/front/auth/update-password", payload)
       .then((response) => {
         setIsLoading(false);
 
@@ -85,9 +80,10 @@ const CoachChangePassword = () => {
                     <input
                       type="password"
                       name="password"
-                      ref={currentPasswordRef}
+                      ref={currentRef}
                       className="form-control"
                       placeholder="Password"
+                      autoComplete="current password"
                     />
                     <label>Old Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -96,9 +92,11 @@ const CoachChangePassword = () => {
                     <input
                       type="password"
                       name="password"
-                      ref={passwordRef}
+                      ref={newRef}
                       className="form-control"
                       placeholder="Password"
+                      autoComplete="new password"
+
                     />
                     <label>New Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -107,9 +105,10 @@ const CoachChangePassword = () => {
                     <input
                       type="password"
                       name="password"
-                      ref={confirmPasswordRef}
                       className="form-control"
                       placeholder="Password"
+                      autoComplete="new password"
+
                     />
                     <label>Confirm New Password</label>
                     <span className="errors">{validationErrors.password}</span>
