@@ -4,12 +4,10 @@ import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { putHttpRequest } from "../../../../axios";
-
 const CoachChangePassword = () => {
+  const userid = useSelector(state=>state.auth.userid);
+  console.log("USERROLE",userid)
   const currentRef = useRef();
-  const role = useSelector((state) => state.auth);
-  const _id = role._id;
-  console.log(_id);
   const newRef = useRef();
   const newconfirmPasswordRef = useRef();
 

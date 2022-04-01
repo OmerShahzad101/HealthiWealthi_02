@@ -97,7 +97,7 @@ const Login = (props) => {
           return;
         }
 
-        if (response.data.success) {
+        if (response.data.success=="true") {
           console.log("response",response)
           const userRole = {
             role: response?.data?.data?.type ,
