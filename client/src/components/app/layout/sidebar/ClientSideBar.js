@@ -52,7 +52,7 @@ const ClientSideBar = () => {
                   <span>Favourites</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/app/chat">
                   <i className="fas fa-comments"></i>
                   <span>Message</span>
@@ -70,7 +70,7 @@ const ClientSideBar = () => {
                   <i className="fas fa-comments"></i>
                   <span>Voice Call</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/app/client-profile-setting">
                   <i className="fas fa-user-cog"></i>
