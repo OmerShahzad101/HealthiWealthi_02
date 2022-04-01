@@ -1,17 +1,15 @@
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  putHttpRequest,
-} from "../../../../axios";
+import { putHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
+import { useSelector } from "react-redux";
 
 const CoachProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const userid = useSelector(state=>state.auth.userid);
 
   // const usernameRef = useRef();
   const emailRef = useRef();
@@ -34,9 +32,9 @@ const CoachProfileSetting = () => {
     const email = emailRef.current.value;
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phonenumber = phonenumberRef.current.value;
+    const phone = phonenumberRef.current.value;
     const gender = genderRef.current.value;
-    const biography = biographyRef.current.value;
+    const about = biographyRef.current.value;
     const address = addressRef.current.value;
     const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
@@ -49,16 +47,16 @@ const CoachProfileSetting = () => {
       email,
       firstname,
       lastname,
-      phonenumber,
+      phone,
       gender,
-      biography,
+      about,
       address,
-     postalCode,
+      postalCode,
       price,
       city,
       state,
       country,
-      _id: "6245d9674779712f0f8fae55",
+      _id: userid,
     };
     console.log(payload);
 
@@ -247,7 +245,7 @@ const CoachProfileSetting = () => {
                 ref={biographyRef}
                 className="form-control"
                 placeholder="biography"
-                style={{ minHeight: '150px' }}
+                style={{ minHeight: "150px" }}
               />
               <label>Biography</label>
             </div>
