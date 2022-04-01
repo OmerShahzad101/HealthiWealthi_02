@@ -1,9 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import breadCrumb from "../../../../utils/breadcrumb/breadcrumb"
-
 const BreadCrumb =  (props)  => {
-  
   const location = useLocation();
   const { pathname } = location;
   const  TITLE_NAME = breadCrumb(pathname)
