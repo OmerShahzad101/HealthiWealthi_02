@@ -6,7 +6,6 @@ import validate from "../../../../utils/form-validation/authFormValidation";
 import { putHttpRequest } from "../../../../axios";
 const CoachChangePassword = () => {
   const userid = useSelector(state=>state.auth.userid);
-  console.log("USERROLE",userid)
   const currentRef = useRef();
   const newRef = useRef();
   const newconfirmPasswordRef = useRef();
@@ -17,14 +16,15 @@ const CoachChangePassword = () => {
 
   function changePasswordHandler(event) {
     event.preventDefault();
-
+///just something
     let payload = {
       current: currentRef.current.value,
       new: newRef.current.value,
       newconfirmPassword : newconfirmPasswordRef.current.value,
-      _id: "6247058026acc61678b576a0",
-    };
+      _id: userid,
 
+    };
+    console.log(payload)
     const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
