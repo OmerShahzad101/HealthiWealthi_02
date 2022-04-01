@@ -9,6 +9,7 @@ const CoachChangePassword = () => {
   console.log("USERROLE",userid)
   const currentRef = useRef();
   const newRef = useRef();
+  const newconfirmPasswordRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,7 +21,8 @@ const CoachChangePassword = () => {
     let payload = {
       current: currentRef.current.value,
       new: newRef.current.value,
-      _id: "6245d9674779712f0f8fae55",
+      newconfirmPassword : newconfirmPasswordRef.current.value,
+      _id: "6247058026acc61678b576a0",
     };
 
     const errors = validate(payload);
@@ -83,7 +85,7 @@ const CoachChangePassword = () => {
                       autoComplete="Current Password"
                     />
                     <label>Old Password</label>
-                    <span className="errors">{validationErrors.password}</span>
+                    <span className="errors">{validationErrors.current}</span>
                   </div>
                   <div className="form-floating mb-4">
                     <input
@@ -95,18 +97,19 @@ const CoachChangePassword = () => {
                       autoComplete="New Password"
                     />
                     <label>New Password</label>
-                    <span className="errors">{validationErrors.password}</span>
+                    <span className="errors">{validationErrors.new}</span>
                   </div>
                   <div className="form-floating mb-4">
                     <input
                       type="password"
                       name="password"
+                      ref={newconfirmPasswordRef}
                       className="form-control"
                       placeholder="New Password"
                       autoComplete="New Password"
                     />
                     <label>Confirm New Password</label>
-                    <span className="errors">{validationErrors.password}</span>
+                    <span className="errors">{validationErrors.newconfirmPassword}</span>
                   </div>
 
                   <div className="submit-section">
