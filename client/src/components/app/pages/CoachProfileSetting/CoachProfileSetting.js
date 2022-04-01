@@ -13,11 +13,11 @@ const CoachProfileSetting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
-  const UserNameRef = useRef();
+  // const usernameRef = useRef();
   const emailRef = useRef();
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const phoneNumberRef = useRef();
+  const firstnameRef = useRef();
+  const lastnameRef = useRef();
+  const phonenumberRef = useRef();
   const genderRef = useRef();
   const DobRef = useRef();
   const biographyRef = useRef();
@@ -27,39 +27,39 @@ const CoachProfileSetting = () => {
 
   function updateProfileHandler(event) {
     event.preventDefault();
-    const userName = UserNameRef.current.value;
+    //const username = usernameRef.current.value;
     const email = emailRef.current.value;
-    const firstName = firstNameRef.current.value;
-    const lastName = lastNameRef.current.value;
-    const phoneNumber = phoneNumberRef.current.value;
+    const firstname = firstnameRef.current.value;
+    const lastname = lastnameRef.current.value;
+    const phonenumber = phonenumberRef.current.value;
     const gender = genderRef.current.value;
     const biography = biographyRef.current.value;
     const address = addressRef.current.value;
-    const postalCode = postalCodeRef.current.value;
+    //const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
 
     const payload = {
-      userName,
+      // username,
       email,
-      firstName,
-      lastName,
-      phoneNumber,
+      firstname,
+      lastname,
+      phonenumber,
       gender,
       biography,
       address,
-      postalCode,
+     // postalCode,
       price,
     };
     console.log(payload);
 
-    // const errors = validate(coachProfileSetting);
+    const errors = validate(payload);
 
-    // if (Object.keys(errors).length > 0) {
-    // setValidationErrors({ ...errors });
-    // return;
-    // } else {/
-    // setValidationErrors({});
-    // }
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({ ...errors });
+      return;
+    } else {
+      setValidationErrors({});
+    }
 
     setIsLoading(true);
     putHttpRequest("/front/coach/edit", payload)
@@ -106,7 +106,7 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">Basic Information</h4>
             <div className="row form-row">
               <div className="col-md-12">
-                <div className="form-group">
+                <div className="form-group mb-4">
                   <div className="change-avatar">
                     <div className="profile-img">
                       <img
@@ -125,85 +125,100 @@ const CoachProfileSetting = () => {
                         Allowed JPG, GIF or PNG. Max size of 2MB
                       </small>
                     </div>
-                    <button className="change-account" onClick={Upgrade}>
+                    {/* <button className="change-account" onClick={Upgrade}>
                       Upgrade Account
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
+                <div className="form-floating mb-4">
+                  <input
+                    type="username"
+                    name="username"
+                    //ref={usernameRef}
+                    className="form-control"
+                    placeholder="username"
+                  />
                   <label>
                     Username <span className="text-danger">*</span>
                   </label>
-                  <input
-                    type="text"
-                    name="userName"
-                    ref={UserNameRef}
-                    className="form-control"
-                    readonly
-                  />
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
-                  <label>
-                    Email <span className="text-danger">*</span>
-                  </label>
+                <div className="form-floating mb-4">
                   <input
                     type="email"
                     name="email"
                     ref={emailRef}
                     className="form-control"
-                    readonly
+                    placeholder="Email"
                   />
+                  <label>
+                    Email <span className="text-danger">*</span>
+                  </label>
+                  <span className="errors">{validationErrors.email}</span>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
+                <div className="form-floating mb-4">
+                  <input
+                    type="text"
+                    name="firstname"
+                    ref={firstnameRef}
+                    className="form-control"
+                    placeholder="Email"
+                  />
                   <label>
                     First Name <span className="text-danger">*</span>
                   </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    ref={firstNameRef}
-                    className="form-control"
-                  />
+                  <span className="errors">{validationErrors.firstname}</span>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
+                <div className="form-floating mb-4">
+                  <input
+                    type="text"
+                    name="lastname"
+                    ref={lastnameRef}
+                    className="form-control"
+                    placeholder="Last Name"
+                  />
                   <label>
                     Last Name <span className="text-danger">*</span>
                   </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    ref={lastNameRef}
-                    className="form-control"
-                  />
+                  <span className="errors">{validationErrors.lastname}</span>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
-                  <label>Phone Number</label>
+                <div className="form-floating mb-4">
                   <input
                     type="text"
-                    name="phoneNumber"
-                    ref={phoneNumberRef}
+                    name="phonenumber"
+                    ref={phonenumberRef}
                     className="form-control"
+                    placeholder="Phone"
                   />
+                  <label>
+                    Phone Number <span className="text-danger">*</span>
+                  </label>
+                  <span className="errors">{validationErrors.phonenumber}</span>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
-                  <label>Gender</label>
-                  <select ref={genderRef} className="form-control select">
-                    <option>Select</option>
-                    <option name="male">Male</option>
-                    <option name="female">Female</option>
+                <div className="form-floating mb-4">
+                  <select className="form-select" ref={genderRef}>
+                    <option value="" selected disabled>
+                      Open this select menu
+                    </option>
+                    <option name="male" value="">
+                      Male
+                    </option>
+                    <option name="female" value="">
+                      Female
+                    </option>
                   </select>
+                  <label>Gender</label>
                 </div>
               </div>
             </div>
@@ -215,13 +230,16 @@ const CoachProfileSetting = () => {
         <div className="card">
           <div className="card-body">
             <h4 className="card-title">About Me</h4>
-            <div className="form-group mb-0">
-              <label>Biography</label>
+            <div className="form-floating mb-4">
               <textarea
-                className="form-control"
+                type="biography"
+                name="biography"
                 ref={biographyRef}
-                rows="5"
-              ></textarea>
+                className="form-control"
+                placeholder="biography"
+                style={{ minHeight: '150px' }}
+              />
+              <label>Biography</label>
             </div>
           </div>
         </div>
@@ -233,45 +251,65 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">Contact Details</h4>
             <div className="row form-row">
               <div className="col-md-12">
-                <div className="form-group">
-                  <label>Address</label>
+                <div className="form-floating mb-4">
                   <input
-                    type="text"
+                    type="address"
                     name="address"
                     ref={addressRef}
                     className="form-control"
+                    placeholder="address"
                   />
+                  <label>Address</label>
                 </div>
               </div>
 
               <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">City</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">State / Province</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">Country</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">Postal Code</label>
+                <div className="form-floating mb-4">
                   <input
-                    type="text"
-                    name="postalCode"
-                    ref={postalCodeRef}
+                    type="city"
+                    name="city"
+                    //ref={cityRef}
                     className="form-control"
+                    placeholder="city"
                   />
+                  <label>City</label>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="form-floating mb-4">
+                  <input
+                    type="state"
+                    name="state"
+                    //ref={stateRef}
+                    className="form-control"
+                    placeholder="state"
+                  />
+                  <label>State</label>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-floating mb-4">
+                  <input
+                    type="country"
+                    name="country"
+                    //ref={countryRef}
+                    className="form-control"
+                    placeholder="country"
+                  />
+                  <label>Country</label>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-floating mb-4">
+                  <input
+                    type="postal"
+                    name="postal"
+                    //ref={postalRef}
+                    className="form-control"
+                    placeholder="postal"
+                  />
+                  <label>Postal Code</label>
                 </div>
               </div>
             </div>
@@ -294,24 +332,18 @@ const CoachProfileSetting = () => {
               </div>
             </div>
 
-            <div
-              className="row custom_price_cont"
-              id="custom_price_cont"
-              // style="display: none;"
-            >
-              <div className="col-md-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="custom_rating_input"
-                  name="price"
-                  ref={priceRef}
-                  placeholder="20"
-                />
-                <small className="form-text text-muted">
-                  Custom price you can add
-                </small>
-              </div>
+            <div className="form-floating my-4">
+              <input
+                type="price"
+                name="price"
+                ref={priceRef}
+                className="form-control"
+                placeholder="price"
+              />
+              <label>
+                Price in USD <span className="text-danger">*</span>
+              </label>
+              <span className="errors">{validationErrors.price}</span>
             </div>
           </div>
         </div>

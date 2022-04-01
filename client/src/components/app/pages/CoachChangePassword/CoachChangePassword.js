@@ -1,18 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
-
+import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-} from "../../../../axios";
+import { putHttpRequest } from "../../../../axios";
 
 const CoachChangePassword = () => {
-  const currentPasswordRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const currentRef = useRef();
+  const role = useSelector((state) => state.auth);
+  const _id = role._id;
+  console.log(_id);
+  const newRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,17 +19,13 @@ const CoachChangePassword = () => {
   function changePasswordHandler(event) {
     event.preventDefault();
 
-    const currentPassword = currentPasswordRef.current.value;
-    const password = passwordRef.current.value;
-    const confirmPassword = confirmPasswordRef.current.value;
-
-    const changePasswordData = {
-      currentPassword,
-      password,
-      confirmPassword
+    let payload = {
+      current: currentRef.current.value,
+      new: newRef.current.value,
+      _id: "6245d9674779712f0f8fae55",
     };
 
-    const errors = validate(changePasswordData);
+    const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors({ ...errors });
@@ -41,7 +35,7 @@ const CoachChangePassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest("/front/auth/changePassword", changePasswordData)
+    putHttpRequest("/front/auth/update-password", payload)
       .then((response) => {
         setIsLoading(false);
 
@@ -81,13 +75,14 @@ const CoachChangePassword = () => {
               <div className="col-md-12 col-lg-6">
                 {/* <!-- Change Password Form --> */}
                 <form onSubmit={changePasswordHandler}>
-                <div className="form-floating mb-4">
+                  <div className="form-floating mb-4">
                     <input
                       type="password"
                       name="password"
-                      ref={currentPasswordRef}
+                      ref={currentRef}
                       className="form-control"
                       placeholder="Password"
+                      autoComplete="Current Password"
                     />
                     <label>Old Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -96,9 +91,10 @@ const CoachChangePassword = () => {
                     <input
                       type="password"
                       name="password"
-                      ref={passwordRef}
+                      ref={newRef}
                       className="form-control"
-                      placeholder="Password"
+                      placeholder="New Password"
+                      autoComplete="New Password"
                     />
                     <label>New Password</label>
                     <span className="errors">{validationErrors.password}</span>
@@ -107,14 +103,14 @@ const CoachChangePassword = () => {
                     <input
                       type="password"
                       name="password"
-                      ref={confirmPasswordRef}
                       className="form-control"
-                      placeholder="Password"
+                      placeholder="New Password"
+                      autoComplete="New Password"
                     />
                     <label>Confirm New Password</label>
                     <span className="errors">{validationErrors.password}</span>
                   </div>
-                 
+
                   <div className="submit-section">
                     <button
                       className="btn btn-primary submit-btn"
