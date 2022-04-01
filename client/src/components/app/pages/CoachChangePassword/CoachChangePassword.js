@@ -3,7 +3,7 @@ import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { postHttpRequest } from "../../../../axios";
+import { putHttpRequest } from "../../../../axios";
 
 const CoachChangePassword = () => {
   const currentRef = useRef();
@@ -22,7 +22,7 @@ const CoachChangePassword = () => {
     let payload = {
       current: currentRef.current.value,
       new: newRef.current.value,
-      _id,
+      _id: "6245d9674779712f0f8fae55",
     };
 
     const errors = validate(payload);
@@ -35,7 +35,7 @@ const CoachChangePassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest("/front/auth/update-password", payload)
+    putHttpRequest("/front/auth/update-password", payload)
       .then((response) => {
         setIsLoading(false);
 
