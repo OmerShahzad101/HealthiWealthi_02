@@ -39,6 +39,28 @@ export default function validate(form) {
             errors.username = 'Name should be lesser than 50 characters.';
         }
     }
+    if ('firstname' in form) {
+        if (!form.firstname) {
+            errors.firstname = 'First Name is required';
+        } else if (!NAME_PATTERN.test(form.firstname)) {
+            errors.firstname = 'First Name seems to be invalid. Only English alphabets are allowed in name.';
+        } else if (form.firstname.trim().length < 2) {
+            errors.firstname = 'First Name should have at least 2 characters.';
+        } else if (form.firstname.trim().length > 50) {
+            errors.firstname = 'First Name should be lesser than 50 characters.';
+        }
+    }
+    if ('lastname' in form) {
+        if (!form.lastname) {
+            errors.lastname = 'Last Name is required';
+        } else if (!NAME_PATTERN.test(form.lastname)) {
+            errors.lastname = 'Last Name seems to be invalid. Only English alphabets are allowed in name.';
+        } else if (form.lastname.trim().length < 2) {
+            errors.lastname = 'Last Name should have at least 2 characters.';
+        } else if (form.lastname.trim().length > 50) {
+            errors.lastname = 'Last Name should be lesser than 50 characters.';
+        }
+    }
 
     if ('email' in form) {
         if (!form.email) {
@@ -68,6 +90,8 @@ export default function validate(form) {
         errors.currentPassword = 'Current Password is required';
     }
 
+
+    
     if ('department' in form && !form.department) {
         errors.department = 'Department is required';
     }
@@ -123,11 +147,11 @@ export default function validate(form) {
     }
 
 
-    if ('rewardValue' in form ) {
-        if (!form.rewardValue) {
-            errors.rewardValue = 'Reward Value is required';
-        } else if (!POSITIVE_NUMBER.test(form.rewardValue)) {
-            errors.rewardValue = 'Reward Value seems to be invalid. Only Positive Number are allowed';
+    if ('price' in form ) {
+        if (!form.price) {
+            errors.price = 'Price Value is required';
+        } else if (!POSITIVE_NUMBER.test(form.price)) {
+            errors.price = 'Price Value seems to be invalid. Only Positive Number are allowed';
         }
     }
 
