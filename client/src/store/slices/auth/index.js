@@ -12,10 +12,10 @@ export const authSlice = createSlice({
     reducers: {
         setUserRole(state, { payload }) {
             const { role, roleId } = payload;
-
             state.userRole = role;
             state.userRoleId = roleId;
-        }, setDashboardName(state, { name }) {
+        }, setDashboardName(state, { name })
+         {
             state.acessPageDashboard = name;
         },
         setUserPermissions(state, { payload: permissions }) {

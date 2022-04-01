@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
-import Logo from "../../common/logo/Logo";
+// import Logo from "../../common/logo/Logo";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -15,7 +15,6 @@ const Login = (props) => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -24,7 +23,6 @@ const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(props)
     const params = new URLSearchParams(location.search);
     const access_path = params.get("access_path"); // access_path
 
@@ -46,11 +44,11 @@ const Login = (props) => {
 
             // Save auth data in Redux store
             dispatch(setUserRole(userRole));
-            dispatch(setUserPermissions(response.data.permission.permissions));
-            dispatch(setAccessToken(response.data.accessToken));
+            // // dispatch(setUserPermissions(response.data.permission.permissions));
+            // // dispatch(setAccessToken(response.data.accessToken));
 
             // Update user data as well in the Redux store
-            dispatch(setInfoData(response.data.user));
+            // // dispatch(setInfoData(response.data.user));
 
             history.replace(DASHBOARD);
           } else {
@@ -92,24 +90,20 @@ const Login = (props) => {
     setIsLoading(true);
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
-    
         setIsLoading(false);
-
         if (!response) {
          alert("Something went wrong with response...")
-          console.log("Something went wrong with response...");
           return;
         }
 
-        if (response.data.success === true) {
+        if (response.data.success) {
           const userRole = {
-            role: response?.data?.user?.role ,//response.data.permission.value
+            role: response?.data?.data?.type ,//response.data.permission.value
             // roleId: response.data.permission.key,
           };
-          console.log("userRole", response?.data?.user?.role)
 
           // Save auth data in Redux store
-          // dispatch(setUserRole(userRole));
+          dispatch(setUserRole(userRole));
           // dispatch(setUserPermissions(response.data.permission.permissions));
           dispatch(setAccessToken(response.data.data.accessToken));
 
