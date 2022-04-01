@@ -1,4 +1,4 @@
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
 import {
@@ -24,6 +24,9 @@ const CoachProfileSetting = () => {
   const addressRef = useRef();
   const postalCodeRef = useRef();
   const priceRef = useRef();
+  const cityRef = useRef();
+  const stateRef = useRef();
+  const countryRef = useRef();
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -35,8 +38,11 @@ const CoachProfileSetting = () => {
     const gender = genderRef.current.value;
     const biography = biographyRef.current.value;
     const address = addressRef.current.value;
-    //const postalCode = postalCodeRef.current.value;
+    const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
+    const city = cityRef.current.value;
+    const state = stateRef.current.value;
+    const country = countryRef.current.value;
 
     const payload = {
       // username,
@@ -47,8 +53,12 @@ const CoachProfileSetting = () => {
       gender,
       biography,
       address,
-     // postalCode,
+     postalCode,
       price,
+      city,
+      state,
+      country,
+      _id: "6245d9674779712f0f8fae55",
     };
     console.log(payload);
 
@@ -268,7 +278,7 @@ const CoachProfileSetting = () => {
                   <input
                     type="city"
                     name="city"
-                    //ref={cityRef}
+                    ref={cityRef}
                     className="form-control"
                     placeholder="city"
                   />
@@ -281,7 +291,7 @@ const CoachProfileSetting = () => {
                   <input
                     type="state"
                     name="state"
-                    //ref={stateRef}
+                    ref={stateRef}
                     className="form-control"
                     placeholder="state"
                   />
@@ -293,7 +303,7 @@ const CoachProfileSetting = () => {
                   <input
                     type="country"
                     name="country"
-                    //ref={countryRef}
+                    ref={countryRef}
                     className="form-control"
                     placeholder="country"
                   />
@@ -305,7 +315,7 @@ const CoachProfileSetting = () => {
                   <input
                     type="postal"
                     name="postal"
-                    //ref={postalRef}
+                    ref={postalCodeRef}
                     className="form-control"
                     placeholder="postal"
                   />
