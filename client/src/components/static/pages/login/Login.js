@@ -95,17 +95,15 @@ const Login = (props) => {
          alert("Something went wrong with response...")
           return;
         }
-        console.log("response",response)
-        if (response.data.success===true) {
-          console.log("response",response)
+
+        if (response.data.success) {
+        
           const userRole = {
             role: response?.data?.data?.type ,
             name: response?.data?.data?.name ,
             email: response?.data?.data?.email ,
             _id: response?.data?.data?._id 
-                   //response.data.permission.value
 
-            // roleId: response.data.permission.key,
           };
 
           // Save auth data in Redux store
@@ -117,16 +115,13 @@ const Login = (props) => {
           dispatch(setInfoData(response.data.data));
 
           // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
-          //const destination = location.state?.location;
-
-          if( response?.data?.data?.type==1)
-             {
-              history.replace(CLIENT_DASHBOARD);
-             }
-             else if(response?.data?.data?.type==3)
-             {
-              history.replace(COACH_DASHBOARD);
-             }
+          
+          let role = response?.data?.data?.type;
+          if(role == 1) history.replace(CLIENT_DASHBOARD);
+          else if(role == 3) history.replace(COACH_DASHBOARD);
+          
+          // const destination = location.state?.location;
+        
           // if (destination) {
           //   history.replace(destination);
           // } else {
