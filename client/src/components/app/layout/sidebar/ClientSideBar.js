@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useEffect } from "react";
+// import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 const ClientSideBar = () => {
-  let history = useHistory();
-  useEffect(() => {
-    history.push("/app/client-dashboard");
-  }, []);
+  // let history = useHistory();
+  // useEffect(() => {
+  //   history.push("/app/client-dashboard");
+  // }, []);
   const removeToken = () => {
     logout();
   };

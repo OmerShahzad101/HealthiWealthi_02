@@ -5,10 +5,11 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { DASHBOARD } from "../../../../router/constants/ROUTES";
+import { DASHBOARD ,CLIENT_DASHBOARD,COACH_DASHBOARD } from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { cancelOngoingHttpRequest, getHttpRequest, postHttpRequest} from "../../../../axios";
-import { setUserRole, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
+import { setUser, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
+import { Dashboard } from "../../../../assets/SVGs/SVGs";
 
 const Login = (props) => {
   
@@ -43,14 +44,14 @@ const Login = (props) => {
             console.log(userRole)
 
             // Save auth data in Redux store
-            dispatch(setUserRole(userRole));
+            dispatch(setUser(userRole));
             // // dispatch(setUserPermissions(response.data.permission.permissions));
             // // dispatch(setAccessToken(response.data.accessToken));
-
+             
             // Update user data as well in the Redux store
             // // dispatch(setInfoData(response.data.user));
 
-            history.replace(DASHBOARD);
+         history.push(DASHBOARD)
           } else {
             Toast.fire({
               icon: "error",
@@ -109,7 +110,7 @@ const Login = (props) => {
           };
 
           // Save auth data in Redux store
-          dispatch(setUserRole(userRole));
+          dispatch(setUser(userRole));
           // dispatch(setUserPermissions(response.data.permission.permissions));
           dispatch(setAccessToken(response.data.data.accessToken));
 
@@ -117,13 +118,21 @@ const Login = (props) => {
           dispatch(setInfoData(response.data.data));
 
           // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
-          const destination = location.state?.location;
+          //const destination = location.state?.location;
 
-          if (destination) {
-            history.replace(destination);
-          } else {
-            history.replace(DASHBOARD);
-          }
+          if( response?.data?.data?.type==1)
+             {
+              history.replace(CLIENT_DASHBOARD);
+             }
+             else if(response?.data?.data?.type==3)
+             {
+              history.replace(COACH_DASHBOARD);
+             }
+          // if (destination) {
+          //   history.replace(destination);
+          // } else {
+          //   history.replace(DASHBOARD);
+          // }
         } else {
 
           Toast.fire({
