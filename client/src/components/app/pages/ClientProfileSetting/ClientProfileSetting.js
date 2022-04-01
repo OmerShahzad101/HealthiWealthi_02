@@ -1,24 +1,22 @@
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  putHttpRequest,
-} from "../../../../axios";
+import { putHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
+import { useSelector } from "react-redux";
 
 const ClientProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const userid = useSelector((state) => state.auth.userid);
 
   const firstnameRef = useRef();
   const lastnameRef = useRef();
-  const phonenumberRef = useRef();
+  const phoneRef = useRef();
   const genderRef = useRef();
   const DobRef = useRef();
-  const biographyRef = useRef();
+  const aboutRef = useRef();
   const addressRef = useRef();
   const postalcodeRef = useRef();
   const cityRef = useRef();
@@ -31,9 +29,9 @@ const ClientProfileSetting = () => {
 
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phonenumber = phonenumberRef.current.value;
+    const phone = phoneRef.current.value;
     const gender = genderRef.current.value;
-    const biography = biographyRef.current.value;
+    const about = aboutRef.current.value;
     const address = addressRef.current.value;
     const postalcode = postalcodeRef.current.value;
     const city = cityRef.current.value;
@@ -44,16 +42,16 @@ const ClientProfileSetting = () => {
     const payload = {
       firstname,
       lastname,
-      phonenumber,
+      phone,
       bloodgroup,
       gender,
-      biography,
+      about,
       address,
       postalcode,
       city,
       state,
       country,
-      //_id: "6245d9674779712f0f8fae55",
+      _id: userid,
     };
     console.log(payload);
 
@@ -164,15 +162,19 @@ const ClientProfileSetting = () => {
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Date of Birth</label>
-                    <div className="cal-icon">
-                      <input
-                        type="text"
-                        className="form-control datetimepicker"
-                        value="24-07-1983"
-                      />
-                    </div>
+                  <div className="form-floating mb-4">
+                    <select className="form-select" ref={genderRef}>
+                      <option value="" selected disabled>
+                        Open this select menu
+                      </option>
+                      <option name="male" value="male">
+                        Male
+                      </option>
+                      <option name="female" value="female">
+                        Female
+                      </option>
+                    </select>
+                    <label>Gender</label>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -210,21 +212,30 @@ const ClientProfileSetting = () => {
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
-                      type="phonenumber"
-                      name="phonenumber"
-                      ref={phonenumberRef}
+                      type="phone"
+                      name="phone"
+                      ref={phoneRef}
                       className="form-control"
                       placeholder="Phone Number"
                     />
                     <label>
                       Phone Number <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">
-                      {validationErrors.phonenumber}
-                    </span>
+                    <span className="errors">{validationErrors.phone}</span>
                   </div>
                 </div>
                 <div className="col-12">
+                  <div className="form-floating mb-4">
+                    <textarea
+                      type="about"
+                      name="about"
+                      ref={aboutRef}
+                      className="form-control"
+                      placeholder="about"
+                      style={{ minHeight: "100px" }}
+                    />
+                    <label>Biography</label>
+                  </div>
                   <div className="form-floating mb-4">
                     <input
                       type="address"

@@ -9,16 +9,16 @@ const CoachProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const userid = useSelector(state=>state.auth.userid);
+  const userid = useSelector((state) => state.auth.userid);
 
   // const usernameRef = useRef();
   const emailRef = useRef();
   const firstnameRef = useRef();
   const lastnameRef = useRef();
-  const phonenumberRef = useRef();
+  const phoneRef = useRef();
   const genderRef = useRef();
   const DobRef = useRef();
-  const biographyRef = useRef();
+  const aboutRef = useRef();
   const addressRef = useRef();
   const postalCodeRef = useRef();
   const priceRef = useRef();
@@ -32,9 +32,9 @@ const CoachProfileSetting = () => {
     const email = emailRef.current.value;
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phone = phonenumberRef.current.value;
+    const phone = phoneRef.current.value;
     const gender = genderRef.current.value;
-    const about = biographyRef.current.value;
+    const about = aboutRef.current.value;
     const address = addressRef.current.value;
     const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
@@ -203,7 +203,7 @@ const CoachProfileSetting = () => {
                   <input
                     type="text"
                     name="phonenumber"
-                    ref={phonenumberRef}
+                    ref={phoneRef}
                     className="form-control"
                     placeholder="Phone"
                   />
@@ -219,10 +219,10 @@ const CoachProfileSetting = () => {
                     <option value="" selected disabled>
                       Open this select menu
                     </option>
-                    <option name="male" value="">
+                    <option name="male" value="male">
                       Male
                     </option>
-                    <option name="female" value="">
+                    <option name="female" value="female">
                       Female
                     </option>
                   </select>
@@ -240,11 +240,11 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">About Me</h4>
             <div className="form-floating mb-4">
               <textarea
-                type="biography"
-                name="biography"
-                ref={biographyRef}
+                type="about"
+                name="about"
+                ref={aboutRef}
                 className="form-control"
-                placeholder="biography"
+                placeholder="about"
                 style={{ minHeight: "150px" }}
               />
               <label>Biography</label>

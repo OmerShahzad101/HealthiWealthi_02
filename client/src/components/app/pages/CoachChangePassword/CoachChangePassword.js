@@ -22,7 +22,6 @@ const CoachChangePassword = () => {
       new: newRef.current.value,
       newconfirmPassword : newconfirmPasswordRef.current.value,
       _id: userid,
-
     };
     console.log(payload)
     const errors = validate(payload);
