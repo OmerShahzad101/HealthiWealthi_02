@@ -68,7 +68,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-01.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -117,7 +117,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-02.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-02.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -164,7 +164,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-03.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-03.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -213,7 +213,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-04.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-04.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -260,7 +260,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-05.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-05.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -355,7 +355,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-07.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-07.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -402,7 +402,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-08.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-08.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -449,7 +449,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-09.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-09.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -496,7 +496,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-10.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-10.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -566,7 +566,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-01.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -603,7 +603,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-02.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-02.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -677,7 +677,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-04.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-04.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -714,7 +714,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-05.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-05.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -826,7 +826,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-08.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-08.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -900,7 +900,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-10.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-10.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -966,7 +966,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-01.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1009,7 +1009,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-02.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-02.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1052,7 +1052,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-03.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-03.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1095,7 +1095,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-04.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-04.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1138,7 +1138,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-05.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-05.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1181,7 +1181,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-06.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-06.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1226,7 +1226,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-07.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-07.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1269,7 +1269,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-08.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-08.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1312,7 +1312,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-09.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-09.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1355,7 +1355,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-10.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-10.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1415,7 +1415,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-01.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
                                     alt="User Image"
                                   />
                                 </Link>
@@ -1776,7 +1776,7 @@ const ClientDashboard = (props) => {
                                 >
                                   <img
                                     className="avatar-img rounded-circle"
-                                    src="assets/img/doctors/doctor-thumb-10.jpg"
+                                    src="/assets/img/doctors/doctor-thumb-10.jpg"
                                     alt="User Image"
                                   />
                                 </Link>

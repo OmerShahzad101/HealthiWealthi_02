@@ -5,7 +5,7 @@ import Toast from "../../../common/toast/Toast";
 import {
   cancelOngoingHttpRequest,
   getHttpRequest,
-  postHttpRequest,
+  putHttpRequest,
 } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 
@@ -25,7 +25,6 @@ const CoachProfileSetting = () => {
   const addressRef = useRef();
   const postalCodeRef = useRef();
   const priceRef = useRef();
-  
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -40,7 +39,7 @@ const CoachProfileSetting = () => {
     const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
 
-    const loginData = {
+    const payload = {
       userName,
       email,
       firstName,
@@ -50,49 +49,49 @@ const CoachProfileSetting = () => {
       biography,
       address,
       postalCode,
-      price
+      price,
     };
-    console.log(loginData);
+    console.log(payload);
 
-    // const errors = validate(loginData);
+    // const errors = validate(coachProfileSetting);
 
     // if (Object.keys(errors).length > 0) {
-    //   setValidationErrors({ ...errors });
-    //   return;
-    // } else {
-    //   setValidationErrors({});
+    // setValidationErrors({ ...errors });
+    // return;
+    // } else {/
+    // setValidationErrors({});
     // }
 
-    // setIsLoading(true);
-    // postHttpRequest("/front/auth/login", loginData)
-    //   .then((response) => {
-    //     setIsLoading(false);
+    setIsLoading(true);
+    putHttpRequest("/front/coach/edit", payload)
+      .then((response) => {
+        setIsLoading(false);
 
-    //     if (!response) {
-    //       alert("Something went wrong with response...");
-    //       console.log("Something went wrong with response...");
-    //       return;
-    //     }
+        if (!response) {
+          alert("Something went wrong with response...");
+          console.log("Something went wrong with response...");
+          return;
+        }
 
-    //     if (response.data.success === true) {
-    //       Toast.fire({
-    //         icon: "success",
-    //         title: response.data.message,
-    //       });
-    //     } else {
-    //       Toast.fire({
-    //         icon: "error",
-    //         title: response.data.message,
-    //       });
-    //     }
-    //   })
-    //   .catch(() => {
-    //     setIsLoading(false);
-    //     Toast.fire({
-    //       icon: "error",
-    //       title: "Something went wrong...",
-    //     });
-    //   });
+        if (response.data.success === true) {
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          });
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong...",
+        });
+      });
   }
 
   const Upgrade = () => {
@@ -289,7 +288,6 @@ const CoachProfileSetting = () => {
             <div className="form-group mb-0">
               <div id="pricing_select">
                 <div className="custom-control custom-radio custom-control-inline">
-                 
                   <label className="custom-control-label" for="price_custom">
                     Custom Price (per hour)
                   </label>
@@ -319,157 +317,6 @@ const CoachProfileSetting = () => {
           </div>
         </div>
         {/* <!-- /Pricing --> */}
-
-        {/* <!-- Services and Specialization --> */}
-        <div className="card services-card">
-          <div className="card-body">
-            <h4 className="card-title">Services and Specialization</h4>
-            <div className="form-group">
-              <label>Services</label>
-              <input
-                type="text"
-                data-role="tagsinput"
-                className="input-tags form-control"
-                placeholder="Enter Services"
-                name="services"
-                value="Tooth cleaning "
-                id="services"
-              />
-              <small className="form-text text-muted">
-                Note : Type & Press enter to add new services
-              </small>
-            </div>
-            <div className="form-group mb-0">
-              <label>Specialization </label>
-              <input
-                className="input-tags form-control"
-                type="text"
-                data-role="tagsinput"
-                placeholder="Enter Specialization"
-                name="specialist"
-                value="Children Care,Dental Care"
-                id="specialist"
-              />
-              <small className="form-text text-muted">
-                Note : Type & Press enter to add new specialization
-              </small>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Services and Specialization --> */}
-
-        {/* <!-- Education --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Education</h4>
-            <div className="education-info">
-              <div className="row form-row education-cont">
-                <div className="col-12 col-md-10 col-lg-11">
-                  <div className="row form-row">
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>Degree</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>College/Institute</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>Year of Completion</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="add-more">
-              <a href="#" className="add-education">
-                <i className="fa fa-plus-circle"></i> Add More
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Education --> */}
-
-        {/* <!-- Experience --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Experience</h4>
-            <div className="experience-info">
-              <div className="row form-row experience-cont">
-                <div className="col-12 col-md-10 col-lg-11">
-                  <div className="row form-row">
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>Hospital Name</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>From</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>To</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                      <div className="form-group">
-                        <label>Designation</label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="add-more">
-              <a href="#" className="add-experience">
-                <i className="fa fa-plus-circle"></i> Add More
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Experience --> */}
-
-        {/* <!-- Awards --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Awards</h4>
-            <div className="awards-info">
-              <div className="row form-row awards-cont">
-                <div className="col-12 col-md-5">
-                  <div className="form-group">
-                    <label>Awards</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-                <div className="col-12 col-md-5">
-                  <div className="form-group">
-                    <label>Year</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="add-more">
-              <a href="#" className="add-award">
-                <i className="fa fa-plus-circle"></i> Add More
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Awards --> */}
 
         <div className="submit-section submit-btn-bottom">
           <button
