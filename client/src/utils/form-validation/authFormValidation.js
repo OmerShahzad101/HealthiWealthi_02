@@ -77,7 +77,29 @@ export default function validate(form) {
             errors.password = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
         }
     }
-
+    // for coach/client profile change password, new and current payload is used
+    if ('current' in form) {
+        if (!form.current) {
+            errors.current = 'Current Password is required';
+        } else if (!VALID_PASSWORD_PATTERN.test(form.current)) {
+            errors.current = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
+        }
+    }
+    if ('new' in form) {
+        if (!form.new) {
+            errors.new = 'Password is required';
+        } else if ('newconfirmPassword' in form && !VALID_PASSWORD_PATTERN.test(form.new)) {
+            errors.new = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
+        }
+    }
+    // if ('newconfirmPassword' in form) {
+    //     if (!form.newconfirmPassword) {
+    //         errors.newconfirmPassword = 'Confirm password is required';
+    //     } else if (form.password !== form.newconfirmPassword) {
+    //         errors.newconfirmPassword = 'Password fields do not match';
+    //     }
+    // }
+// coach/client profile change password end
     if ('confirmPassword' in form) {
         if (!form.confirmPassword) {
             errors.confirmPassword = 'Confirm password is required';
