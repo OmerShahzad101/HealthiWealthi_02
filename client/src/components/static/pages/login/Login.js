@@ -97,8 +97,14 @@ const Login = (props) => {
         }
 
         if (response.data.success) {
+          console.log("response",response)
           const userRole = {
-            role: response?.data?.data?.type ,//response.data.permission.value
+            role: response?.data?.data?.type ,
+            name: response?.data?.data?.name ,
+            email: response?.data?.data?.email ,
+            _id: response?.data?.data?._id 
+                   //response.data.permission.value
+
             // roleId: response.data.permission.key,
           };
 
