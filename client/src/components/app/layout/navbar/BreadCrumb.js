@@ -1,9 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import breadCrumb from "../../../../utils/breadcrumb/breadcrumb"
-
 const BreadCrumb =  (props)  => {
-  
   const location = useLocation();
   const { pathname } = location;
   const  TITLE_NAME = breadCrumb(pathname)
@@ -19,11 +17,11 @@ const BreadCrumb =  (props)  => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  {/* {TITLE_NAME.associatedName} */}
+                  {TITLE_NAME?.associatedName}
                 </li>
               </ol>
             </nav>
-            {/* <h2 className="breadcrumb-title">{TITLE_NAME.associatedName}</h2> */}
+            <h2 className="breadcrumb-title">{TITLE_NAME?.associatedName}</h2>
           </div>
         </div>
       </div>
