@@ -1,4 +1,4 @@
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
 import {
@@ -24,6 +24,9 @@ const CoachProfileSetting = () => {
   const addressRef = useRef();
   const postalCodeRef = useRef();
   const priceRef = useRef();
+  const cityRef = useRef();
+  const stateRef = useRef();
+  const countryRef = useRef();
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -37,6 +40,9 @@ const CoachProfileSetting = () => {
     const address = addressRef.current.value;
     const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
+    const city = cityRef.current.value;
+    const state = stateRef.current.value;
+    const country = countryRef.current.value;
 
     const payload = {
       userName,
@@ -49,6 +55,10 @@ const CoachProfileSetting = () => {
       address,
       postalCode,
       price,
+      city,
+      state,
+      country,
+      _id: "6245d9674779712f0f8fae55",
     };
     console.log(payload);
 
@@ -246,20 +256,30 @@ const CoachProfileSetting = () => {
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="control-label">City</label>
+                  <label className="control-label" name="city" ref={cityRef}>
+                    City
+                  </label>
                   <input type="text" className="form-control" />
                 </div>
               </div>
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="control-label">State / Province</label>
+                  <label className="control-label" name="state" ref={stateRef}>
+                    State / Province
+                  </label>
                   <input type="text" className="form-control" />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="control-label">Country</label>
+                  <label
+                    className="control-label"
+                    ref={countryRef}
+                    nam="country"
+                  >
+                    Country
+                  </label>
                   <input type="text" className="form-control" />
                 </div>
               </div>
