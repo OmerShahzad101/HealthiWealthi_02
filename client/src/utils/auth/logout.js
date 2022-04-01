@@ -2,7 +2,7 @@ import storage from 'redux-persist/lib/storage';
 
 import store from '../../store';
 import { logoutUser } from '../../store/actionCreators';
-import { LOGIN } from '../../router/constants/ROUTES';
+import { LOGIN, ROOT } from '../../router/constants/ROUTES';
 import history from '../../router/utils/history';
 
 export default function logout() {
@@ -14,7 +14,7 @@ export default function logout() {
     store.dispatch(logoutUser());
 
     // Redirect the user to login screen before reloading (so that no location state is persisted on page reload)
-    history.push(LOGIN);
+    history.push(ROOT);
 
     // Reload page to reset the app data
     window.location.reload();

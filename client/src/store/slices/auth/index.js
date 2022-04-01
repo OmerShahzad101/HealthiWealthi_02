@@ -3,7 +3,7 @@ const initialState = {
     userRole: null,
     username:null,
     userid:null,
-      UserEmail:null,
+    UserEmail:null,
     userRoleId: null,
     permissions: [],
     accessToken: null,
@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUserRole(state, { payload }) {
+        setUser(state, { payload }) {
             const { role, name,email,_id } = payload;
             state.userRole = role;
             state.username = name;
@@ -38,5 +38,5 @@ export const authSlice = createSlice({
     extraReducers: {},
 });
 
-export const { setUserRole, setUserPermissions, setAccessToken ,setDashboardName} = authSlice.actions;
+export const { setUser, setUserPermissions, setAccessToken ,setDashboardName} = authSlice.actions;
 export default authSlice.reducer;

@@ -5,10 +5,11 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { DASHBOARD, COACH_DASHBOARD, CLIENT_DASHBOARD } from "../../../../router/constants/ROUTES";
+import { DASHBOARD ,CLIENT_DASHBOARD,COACH_DASHBOARD } from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { cancelOngoingHttpRequest, getHttpRequest, postHttpRequest} from "../../../../axios";
-import { setUserRole, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
+import { setUser, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
+import { Dashboard } from "../../../../assets/SVGs/SVGs";
 
 const Login = (props) => {
   
@@ -43,14 +44,14 @@ const Login = (props) => {
             console.log(userRole)
 
             // Save auth data in Redux store
-            dispatch(setUserRole(userRole));
+            dispatch(setUser(userRole));
             // // dispatch(setUserPermissions(response.data.permission.permissions));
             // // dispatch(setAccessToken(response.data.accessToken));
-
+             
             // Update user data as well in the Redux store
             // // dispatch(setInfoData(response.data.user));
 
-            history.replace(DASHBOARD);
+         history.push(DASHBOARD)
           } else {
             Toast.fire({
               icon: "error",
@@ -86,7 +87,6 @@ const Login = (props) => {
     } else {
       setValidationErrors({});
     }
-
     setIsLoading(true);
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
@@ -107,7 +107,7 @@ const Login = (props) => {
           };
 
           // Save auth data in Redux store
-          dispatch(setUserRole(userRole));
+          dispatch(setUser(userRole));
           // dispatch(setUserPermissions(response.data.permission.permissions));
           dispatch(setAccessToken(response.data.data.accessToken));
 
