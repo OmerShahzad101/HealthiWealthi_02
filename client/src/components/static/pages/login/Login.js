@@ -87,7 +87,6 @@ const Login = (props) => {
     } else {
       setValidationErrors({});
     }
-
     setIsLoading(true);
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
@@ -96,8 +95,8 @@ const Login = (props) => {
          alert("Something went wrong with response...")
           return;
         }
-
-        if (response.data.success=="true") {
+        console.log("response",response)
+        if (response.data.success===true) {
           console.log("response",response)
           const userRole = {
             role: response?.data?.data?.type ,
