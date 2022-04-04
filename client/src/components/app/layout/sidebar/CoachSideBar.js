@@ -1,16 +1,8 @@
-import React from "react";
-// import { useEffect } from 'react';
-// import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logout from './../../../../utils/auth/logout'
+
 const CoachSideBar = () => {
-  // let history = useHistory();
-  // useEffect(()=>{
-  //   history.push("/app/coach-dashboard");
-  // },[])  
-  const removeToken=()=>{
-    logout();
-  }
+
   return (
       <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
         <div className="profile-sidebar">
@@ -99,7 +91,7 @@ const CoachSideBar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink onClick={removeToken} to="/asd">
+                  <NavLink onClick={logout} to="/logout">
                     <i className="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                   </NavLink>
