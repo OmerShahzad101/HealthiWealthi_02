@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { getHttpRequest, putHttpRequest } from "../../../../axios";
+import { getHttpRequest, putHttpRequest ,postHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useSelector } from "react-redux";
 
@@ -26,6 +26,77 @@ const CoachProfileSetting = () => {
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
+
+
+  const onChangeImage = async (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      let _objFiles = files[0];
+      console.log(_objFiles);
+
+      if (_objFiles.size > 1000000) {
+        Toast.fire({
+          icon: "error",
+          title: "File too Big, please select a file less than 1MB ",
+        });
+        return;
+      }
+
+      if (
+        _objFiles.type.toLowerCase() !== "image/png" &&
+        _objFiles.type.toLowerCase() !== "image/jpg" &&
+        _objFiles.type.toLowerCase() !== "image/jpeg"
+      ) {
+        Toast.fire({
+          icon: "error",
+          title:
+            "Only files with the following extensions are allowed: png, jpg, jpeg",
+        });
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("avatar", files[0], files[0].name);
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      setIsLoading(true);
+      postHttpRequest("/user/uploadImage", formData, config)
+        .then((response) => {
+          if (!response) {
+            console.log("Something went wrong with response...");
+            return;
+          }
+
+          if (response.data.success === true) {
+            setValidationErrors({});
+            // Update user data as well in the Redux store
+            checKImage(response.data.user);
+
+            Toast.fire({
+              icon: "success",
+              title: response.data.message,
+            });
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  };
+
+
+
+
+
 
   function updateProfileHandler(event) {
     event.preventDefault();
