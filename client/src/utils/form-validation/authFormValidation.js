@@ -8,8 +8,8 @@ const POSITIVE_NUMBER = /^[1-9]+[0-9]*$/;
 export default function validate(form) {
     const errors = {};
 
-    if ('companyName' in form && !form.companyName) {
-        errors.companyName = 'Company name is required';
+    if ('specialization' in form && !form.specialization) {
+        errors.specialization = 'Specialization is required';
     }
 
     if ('companyDomain' in form) {
