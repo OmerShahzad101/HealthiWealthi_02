@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { putHttpRequest } from "../../../../axios";
+import { getHttpRequest, putHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useSelector } from "react-redux";
 
@@ -10,6 +10,7 @@ const ClientProfileSetting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const userid = useSelector((state) => state.auth.userid);
+  const [profileData, setprofileData] = useState({});
 
   const firstnameRef = useRef();
   const lastnameRef = useRef();
@@ -53,7 +54,6 @@ const ClientProfileSetting = () => {
       country,
       _id: userid,
     };
-    console.log(payload);
 
     const errors = validate(payload);
 
@@ -101,6 +101,27 @@ const ClientProfileSetting = () => {
     console.log("dssd");
   };
 
+  useEffect(() => {
+    getHttpRequest(`/front/client/get/${userid}`)
+      .then((response) => {
+        if (!response) {
+          alert("Something went wrong with response...");
+          console.log("Something went wrong with response...");
+          return;
+        }
+
+        if (response.data.success === true) {
+          setprofileData(response?.data?.client);
+          console.log(response?.data?.client);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
+  }, []);
+
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -134,11 +155,38 @@ const ClientProfileSetting = () => {
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
+                      type="text"
+                      name="username"
+                      className="form-control"
+                      placeholder="username"
+                      value={profileData?.username}
+                      disabled
+                    />
+                    <label>Username</label>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-floating mb-4">
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      placeholder="email"
+                      value={profileData?.email}
+                      disabled
+                    />
+                    <label>Email</label>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-floating mb-4">
+                    <input
                       type="firstname"
                       name="firstname"
                       ref={firstnameRef}
                       className="form-control"
                       placeholder="first name"
+                      defaultValue={profileData?.firstname}
                     />
                     <label>
                       First Name <span className="text-danger">*</span>
@@ -154,6 +202,7 @@ const ClientProfileSetting = () => {
                       ref={lastnameRef}
                       className="form-control"
                       placeholder="last name"
+                      defaultValue={profileData?.lastname}
                     />
                     <label>
                       Last Name <span className="text-danger">*</span>
@@ -163,7 +212,7 @@ const ClientProfileSetting = () => {
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
-                    <select className="form-select" ref={genderRef}>
+                    <select className="form-select" ref={genderRef}  defaultValue={profileData?.gender}>
                       <option value="" selected disabled>
                         Open this select menu
                       </option>
@@ -179,36 +228,39 @@ const ClientProfileSetting = () => {
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
-                    <select className="form-select" ref={bloodgroupRef}>
-                      <option value="" selected disabled>
+                    <select className="form-select" ref={bloodgroupRef} defaultValue={profileData?.bloodgroup}> 
+                      <option value="" disabled>
                         Open this select menu
                       </option>
-                      <option name="A" value="A-">A-</option>
-                      <option name="A+" value="A+">A+</option>
-                      <option name="B-" value="B-">B-</option>
-                      <option name="B+" value="B+">B+</option>
-                      <option name="AB-" value="AB-">AB-</option>
-                      <option name="AB+" value="AB+">AB+</option>
-                      <option name="O-" value="O-">O-</option>
-                      <option name="O+" value="O+">O+</option>
+                      <option name="A" value="A-">
+                        A-
+                      </option>
+                      <option name="A+" value="A+">
+                        A+
+                      </option>
+                      <option name="B-" value="B-">
+                        B-
+                      </option>
+                      <option name="B+" value="B+">
+                        B+
+                      </option>
+                      <option name="AB-" value="AB-">
+                        AB-
+                      </option>
+                      <option name="AB+" value="AB+">
+                        AB+
+                      </option>
+                      <option name="O-" value="O-">
+                        O-
+                      </option>
+                      <option name="O+" value="O+">
+                        O+
+                      </option>
                     </select>
                     <label>Blood Group</label>
                   </div>
                 </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-floating mb-4">
-                    <input
-                      type="email"
-                      name="email"
-                      //ref={emailRef}
-                      className="form-control"
-                      placeholder="email"
-                    />
-                    <label>
-                      Email <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
+
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
@@ -217,11 +269,9 @@ const ClientProfileSetting = () => {
                       ref={phoneRef}
                       className="form-control"
                       placeholder="Phone Number"
+                      defaultValue={profileData?.phone}
                     />
-                    <label>
-                      Phone Number <span className="text-danger">*</span>
-                    </label>
-                    <span className="errors">{validationErrors.phone}</span>
+                    <label>Phone Number</label>
                   </div>
                 </div>
                 <div className="col-12">
@@ -233,8 +283,9 @@ const ClientProfileSetting = () => {
                       className="form-control"
                       placeholder="about"
                       style={{ minHeight: "100px" }}
+                      defaultValue={profileData?.about}
                     />
-                    <label>Biography</label>
+                    <label>Briefly describe about yourself</label>
                   </div>
                   <div className="form-floating mb-4">
                     <input
@@ -243,6 +294,7 @@ const ClientProfileSetting = () => {
                       ref={addressRef}
                       className="form-control"
                       placeholder="address"
+                      defaultValue={profileData?.address}
                     />
                     <label>Address</label>
                   </div>
@@ -255,6 +307,7 @@ const ClientProfileSetting = () => {
                       ref={cityRef}
                       className="form-control"
                       placeholder="city"
+                      defaultValue={profileData?.city}
                     />
                     <label>City</label>
                   </div>
@@ -267,20 +320,9 @@ const ClientProfileSetting = () => {
                       ref={stateRef}
                       className="form-control"
                       placeholder="state"
+                      defaultValue={profileData?.state}
                     />
                     <label>State</label>
-                  </div>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-floating mb-4">
-                    <input
-                      type="postalCode"
-                      name="postalCode"
-                      ref={postalCodeRef}
-                      className="form-control"
-                      placeholder="postalCode"
-                    />
-                    <label>Postal Code</label>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -291,8 +333,22 @@ const ClientProfileSetting = () => {
                       ref={countryRef}
                       className="form-control"
                       placeholder="country"
+                      defaultValue={profileData?.country}
                     />
                     <label>Country</label>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-floating mb-4">
+                    <input
+                      type="postalCode"
+                      name="postalCode"
+                      ref={postalCodeRef}
+                      className="form-control"
+                      placeholder="postalCode"
+                      defaultValue={profileData?.postalCode}
+                    />
+                    <label>Postal Code</label>
                   </div>
                 </div>
               </div>

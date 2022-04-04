@@ -58,7 +58,6 @@ const CoachProfileSetting = () => {
       country,
       _id: userid,
     };
-    console.log(payload);
 
     const errors = validate(payload);
 
@@ -238,18 +237,19 @@ const CoachProfileSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-floating mb-4">
+                  {console.log(profileData?.gender)}
                   <select
                     className="form-select"
                     ref={genderRef}
                     defaultValue={profileData?.gender}
                   >
-                    {profileData?.gender === "" ? (
+                    {/* {profileData?.gender === "" ? (
                       <option selected disabled>
                         Open this select menu
                       </option>
                     ) : (
                       <option disabled>Open this select menu</option>
-                    )}
+                    )} */}
 
                     <option name="male" value="male">
                       Male
