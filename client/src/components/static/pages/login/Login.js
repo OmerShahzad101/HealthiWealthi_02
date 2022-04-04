@@ -1,18 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
-// import Logo from "../../common/logo/Logo";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { DASHBOARD ,CLIENT_DASHBOARD,COACH_DASHBOARD } from "../../../../router/constants/ROUTES";
+import {
+  DASHBOARD,
+  CLIENT_DASHBOARD,
+  COACH_DASHBOARD,
+} from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { cancelOngoingHttpRequest, getHttpRequest, postHttpRequest} from "../../../../axios";
-import { setUser, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
-import { Dashboard } from "../../../../assets/SVGs/SVGs";
-
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
+import {
+  setUser,
+  setUserPermissions,
+  setAccessToken,
+} from "../../../../store/slices/auth";
 const Login = (props) => {
-  
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -41,17 +49,11 @@ const Login = (props) => {
               role: response.data.permission.value,
               roleId: response.data.permission.key,
             };
-            console.log(userRole)
+            console.log(userRole);
 
-            // Save auth data in Redux store
             dispatch(setUser(userRole));
-            // // dispatch(setUserPermissions(response.data.permission.permissions));
-            // // dispatch(setAccessToken(response.data.accessToken));
-             
-            // Update user data as well in the Redux store
-            // // dispatch(setInfoData(response.data.user));
 
-         history.push(DASHBOARD)
+            history.push(DASHBOARD);
           } else {
             Toast.fire({
               icon: "error",
@@ -64,11 +66,10 @@ const Login = (props) => {
         });
     }
 
-    // Cancel company creation HTTP call in case component is unmounted due to route change
     return cancelOngoingHttpRequest;
   }, [dispatch, history, location.search]);
 
-  function loginHandler(event) {
+  const loginHandler = async (event) => {
     event.preventDefault();
 
     const email = emailRef.current.value;
@@ -88,58 +89,72 @@ const Login = (props) => {
       setValidationErrors({});
     }
     setIsLoading(true);
+
+    let response = await postHttpRequest("/front/auth/login", loginData);
+    if (!response) {
+     alert("Something went wrong with response...");
+     return;
+    }
+    console.log("response", response);
+    if (response) {
+       setIsLoading(false);
+      let res = await getHttpRequest(
+        `/front/coach/get/${response?.data?.data?._id}`
+      );
+      console.log("resresresresres", res);
+       const userRole = {
+         role: response?.data?.data?.type,
+         name: response?.data?.data?.name,
+         email: response?.data?.data?.email,
+         _id: response?.data?.data?._id,
+
+       };
+    }
+
+    // return false;
+   
+
     postHttpRequest("/front/auth/login", loginData)
       .then((response) => {
-        setIsLoading(false);
-        if (!response) {
-         alert("Something went wrong with response...")
-          return;
-        }
-        console.log("response",response)
-        if (response.data.success===true) {
-          console.log("response",response)
-          const userRole = {
-            role: response?.data?.data?.type ,
-            name: response?.data?.data?.name ,
-            email: response?.data?.data?.email ,
-            _id: response?.data?.data?._id 
-                   //response.data.permission.value
+      
+        if (response?.data?.data?._id) {
+          // console.log("response coach ", response?.data?.data?._id);
+          getHttpRequest(`/front/coach/get/${response?.data?.data?._id}`).then(
+            (res) => {
+              console.log("res2 ", res);
+            }
+          );
+          // console.log("response1 ", response);
+          setIsLoading(false);
+          if (!response) {
+            alert("Something went wrong with response...");
+            return;
+          }
 
-            // roleId: response.data.permission.key,
+          const userRole = {
+            role: response?.data?.data?.type,
+            name: response?.data?.data?.name,
+            email: response?.data?.data?.email,
+            _id: response?.data?.data?._id,
           };
 
-          // Save auth data in Redux store
           dispatch(setUser(userRole));
-          // dispatch(setUserPermissions(response.data.permission.permissions));
           dispatch(setAccessToken(response.data.data.accessToken));
-
-          // Update user data as well in the Redux store
           dispatch(setInfoData(response.data.data));
 
-          // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
-          //const destination = location.state?.location;
-
-          if( response?.data?.data?.type==1)
-             {
-              history.replace(CLIENT_DASHBOARD);
-             }
-             else if(response?.data?.data?.type==3)
-             {
-              history.replace(COACH_DASHBOARD);
-             }
-          // if (destination) {
-          //   history.replace(destination);
-          // } else {
-          //   history.replace(DASHBOARD);
-          // }
+          if (response?.data?.data?.type == 1) {
+            history.replace(CLIENT_DASHBOARD);
+          } else if (response?.data?.data?.type == 3) {
+            history.replace(COACH_DASHBOARD);
+          }
         } else {
-
           Toast.fire({
             icon: "error",
             title: response.data.message,
           });
         }
       })
+      //////////////
       .catch(() => {
         setIsLoading(false);
         Toast.fire({
@@ -147,14 +162,12 @@ const Login = (props) => {
           title: "Something went wrong...",
         });
       });
-  }
+  };
 
   return (
     <div className="account-page">
       <div className="content">
-        <div className="text-center mb-md-5 mb-3">
-          {/* <Logo /> */}
-        </div>
+        <div className="text-center mb-md-5 mb-3">{/* <Logo /> */}</div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-7 text-center ">
