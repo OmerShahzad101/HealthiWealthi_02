@@ -43,7 +43,14 @@ export default function breadCrumb(path) {
         path: "coach-change-password",
         associatedName: "Change Password",
       },
-      
+      {
+        path: "client-change-password",
+        associatedName: "Change Password",
+      },
+      {
+        path: "client-profile-setting",
+        associatedName: "Profile Setting",
+      },
     ];
     const result = schema.filter((schema) => schema.path == URI);
     const res = result.pop();

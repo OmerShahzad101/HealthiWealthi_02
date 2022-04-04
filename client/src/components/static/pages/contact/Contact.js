@@ -78,7 +78,6 @@ const Contact = () => {
                   type="text"
                   className="form-control"
                   ref={nameRef}
-                  // onChange={(e)=>setFormValues({...formValues,name:e.target.value})}
                 />
                 <p className="contact-form-errors">
                   {validationErrors.username}
@@ -93,7 +92,7 @@ const Contact = () => {
                   type="email"
                   className="form-control"
                   ref={emailRef}
-                  //onChange={(e)=>setFormValues({...formValues,email:e.target.value})}
+
                 />
                 <p className="contact-form-errors">{validationErrors.email}</p>
               </div>
@@ -106,7 +105,6 @@ const Contact = () => {
                   type="text"
                   className="form-control"
                   ref={subjectRef}
-                  //onChange={(e)=>setFormValues({...formValues,subject:e.target.value})}
                 />
                 <p className="contact-form-errors">
                   {validationErrors.subject}
@@ -120,7 +118,6 @@ const Contact = () => {
                   name="message"
                   placeholder="Message"
                   type="text"
-                  // onChange={(e)=>setFormValues({...formValues,message:e.target.value})}
                   ref={messageRef}
                   className="form-control"
                 ></textarea>

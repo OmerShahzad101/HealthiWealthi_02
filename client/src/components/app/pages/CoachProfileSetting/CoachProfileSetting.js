@@ -1,26 +1,24 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  putHttpRequest,
-} from "../../../../axios";
+import { getHttpRequest, putHttpRequest ,postHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
-
+import { useSelector } from "react-redux";
 const CoachProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const userid = useSelector((state) => state.auth.userid);
+  const [profileData, setprofileData] = useState({});
 
-  // const usernameRef = useRef();
-  const emailRef = useRef();
+  const specializationRef = useRef();
+
   const firstnameRef = useRef();
   const lastnameRef = useRef();
-  const phonenumberRef = useRef();
+  const phoneRef = useRef();
   const genderRef = useRef();
-  const DobRef = useRef();
-  const biographyRef = useRef();
+
+  const aboutRef = useRef();
   const addressRef = useRef();
   const postalCodeRef = useRef();
   const priceRef = useRef();
@@ -28,15 +26,21 @@ const CoachProfileSetting = () => {
   const stateRef = useRef();
   const countryRef = useRef();
 
+
+
+
+
+
+
   function updateProfileHandler(event) {
     event.preventDefault();
-    //const username = usernameRef.current.value;
-    const email = emailRef.current.value;
+    const specialization = specializationRef.current.value;
+
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phonenumber = phonenumberRef.current.value;
+    const phone = phoneRef.current.value;
     const gender = genderRef.current.value;
-    const biography = biographyRef.current.value;
+    const about = aboutRef.current.value;
     const address = addressRef.current.value;
     const postalCode = postalCodeRef.current.value;
     const price = priceRef.current.value;
@@ -45,20 +49,19 @@ const CoachProfileSetting = () => {
     const country = countryRef.current.value;
 
     const payload = {
-      // username,
-      email,
+      specialization,
       firstname,
       lastname,
-      phonenumber,
+      phone,
       gender,
-      biography,
+      about,
       address,
-     postalCode,
+      postalCode,
       price,
       city,
       state,
       country,
-      _id: "6245d9674779712f0f8fae55",
+      _id: userid,
     };
     console.log(payload);
 
@@ -103,10 +106,31 @@ const CoachProfileSetting = () => {
       });
   }
 
-  const Upgrade = () => {
+  const upgradePackage = () => {
     history.push("/coach-upgrade-profile");
     console.log("dssd");
   };
+
+  useEffect(() => {
+    getHttpRequest(`/front/coach/get/${userid}`)
+      .then((response) => {
+        if (!response) {
+          alert("Something went wrong with response...");
+          console.log("Something went wrong with response...");
+          return;
+        }
+
+        if (response.data.success === true) {
+          setprofileData(response?.data?.coach);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
+  }, []);
+
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -135,7 +159,7 @@ const CoachProfileSetting = () => {
                         Allowed JPG, GIF or PNG. Max size of 2MB
                       </small>
                     </div>
-                    {/* <button className="change-account" onClick={Upgrade}>
+                    {/* <button className="change-account" onClick={upgradePackage}>
                       Upgrade Account
                     </button> */}
                   </div>
@@ -144,15 +168,14 @@ const CoachProfileSetting = () => {
               <div className="col-md-6">
                 <div className="form-floating mb-4">
                   <input
-                    type="username"
+                    type="text"
                     name="username"
-                    //ref={usernameRef}
                     className="form-control"
                     placeholder="username"
+                    value={profileData?.username}
+                    disabled
                   />
-                  <label>
-                    Username <span className="text-danger">*</span>
-                  </label>
+                  <label>Username</label>
                 </div>
               </div>
               <div className="col-md-6">
@@ -160,14 +183,12 @@ const CoachProfileSetting = () => {
                   <input
                     type="email"
                     name="email"
-                    ref={emailRef}
                     className="form-control"
                     placeholder="Email"
+                    value={profileData?.email}
+                    disabled
                   />
-                  <label>
-                    Email <span className="text-danger">*</span>
-                  </label>
-                  <span className="errors">{validationErrors.email}</span>
+                  <label>Email</label>
                 </div>
               </div>
               <div className="col-md-6">
@@ -178,6 +199,7 @@ const CoachProfileSetting = () => {
                     ref={firstnameRef}
                     className="form-control"
                     placeholder="Email"
+                    defaultValue={profileData?.firstname}
                   />
                   <label>
                     First Name <span className="text-danger">*</span>
@@ -193,6 +215,7 @@ const CoachProfileSetting = () => {
                     ref={lastnameRef}
                     className="form-control"
                     placeholder="Last Name"
+                    defaultValue={profileData?.lastname}
                   />
                   <label>
                     Last Name <span className="text-danger">*</span>
@@ -204,27 +227,39 @@ const CoachProfileSetting = () => {
                 <div className="form-floating mb-4">
                   <input
                     type="text"
-                    name="phonenumber"
-                    ref={phonenumberRef}
+                    name="specialization"
+                    ref={specializationRef}
                     className="form-control"
-                    placeholder="Phone"
+                    placeholder="specialization"
+                    defaultValue={profileData?.specialization}
                   />
                   <label>
-                    Phone Number <span className="text-danger">*</span>
+                    Specialization <span className="text-danger">*</span>
                   </label>
-                  <span className="errors">{validationErrors.phonenumber}</span>
+                  <span className="errors">
+                    {validationErrors.specialization}
+                  </span>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-floating mb-4">
-                  <select className="form-select" ref={genderRef}>
-                    <option value="" selected disabled>
-                      Open this select menu
-                    </option>
-                    <option name="male" value="">
+                  <select
+                    className="form-select"
+                    ref={genderRef}
+                    defaultValue={profileData?.gender}
+                  >
+                    {profileData?.gender === "" ? (
+                      <option selected disabled>
+                        Open this select menu
+                      </option>
+                    ) : (
+                      <option disabled>Open this select menu</option>
+                    )}
+
+                    <option name="male" value="male">
                       Male
                     </option>
-                    <option name="female" value="">
+                    <option name="female" value="female">
                       Female
                     </option>
                   </select>
@@ -242,14 +277,15 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">About Me</h4>
             <div className="form-floating mb-4">
               <textarea
-                type="biography"
-                name="biography"
-                ref={biographyRef}
+                type="about"
+                name="about"
+                ref={aboutRef}
                 className="form-control"
-                placeholder="biography"
-                style={{ minHeight: '150px' }}
+                placeholder="about"
+                style={{ minHeight: "150px" }}
+                defaultValue={profileData?.about}
               />
-              <label>Biography</label>
+              <label>Briefly describe yourself</label>
             </div>
           </div>
         </div>
@@ -268,6 +304,7 @@ const CoachProfileSetting = () => {
                     ref={addressRef}
                     className="form-control"
                     placeholder="address"
+                    defaultValue={profileData?.address}
                   />
                   <label>Address</label>
                 </div>
@@ -281,6 +318,7 @@ const CoachProfileSetting = () => {
                     ref={cityRef}
                     className="form-control"
                     placeholder="city"
+                    defaultValue={profileData?.city}
                   />
                   <label>City</label>
                 </div>
@@ -294,6 +332,7 @@ const CoachProfileSetting = () => {
                     ref={stateRef}
                     className="form-control"
                     placeholder="state"
+                    defaultValue={profileData?.state}
                   />
                   <label>State</label>
                 </div>
@@ -306,6 +345,7 @@ const CoachProfileSetting = () => {
                     ref={countryRef}
                     className="form-control"
                     placeholder="country"
+                    defaultValue={profileData?.country}
                   />
                   <label>Country</label>
                 </div>
@@ -318,8 +358,22 @@ const CoachProfileSetting = () => {
                     ref={postalCodeRef}
                     className="form-control"
                     placeholder="postal"
+                    defaultValue={profileData?.postalCode}
                   />
                   <label>Postal Code</label>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-floating mb-4">
+                  <input
+                    type="text"
+                    name="phonenumber"
+                    ref={phoneRef}
+                    className="form-control"
+                    placeholder="Phone"
+                    defaultValue={profileData?.phone}
+                  />
+                  <label>Phone Number</label>
                 </div>
               </div>
             </div>
@@ -341,19 +395,23 @@ const CoachProfileSetting = () => {
                 </div>
               </div>
             </div>
-
-            <div className="form-floating my-4">
-              <input
-                type="price"
-                name="price"
-                ref={priceRef}
-                className="form-control"
-                placeholder="price"
-              />
-              <label>
-                Price in USD <span className="text-danger">*</span>
-              </label>
-              <span className="errors">{validationErrors.price}</span>
+            <div className="row form-row">
+              <div className="col-md-6">
+                <div className="form-floating my-4">
+                  <input
+                    type="price"
+                    name="price"
+                    ref={priceRef}
+                    className="form-control"
+                    placeholder="price"
+                    defaultValue={profileData?.price}
+                  />
+                  <label>
+                    Price in USD <span className="text-danger">*</span>
+                  </label>
+                  <span className="errors">{validationErrors.price}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -92,76 +92,47 @@ const Login = (props) => {
 
     let response = await postHttpRequest("/front/auth/login", loginData);
     if (!response) {
-     alert("Something went wrong with response...");
-     return;
+      Toast.fire({
+        icon: "error",
+        title: response.data.message,
+      });
+      return;
     }
     console.log("response", response);
     if (response) {
-       setIsLoading(false);
+      setIsLoading(false);
       let res = await getHttpRequest(
         `/front/coach/get/${response?.data?.data?._id}`
       );
-      console.log("resresresresres", res);
-       const userRole = {
-         role: response?.data?.data?.type,
-         name: response?.data?.data?.name,
-         email: response?.data?.data?.email,
-         _id: response?.data?.data?._id,
-
-       };
-    }
-
-    // return false;
-   
-
-    postHttpRequest("/front/auth/login", loginData)
-      .then((response) => {
-      
-        if (response?.data?.data?._id) {
-          // console.log("response coach ", response?.data?.data?._id);
-          getHttpRequest(`/front/coach/get/${response?.data?.data?._id}`).then(
-            (res) => {
-              console.log("res2 ", res);
-            }
-          );
-          // console.log("response1 ", response);
-          setIsLoading(false);
-          if (!response) {
-            alert("Something went wrong with response...");
-            return;
-          }
-
-          const userRole = {
-            role: response?.data?.data?.type,
-            name: response?.data?.data?.name,
-            email: response?.data?.data?.email,
-            _id: response?.data?.data?._id,
-          };
-
-          dispatch(setUser(userRole));
-          dispatch(setAccessToken(response.data.data.accessToken));
-          dispatch(setInfoData(response.data.data));
-
-          if (response?.data?.data?.type == 1) {
-            history.replace(CLIENT_DASHBOARD);
-          } else if (response?.data?.data?.type == 3) {
-            history.replace(COACH_DASHBOARD);
-          }
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: response.data.message,
-          });
+      console.log("res ", res);
+      if (res) {
+        const userRole = {
+          role: response?.data?.data?.type,
+          name: response?.data?.data?.name,
+          email: response?.data?.data?.email,
+          _id: response?.data?.data?._id,
+          about: res?.data.coach.about,
+          firstname: res?.data.coach.firstname,
+          lastname: res?.data.coach.lastname,
+          specialization: res?.data.coach.specialization,
+          profile: res?.data.coach.profile,
+        };
+        dispatch(setUser(userRole));
+        dispatch(setAccessToken(response.data.data.accessToken));
+        dispatch(setInfoData(response.data.data));
+        if (response?.data?.data?.type == 1) {
+          history.replace(CLIENT_DASHBOARD);
+        } else if (response?.data?.data?.type == 3) {
+          history.replace(COACH_DASHBOARD);
         }
-      })
-      //////////////
-      .catch(() => {
-        setIsLoading(false);
+      } else {
         Toast.fire({
           icon: "error",
-          title: "Something went wrong...",
+          title: response.data.message,
         });
-      });
+        return;
+      }
+    }
   };
 
   return (
