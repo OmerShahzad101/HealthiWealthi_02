@@ -18,7 +18,7 @@ const ClientProfileSetting = () => {
   const DobRef = useRef();
   const aboutRef = useRef();
   const addressRef = useRef();
-  const postalcodeRef = useRef();
+  const postalCodeRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
@@ -33,7 +33,7 @@ const ClientProfileSetting = () => {
     const gender = genderRef.current.value;
     const about = aboutRef.current.value;
     const address = addressRef.current.value;
-    const postalcode = postalcodeRef.current.value;
+    const postalCode = postalCodeRef.current.value;
     const city = cityRef.current.value;
     const state = stateRef.current.value;
     const country = countryRef.current.value;
@@ -47,7 +47,7 @@ const ClientProfileSetting = () => {
       gender,
       about,
       address,
-      postalcode,
+      postalCode,
       city,
       state,
       country,
@@ -183,14 +183,14 @@ const ClientProfileSetting = () => {
                       <option value="" selected disabled>
                         Open this select menu
                       </option>
-                      <option>A-</option>
-                      <option>A+</option>
-                      <option>B-</option>
-                      <option>B+</option>
-                      <option>AB-</option>
-                      <option>AB+</option>
-                      <option>O-</option>
-                      <option>O+</option>
+                      <option name="A" value="A-">A-</option>
+                      <option name="A+" value="A+">A+</option>
+                      <option name="B-" value="B-">B-</option>
+                      <option name="B+" value="B+">B+</option>
+                      <option name="AB-" value="AB-">AB-</option>
+                      <option name="AB+" value="AB+">AB+</option>
+                      <option name="O-" value="O-">O-</option>
+                      <option name="O+" value="O+">O+</option>
                     </select>
                     <label>Blood Group</label>
                   </div>
@@ -274,11 +274,11 @@ const ClientProfileSetting = () => {
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
-                      type="postalcode"
-                      name="postalcode"
-                      ref={postalcodeRef}
+                      type="postalCode"
+                      name="postalCode"
+                      ref={postalCodeRef}
                       className="form-control"
-                      placeholder="postalcode"
+                      placeholder="postalCode"
                     />
                     <label>Postal Code</label>
                   </div>

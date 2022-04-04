@@ -45,7 +45,7 @@ export default function ChangePassword() {
     }
 
     setIsLoading(true);
-    postHttpRequest(`front/auth/changePassword/${token}`, { ...inputData })
+    postHttpRequest(`front/auth/change-password/${token}`, { ...inputData })
       .then((response) => {
         setIsLoading(false);
         const data = response.data;
