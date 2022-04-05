@@ -2,10 +2,12 @@ import RouterConfig from "./RouterConfig";
 import BreadCrumb from "./navbar/BreadCrumb";
 import CoachSideBar from "./sidebar/CoachSideBar";
 import ClientSideBar from "./sidebar/ClientSideBar";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function AppMain(props) {
  const role = useSelector(state=>state.auth.userRole);
- console.log('role',role)
+ let history = useHistory();
+//  console.log('role',role)
   let content = (
     <>
       <BreadCrumb  name={props}/>
@@ -13,7 +15,7 @@ export default function AppMain(props) {
         <div className="container-fluid">
           <div className="row">
             {
-              role == '1' ?  <ClientSideBar/> : <CoachSideBar />
+              role == '1' ?  <ClientSideBar/> : role == '3' ? <CoachSideBar /> :  history.push("/")
             }
             <RouterConfig />
           </div>
