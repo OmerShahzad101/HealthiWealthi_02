@@ -1,17 +1,31 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+// --------------------------------
+import { getHttpRequest } from "../../../../axios";
 const SearchCoach = () => {
+  const [coachList, setCoachList] = useState([]);
+  useEffect(() => {
+    getHttpRequest("/front/coach/list")
+      .then((response) => {
+        console.log(response);
+        setCoachList(response.data.data.coaches);
+      })
+      .catch(() => {
+        alert("error");
+      });
+  }, []);
+
   return (
     <>
       <div className="breadcrumb-bar">
+        {console.log(coachList)}{" "}
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-md-8 col-12">
               <nav aria-label="breadcrumb" className="page-breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                  <Link to="/">Home</Link>
+                    <Link to="/">Home</Link>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     Search
@@ -130,140 +144,158 @@ const SearchCoach = () => {
             </div>
 
             <div className="col-md-12 col-lg-8 col-xl-9">
-              <div className="card">
-                <div className="card-body">
-                  <div className="doctor-widget">
-                    <div className="doc-info-left">
-                      <div className="doctor-img">
-                        <Link to="/coach-profile">
-                          <img
-                            src="assets/img/doctors/Ellie-Krieger.png"
-                            className="img-fluid"
-                            alt="User Image"
-                          />
-                        </Link>
-                      </div>
-                      <div className="doc-info-cont">
-                        <h4 className="doc-name">
-                          <Link to="/coach-profile">Dr. Ellie Krieger</Link>
-                        </h4>
-                        <p className="doc-speciality">
-                          Donec sollicitudin molestie malesuada.
-                        </p>
-                        <h5 className="doc-department">
-                          <img
-                            src="assets/img/specialities/specialities-05.png"
-                            className="img-fluid"
-                            alt="Speciality"
-                          />
-                          Nutritionists
-                          
-                        </h5>
-                        <div className="rating">
-                          <i className="fas fa-star filled"></i>
-                          <i className="fas fa-star filled"></i>
-                          <i className="fas fa-star filled"></i>
-                          <i className="fas fa-star filled"></i>
-                          <i className="fas fa-star"></i>
-                          <span className="d-inline-block average-rating">
-                            (17)
-                          </span>
-                        </div>
-                        <div className="clinic-details">
-                          <p className="doc-location">
-                            <i className="fas fa-map-marker-alt"></i> Florida,
-                            USA
-                          </p>
-                          <ul className="clinic-gallery">
-                            <li>
-                              <a
-                                href="assets/img/features/feature-01.png"
-                                data-fancybox="gallery"
-                              >
+              {coachList ? (
+                coachList.map((item, idx) => {
+                  return (
+                    <div key={`coach_${idx}`}  className="card">
+                      <div className="card-body">
+                        <div className="doctor-widget">
+                          <div className="doc-info-left">
+                            <div className="doctor-img">
+                              <Link to="/coach-profile">
                                 <img
-                                  src="assets/img/features/feature-01.png"
-                                  alt="Feature"
+                                  src="/assets/img/doctors/Ellie-Krieger.png"
+                                  className="img-fluid"
+                                  alt="User Image"
                                 />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="assets/img/features/feature-02.png"
-                                data-fancybox="gallery"
-                              >
+                              </Link>
+                            </div>
+                            <div className="doc-info-cont">
+                              <h4 className="doc-name">
+                                <Link to="/coach-profile">
+                                  {item.firstname + " " + item.lastname}
+                                </Link>
+                              </h4>
+                              {/* //replaced by specialities */}
+                              {/* //replaced by specialities */}
+                              {/* //replaced by specialities */}
+                              {/* //replaced by specialities */}
+                              <p className="doc-speciality">
+                                {item.about}
+                              </p>
+                              <h5 className="doc-department">
                                 <img
-                                  src="assets/img/features/feature-02.png"
-                                  alt="Feature"
+                                  src="assets/img/specialities/specialities-05.png"
+                                  className="img-fluid"
+                                  alt="Speciality"
                                 />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="assets/img/features/feature-03.jpeg"
-                                data-fancybox="gallery"
+                                Nutritionists
+                              </h5>
+                              <div className="rating">
+                                <i className="fas fa-star filled"></i>
+                                <i className="fas fa-star filled"></i>
+                                <i className="fas fa-star filled"></i>
+                                <i className="fas fa-star filled"></i>
+                                <i className="fas fa-star"></i>
+                                <span className="d-inline-block average-rating">
+                                  (17)
+                                </span>
+                              </div>
+                              <div className="clinic-details">
+                                <p className="doc-location">
+                                  <i className="fas fa-map-marker-alt"></i>{" "}
+                                  {item.country + ", " + item.city}
+                                </p>
+                                <ul className="clinic-gallery">
+                                  <li>
+                                    <a
+                                      href="assets/img/features/feature-01.png"
+                                      data-fancybox="gallery"
+                                    >
+                                      <img
+                                        src="assets/img/features/feature-01.png"
+                                        alt="Feature"
+                                      />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      href="assets/img/features/feature-02.png"
+                                      data-fancybox="gallery"
+                                    >
+                                      <img
+                                        src="assets/img/features/feature-02.png"
+                                        alt="Feature"
+                                      />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      href="assets/img/features/feature-03.jpeg"
+                                      data-fancybox="gallery"
+                                    >
+                                      <img
+                                        src="assets/img/features/feature-03.jpeg"
+                                        alt="Feature"
+                                      />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      href="assets/img/features/feature-04.jpeg"
+                                      data-fancybox="gallery"
+                                    >
+                                      <img
+                                        src="assets/img/features/feature-04.jpeg"
+                                        alt="Feature"
+                                      />
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div className="clinic-services">
+                                <span>Diet Plan</span>
+                                <span>Fitness</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="doc-info-right">
+                            <div className="clini-infos">
+                              <ul>
+                                <li>
+                                  <i className="far fa-thumbs-up"></i> 98%
+                                </li>
+                                <li>
+                                  <i className="far fa-comment"></i> 17 Feedback
+                                </li>
+                                <li>
+                                  <i className="fas fa-map-marker-alt"></i>{" "}
+                                  {item.country + ", " + item.city}
+                                </li>
+                                <li>
+                                  <i className="far fa-money-bill-alt"></i> $
+                                  {item.price}
+                                  {" "}
+                                  <i
+                                    className="fas fa-info-circle"
+                                    data-toggle="tooltip"
+                                    title="Lorem Ipsum"
+                                  ></i>{" "}
+                                </li>
+                              </ul>
+                            </div>
+                            <div className="clinic-booking">
+                              <Link
+                                className="view-pro-btn"
+                                to="/app/coach-profile"
                               >
-                                <img
-                                  src="assets/img/features/feature-03.jpeg"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="assets/img/features/feature-04.jpeg"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="assets/img/features/feature-04.jpeg"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="clinic-services">
-                          <span>Diet Plan</span>
-                          <span>Fitness</span>
+                                View Profile
+                              </Link>
+                              <Link className="apt-btn" to="/app/book-appointment">
+                                Book Appointment
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="doc-info-right">
-                      <div className="clini-infos">
-                        <ul>
-                          <li>
-                            <i className="far fa-thumbs-up"></i> 98%
-                          </li>
-                          <li>
-                            <i className="far fa-comment"></i> 17 Feedback
-                          </li>
-                          <li>
-                            <i className="fas fa-map-marker-alt"></i> Florida,
-                            USA
-                          </li>
-                          <li>
-                            <i className="far fa-money-bill-alt"></i> $300 -
-                            $1000{" "}
-                            <i
-                              className="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>{" "}
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="clinic-booking">
-                        <Link className="view-pro-btn" to="/coach-profile">
-                          View Profile
-                        </Link>
-                        <Link className="apt-btn" to="/book-appointment">
-                          Book Appointment
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  );
+                })
+              ) : (
+                <div className="no_data">
+                  <span>No Coaches found</span>
                 </div>
-              </div>
-
+              )}
               <div className="load-more text-center">
                 <a className="btn btn-primary btn-sm" href="#;">
                   Load More

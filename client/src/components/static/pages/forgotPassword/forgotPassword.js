@@ -36,7 +36,7 @@ const ForgotPassword = () => {
     }
 
     setIsLoading(true);
-    postHttpRequest('/auth//forgot-password', { ...inputData })
+    postHttpRequest('front/auth/forgot-password', { ...inputData })
       .then((response) => {
         const data = response.data;
 
@@ -83,6 +83,7 @@ const ForgotPassword = () => {
                        ref={emailRef}
                        name="email"
                        required
+                       placeholder='Email'
                     />
                     <label>Email</label>
                     <span className="errors">{validationErrors?.email}</span>

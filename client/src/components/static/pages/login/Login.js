@@ -1,21 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
-import Logo from "../../common/logo/Logo";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { DASHBOARD } from "../../../../router/constants/ROUTES";
+import {
+  DASHBOARD,
+  CLIENT_DASHBOARD,
+  COACH_DASHBOARD,
+} from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { cancelOngoingHttpRequest, getHttpRequest, postHttpRequest} from "../../../../axios";
-import { setUserRole, setUserPermissions, setAccessToken} from "../../../../store/slices/auth";
-
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
+import {
+  setUser,
+  setUserPermissions,
+  setAccessToken,
+} from "../../../../store/slices/auth";
 const Login = (props) => {
-  
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -24,7 +32,6 @@ const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(props)
     const params = new URLSearchParams(location.search);
     const access_path = params.get("access_path"); // access_path
 
@@ -42,16 +49,11 @@ const Login = (props) => {
               role: response.data.permission.value,
               roleId: response.data.permission.key,
             };
+            console.log(userRole);
 
-            // Save auth data in Redux store
-            dispatch(setUserRole(userRole));
-            dispatch(setUserPermissions(response.data.permission.permissions));
-            dispatch(setAccessToken(response.data.accessToken));
+            dispatch(setUser(userRole));
 
-            // Update user data as well in the Redux store
-            dispatch(setInfoData(response.data.user));
-
-            history.replace(DASHBOARD);
+            history.push(DASHBOARD);
           } else {
             Toast.fire({
               icon: "error",
@@ -64,11 +66,10 @@ const Login = (props) => {
         });
     }
 
-    // Cancel company creation HTTP call in case component is unmounted due to route change
     return cancelOngoingHttpRequest;
   }, [dispatch, history, location.search]);
 
-  function loginHandler(event) {
+  const loginHandler = async (event) => {
     event.preventDefault();
 
     const email = emailRef.current.value;
@@ -87,64 +88,57 @@ const Login = (props) => {
     } else {
       setValidationErrors({});
     }
-
     setIsLoading(true);
-    postHttpRequest("/front/auth/login", loginData)
-      .then((response) => {
-    
-        setIsLoading(false);
 
-        if (!response) {
-         alert("Something went wrong with response...")
-          console.log("Something went wrong with response...");
-          return;
+    let response = await postHttpRequest("/front/auth/login", loginData);
+    if (!response) {
+      Toast.fire({
+        icon: "error",
+        title: response.data.message,
+      });
+      return;
+    }
+    console.log("response", response);
+    if (response) {
+      setIsLoading(false);
+      let res = await getHttpRequest(
+        `/front/coach/get/${response?.data?.data?._id}`
+      );
+      console.log("res ", res);
+      if (res) {
+        const userRole = {
+          role: response?.data?.data?.type,
+          name: response?.data?.data?.name,
+          email: response?.data?.data?.email,
+          _id: response?.data?.data?._id,
+          about: res?.data.coach.about,
+          firstname: res?.data.coach.firstname,
+          lastname: res?.data.coach.lastname,
+          specialization: res?.data.coach.specialization,
+          profile: res?.data.coach.profile,
+        };
+        dispatch(setUser(userRole));
+        dispatch(setAccessToken(response.data.data.accessToken));
+        dispatch(setInfoData(response.data.data));
+        if (response?.data?.data?.type == 1) {
+          history.replace(CLIENT_DASHBOARD);
+        } else if (response?.data?.data?.type == 3) {
+          history.replace(COACH_DASHBOARD);
         }
-
-        if (response.data.success === true) {
-          const userRole = {
-            role: response?.data?.user?.role ,//response.data.permission.value
-            // roleId: response.data.permission.key,
-          };
-          console.log("userRole", response?.data?.user?.role)
-
-          // Save auth data in Redux store
-          // dispatch(setUserRole(userRole));
-          // dispatch(setUserPermissions(response.data.permission.permissions));
-          dispatch(setAccessToken(response.data.data.accessToken));
-
-          // Update user data as well in the Redux store
-          dispatch(setInfoData(response.data.data));
-
-          // Finally, redirect the user to either the `dashboard` or any other page they were trying to access before logging in
-          const destination = location.state?.location;
-
-          if (destination) {
-            history.replace(destination);
-          } else {
-            history.replace(DASHBOARD);
-          }
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: response.data.message,
-          });
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
+      } else {
         Toast.fire({
           icon: "error",
-          title: "Something went wrong...",
+          title: response.data.message,
         });
-      });
-  }
+        return;
+      }
+    }
+  };
 
   return (
     <div className="account-page">
       <div className="content">
-        <div className="text-center mb-md-5 mb-3">
-          {/* <Logo /> */}
-        </div>
+        <div className="text-center mb-md-5 mb-3">{/* <Logo /> */}</div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-7 text-center ">

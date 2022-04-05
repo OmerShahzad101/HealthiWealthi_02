@@ -4,12 +4,11 @@ const DOMAIN_PATTERN = /^([a-z0-9A-Z]\.)*[a-z0-9-]+\.([a-z0-9]{2,24})+(\.co\.([a
 const NAME_PATTERN = /^[a-zA-Z\s]*$/;
 const TEXT_PATTERN = /^\s*$/;
 const POSITIVE_NUMBER = /^[1-9]+[0-9]*$/;
-
 export default function validate(form) {
     const errors = {};
 
-    if ('companyName' in form && !form.companyName) {
-        errors.companyName = 'Company name is required';
+    if ('specialization' in form && !form.specialization) {
+        errors.specialization = 'Specialization is required';
     }
 
     if ('companyDomain' in form) {
@@ -40,6 +39,49 @@ export default function validate(form) {
         }
     }
 
+    if ('firstname' in form) {
+        if (!form.firstname) {
+            errors.firstname = 'First Name is required';
+        } else if (!NAME_PATTERN.test(form.firstname)) {
+            errors.firstname = 'First Name seems to be invalid. Only English alphabets are allowed in name.';
+        } else if (form.firstname.trim().length < 2) {
+            errors.firstname = 'First Name should have at least 2 characters.';
+        } else if (form.firstname.trim().length > 50) {
+            errors.firstname = 'First Name should be lesser than 50 characters.';
+        }
+    }
+    if ('subject' in form) {
+        if (!form.subject) {
+            errors.subject = 'Subject is required';
+        } 
+         else if (form.subject.trim().length < 3) {
+            errors.subject = 'Subject should have at least 2 characters.';
+        } else if (form.subject.trim().length > 20) {
+            errors.subject = 'subject should be lesser than 50 characters.';
+        }
+    }
+    if ('message' in form) {
+        if (!form.message) {
+            errors.message = 'Subject is required';
+        } 
+         else if (form.message.trim().length < 10) {
+            errors.message = 'message should have at least 10 characters.';
+        } else if (form.message.trim().length > 100) {
+            errors.message = 'message should be lesser than 100 characters.';
+        }
+    }
+    if ('lastname' in form) {
+        if (!form.lastname) {
+            errors.lastname = 'Last Name is required';
+        } else if (!NAME_PATTERN.test(form.lastname)) {
+            errors.lastname = 'Last Name seems to be invalid. Only English alphabets are allowed in name.';
+        } else if (form.lastname.trim().length < 2) {
+            errors.lastname = 'Last Name should have at least 2 characters.';
+        } else if (form.lastname.trim().length > 50) {
+            errors.lastname = 'Last Name should be lesser than 50 characters.';
+        }
+    }
+
     if ('email' in form) {
         if (!form.email) {
             errors.email = 'Email address is required';
@@ -55,7 +97,29 @@ export default function validate(form) {
             errors.password = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
         }
     }
-
+    // for coach/client profile change password, new and current payload is used
+    if ('current' in form) {
+        if (!form.current) {
+            errors.current = 'Current Password is required';
+        } else if (!VALID_PASSWORD_PATTERN.test(form.current)) {
+            errors.current = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
+        }
+    }
+    if ('new' in form) {
+        if (!form.new) {
+            errors.new = 'Password is required';
+        } else if ('newconfirmPassword' in form && !VALID_PASSWORD_PATTERN.test(form.new)) {
+            errors.new = 'Password must be 8 or more characters long, must contain alphabet [a-z] & number [0-9] & special character';
+        }
+    }
+    if ('newconfirmPassword' in form) {
+        if (!form.newconfirmPassword) {
+            errors.newconfirmPassword = 'Confirm password is required';
+        } else if (form.new !== form.newconfirmPassword) {
+            errors.newconfirmPassword = 'Password fields do not match';
+        }
+    }
+// coach/client profile change password end
     if ('confirmPassword' in form) {
         if (!form.confirmPassword) {
             errors.confirmPassword = 'Confirm password is required';
@@ -68,6 +132,8 @@ export default function validate(form) {
         errors.currentPassword = 'Current Password is required';
     }
 
+
+    
     if ('department' in form && !form.department) {
         errors.department = 'Department is required';
     }
@@ -123,11 +189,11 @@ export default function validate(form) {
     }
 
 
-    if ('rewardValue' in form ) {
-        if (!form.rewardValue) {
-            errors.rewardValue = 'Reward Value is required';
-        } else if (!POSITIVE_NUMBER.test(form.rewardValue)) {
-            errors.rewardValue = 'Reward Value seems to be invalid. Only Positive Number are allowed';
+    if ('price' in form ) {
+        if (!form.price) {
+            errors.price = 'Price Value is required';
+        } else if (!POSITIVE_NUMBER.test(form.price)) {
+            errors.price = 'Price Value seems to be invalid. Only Positive Number are allowed';
         }
     }
 

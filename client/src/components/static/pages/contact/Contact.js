@@ -1,80 +1,141 @@
-import React from "react";
+import { exportDefaultSpecifier } from "@babel/types";
+import validate from "../../../../utils/form-validation/authFormValidation";
+import { postHttpRequest } from "../../../../axios";
+import Toast from "../../../common/toast/Toast";
+import React, { useState, useRef } from "react";
 
 const Contact = () => {
+  const [validationErrors, setValidationErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const subjectRef = useRef();
+  const messageRef = useRef();
+  const formRef = useRef();
+
+  function submitHandler(event) {
+    event.preventDefault();
+
+    const name = nameRef.current.value;
+    const email = emailRef?.current.value;
+    const subject = subjectRef?.current.value;
+    const message = messageRef?.current.value;
+
+    const loginData = {
+      name,
+      email,
+      subject,
+      message,
+    };
+    console.log("loginData", loginData);
+    const errors = validate(loginData);
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({ ...errors });
+      return;
+    } else {
+      setValidationErrors({});
+    }
+    setIsLoading(true);
+
+    postHttpRequest("front/contact/create/", loginData)
+      .then((response) => {
+        setIsLoading(false);
+        if (!response) {
+          alert("Something went wrong with response...");
+          return;
+        } else {
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          });
+          formRef.current.reset();
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong...",
+        });
+      });
+  }
+
   return (
-    <div class="p-0 container-fluid">
-      <div class="website-banner container-fluid">
-      </div>
-      <div class="Toastify"></div>
-      <div class="contactus-form py-5 container">
-        <h3 class="mt-0 mb-5 text-center font-weight-bold">GET IN TOUCH</h3>
-        <form class="">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-label">First Name</label>
+    <div className="p-0 container-fluid">
+      <div className="website-banner container-fluid"></div>
+      <div className="Toastify"></div>
+      <div className="contactus-form py-5 container ">
+        <h3 className="mt-0 mb-5 text-center font-weight-bold">GET IN TOUCH</h3>
+        <form className="" noValidate ref={formRef} onSubmit={submitHandler}>
+          <div className="row">
+            <div className="col-lg-6 offset-lg-3">
+              <div className="form-group">
+                <label className="form-label">Name</label>
                 <input
-                  name="firstName"
-                  placeholder="First Name"
+                  name="username"
+                  placeholder="Name"
                   type="text"
-                  class="form-control"
+                  className="form-control"
+                  ref={nameRef}
                 />
-                <p class="contact-form-errors"></p>
+                <p className="contact-form-errors">
+                  {validationErrors.username}
+                </p>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-label">Last Name</label>
-                <input
-                  name="lastName"
-                  placeholder="Last Name"
-                  type="text"
-                  class="form-control"
-                />
-                <p class="contact-form-errors"></p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-label">Email</label>
+
+              <div className="form-group">
+                <label className="form-label">Email</label>
                 <input
                   name="email"
                   placeholder="Email"
                   type="email"
-                  class="form-control"
+                  className="form-control"
+                  ref={emailRef}
+
                 />
-                <p class="contact-form-errors"></p>
+                <p className="contact-form-errors">{validationErrors.email}</p>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-label">Phone</label>
+
+              <div className="form-group">
+                <label className="form-label">Subject</label>
                 <input
-                  name="phone"
-                  placeholder="Phone Number"
+                  name="subject"
+                  placeholder="Subject"
                   type="text"
-                  class="form-control"
+                  className="form-control"
+                  ref={subjectRef}
                 />
-                <p class="contact-form-errors"></p>
+                <p className="contact-form-errors">
+                  {validationErrors.subject}
+                </p>
               </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="form-group">
-                <label class="form-label">Message</label>
+
+              <div className="form-group">
+                <label className="form-label">Message</label>
                 <textarea
                   rows="3"
                   name="message"
                   placeholder="Message"
                   type="text"
-                  class="form-control"
+                  ref={messageRef}
+                  className="form-control"
                 ></textarea>
-                <p class="contact-form-errors"></p>
+                <p className="contact-form-errors">
+                  {validationErrors.message}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="adduser me-3 btn btn-primary  "
+                >
+                  Submit
+                </button>
               </div>
             </div>
           </div>
-          <button type="submit" class="adduser me-3 btn btn-primary">
-            Submit
-          </button>
         </form>
       </div>
     </div>

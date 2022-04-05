@@ -2,11 +2,15 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { CgPhone } from 'react-icons/cg'
 import $ from "jquery";
+import { useSelector } from "react-redux";
+import { CLIENT_DASHBOARD,COACH_DASHBOARD } from "../../../router/constants/ROUTES";
 
 export default function Header() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
+  const loginToken = useSelector((state) => state.auth.accessToken);
+  const userRole = useSelector((state) => state.auth.userRole);
 
   useEffect(() => {
     $("body").append('<div class="sidebar-overlay"></div>');
@@ -71,12 +75,12 @@ export default function Header() {
               >
                 <Link to="/search-coach">Search Coach</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/app/coach-dashboard">Coach Dashboard</Link>
               </li>
               <li>
                 <Link to="/client-dashboard">Client Dashboard</Link>
-              </li>
+              </li> */}
               <li className={splitLocation[1] === "contact-us" ? "active" : ""}>
                 <Link to="/contact-us">Contact us</Link>
               </li>
@@ -94,9 +98,9 @@ export default function Header() {
               </div>
             </li>
             <li className="nav-item">
-              {false ? (
-                <Link className="nav-link header-logout" to="/login">
-                  logout
+              {loginToken ? (
+                <Link className="nav-link header-login" to = { userRole==1 ? CLIENT_DASHBOARD : COACH_DASHBOARD}>
+                  Go to Dashboard
                 </Link>
               ) : (
                 <Link className="nav-link header-login" to="/login">

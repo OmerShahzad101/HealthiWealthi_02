@@ -7261,3 +7261,7 @@ font-size: 16px;
   position: absolute;
   left: 5px;
 }
+.contact-form-errors {
+  color: red;
+  font-size: 12px;
+}
