@@ -1,32 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import Toast from "../../../common/toast/Toast";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-} from "../../../../axios";
 const CoachProfile = () => {
-  const id = useSelector((state) => state.auth.userid);
-  const [coachProfileData, setCoachProfileData] = useState([]);
-
-  useEffect(async () => {
-    let res = await getHttpRequest(`/front/coach/get/${id}`);
-    // console.log("res11111111111111111111111111111111 ", res?.data?.coach);
-    if (res) {
-      setCoachProfileData(res?.data?.coach);
-      Toast.fire({
-        icon: "sucess",
-        title: res.data.message,
-      });
-      return;
-    }
-  }, []);
   return (
     <>
-      <div className="col-md-7 col-lg-8 col-xl-9">
+      <div className="content">
+        <div className="container">
+          {/* <!-- Doctor Widget --> */}
           <div className="card">
             <div className="card-body">
               <div className="doctor-widget">
@@ -39,17 +18,19 @@ const CoachProfile = () => {
                     />
                   </div>
                   <div className="doc-info-cont">
-                    <h4 className="doc-name">{}</h4>
-                    <p className="doc-speciality">{coachProfileData.username}</p>
+                    <h4 className="doc-name">Dr. Darren Elder</h4>
+                    <p className="doc-speciality">
+                      Donec sollicitudin molestie malesuada.
+                    </p>
                     <p className="doc-department">
                       <img
                         src="assets/img/specialities/specialities-05.png"
                         className="img-fluid"
                         alt="Speciality"
                       />
-                      {coachProfileData.specialization}
+                      Yoga Expert
                     </p>
-                    {/* <div className="rating">
+                    <div className="rating">
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
@@ -58,11 +39,10 @@ const CoachProfile = () => {
                       <span className="d-inline-block average-rating">
                         (35)
                       </span>
-                    </div> */}
+                    </div>
                     <div className="clinic-details">
                       <p className="doc-location">
-                        <i className="fas fa-map-marker-alt"></i>
-                        {coachProfileData.address}
+                        <i className="fas fa-map-marker-alt"></i> Newyork, USA -{" "}
                         <a href="#;">Get Directions</a>
                       </p>
                       <ul className="clinic-gallery">
@@ -128,8 +108,7 @@ const CoachProfile = () => {
                         <i className="far fa-comment"></i> 35 Feedback
                       </li>
                       <li>
-                        <i className="fas fa-map-marker-alt"></i>{" "}
-                        {coachProfileData.address}
+                        <i className="fas fa-map-marker-alt"></i> Newyork, USA
                       </li>
                       <li>
                         <i className="far fa-money-bill-alt"></i> $100 per hour{" "}
@@ -230,7 +209,17 @@ const CoachProfile = () => {
                       {/* <!-- About Details --> */}
                       <div className="widget about-widget">
                         <h4 className="widget-title">About Me</h4>
-                        <p>{coachProfileData.about}</p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu
+                          fugiat nulla pariatur. Excepteur sint occaecat
+                          cupidatat non proident, sunt in culpa qui officia
+                          deserunt mollit anim id est laborum.
+                        </p>
                       </div>
                       {/* <!-- /About Details --> */}
 
@@ -1035,7 +1024,8 @@ const CoachProfile = () => {
             </div>
           </div>
           {/* <!-- /Doctor Details Tab --> */}
-          </div>
+        </div>
+      </div>
     </>
   );
 };
