@@ -5,7 +5,7 @@ import ClientSideBar from "./sidebar/ClientSideBar";
 import { useSelector } from "react-redux";
 export default function AppMain(props) {
  const role = useSelector(state=>state.auth.userRole);
-//  console.log('role',role)
+ console.log('role',role)
   let content = (
     <>
       <BreadCrumb  name={props}/>

@@ -33,8 +33,7 @@ const Login = (props) => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const access_path = params.get("access_path"); // access_path
-
+    const access_path = params.get("access_path");
     if (access_path) {
       setIsLoading(true);
       getHttpRequest(`/auth/googleLogin/${access_path}`)
@@ -125,7 +124,9 @@ const Login = (props) => {
         } else if (response?.data?.data?.type == 3) {
           history.replace(COACH_DASHBOARD);
         }
-      } else {
+      } 
+      else 
+      {
         Toast.fire({
           icon: "error",
           title: response.data.message,
