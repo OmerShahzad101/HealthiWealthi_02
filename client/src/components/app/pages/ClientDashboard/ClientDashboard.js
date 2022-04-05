@@ -1,48 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { Tabs , Tab } from "react-bootstrap";
 const ClientDashboard = (props) => {
   console.log("dfdf", props);
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="card">
-          <div className="card-body pt-0">
-            <nav className="user-tabs mb-4">
-              <ul className="nav nav-tabs nav-tabs-bottom nav-justified">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    href="#pat_appointments"
-                    data-toggle="tab"
-                  >
-                    Appointments
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#pat_Plans" data-toggle="tab">
-                    Plans
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="#pat_medical_records"
-                    data-toggle="tab"
-                  >
-                    <span className="med-records">Records</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#pat_billing" data-toggle="tab">
-                    Billing
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="tab-content pt-0">
-              <div id="pat_appointments" className="tab-pane fade show active">
+          <div className="card-body pt-0 user-tabs mb-4">
+            <Tabs
+              defaultActiveKey="pat_appointments"
+              id="uncontrolled-tab-example"
+              className="nav-tabs-bottom nav-justified"
+            >
+              <Tab eventKey="pat_appointments" title="Appointments">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -78,7 +49,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              14 Feb 2022{" "}
+                              14 Feb 2022
                               <span className="d-block text-info">
                                 10.00 AM
                               </span>
@@ -127,7 +98,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              12 Feb 2022{" "}
+                              12 Feb 2022
                               <span className="d-block text-info">8.00 PM</span>
                             </td>
                             <td>12 Feb 2022</td>
@@ -174,7 +145,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              11 Feb 2022{" "}
+                              11 Feb 2022
                               <span className="d-block text-info">
                                 11.00 AM
                               </span>
@@ -223,7 +194,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              10 Feb 2022{" "}
+                              10 Feb 2022
                               <span className="d-block text-info">3.00 PM</span>
                             </td>
                             <td>10 Feb 2022</td>
@@ -270,7 +241,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              9 Feb 2022{" "}
+                              9 Feb 2022
                               <span className="d-block text-info">7.00 PM</span>
                             </td>
                             <td>8 Feb 2022</td>
@@ -312,13 +283,13 @@ const ClientDashboard = (props) => {
                                   />
                                 </Link>
                                 <Link to="/coach-profile">
-                                  Dr. Katharine Berthold{" "}
+                                  Dr. Katharine Berthold
                                   <span>Paleo Health</span>
                                 </Link>
                               </h2>
                             </td>
                             <td>
-                              8 Feb 2022{" "}
+                              8 Feb 2022
                               <span className="d-block text-info">9.00 AM</span>
                             </td>
                             <td>6 Feb 2022</td>
@@ -365,7 +336,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              8 Feb 2022{" "}
+                              8 Feb 2022
                               <span className="d-block text-info">6.00 PM</span>
                             </td>
                             <td>6 Feb 2022</td>
@@ -412,7 +383,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              7 Feb 2022{" "}
+                              7 Feb 2022
                               <span className="d-block text-info">9.00 PM</span>
                             </td>
                             <td>7 Feb 2022</td>
@@ -459,7 +430,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              6 Feb 2022{" "}
+                              6 Feb 2022
                               <span className="d-block text-info">8.00 PM</span>
                             </td>
                             <td>4 Feb 2022</td>
@@ -506,7 +477,7 @@ const ClientDashboard = (props) => {
                               </h2>
                             </td>
                             <td>
-                              5 Feb 2022{" "}
+                              5 Feb 2022
                               <span className="d-block text-info">5.00 PM</span>
                             </td>
                             <td>1 Feb 2022</td>
@@ -539,9 +510,8 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="tab-pane fade" id="pat_Plans">
+              </Tab>
+              <Tab eventKey="pat_Plans" title="Plans">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -756,7 +726,7 @@ const ClientDashboard = (props) => {
                                   />
                                 </Link>
                                 <Link to="/coach-profile">
-                                  Dr. Katharine Berthold{" "}
+                                  Dr. Katharine Berthold
                                   <span>Wellness Health</span>
                                 </Link>
                               </h2>
@@ -931,9 +901,8 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div id="pat_medical_records" className="tab-pane fade">
+              </Tab>
+              <Tab eventKey="pat_medical_records" title="Records">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -1186,7 +1155,7 @@ const ClientDashboard = (props) => {
                                   />
                                 </Link>
                                 <Link to="/coach-profile">
-                                  Dr. Katharine Berthold{" "}
+                                  Dr. Katharine Berthold
                                   <span>Wellness Health</span>
                                 </Link>
                               </h2>
@@ -1386,9 +1355,8 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div id="pat_billing" className="tab-pane fade">
+              </Tab>
+              <Tab eventKey="pat_billing" title="Billing">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -1620,7 +1588,7 @@ const ClientDashboard = (props) => {
                                   />
                                 </Link>
                                 <Link to="/coach-profile">
-                                  Dr. Katharine Berthold{" "}
+                                  Dr. Katharine Berthold
                                   <span>Wellness Health</span>
                                 </Link>
                               </h2>
@@ -1809,8 +1777,8 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </Tab>
+            </Tabs>
           </div>
         </div>
       </div>
