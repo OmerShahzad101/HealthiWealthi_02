@@ -94,7 +94,7 @@ export default function Home(props) {
                 {coachList.map((e, idx) =>
                 <div className="profile-widget">
                   <div className="doc-img">
-                    <Link to="app/coach-profile">
+                    <Link to="/coach-profile">
                       <img
                         className="img-fluid"
                         alt="User Image"
@@ -107,7 +107,7 @@ export default function Home(props) {
                   </div>
                   <div className="pro-content">
                     <h3 className="title">
-                      <Link to="app/coach-profile">{e?.firstname + " " + e?.lastname}</Link>
+                      <Link to="/coach-profile">{e?.firstname + " " + e?.lastname}</Link>
                       <i className="fas fa-check-circle verified"></i>
                     </h3>
                     <p className="speciality">
@@ -144,7 +144,7 @@ export default function Home(props) {
                     </ul>
                     <div className="row row-sm">
                       <div className="col-6">
-                        <Link to="app/coach-profile" className="btn view-btn">
+                        <Link to="/coach-profile" className="btn view-btn">
                           View Profile
                         </Link>
                       </div>

@@ -105,7 +105,7 @@ const Login = (props) => {
       );
       console.log("res ", res);
       if (res) {
-        const userRole = {
+        const userData = {
           role: response?.data?.data?.type,
           name: response?.data?.data?.name,
           email: response?.data?.data?.email,
@@ -116,9 +116,9 @@ const Login = (props) => {
           specialization: res?.data.coach.specialization,
           profile: res?.data.coach.profile,
         };
-        dispatch(setUser(userRole));
+        dispatch(setUser(userData));
         dispatch(setAccessToken(response.data.data.accessToken));
-        dispatch(setInfoData(response.data.data));
+      
         if (response?.data?.data?.type == 1) {
           history.replace(CLIENT_DASHBOARD);
         } else if (response?.data?.data?.type == 3) {
