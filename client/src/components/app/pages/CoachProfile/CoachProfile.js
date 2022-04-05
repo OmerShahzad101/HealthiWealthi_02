@@ -14,7 +14,6 @@ const CoachProfile = () => {
 
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    // console.log("res11111111111111111111111111111111 ", res?.data?.coach);
     if (res) {
       setCoachProfileData(res?.data?.coach);
       Toast.fire({
