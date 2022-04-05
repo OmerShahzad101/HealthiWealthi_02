@@ -1,6 +1,29 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import Toast from "../../../common/toast/Toast";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
 const CoachProfile = () => {
+  const id = useSelector((state) => state.auth.userid);
+  const [coachProfileData, setCoachProfileData] = useState([]);
+
+  useEffect(async () => {
+    let res = await getHttpRequest(`/front/coach/get/${id}`);
+    // console.log("res11111111111111111111111111111111 ", res?.data?.coach);
+    if (res) {
+      setCoachProfileData(res?.data?.coach);
+      Toast.fire({
+        icon: "sucess",
+        title: res.data.message,
+      });
+      return;
+    }
+  }, []);
   return (
     <>
       {/* // breadcrumb */}
@@ -39,19 +62,17 @@ const CoachProfile = () => {
                     />
                   </div>
                   <div className="doc-info-cont">
-                    <h4 className="doc-name">Dr. Darren Elder</h4>
-                    <p className="doc-speciality">
-                      Donec sollicitudin molestie malesuada.
-                    </p>
+                    <h4 className="doc-name">{}</h4>
+                    <p className="doc-speciality">{coachProfileData.username}</p>
                     <p className="doc-department">
                       <img
                         src="assets/img/specialities/specialities-05.png"
                         className="img-fluid"
                         alt="Speciality"
                       />
-                      Yoga Expert
+                      {coachProfileData.specialization}
                     </p>
-                    <div className="rating">
+                    {/* <div className="rating">
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
@@ -60,10 +81,11 @@ const CoachProfile = () => {
                       <span className="d-inline-block average-rating">
                         (35)
                       </span>
-                    </div>
+                    </div> */}
                     <div className="clinic-details">
                       <p className="doc-location">
-                        <i className="fas fa-map-marker-alt"></i> Newyork, USA -{" "}
+                        <i className="fas fa-map-marker-alt"></i>
+                        {coachProfileData.address}
                         <a href="#;">Get Directions</a>
                       </p>
                       <ul className="clinic-gallery">
@@ -129,7 +151,8 @@ const CoachProfile = () => {
                         <i className="far fa-comment"></i> 35 Feedback
                       </li>
                       <li>
-                        <i className="fas fa-map-marker-alt"></i> Newyork, USA
+                        <i className="fas fa-map-marker-alt"></i>{" "}
+                        {coachProfileData.address}
                       </li>
                       <li>
                         <i className="far fa-money-bill-alt"></i> $100 per hour{" "}
@@ -230,17 +253,7 @@ const CoachProfile = () => {
                       {/* <!-- About Details --> */}
                       <div className="widget about-widget">
                         <h4 className="widget-title">About Me</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat. Duis aute irure dolor in
-                          reprehenderit in voluptate velit esse cillum dolore eu
-                          fugiat nulla pariatur. Excepteur sint occaecat
-                          cupidatat non proident, sunt in culpa qui officia
-                          deserunt mollit anim id est laborum.
-                        </p>
+                        <p>{coachProfileData.about}</p>
                       </div>
                       {/* <!-- /About Details --> */}
 

@@ -1,7 +1,28 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import Toast from "../../../common/toast/Toast";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import {
+  cancelOngoingHttpRequest,
+  getHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
 const ClientProfile = () => {
+  const id = useSelector((state) => state.auth.userid);
+  const [clientProfileData, setClientProfileData] = useState([]);
+  useEffect(async () => {
+    let res = await getHttpRequest(`/front/coach/get/${id}`);
+    console.log("res11111111111111111111111111111111 ", res?.data?.coach);
+    if (res) {
+      setClientProfileData(res?.data?.coach);
+      Toast.fire({
+        icon: "sucess",
+        title: res.data.message,
+      });
+      return;
+    }
+  }, []);
   return (
     <div>
       {/* <!-- Breadcrumb --> */}
@@ -43,15 +64,16 @@ const ClientProfile = () => {
                         />
                       </a>
                       <div class="profile-det-info">
-                        <h3>Richard Wilson</h3>
+                        <h3>{clientProfileData.username}</h3>
 
                         <div class="patient-details">
                           <h5>
-                            <b>Patient ID :</b> PT0016
+                            <b>Patient ID :</b>
+                            {clientProfileData._id}
                           </h5>
                           <h5 class="mb-0">
-                            <i class="fas fa-map-marker-alt"></i> Newyork,
-                            United States
+                            <i class="fas fa-map-marker-alt"></i>{" "}
+                            {clientProfileData.address}
                           </h5>
                         </div>
                       </div>
@@ -60,13 +82,13 @@ const ClientProfile = () => {
                   <div class="patient-info">
                     <ul>
                       <li>
-                        Phone <span>+1 952 001 8563</span>
+                        Phone <span>{clientProfileData.phone}</span>
                       </li>
                       <li>
                         Age <span>38 Years, Male</span>
                       </li>
                       <li>
-                        Blood Group <span>AB+</span>
+                        Blood Group <span>{clientProfileData.bloodgroup}</span>
                       </li>
                     </ul>
                   </div>
@@ -177,7 +199,8 @@ const ClientProfile = () => {
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -219,7 +242,8 @@ const ClientProfile = () => {
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -261,7 +285,8 @@ const ClientProfile = () => {
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -303,7 +328,8 @@ const ClientProfile = () => {
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -351,7 +377,8 @@ const ClientProfile = () => {
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -423,7 +450,8 @@ const ClientProfile = () => {
                                   <td>Prescription 1</td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -459,7 +487,8 @@ const ClientProfile = () => {
                                   <td>Prescription 2</td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -548,7 +577,8 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -590,7 +620,8 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -670,7 +701,8 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -705,11 +737,12 @@ const ClientProfile = () => {
                                 </tr>
                                 <tr>
                                   <td>
-                                  <Link to="/invoice">#INV-0009</Link>
+                                    <Link to="/invoice">#INV-0009</Link>
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -760,7 +793,8 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
@@ -796,11 +830,12 @@ const ClientProfile = () => {
                                 </tr>
                                 <tr>
                                   <td>
-                                  <Link to="/invoice">#INV-0007</Link>
+                                    <Link to="/invoice">#INV-0007</Link>
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">
-                                      <Link to="/client-profile"
+                                      <Link
+                                        to="/client-profile"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
