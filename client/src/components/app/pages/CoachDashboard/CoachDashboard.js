@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Tabs, Tab } from "react-bootstrap";
 const CoachDashboard = () => {
   return (
     <>
@@ -75,32 +76,12 @@ const CoachDashboard = () => {
           <div className="col-md-12">
             <h4 className="mb-4">Client Appoinment</h4>
             <div className="appointment-tab">
-              <ul className="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    href="#upcoming-appointments"
-                    data-toggle="tab"
-                  >
-                    Upcoming
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="#/today-appointments"
-                    data-toggle="tab"
-                  >
-                    Today
-                  </a>
-                </li>
-              </ul>
-
-              <div className="tab-content">
-                <div
-                  className="tab-pane show active"
-                  id="upcoming-appointments"
-                >
+              <Tabs
+                defaultActiveKey="upcoming-appointments"
+                id="uncontrolled-tab-example"
+                className="nav-tabs-solid nav-tabs-rounded"
+              >
+                <Tab eventKey="upcoming-appointments" title="Upcoming">
                   <div className="card card-table mb-0">
                     <div className="card-body">
                       <div className="table-responsive">
@@ -326,9 +307,8 @@ const CoachDashboard = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="tab-pane" id="today-appointments">
+                </Tab>
+                <Tab eventKey="today-appointments" title="Today">
                   <div className="card card-table mb-0">
                     <div className="card-body">
                       <div className="table-responsive">
@@ -655,8 +635,8 @@ const CoachDashboard = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </Tab>
+              </Tabs>
             </div>
           </div>
         </div>
