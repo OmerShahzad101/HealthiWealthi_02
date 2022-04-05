@@ -1,5 +1,4 @@
 import storage from 'redux-persist/lib/storage';
-
 import store from '../../store';
 import { logoutUser } from '../../store/actionCreators';
 import { LOGIN, ROOT } from '../../router/constants/ROUTES';
@@ -9,7 +8,7 @@ export default function logout() {
     // Remove all keys defined in persistConfig(s) of `redux-persist` (to make sure `store` does not get rehydrated after page refresh)
     storage.removeItem('persist:root');
     localStorage.removeItem('onBoardingClose');
-
+        
     // Reset Redux store to its initial state
     store.dispatch(logoutUser());
 
