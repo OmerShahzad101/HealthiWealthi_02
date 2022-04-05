@@ -5,4 +5,6 @@ export default function imagePath(path) {
         path = process.env.REACT_APP_BASE_API+ '/' + path;
         return path;
     }
+    // path = process.env.REACT_APP_BASE_API+ '/' + path;
+    //     return path;
 }
