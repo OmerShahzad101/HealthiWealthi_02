@@ -1,5 +1,6 @@
 import Axios from './_instance';
 
+
 let abortController = new AbortController();
 
 export async function getHttpRequest(url, config = {}) {

@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import { useEffect, useState } from "react";
+import { getHttpRequest } from "../../../../axios";
 
 export default function Home(props) {
-  console.log(props);
+
+  const [coachList, setCoachList] = useState([]);
+
+  useEffect(() => {
+    getHttpRequest("/front/coach/list")
+      .then((response) => {
+        console.log(response);
+        setCoachList(response.data.data.coaches);
+      })
+      .catch(() => {
+        alert("error");
+      });
+  }, []);
+
+  console.log("data", coachList);
+
   const settings = {
     dots: false,
     autoplay: false,
@@ -73,76 +90,11 @@ export default function Home(props) {
               </div>
             </div>
             <div className="col-lg-8 doctor-slider slider">
-              <Slider {...settings}>
-                {/* <!-- Doctor Widget --> */}
+              {coachList ? (<Slider {...settings}>
+                {coachList.map((e, idx) =>
                 <div className="profile-widget">
                   <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-01.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Ruby Perrin</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MDS - Periodontology and Oral Implantology, BDS
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <span className="d-inline-block average-rating">
-                        (17)
-                      </span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Florida, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $300 - $1000
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
+                    <Link to="app/coach-profile">
                       <img
                         className="img-fluid"
                         alt="User Image"
@@ -155,13 +107,13 @@ export default function Home(props) {
                   </div>
                   <div className="pro-content">
                     <h3 className="title">
-                      <Link to="/coach-profile">Darren Elder</Link>
+                      <Link to="app/coach-profile">{e?.firstname + " " + e?.lastname}</Link>
                       <i className="fas fa-check-circle verified"></i>
                     </h3>
                     <p className="speciality">
-                      BDS, MDS - Oral & Maxillofacial Surgery
+                      {e?.about}
                     </p>
-                    <div className="rating">
+                    {/* <div className="rating">
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
@@ -170,17 +122,19 @@ export default function Home(props) {
                       <span className="d-inline-block average-rating">
                         (35)
                       </span>
-                    </div>
+                    </div> */}
                     <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Newyork, USA
+                     {( e.country || e.city || e.address ) && 
+                     <li>
+                        <i className="fas fa-map-marker-alt"></i>{e?.country + ", " + e?.city}
                       </li>
-                      <li>
+                      }
+                      {/* <li>
                         <i className="far fa-clock"></i> Available on Fri, 22
                         Mar
-                      </li>
+                      </li> */}
                       <li>
-                        <i className="far fa-money-bill-alt"></i> $50 - $300
+                        <i className="far fa-money-bill-alt"></i>{e?.price}{" "}
                         <i
                           className="fas fa-info-circle"
                           data-toggle="tooltip"
@@ -190,345 +144,21 @@ export default function Home(props) {
                     </ul>
                     <div className="row row-sm">
                       <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
+                        <Link to="app/coach-profile" className="btn view-btn">
                           View Profile
                         </Link>
                       </div>
                       <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
+                        <Link to="app/book-appointment" className="btn book-btn">
                           Book Now
                         </Link>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-03.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Deborah Angel</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MBBS, MD - General Medicine, DNB - Cardiology
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">
-                        (27)
-                      </span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Georgia, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $100 - $400
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-04.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Sofia Brient</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MBBS, MS - General Surgery, MCh - Urology
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">(4)</span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Louisiana, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $150 - $250
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-05.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Marvin Campbell</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MBBS, MD - Ophthalmology, DNB - Ophthalmology
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">
-                        (66)
-                      </span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Michigan, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $50 - $700
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-06.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Katharine Berthold</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MS - Orthopaedics, MBBS, M.Ch - Orthopaedics
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">
-                        (52)
-                      </span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Texas, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $100 - $500
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
-                  <div className="doc-img">
-                    <Link to="/coach-profile">
-                      <img
-                        className="img-fluid"
-                        alt="User Image"
-                        src="assets/img/doctors/doctor-07.jpg"
-                      />
-                    </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
-                  </div>
-                  <div className="pro-content">
-                    <h3 className="title">
-                      <Link to="/coach-profile">Linda Tobin</Link>
-                      <i className="fas fa-check-circle verified"></i>
-                    </h3>
-                    <p className="speciality">
-                      MBBS, MD - General Medicine, DM - Neurology
-                    </p>
-                    <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">
-                        (43)
-                      </span>
-                    </div>
-                    <ul className="available-info">
-                      <li>
-                        <i className="fas fa-map-marker-alt"></i> Kansas, USA
-                      </li>
-                      <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li>
-                      <li>
-                        <i className="far fa-money-bill-alt"></i> $100 - $1000
-                        <i
-                          className="fas fa-info-circle"
-                          data-toggle="tooltip"
-                          title="Lorem Ipsum"
-                        ></i>
-                      </li>
-                    </ul>
-                    <div className="row row-sm">
-                      <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
-                          View Profile
-                        </Link>
-                      </div>
-                      <div className="col-6">
-                        <Link to="/book-appointment" className="btn book-btn">
-                          Book Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- /Doctor Widget --> */}
-
-                {/* <!-- Doctor Widget --> */}
-                <div className="profile-widget">
+                )}
+              
+                {/* <div className="profile-widget">
                   <div className="doc-img">
                     <Link to="/coach-profile">
                       <img
@@ -590,9 +220,11 @@ export default function Home(props) {
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* <!-- Doctor Widget --> */}
-              </Slider>
+                </div> */}
+
+              </Slider>) : <div className="no_data">
+                <span>No Coaches found</span>
+              </div>}
             </div>
           </div>
         </div>
