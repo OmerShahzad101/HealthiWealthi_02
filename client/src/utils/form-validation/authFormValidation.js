@@ -4,7 +4,6 @@ const DOMAIN_PATTERN = /^([a-z0-9A-Z]\.)*[a-z0-9-]+\.([a-z0-9]{2,24})+(\.co\.([a
 const NAME_PATTERN = /^[a-zA-Z\s]*$/;
 const TEXT_PATTERN = /^\s*$/;
 const POSITIVE_NUMBER = /^[1-9]+[0-9]*$/;
-
 export default function validate(form) {
     const errors = {};
 
@@ -39,6 +38,7 @@ export default function validate(form) {
             errors.username = 'Name should be lesser than 50 characters.';
         }
     }
+
     if ('firstname' in form) {
         if (!form.firstname) {
             errors.firstname = 'First Name is required';
@@ -48,6 +48,26 @@ export default function validate(form) {
             errors.firstname = 'First Name should have at least 2 characters.';
         } else if (form.firstname.trim().length > 50) {
             errors.firstname = 'First Name should be lesser than 50 characters.';
+        }
+    }
+    if ('subject' in form) {
+        if (!form.subject) {
+            errors.subject = 'Subject is required';
+        } 
+         else if (form.subject.trim().length < 3) {
+            errors.subject = 'Subject should have at least 2 characters.';
+        } else if (form.subject.trim().length > 20) {
+            errors.subject = 'subject should be lesser than 50 characters.';
+        }
+    }
+    if ('message' in form) {
+        if (!form.message) {
+            errors.message = 'Subject is required';
+        } 
+         else if (form.message.trim().length < 10) {
+            errors.message = 'message should have at least 10 characters.';
+        } else if (form.message.trim().length > 100) {
+            errors.message = 'message should be lesser than 100 characters.';
         }
     }
     if ('lastname' in form) {
