@@ -5423,7 +5423,7 @@ font-size: 16px;
   padding: 16px 20px;
 }
 .dashboard-menu > ul > li:hover > a,
-.dashboard-menu > ul > li > button.active {
+.dashboard-menu > ul > li > a.active {
   color: #d32986;
 }
 .dashboard-menu ul li a i {
