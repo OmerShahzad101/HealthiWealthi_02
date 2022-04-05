@@ -112,7 +112,6 @@ const ClientProfileSetting = () => {
 
         if (response.data.success === true) {
           setprofileData(response?.data?.client);
-          console.log(response?.data?.client);
         } else {
           console.log(response.data.message);
         }

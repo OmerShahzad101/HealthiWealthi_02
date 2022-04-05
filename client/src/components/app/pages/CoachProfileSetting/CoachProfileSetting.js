@@ -1,11 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { getHttpRequest, putHttpRequest ,postHttpRequest } from "../../../../axios";
+import {
+  getHttpRequest,
+  putHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import imagePath from "../../../../utils/url/imagePath";
+import imageExist from "../../../../utils/url/imageExist";
+import { AiOutlineCamera } from "react-icons/ai";
+import { setInfoData } from "../../../../store/slices/user";
 
 const CoachProfileSetting = () => {
+  const userInfo = useSelector((state) => state.user.info);
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -27,6 +38,18 @@ const CoachProfileSetting = () => {
   const stateRef = useRef();
   const countryRef = useRef();
 
+  const checKImage = async (data) => {
+    setTimeout(dispatch(setInfoData(data)), 9000);
+
+    const exist = await imageExist(data.avatar);
+
+    if (exist) {
+      dispatch(setInfoData(data));
+      return true;
+    } else {
+      checKImage(data);
+    }
+  };
 
   const onChangeImage = async (e) => {
     const files = e.target.files;
@@ -64,13 +87,13 @@ const CoachProfileSetting = () => {
       };
 
       setIsLoading(true);
-      postHttpRequest("/user/uploadImage", formData, config)
+      postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
         .then((response) => {
           if (!response) {
             console.log("Something went wrong with response...");
             return;
           }
-
+          console.log("in then");
           if (response.data.success === true) {
             setValidationErrors({});
             // Update user data as well in the Redux store
@@ -89,14 +112,10 @@ const CoachProfileSetting = () => {
         })
         .finally(() => {
           setIsLoading(false);
+          console.log("in finally");
         });
     }
   };
-
-
-
-
-
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -205,14 +224,34 @@ const CoachProfileSetting = () => {
             <h4 className="card-title">Basic Information</h4>
             <div className="row form-row">
               <div className="col-md-12">
-                <div className="form-group mb-4">
+                <div className="imageUploaderWrapper profile-img">
+                  <div className="circle">
+                    {userInfo && (
+                      <img src={imagePath(userInfo.avatar)} alt="user img" />
+                    )}
+                    {/* <img className="profilePic" src={imagePath} alt="user img" /> */}
+                  </div>
+
+                  <label className="pImage">
+                    <AiOutlineCamera className="uploadButton" />
+                    <input
+                      className="fileUpload"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      onChange={onChangeImage}
+                    />
+                  </label>
+                </div>
+                {/* <div className="form-group mb-4">
                   <div className="change-avatar">
                     <div className="profile-img">
                       <img
                         src="/assets/img/doctors/doctor-thumb-02.jpg"
                         alt="User Image"
                       />
+                   
                     </div>
+                 
                     <div className="upload-img">
                       <div className="change-photo-btn">
                         <span>
@@ -224,11 +263,11 @@ const CoachProfileSetting = () => {
                         Allowed JPG, GIF or PNG. Max size of 2MB
                       </small>
                     </div>
-                    {/* <button className="change-account" onClick={upgradePackage}>
+                    <button className="change-account" onClick={upgradePackage}>
                       Upgrade Account
-                    </button> */}
+                    </button>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="col-md-6">
                 <div className="form-floating mb-4">
