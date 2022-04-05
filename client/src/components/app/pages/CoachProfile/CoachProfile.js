@@ -25,12 +25,7 @@ const CoachProfile = () => {
   }, []);
   return (
     <>
-      {/* // breadcrumb */}
- 
-      {/* // breadcrumb end */}
-      <div className="content">
-        <div className="container">
-          {/* <!-- Doctor Widget --> */}
+      <div className="col-md-7 col-lg-8 col-xl-9">
           <div className="card">
             <div className="card-body">
               <div className="doctor-widget">
@@ -1039,8 +1034,7 @@ const CoachProfile = () => {
             </div>
           </div>
           {/* <!-- /Doctor Details Tab --> */}
-        </div>
-      </div>
+          </div>
     </>
   );
 };
