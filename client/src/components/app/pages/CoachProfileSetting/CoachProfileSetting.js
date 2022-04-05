@@ -12,6 +12,7 @@ import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData } from "../../../../store/slices/user";
+import { Tabs, Tab } from "react-bootstrap";
 
 const CoachProfileSetting = () => {
   const userInfo = useSelector((state) => state.user.info);
@@ -218,31 +219,42 @@ const CoachProfileSetting = () => {
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
-        {/* <!-- Basic Information --> */}
         <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Basic Information</h4>
-            <div className="row form-row">
-              <div className="col-md-12">
-                <div className="imageUploaderWrapper profile-img">
-                  <div className="circle">
-                    {userInfo && (
-                      <img src={imagePath(userInfo.avatar)} alt="user img" />
-                    )}
-                    {/* <img className="profilePic" src={imagePath} alt="user img" /> */}
-                  </div>
+          <div className="card-body pt-0 user-tabs mb-4">
+          <Tabs
+            defaultActiveKey="user-info"
+            id="uncontrolled-tab-example"
+            className="nav-tabs-bottom nav-justified"
+          >
+            <Tab eventKey="user-info" title="Basic">
+              {/* <!-- Basic Information --> */}
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Basic Information</h4>
+                  <div className="row form-row">
+                    <div className="col-md-12">
+                      <div className="imageUploaderWrapper profile-img">
+                        <div className="circle">
+                          {userInfo && (
+                            <img
+                              src={imagePath(userInfo.avatar)}
+                              alt="user img"
+                            />
+                          )}
+                          {/* <img className="profilePic" src={imagePath} alt="user img" /> */}
+                        </div>
 
-                  <label className="pImage">
-                    <AiOutlineCamera className="uploadButton" />
-                    <input
-                      className="fileUpload"
-                      type="file"
-                      accept="image/png, image/jpeg"
-                      onChange={onChangeImage}
-                    />
-                  </label>
-                </div>
-                {/* <div className="form-group mb-4">
+                        <label className="pImage">
+                          <AiOutlineCamera className="uploadButton" />
+                          <input
+                            className="fileUpload"
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            onChange={onChangeImage}
+                          />
+                        </label>
+                      </div>
+                      {/* <div className="form-group mb-4">
                   <div className="change-avatar">
                     <div className="profile-img">
                       <img
@@ -268,92 +280,96 @@ const CoachProfileSetting = () => {
                     </button>
                   </div>
                 </div> */}
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    name="username"
-                    className="form-control"
-                    placeholder="username"
-                    value={profileData?.username}
-                    disabled
-                  />
-                  <label>Username</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="email"
-                    name="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={profileData?.email}
-                    disabled
-                  />
-                  <label>Email</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    name="firstname"
-                    ref={firstnameRef}
-                    className="form-control"
-                    placeholder="Email"
-                    defaultValue={profileData?.firstname}
-                  />
-                  <label>
-                    First Name <span className="text-danger">*</span>
-                  </label>
-                  <span className="errors">{validationErrors.firstname}</span>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    name="lastname"
-                    ref={lastnameRef}
-                    className="form-control"
-                    placeholder="Last Name"
-                    defaultValue={profileData?.lastname}
-                  />
-                  <label>
-                    Last Name <span className="text-danger">*</span>
-                  </label>
-                  <span className="errors">{validationErrors.lastname}</span>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    name="specialization"
-                    ref={specializationRef}
-                    className="form-control"
-                    placeholder="specialization"
-                    defaultValue={profileData?.specialization}
-                  />
-                  <label>
-                    Specialization <span className="text-danger">*</span>
-                  </label>
-                  <span className="errors">
-                    {validationErrors.specialization}
-                  </span>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  {console.log(profileData?.gender)}
-                  <select
-                    className="form-select"
-                    ref={genderRef}
-                    defaultValue={profileData?.gender}
-                  >
-                    {/* {profileData?.gender === "" ? (
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="text"
+                          name="username"
+                          className="form-control"
+                          placeholder="username"
+                          value={profileData?.username}
+                          disabled
+                        />
+                        <label>Username</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="email"
+                          name="email"
+                          className="form-control"
+                          placeholder="Email"
+                          value={profileData?.email}
+                          disabled
+                        />
+                        <label>Email</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="text"
+                          name="firstname"
+                          ref={firstnameRef}
+                          className="form-control"
+                          placeholder="Email"
+                          defaultValue={profileData?.firstname}
+                        />
+                        <label>
+                          First Name <span className="text-danger">*</span>
+                        </label>
+                        <span className="errors">
+                          {validationErrors.firstname}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="text"
+                          name="lastname"
+                          ref={lastnameRef}
+                          className="form-control"
+                          placeholder="Last Name"
+                          defaultValue={profileData?.lastname}
+                        />
+                        <label>
+                          Last Name <span className="text-danger">*</span>
+                        </label>
+                        <span className="errors">
+                          {validationErrors.lastname}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="text"
+                          name="specialization"
+                          ref={specializationRef}
+                          className="form-control"
+                          placeholder="specialization"
+                          defaultValue={profileData?.specialization}
+                        />
+                        <label>
+                          Specialization <span className="text-danger">*</span>
+                        </label>
+                        <span className="errors">
+                          {validationErrors.specialization}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        {console.log(profileData?.gender)}
+                        <select
+                          className="form-select"
+                          ref={genderRef}
+                          defaultValue={profileData?.gender}
+                        >
+                          {/* {profileData?.gender === "" ? (
                       <option selected disabled>
                         Open this select menu
                       </option>
@@ -361,176 +377,204 @@ const CoachProfileSetting = () => {
                       <option disabled>Open this select menu</option>
                     )} */}
 
-                    <option name="male" value="male">
-                      Male
-                    </option>
-                    <option name="female" value="female">
-                      Female
-                    </option>
-                  </select>
-                  <label>Gender</label>
+                          <option name="male" value="male">
+                            Male
+                          </option>
+                          <option name="female" value="female">
+                            Female
+                          </option>
+                        </select>
+                        <label>Gender</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              {/* <!-- /Basic Information --> */}
+
+              {/* <!-- About Me --> */}
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">About Me</h4>
+                  <div className="form-floating mb-4">
+                    <textarea
+                      type="about"
+                      name="about"
+                      ref={aboutRef}
+                      className="form-control"
+                      placeholder="about"
+                      style={{ minHeight: "150px" }}
+                      defaultValue={profileData?.about}
+                    />
+                    <label>Briefly describe yourself</label>
+                  </div>
+                </div>
+              </div>
+              {/* <!-- /About Me --> */}
+
+              {/* <!-- Contact Details --> */}
+              <div className="card contact-card">
+                <div className="card-body">
+                  <h4 className="card-title">Contact Details</h4>
+                  <div className="row form-row">
+                    <div className="col-md-12">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="address"
+                          name="address"
+                          ref={addressRef}
+                          className="form-control"
+                          placeholder="address"
+                          defaultValue={profileData?.address}
+                        />
+                        <label>Address</label>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="city"
+                          name="city"
+                          ref={cityRef}
+                          className="form-control"
+                          placeholder="city"
+                          defaultValue={profileData?.city}
+                        />
+                        <label>City</label>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="state"
+                          name="state"
+                          ref={stateRef}
+                          className="form-control"
+                          placeholder="state"
+                          defaultValue={profileData?.state}
+                        />
+                        <label>State</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="country"
+                          name="country"
+                          ref={countryRef}
+                          className="form-control"
+                          placeholder="country"
+                          defaultValue={profileData?.country}
+                        />
+                        <label>Country</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="postal"
+                          name="postal"
+                          ref={postalCodeRef}
+                          className="form-control"
+                          placeholder="postal"
+                          defaultValue={profileData?.postalCode}
+                        />
+                        <label>Postal Code</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating mb-4">
+                        <input
+                          type="text"
+                          name="phonenumber"
+                          ref={phoneRef}
+                          className="form-control"
+                          placeholder="Phone"
+                          defaultValue={profileData?.phone}
+                        />
+                        <label>Phone Number</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <!-- /Contact Details --> */}
+
+              {/* <!-- Pricing --> */}
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Pricing</h4>
+
+                  <div className="form-group mb-0">
+                    <div id="pricing_select">
+                      <div className="custom-control custom-radio custom-control-inline">
+                        <label
+                          className="custom-control-label"
+                          for="price_custom"
+                        >
+                          Custom Price (per hour)
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row form-row">
+                    <div className="col-md-6">
+                      <div className="form-floating my-4">
+                        <input
+                          type="price"
+                          name="price"
+                          ref={priceRef}
+                          className="form-control"
+                          placeholder="price"
+                          defaultValue={profileData?.price}
+                        />
+                        <label>
+                          Price in USD <span className="text-danger">*</span>
+                        </label>
+                        <span className="errors">{validationErrors.price}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <!-- /Pricing --> */}
+
+              <div className="submit-section submit-btn-bottom">
+                <button
+                  type="button"
+                  onClick={updateProfileHandler}
+                  className="btn btn-primary submit-btn"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </Tab>
+            <Tab eventKey="availability" title="Availability">
+            <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Availability</h4>
+                  <div className="row form-row">
+
+                  </div>
+                </div>
+              </div>
+            </Tab>
+            <Tab eventKey="calendar" title="Calendar">
+            <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Calendar</h4>
+                  <div className="row form-row">
+
+                  </div>
+                </div>
+              </div>
+            </Tab>
+          </Tabs>
           </div>
         </div>
-        {/* <!-- /Basic Information --> */}
-
-        {/* <!-- About Me --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">About Me</h4>
-            <div className="form-floating mb-4">
-              <textarea
-                type="about"
-                name="about"
-                ref={aboutRef}
-                className="form-control"
-                placeholder="about"
-                style={{ minHeight: "150px" }}
-                defaultValue={profileData?.about}
-              />
-              <label>Briefly describe yourself</label>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /About Me --> */}
-
-        {/* <!-- Contact Details --> */}
-        <div className="card contact-card">
-          <div className="card-body">
-            <h4 className="card-title">Contact Details</h4>
-            <div className="row form-row">
-              <div className="col-md-12">
-                <div className="form-floating mb-4">
-                  <input
-                    type="address"
-                    name="address"
-                    ref={addressRef}
-                    className="form-control"
-                    placeholder="address"
-                    defaultValue={profileData?.address}
-                  />
-                  <label>Address</label>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="city"
-                    name="city"
-                    ref={cityRef}
-                    className="form-control"
-                    placeholder="city"
-                    defaultValue={profileData?.city}
-                  />
-                  <label>City</label>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="state"
-                    name="state"
-                    ref={stateRef}
-                    className="form-control"
-                    placeholder="state"
-                    defaultValue={profileData?.state}
-                  />
-                  <label>State</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="country"
-                    name="country"
-                    ref={countryRef}
-                    className="form-control"
-                    placeholder="country"
-                    defaultValue={profileData?.country}
-                  />
-                  <label>Country</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="postal"
-                    name="postal"
-                    ref={postalCodeRef}
-                    className="form-control"
-                    placeholder="postal"
-                    defaultValue={profileData?.postalCode}
-                  />
-                  <label>Postal Code</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    name="phonenumber"
-                    ref={phoneRef}
-                    className="form-control"
-                    placeholder="Phone"
-                    defaultValue={profileData?.phone}
-                  />
-                  <label>Phone Number</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Contact Details --> */}
-
-        {/* <!-- Pricing --> */}
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Pricing</h4>
-
-            <div className="form-group mb-0">
-              <div id="pricing_select">
-                <div className="custom-control custom-radio custom-control-inline">
-                  <label className="custom-control-label" for="price_custom">
-                    Custom Price (per hour)
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className="row form-row">
-              <div className="col-md-6">
-                <div className="form-floating my-4">
-                  <input
-                    type="price"
-                    name="price"
-                    ref={priceRef}
-                    className="form-control"
-                    placeholder="price"
-                    defaultValue={profileData?.price}
-                  />
-                  <label>
-                    Price in USD <span className="text-danger">*</span>
-                  </label>
-                  <span className="errors">{validationErrors.price}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- /Pricing --> */}
-
-        <div className="submit-section submit-btn-bottom">
-          <button
-            type="button"
-            onClick={updateProfileHandler}
-            className="btn btn-primary submit-btn"
-          >
-            Save Changes
-          </button>
-        </div>
+        
       </div>
     </>
   );
