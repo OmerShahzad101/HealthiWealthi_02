@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import AvailableTimes from "react-available-times";
 
 const CoachCalendar = (props) => {
-  console.log("propspropspropsprops",props)
+  
   useEffect(() => {
-    console.log("propspropspropsprops",props)
+    console.log("propspropspropsprops",props.a)
   }, []);
+
   return (
+    props.a == "calendar" ? 
     <AvailableTimes
       weekStartsOn="monday"
       calendars={[
@@ -35,6 +37,7 @@ const CoachCalendar = (props) => {
       availableDays={["monday", "tuesday", "wednesday", "thursday", "friday"]}
       availableHourRange={{ start: 9, end: 19 }}
     />
+    : ""
   );
 };
 

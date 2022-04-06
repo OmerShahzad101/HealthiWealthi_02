@@ -20,7 +20,7 @@ import CoachCalendar from "../Calendar/CoachCalendar";
 const CoachProfileSetting = () => {
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
-  const [a, seta] = useState("tarue");
+  const [key, setKey] = useState('user-info');
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -224,11 +224,13 @@ const CoachProfileSetting = () => {
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="card">
           <div className="card-body pt-0 user-tabs mb-4">
-            <Tabs
-              defaultActiveKey="user-info"
-              id="uncontrolled-tab-example"
-              className="nav-tabs-bottom nav-justified"
-            >
+      
+    <Tabs
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="mb-3"
+    >
               <Tab eventKey="user-info" title="Basic">
                 {/* <!-- Basic Information --> */}
                 <div className="card">
@@ -570,12 +572,13 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                      <CoachCalendar a={a} />
+                      <CoachCalendar a={key} />
                     </div>
                   </div>
                 </div>
               </Tab>
             </Tabs>
+
           </div>
         </div>
       </div>
