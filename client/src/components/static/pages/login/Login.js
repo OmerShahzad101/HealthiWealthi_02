@@ -20,6 +20,7 @@ import {
   setUserPermissions,
   setAccessToken,
 } from "../../../../store/slices/auth";
+import { createCacheKeyComparator } from "reselect/es/defaultMemoize";
 const Login = (props) => {
   const history = useHistory();
   const location = useLocation();
@@ -71,6 +72,7 @@ const Login = (props) => {
   const loginHandler = async (event) => {
     event.preventDefault();
 
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
@@ -89,51 +91,64 @@ const Login = (props) => {
     }
     setIsLoading(true);
 
-    let response = await postHttpRequest("/front/auth/login", loginData);
-    if (!response) {
-      Toast.fire({
-        icon: "error",
-        title: response.data.message,
-      });
-      return;
-    }
-    console.log("response", response);
-    if (response) {
-      setIsLoading(false);
-      let res = await getHttpRequest(
-        `/front/coach/get/${response?.data?.data?._id}`
-      );
-      console.log("res ", res);
-      if (res) {
-        const userData = {
-          role: response?.data?.data?.type,
-          name: response?.data?.data?.name,
-          email: response?.data?.data?.email,
-          _id: response?.data?.data?._id,
-          about: res?.data.coach.about,
-          firstname: res?.data.coach.firstname,
-          lastname: res?.data.coach.lastname,
-          specialization: res?.data.coach.specialization,
-          profile: res?.data.coach.profile,
-        };
-        dispatch(setUser(userData));
-        dispatch(setAccessToken(response.data.data.accessToken));
-      
-        if (response?.data?.data?.type == 1) {
-          history.replace(CLIENT_DASHBOARD);
-        } else if (response?.data?.data?.type == 3) {
-          history.replace(COACH_DASHBOARD);
-        }
-      } 
-      else 
-      {
+    // __ __ __ __ //
+    try{
+      let response = await postHttpRequest("/front/auth/login", loginData);
+      console.log(response);
+      if (!response) {
         Toast.fire({
           icon: "error",
           title: response.data.message,
         });
         return;
       }
+  
+      if (response) {
+        setIsLoading(false);
+        let res = await getHttpRequest(
+          `/front/coach/get/${response?.data?.data?._id}`
+        );
+        console.log("res ", res);
+        if (res) {
+          const userData = {
+            role: response?.data?.data?.type,
+            name: response?.data?.data?.name,
+            email: response?.data?.data?.email,
+            _id: response?.data?.data?._id,
+            about: res?.data.coach.about,
+            firstname: res?.data.coach.firstname,
+            lastname: res?.data.coach.lastname,
+            specialization: res?.data.coach.specialization,
+            profile: res?.data.coach.profile,
+          };
+          dispatch(setUser(userData));
+          dispatch(setAccessToken(response.data.data.accessToken));
+        
+          if (response?.data?.data?.type == 1) {
+            history.replace(CLIENT_DASHBOARD);
+          } else if (response?.data?.data?.type == 3) {
+            history.replace(COACH_DASHBOARD);
+          }
+        } 
+        else 
+        {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+          return;
+        }
+      }
+
+    }catch (e) {
+      setIsLoading(false);
+      Toast.fire({
+        icon: "error",
+        title: "Invalid username or password",
+      });
     }
+    
+
   };
 
   return (
