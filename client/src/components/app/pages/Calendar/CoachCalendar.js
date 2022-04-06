@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import AvailableTimes from "react-available-times";
 
 const CoachCalendar = (props) => {
-    
+  console.log("propspropspropsprops",props)
   useEffect(() => {
-    console.log(props)
+    console.log("propspropspropsprops",props)
   }, []);
   return (
     <AvailableTimes
