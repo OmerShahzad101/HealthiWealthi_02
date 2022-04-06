@@ -15,11 +15,12 @@ import { setInfoData} from "../../../../store/slices/user";
 import setAvatar from "../../../../store/slices/user"
 
 import { Tabs, Tab } from "react-bootstrap";
+import CoachCalendar from "../Calendar/CoachCalendar";
 
 const CoachProfileSetting = () => {
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
-
+const[a, seta] = useState("tarue");
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -569,7 +570,7 @@ dispatch(setAvatar(files[0].name));
                 <div className="card-body">
                   <h4 className="card-title">Calendar</h4>
                   <div className="row form-row">
-
+                  <CoachCalendar a={a}/>
                   </div>
                 </div>
               </div>
