@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Tabs , Tab } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
 const ClientDashboard = (props) => {
+  // let response = await postHttpRequest("/front/auth/login", loginData);
+  //     if (!response) {
+  //       Toast.fire({
+  //         icon: "error",
+  //         title: response.data.message,
+  //       });
+  //       return;
+  //     }
+
   console.log("dfdf", props);
   return (
     <>

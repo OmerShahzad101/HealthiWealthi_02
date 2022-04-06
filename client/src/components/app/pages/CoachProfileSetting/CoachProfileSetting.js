@@ -11,7 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
-import { setInfoData } from "../../../../store/slices/user";
+import { setInfoData} from "../../../../store/slices/user";
+import setAvatar from "../../../../store/slices/user"
+
 import { Tabs, Tab } from "react-bootstrap";
 
 const CoachProfileSetting = () => {
@@ -86,7 +88,8 @@ const CoachProfileSetting = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-
+    
+dispatch(setAvatar(files[0].name));
       setIsLoading(true);
       postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
         .then((response) => {
@@ -121,7 +124,6 @@ const CoachProfileSetting = () => {
   function updateProfileHandler(event) {
     event.preventDefault();
     const specialization = specializationRef.current.value;
-
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
     const phone = phoneRef.current.value;
@@ -133,6 +135,7 @@ const CoachProfileSetting = () => {
     const city = cityRef.current.value;
     const state = stateRef.current.value;
     const country = countryRef.current.value;
+
 
     const payload = {
       specialization,
