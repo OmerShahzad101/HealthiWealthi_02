@@ -4,14 +4,14 @@ import { Tabs, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 const ClientDashboard = (props) => {
-
   const clientId = useSelector((state) => state.auth.userid);
+
   const [myAppoinment, setMyAppoinment] = useState();
   useEffect(() => {
     getHttpRequest(`/front/booking/getAppoinment/${clientId}`)
       .then((response) => {
-        console.log(response)
-        setMyAppoinment(response?.data?.client);
+        console.log(response);
+        setMyAppoinment(response?.data?.BookingData);
       })
       .catch((e) => {
         alert("error", e);
@@ -44,55 +44,69 @@ const ClientDashboard = (props) => {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>
-                              <h2 className="table-avatar">
-                                <Link
-                                  to="/coach-profile"
-                                  className="avatar avatar-sm mr-2"
-                                >
-                                  <img
-                                    className="avatar-img rounded-circle"
-                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
-                                    alt="User Image"
-                                  />
-                                </Link>
-                                <Link to="/coach-profile">
-                                  Dr. Ruby Perrin <span>Yoga Expert</span>
-                                </Link>
-                              </h2>
-                            </td>
-                            <td>
-                              14 Feb 2022
-                              <span className="d-block text-info">
-                                10.00 AM
-                              </span>
-                            </td>
-                            <td>12 Feb 2022</td>
-                            <td>$160</td>
-                            <td>16 Feb 2022</td>
-                            <td>
-                              <span className="badge badge-pill bg-success-light">
-                                Confirm
-                              </span>
-                            </td>
-                            <td className="text-right">
-                              <div className="table-action">
-                                <a
-                                  href="#"
-                                  className="btn btn-sm bg-primary-light"
-                                >
-                                  <i className="fas fa-print"></i> Print
-                                </a>
-                                <a
-                                  href="#"
-                                  className="btn btn-sm bg-info-light"
-                                >
-                                  <i className="far fa-eye"></i> View
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
+                          {myAppoinment ? (
+                            myAppoinment.map((item, idx) => {
+                              return (
+                                <tr>
+                                  <td>
+                                    <h2 className="table-avatar">
+                                      <Link
+                                        to="/coach-profile"
+                                        className="avatar avatar-sm mr-2"
+                                      >
+                                        <img
+                                          className="avatar-img rounded-circle"
+                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
+                                          alt="User Image"
+                                        />
+                                      </Link>
+                                      <Link to="/coach-profile">
+                                        {item?.coachData?.firstname +
+                                          item?.coachData?.lastname}{" "}
+                                        <span>
+                                          {item?.coachData?.specialization}
+                                        </span>
+                                      </Link>
+                                    </h2>
+                                  </td>
+                                  <td>
+                                    {item?.bookingDate}
+                                    <span className="d-block text-info">
+                                      {item?.slots}
+                                    </span>
+                                  </td>
+                                  <td>{item?.bookingDate}</td>
+                                  <td>${item?.price}</td>
+                                  <td>16 Feb 2022</td>
+                                  <td>
+                                    <span className="badge badge-pill bg-success-light">
+                                      Confirm
+                                    </span>
+                                  </td>
+                                  <td className="text-right">
+                                    <div className="table-action">
+                                      <a
+                                        href="#"
+                                        className="btn btn-sm bg-primary-light"
+                                      >
+                                        <i className="fas fa-print"></i> Print
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="btn btn-sm bg-info-light"
+                                      >
+                                        <i className="far fa-eye"></i> View
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          ) : (
+                            <div className="no_data">
+                              <span>You don't book any coach</span>
+                            </div>
+                          )}
                         </tbody>
                       </table>
                     </div>
@@ -113,43 +127,55 @@ const ClientDashboard = (props) => {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>14 Feb 2022</td>
-                            <td>Plan 1</td>
-                            <td>
-                              <h2 className="table-avatar">
-                                <Link
-                                  to="/coach-profile"
-                                  className="avatar avatar-sm mr-2"
-                                >
-                                  <img
-                                    className="avatar-img rounded-circle"
-                                    src="/assets/img/doctors/doctor-thumb-01.jpg"
-                                    alt="User Image"
-                                  />
-                                </Link>
-                                <Link to="/coach-profile">
-                                  Dr. Ruby Perrin <span>Nutritionists</span>
-                                </Link>
-                              </h2>
-                            </td>
-                            <td className="text-right">
-                              <div className="table-action">
-                                <a
-                                  href="#"
-                                  className="btn btn-sm bg-primary-light"
-                                >
-                                  <i className="fas fa-print"></i> Print
-                                </a>
-                                <a
-                                  href="#"
-                                  className="btn btn-sm bg-info-light"
-                                >
-                                  <i className="far fa-eye"></i> View
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
+                          {myAppoinment ? (
+                            myAppoinment.map((item, idx) => {
+                              return (
+                                <tr>
+                                  <td>14 Feb 2022</td>
+                                  <td>Plan 1</td>
+                                  <td>
+                                    <h2 className="table-avatar">
+                                      <Link
+                                        to="/coach-profile"
+                                        className="avatar avatar-sm mr-2"
+                                      >
+                                        <img
+                                          className="avatar-img rounded-circle"
+                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
+                                          alt="User Image"
+                                        />
+                                      </Link>
+                                      <Link to="/coach-profile">
+                                        {item?.coachData?.firstname +
+                                          item?.coachData?.lastname}{" "}
+                                        <span>Nutritionists</span>
+                                      </Link>
+                                    </h2>
+                                  </td>
+                                  <td className="text-right">
+                                    <div className="table-action">
+                                      <a
+                                        href="#"
+                                        className="btn btn-sm bg-primary-light"
+                                      >
+                                        <i className="fas fa-print"></i> Print
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="btn btn-sm bg-info-light"
+                                      >
+                                        <i className="far fa-eye"></i> View
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          ) : (
+                            <div className="no_data">
+                              <span>You don't book any coach</span>
+                            </div>
+                          )}
                         </tbody>
                       </table>
                     </div>
