@@ -1,10 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    info: null,
-    subscriptionPlan: null,
-    company: null,
-    departments: [],
-    avatar:null
+  info:null,
+  subscriptionPlan: null,
+  company: null,
+  departments: [],
 };
 export const authSlice = createSlice({
   name: "user",
@@ -22,15 +21,13 @@ export const authSlice = createSlice({
     setDepartment: (state, { payload: planDetails }) => {
       state.departments = planDetails;
     },
-    setAvatar: (state, { payload }) => {
-         const {
-        avatar,
-      } = payload;
-      state.avatar = avatar;
-    },
+    // setInfo: (state, { payload }) => {
+    //   return { ...state, info: { ...state.info, avatar: payload } };
+    // },
   },
 });
 
-export const { setInfoData, setSubscriptionPlan, setCompany, setDepartment } = authSlice.actions;
+export const { setInfoData, setSubscriptionPlan, setCompany, setDepartment, setInfo } =
+  authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,8 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // --------------------------------
 import { getHttpRequest } from "../../../../axios";
 const SearchCoach = () => {
+  const SearchFilter = useRef("");
+  const maleCoach = useRef("");
+  const femaleCoach = useRef("");
+  const Certified_Phlebotomy = useRef("");
+  const ProfessionalCoder = useRef("");
+  const Yoga = useRef("");
+  const Nutritionists = useRef("");
+  const HolisticHealth = useRef("");
+  const WellnessHealth = useRef("");
+  const PaleoHealth = useRef("");
+  const kickBoxing = useRef("");
+  const coachGender = {
+    maleCoach,
+    femaleCoach,
+  };
+  const Services = {
+    kickBoxing,
+    Yoga,
+    Nutritionists,
+    HolisticHealth,
+    PaleoHealth,
+  };
+  const healthCourse = {
+    Certified_Phlebotomy,
+    ProfessionalCoder,
+  };
+
   const [coachList, setCoachList] = useState([]);
   useEffect(() => {
     getHttpRequest("/front/coach/list")
@@ -14,6 +41,10 @@ const SearchCoach = () => {
         alert("error");
       });
   }, []);
+  function handleChange(event) {
+    console.log(" kickBoxing", kickBoxing.current.value);
+    console.log("SearchFilter", SearchFilter.current.value);
+  }
 
   return (
     <>
@@ -40,12 +71,20 @@ const SearchCoach = () => {
               <div className="sort-by">
                 <span className="sort-title">Sort by</span>
                 <span className="sortby-fliter">
-                  <select className="select">
+                  <select className="select" ref={SearchFilter}>
                     <option>Select</option>
-                    <option className="sorting">Rating</option>
-                    <option className="sorting">Popular</option>
-                    <option className="sorting">Latest</option>
-                    <option className="sorting">Free</option>
+                    <option className="sorting" value="rating">
+                      Rating
+                    </option>
+                    <option className="sorting" value="popular">
+                      Popular
+                    </option>
+                    <option className="sorting" value="popular">
+                      Latest
+                    </option>
+                    <option className="sorting" value="popular">
+                      Free
+                    </option>
                   </select>
                 </span>
               </div>
@@ -75,25 +114,35 @@ const SearchCoach = () => {
                     <h4>Gender</h4>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="gender_type" checked />
+                        <input
+                          type="checkbox"
+                          name="gender_type"
+                          ref={maleCoach}
+                          checked
+                        />
                         <span className="checkmark"></span> Male Coach
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="gender_type" />
+                        <input
+                          type="checkbox"
+                          name="gender_type"
+                          ref={femaleCoach}
+                        />
                         <span className="checkmark"></span> Female Coach
                       </label>
                     </div>
                   </div>
                   <div className="filter-widget">
-                    <h4>Select Specialist</h4>
+                    <h4>Select Services</h4>
                     <div>
                       <label className="custom_check">
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          checked
+                          ref={kickBoxing}
+                          value="kickBoxing"
                         />
                         <span className="checkmark"></span> Kick Boxing
                       </label>
@@ -103,39 +152,85 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          checked
+                          ref={Yoga}
                         />
-                        <span className="checkmark"></span> Yoga Expert
+                        <span className="checkmark"></span> Yoga
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="select_specialist" />
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          ref={Nutritionists}
+                        />
                         <span className="checkmark"></span> Nutritionists
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="select_specialist" />
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          ref={HolisticHealth}
+                        />
                         <span className="checkmark"></span> Holistic Health
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="select_specialist" />
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          ref={WellnessHealth}
+                        />
                         <span className="checkmark"></span> Wellness Health
                         Coach
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="select_specialist" />
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          ref={PaleoHealth}
+                        />
                         <span className="checkmark"></span> Paleo Health
                       </label>
                     </div>
                   </div>
+                  <div className="filter-widget">
+                    <h4>Health courses</h4>
+                    <div>
+                      <label className="custom_check">
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          ref={Certified_Phlebotomy}
+                        />
+                        <span className="checkmark"></span>Certified Phlebotomy
+                        Technician (CPT) Training time
+                      </label>
+                    </div>
+                    <div>
+                      <label className="custom_check">
+                        <input
+                          type="checkbox"
+                          name="select_specialist"
+                          // onChange={handleChange}
+                          ref={ProfessionalCoder}
+                        />
+                        <span className="checkmark"></span> Professional Coder
+                      </label>
+                    </div>
+                  </div>
+
                   <div className="btn-search">
-                    <button type="button" className="btn btn-block">
+                    <button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={handleChange}
+                    >
                       Search
                     </button>
                   </div>
@@ -147,7 +242,7 @@ const SearchCoach = () => {
               {coachList ? (
                 coachList.map((item, idx) => {
                   return (
-                    <div key={`coach_${idx}`}  className="card">
+                    <div key={`coach_${idx}`} className="card">
                       <div className="card-body">
                         <div className="doctor-widget">
                           <div className="doc-info-left">
@@ -170,9 +265,7 @@ const SearchCoach = () => {
                               {/* //replaced by specialities */}
                               {/* //replaced by specialities */}
                               {/* //replaced by specialities */}
-                              <p className="doc-speciality">
-                                {item.about}
-                              </p>
+                              <p className="doc-speciality">{item.about}</p>
                               <h5 className="doc-department">
                                 <img
                                   src="assets/img/specialities/specialities-05.png"
@@ -264,8 +357,7 @@ const SearchCoach = () => {
                                 </li>
                                 <li>
                                   <i className="far fa-money-bill-alt"></i> $
-                                  {item.price}
-                                  {" "}
+                                  {item.price}{" "}
                                   <i
                                     className="fas fa-info-circle"
                                     data-toggle="tooltip"
@@ -281,7 +373,10 @@ const SearchCoach = () => {
                               >
                                 View Profile
                               </Link>
-                              <Link className="apt-btn" to="/app/book-appointment">
+                              <Link
+                                className="apt-btn"
+                                to="/app/book-appointment"
+                              >
                                 Book Appointment
                               </Link>
                             </div>
