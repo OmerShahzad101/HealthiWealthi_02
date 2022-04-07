@@ -229,7 +229,7 @@ const CoachProfileSetting = () => {
       id="controlled-tab-example"
       activeKey={key}
       onSelect={(k) => setKey(k)}
-      className="mb-3"
+      className="mb-3 nav-tabs-bottom nav-justified"
     >
               <Tab eventKey="user-info" title="Basic">
                 {/* <!-- Basic Information --> */}
@@ -572,7 +572,7 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                      <CoachCalendar a={key} />
+                      {/* <CoachCalendar calendar={key} /> */}
                     </div>
                   </div>
                 </div>
