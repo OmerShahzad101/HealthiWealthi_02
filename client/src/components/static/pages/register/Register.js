@@ -7,27 +7,11 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Google from "../../common/Google";
-import GoogleLogin from "react-google-login";
 import { JsonWebTokenError } from "jsonwebtoken";
 
 //import Swal from "sweetalert2";
 const Register = () => {
-  const handleLogin = (result) => {
-    console.log(result);
-  };
-  const [loginData, setLoginData] = useState(
-  localStorage.getItem("loginData")
-    ? JSON.parse(localStorage.getItem("loginData"))
-    : null
-);
-
-  const handleFail = (googleData) => {
-    console.log(googleData);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem("loginData")
-    setLoginData(null)
-  }
+ 
 
   const history = useHistory();
   const usernameRef = useRef();
@@ -40,9 +24,6 @@ const Register = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
   // Cancel company creation HTTP call in case component is unmounted due to route change
-  useEffect(() => {
-    return cancelOngoingHttpRequest;
-  }, []);
 
   function registerUserHandler(event) {
     event.preventDefault();
@@ -73,59 +54,56 @@ const Register = () => {
     postHttpRequest("/front/auth/register", {
       ...inputData,
       confirmPassword: undefined,
-    })
-      .then((response) => {
-        setIsLoading(false);
+    }).then((response) => {
+      setIsLoading(false);
 
-        if (!response) {
-          console.log("Something went wrong with response...");
-          return;
-        }
+      if (!response) {
+        console.log("Something went wrong with response...");
+        return;
+      }
 
-        if (response.data.status === true) {
-          setValidationErrors({});
-          Toast.fire({
-            customClass: {
-              denyButton: "deny-class",
-              confirmButton: "confirm-class",
-              title: "title",
-              htmlContainer: "text",
-            },
-            icon: "success",
-            width: "450px",
-            padding: "20px 10px",
-            title: `Registered Successfully!`,
-            confirmButtonText: `OK`,
-            text: `${response.data.message}`,
-          }).then(() => {
-            history.push(LOGIN);
-          });
-        } else {
-          setValidationErrors(response.data.errorObj);
-         
-          Toast.fire({
-            icon: "error",
-            title: response.data.message,
-          });
-        }
-      })
-      // .catch((e) => {
-      //   console.log(e)
-     
-      //   Toast.fire({
-      //     icon: "error",
-      //     title: "Email Already Exist",
-      //   });
-      //   setIsLoading(false);
-      // });
+      if (response.data.status === true) {
+        setValidationErrors({});
+        Toast.fire({
+          customClass: {
+            denyButton: "deny-class",
+            confirmButton: "confirm-class",
+            title: "title",
+            htmlContainer: "text",
+          },
+          icon: "success",
+          width: "450px",
+          padding: "20px 10px",
+          title: `Registered Successfully!`,
+          confirmButtonText: `OK`,
+          text: `${response.data.message}`,
+        }).then(() => {
+          history.push(LOGIN);
+        });
+      } else {
+        setValidationErrors(response.data.errorObj);
+
+        Toast.fire({
+          icon: "error",
+          title: response.data.message,
+        });
+      }
+    });
+    // .catch((e) => {
+    //   console.log(e)
+
+    //   Toast.fire({
+    //     icon: "error",
+    //     title: "Email Already Exist",
+    //   });
+    //   setIsLoading(false);
+    // });
   }
 
   return (
     <div className="account-page">
       <div className="content">
-        <div className="text-center mb-md-5 mb-3">
-          {/* <Logo /> */}
-        </div>
+        <div className="text-center mb-md-5 mb-3">{/* <Logo /> */}</div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-7 text-center ">
@@ -203,9 +181,7 @@ const Register = () => {
                       </option>
                     </select>
                     <label>Register as a</label>
-                    <span className="errors">
-                      {validationErrors?.type}
-                    </span>
+                    <span className="errors">{validationErrors?.type}</span>
                   </div>
 
                   <div className="text-right">
@@ -233,29 +209,7 @@ const Register = () => {
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
                   </div>
-                  <div className="row form-row social-login">
-                    <div className="col-12">
-                      {loginData ? (
-                        <div>
-                          <h3>YOu log in {loginData.email}</h3>
-                          <button onClick={handleLogout}>logout</button>
-                        </div>
-                      ) : (
-                        <GoogleLogin
-                          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                          buttonText="Sign in with Google"
-                          className="ct-button ct-button--secondary"
-                          onSuccess={handleLogin}
-                          onFailure={handleFail}
-                          cookiePolicy="single_host_origin"
-                        ></GoogleLogin>
-                      )}
-
-                      {/* <button  className="btn btn-google btn-block">
-                        <i className="fab fa-google mr-1"></i> Login
-                      </button> */}
-                    </div>
-                  </div>
+                 
                 </form>
               </div>
             </div>

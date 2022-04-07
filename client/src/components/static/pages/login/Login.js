@@ -20,6 +20,8 @@ import {
   setUserPermissions,
   setAccessToken,
 } from "../../../../store/slices/auth";
+import GoogleLogin from "react-google-login";
+
 import { createCacheKeyComparator } from "reselect/es/defaultMemoize";
 const Login = (props) => {
   const history = useHistory();
@@ -32,46 +34,22 @@ const Login = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const access_path = params.get("access_path");
-    if (access_path) {
-      setIsLoading(true);
-      getHttpRequest(`/auth/googleLogin/${access_path}`)
-        .then((response) => {
-          if (!response) {
-            console.log("Something went wrong with response...");
-            return;
-          }
+  const handleLogin = (response) => {
+    console.log(response.tokenId);
 
-          if (response.data.success === true) {
-            const userRole = {
-              role: response.data.permission.value,
-              roleId: response.data.permission.key,
-            };
-            console.log(userRole);
+    postHttpRequest("/front/auth/googleLogin", {
+      tokenId: response.tokenId,
+    }).then((response) => {
+      console.log("google login success", response);
+    });
+  };
 
-            dispatch(setUser(userRole));
-
-            history.push(DASHBOARD);
-          } else {
-            Toast.fire({
-              icon: "error",
-              title: response.data.message,
-            });
-          }
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-
-    return cancelOngoingHttpRequest;
-  }, [dispatch, history, location.search]);
+  const handleFail = (googleData) => {
+    console.log(googleData);
+  };
 
   const loginHandler = async (event) => {
     event.preventDefault();
-
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
@@ -92,7 +70,7 @@ const Login = (props) => {
     setIsLoading(true);
 
     // __ __ __ __ //
-    try{
+    try {
       let response = await postHttpRequest("/front/auth/login", loginData);
       console.log(response);
       if (!response) {
@@ -102,7 +80,7 @@ const Login = (props) => {
         });
         return;
       }
-  
+
       if (response) {
         setIsLoading(false);
         let res = await getHttpRequest(
@@ -123,15 +101,13 @@ const Login = (props) => {
           };
           dispatch(setUser(userData));
           dispatch(setAccessToken(response.data.data.accessToken));
-        
+
           if (response?.data?.data?.type == 1) {
             history.replace(CLIENT_DASHBOARD);
           } else if (response?.data?.data?.type == 3) {
             history.replace(COACH_DASHBOARD);
           }
-        } 
-        else 
-        {
+        } else {
           Toast.fire({
             icon: "error",
             title: response.data.message,
@@ -139,16 +115,13 @@ const Login = (props) => {
           return;
         }
       }
-
-    }catch (e) {
+    } catch (e) {
       setIsLoading(false);
       Toast.fire({
         icon: "error",
         title: "Invalid username or password",
       });
     }
-    
-
   };
 
   return (
@@ -218,6 +191,19 @@ const Login = (props) => {
                       </a>
                     </div>
                   </div>
+                  <div className="row form-row social-login">
+                    <div className="col-12">
+                      <GoogleLogin
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText="Sign in with Google"
+                        className="ct-button ct-button--secondary"
+                        onSuccess={handleLogin}
+                        onFailure={handleFail}
+                        cookiePolicy="single_host_origin"
+                      ></GoogleLogin>
+                    </div>
+                  </div>
+
                   <div className="text-center dont-have">
                     Don’t have an account? <Link to="/signup">Register</Link>
                   </div>

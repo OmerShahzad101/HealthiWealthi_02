@@ -276,7 +276,7 @@ const SearchCoach = () => {
                             <div className="clinic-booking">
                               <Link
                                 className="view-pro-btn"
-                                to="/app/coach-profile"
+                                to="/coach-profile"
                               >
                                 View Profile
                               </Link>

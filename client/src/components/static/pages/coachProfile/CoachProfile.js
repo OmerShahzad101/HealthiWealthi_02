@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-} from "../../../../axios";
+import { getHttpRequest } from "../../../../axios";
 const CoachProfile = () => {
   const id = useSelector((state) => state.auth.userid);
   const [coachProfileData, setCoachProfileData] = useState([]);
