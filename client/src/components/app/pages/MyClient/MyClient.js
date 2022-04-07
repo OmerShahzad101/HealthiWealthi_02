@@ -9,7 +9,8 @@ const MyClient = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        setMyclient(response?.data?.coach);
+        console.log(response);
+        setMyclient(response?.data?.BookingData);
       })
       .catch((e) => {
         alert("error", e);
@@ -39,17 +40,21 @@ const MyClient = () => {
                           <div className="profile-det-info">
                             <h3>
                               <Link to="/app/client-profile">
-                                {item?.firstname + " " + item?.lastname}{" "}
+                                {item?.clientData?.firstname +
+                                  " " +
+                                  item?.clientData?.lastname}{" "}
                               </Link>
                             </h3>
 
                             <div className="patient-details">
                               <h5>
-                                <b>Client ID :</b> P0016
+                                <b>Client ID :</b> {idx + 1}
                               </h5>
                               <h5 className="mb-0">
                                 <i className="fas fa-map-marker-alt"></i>{" "}
-                                {item?.country + ", " + item?.city}
+                                {item?.clientData?.country +
+                                  ", " +
+                                  item?.clientData?.city}
                               </h5>
                             </div>
                           </div>
@@ -58,13 +63,14 @@ const MyClient = () => {
                       <div className="patient-info">
                         <ul>
                           <li>
-                            Phone <span>{item?.phone}</span>
+                            Phone <span>{item?.clientData?.phone}</span>
                           </li>
                           <li>
-                            Gender <span> {item.gender}</span>
+                            Gender <span> {item.clientData?.gender}</span>
                           </li>
                           <li>
-                            Blood Group <span>{item?.bloodgroup}</span>
+                            Blood Group{" "}
+                            <span>{item?.clientData?.bloodgroup}</span>
                           </li>
                         </ul>
                       </div>
