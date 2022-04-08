@@ -837,7 +837,7 @@ const CoachProfileSetting = () => {
                             </div>
                           </div>
                           <div className="btn-box add-more">
-                            {awards.length - 1 === i && (
+                            {experience.length - 1 === i && (
                               <a
                                 href="javascript:void(0)"
                                 className="add-award"
