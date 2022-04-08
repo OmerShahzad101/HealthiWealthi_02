@@ -1,18 +1,13 @@
-import Logo from "../../common/logo/Logo";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { cancelOngoingHttpRequest, postHttpRequest } from "../../../../axios";
-import { useEffect, useRef, useState } from "react";
+import { postHttpRequest } from "../../../../axios";
+import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
-import Google from "../../common/Google";
-import { JsonWebTokenError } from "jsonwebtoken";
 
 //import Swal from "sweetalert2";
 const Register = () => {
- 
-
   const history = useHistory();
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -209,7 +204,6 @@ const Register = () => {
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
                   </div>
-                 
                 </form>
               </div>
             </div>

@@ -14,7 +14,7 @@ export default function Home(props) {
         setCoachList(response.data.data.coaches);
       })
       .catch(() => {
-        alert("error");
+        console.log("error");
       });
   }, []);
 
@@ -97,7 +97,7 @@ export default function Home(props) {
                     <Link to="/coach-profile">
                       <img
                         className="img-fluid"
-                        alt="User Image"
+                        alt="User"
                         src="assets/img/doctors/doctor-02.jpg"
                       />
                     </Link>
@@ -163,7 +163,7 @@ export default function Home(props) {
                     <Link to="/coach-profile">
                       <img
                         className="img-fluid"
-                        alt="User Image"
+                        alt="User"
                         src="assets/img/doctors/doctor-08.jpg"
                       />
                     </Link>

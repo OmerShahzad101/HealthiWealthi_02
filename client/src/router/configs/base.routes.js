@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import withSuspense from '../../hoc/withSuspense';
 import validateAuthState from '../../utils/auth/validateAuthState';
-import { APP, ROOT, LOGIN, SIGNUP, FORGOT_PASSWORD, RESET_PASSWORD, DASHBOARD, EMAIL_VERIFICATION } from '../constants/ROUTES';
+import { APP, ROOT, LOGIN, SIGNUP, FORGOT_PASSWORD, RESET_PASSWORD, EMAIL_VERIFICATION } from '../constants/ROUTES';
 
 // Login
 const Login = lazy(() => import(/* webpackChunkName: "Login" */ '../../components/static/pages/login/Login'));

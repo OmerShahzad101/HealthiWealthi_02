@@ -10,7 +10,7 @@ const SearchCoach = () => {
         setCoachList(response.data.data.coaches);
       })
       .catch(() => {
-        alert("error");
+        console.log("error");
       });
   }, []);
 
@@ -155,7 +155,7 @@ const SearchCoach = () => {
                                 <img
                                   src="/assets/img/doctors/Ellie-Krieger.png"
                                   className="img-fluid"
-                                  alt="User Image"
+                                  alt="User"
                                 />
                               </Link>
                             </div>
@@ -198,7 +198,7 @@ const SearchCoach = () => {
                                 <ul className="clinic-gallery">
                                   <li>
                                     <a
-                                      href="assets/img/features/feature-01.png"
+                                      href="/assets/img/features/feature-01.png"
                                       data-fancybox="gallery"
                                     >
                                       <img
@@ -209,7 +209,7 @@ const SearchCoach = () => {
                                   </li>
                                   <li>
                                     <a
-                                      href="assets/img/features/feature-02.png"
+                                      href="/assets/img/features/feature-02.png"
                                       data-fancybox="gallery"
                                     >
                                       <img
