@@ -14,61 +14,16 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
 
 import { Tabs, Tab } from "react-bootstrap";
+import CoachCalendar from "../Calendar/CoachCalendar";
 
 const CoachProfileSetting = () => {
+  //////Education
   const [education, setEducation] = useState([
     { degree: "", college: "", year: "" },
   ]);
-
-  var name = 2;
   const addEducation = () => {
     setEducation([...education, { degree: "", college: "", year: "" }]);
     console.log("education", education);
-    //  $(this)
-    // .closest(".education-cont")
-    // .remove();
-    var educationcontent = {
-      /* <div class="row form-row education-cont">
-    <div class="col-12 col-md-10 col-lg-11">
-    <div class="row form-row">
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Degree</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>College/Institute</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Year of Completion</label>
-    <input type="text" class="form-control"
-    </div
-    </div
-    </div
-    </div
-    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-    </div>
- */
-    };
-
-    //   var input = document.createElement("INPUT");
-    // input.className = "form-control";
-    // input.type = "text";
-    //  input.value = "";
-    //   var input1 = document.createElement("INPUT");
-    //   input1.className = "form-control ";
-    //   input1.type = "text";
-    //   input1.value = "";
-    //    var input2 = document.createElement("INPUT");
-    //    input2.className = "form-control";
-    //    input2.type = "text";
-    //    input2.value = "";
-    // document.getElementById("education-info").append(input,input1,input2);
   };
   const handleChange = (index, key, value) => {
     let updatedKeyValue;
@@ -87,7 +42,6 @@ const CoachProfileSetting = () => {
       console.log("education is updated ", education);
     }
   };
-
   const removeEducation = (i) => {
     console.log("index ", i);
 
@@ -98,77 +52,82 @@ const CoachProfileSetting = () => {
       setEducation([...newArray]);
     }
   };
-  const addExperience = () => {
-    //  $(this)
-    // .closest(".education-cont")
-    // .remove();
-    var educationcontent = {
-      /* <div class="row form-row education-cont">
-    <div class="col-12 col-md-10 col-lg-11">
-    <div class="row form-row">
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Degree</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>College/Institute</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Year of Completion</label>
-    <input type="text" class="form-control"
-    </div
-    </div
-    </div
-    </div
-    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-    </div>
-   
- */
-    };
-    var x = document.createElement("INPUT");
-    document.getElementById("experience-info").append(x);
-  };
+  //////Education
+
+  /***awards ***/
+  const [awards, setAwards] = useState([{ award: "", year: "" }]);
   const addAward = () => {
-    //  $(this)
-    // .closest(".education-cont")
-    // .remove();
-    var educationcontent = {
-      /* <div class="row form-row education-cont">
-    <div class="col-12 col-md-10 col-lg-11">
-    <div class="row form-row">
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Degree</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>College/Institute</label>
-    <input type="text" class="form-control"/>
-    </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="form-group">
-    <label>Year of Completion</label>
-    <input type="text" class="form-control"
-    </div
-    </div
-    </div
-    </div
-    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-    </div>
- */
-    };
-    var x = document.createElement("INPUT");
-    document.getElementById("awards-info").append(x);
+    debugger;
+    setAwards([...awards, { award: "", year: "" }]);
+    console.log("Awards", awards);
   };
+  const handleAwardchange = (index, key, value) => {
+    let updatedKeyValue;
+    if (value) {
+      const keyValue = awards[index];
+      if (key === "award") {
+        updatedKeyValue = { ...keyValue, award: value };
+      } else if (key === "year") {
+        updatedKeyValue = { ...keyValue, year: value };
+      }
+      const updatedAwards = [...awards];
+      updatedAwards.splice(index, 1, updatedKeyValue);
+      setEducation([...updatedAwards]);
+      console.log("Awards is updated ", awards);
+    }
+  };
+  const removeAward = (i) => {
+    //console.log("index ", i);
+
+    if (i) {
+      const newArray = [...awards];
+      const updateAwards = newArray.splice(i, 1);
+      console.log("newArray  ", i, updateAwards);
+      setAwards([...newArray]);
+    }
+  };
+  /***awards ***/
+  /*****Experience*****/
+  const [experience, setExperience] = useState([
+    { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+  ]);
+
+  const addExperience = () => {
+    setExperience([
+      ...experience,
+      { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+    ]);
+    console.log("experience", experience);
+  };
+
+  const handleExperiencechange = (index, key, value) => {
+    let updatedKeyValue;
+    if (value) {
+      const keyValue = experience[index];
+      if (key === "hospitalName") {
+        updatedKeyValue = { ...keyValue, hospitalName: value };
+      } else if (key === "dateFrom") {
+        updatedKeyValue = { ...keyValue, dateFrom: value };
+      } else if (key === "dateTo") {
+        updatedKeyValue = { ...keyValue, dateTo: value };
+      } else if (key === "designation") {
+        updatedKeyValue = { ...keyValue, designation: value };
+      }
+      const updateExperience = [...experience];
+      updateExperience.splice(index, 1, updatedKeyValue);
+      setExperience([...updateExperience]);
+      console.log("experience is updated ", experience);
+    }
+  };
+  const removeExpirence = (i) => {
+    if (i) {
+      const newArray = [...experience];
+      const updateAwards = newArray.splice(i, 1);
+      console.log("newArray  ", i, updateAwards);
+      setExperience([...newArray]);
+    }
+  };
+
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -524,14 +483,6 @@ const CoachProfileSetting = () => {
                             ref={genderRef}
                             defaultValue={profileData?.gender}
                           >
-                            {/* {profileData?.gender === "" ? (
-                      <option selected disabled>
-                        Open this select menu
-                      </option>
-                    ) : (
-                      <option disabled>Open this select menu</option>
-                    )} */}
-
                             <option name="male" value="male">
                               Male
                             </option>
@@ -634,20 +585,20 @@ const CoachProfileSetting = () => {
 
                             <div className="col-1">
                               {i > 0 && (
-                                <button
-                                  className=""
+                                <a
+                                  className="btn btn-danger trash"
                                   onClick={() => removeEducation(i)}
                                 >
-                                  Remove
-                                </button>
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
                               )}
                             </div>
                           </div>
 
                           <div className="btn-box add-more">
-                         
                             {education.length - 1 === i && (
-                              <a href="javascript:void(0)"
+                              <a
+                                href="javascript:void(0)"
                                 className="add-experience"
                                 onClick={addEducation}
                               >
@@ -662,41 +613,98 @@ const CoachProfileSetting = () => {
                   </div>
                 </div>
                 {/*award*/}
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Awards</h4>
-                    <div class="awards-info" id="awards-info">
-                      <div class="row form-row awards-cont">
-                        <div class="col-12 col-md-5">
-                          <div class="form-group">
-                            <label>Awards</label>
-                            <input type="text" class="form-control" />
-                          </div>
-                        </div>
-                        <div class="col-12 col-md-5">
-                          <div class="form-group">
-                            <label>Year</label>
-                            <input type="text" class="form-control" />
+
+                {/***award** */}
+                {/**************************************************************************************** */}
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Awards</h4>
+                    <div className="awards-info" id="education-info">
+                      <div className="row form-row awards-cont">
+                        <div className="col-12 col-md-10 col-lg-11">
+                          <div className="row form-row">
+                            <div className="col-12 col-md-6 col-lg-6">
+                              <div className="form-group">
+                                <label>Award</label>
+                              </div>
+                            </div>
+                            <div className="col-12 col-md-6 col-lg-6">
+                              <div className="form-group">
+                                <label>Year</label>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="add-more">
-                      <a
-                        href="javascript:void(0);"
-                        class="add-award"
-                        onClick={addAward}
-                      >
-                        <i class="fa fa-plus-circle"></i> Add More
-                      </a>
-                    </div>
+                    {awards?.map((edu, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="row form-row">
+                            <div className="form-group col-11">
+                              <div className="row form-row">
+                                <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <input
+                                    name="award"
+                                    className="form-control"
+                                    value={edu.award}
+                                    onChange={(e) =>
+                                      handleAwardchange(
+                                        i,
+                                        "award",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <input
+                                    className="form-control"
+                                    name="year"
+                                    value={edu.year}
+                                    onChange={(e) =>
+                                      handleAwardchange(
+                                        i,
+                                        "year",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-1">
+                              {i > 0 && (
+                                <a
+                                  className="btn btn-danger trash"
+                                  onClick={() => removeAward(i)}
+                                >
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                          <div className="btn-box add-more">
+                            {awards.length - 1 === i && (
+                              <a
+                                href="javascript:void(0)"
+                                className="add-award"
+                                onClick={addAward}
+                              >
+                                <i class="fa fa-plus-circle"></i>
+                                Add more
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-                {/***award** */}
-
+                {/**************************************************************************************** */}
                 {/* <!-- /About Me --> */}
                 {/* Experience */}
-                <div class="card">
+                {/* <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Experience</h4>
                     <div class="experience-info" id="experience-info">
@@ -742,8 +750,110 @@ const CoachProfileSetting = () => {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* Experience */}
+                {/****************************************************************/}
+
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Experience</h4>
+                    {experience?.map((exp, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="row form-row">
+                            <div className="form-group col-11">
+                              <div className="row form-row">
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Hospital Name</label>
+                                  <input
+                                    name="hospitalName"
+                                    className="form-control"
+                                    value={exp.hospitalName}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "hospitalName",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>From </label>
+                                  <input
+                                    name="dateFrom"
+                                    className="form-control"
+                                    value={exp.dateFrom}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "dateFrom",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>To</label>
+                                  <input
+                                    name="dateTo"
+                                    className="form-control"
+                                    value={exp.dateTo}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "dateTo",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Designation</label>
+                                  <input
+                                    name="designation"
+                                    className="form-control"
+                                    value={exp.designation}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "designation",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-1">
+                              {i > 0 && (
+                                <a
+                                  className="btn btn-danger trash"
+                                  onClick={() => removeExpirence(i)}
+                                >
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                          <div className="btn-box add-more">
+                            {awards.length - 1 === i && (
+                              <a
+                                href="javascript:void(0)"
+                                className="add-award"
+                                onClick={addExperience}
+                              >
+                                <i class="fa fa-plus-circle"></i>
+                                Add more
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                {/*****************************************************************/}
                 {/* <!-- Contact Details --> */}
                 <div className="card contact-card">
                   <div className="card-body">
