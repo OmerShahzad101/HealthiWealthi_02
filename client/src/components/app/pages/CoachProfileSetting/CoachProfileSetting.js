@@ -521,29 +521,7 @@ const CoachProfileSetting = () => {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Education</h4>
-                    <div className="education-info" id="education-info">
-                      <div className="row form-row education-cont">
-                        <div className="col-12 col-md-10 col-lg-11">
-                          <div className="row form-row">
-                            <div className="col-12 col-md-6 col-lg-4">
-                              <div className="form-group">
-                                <label>Degree</label>
-                              </div>
-                            </div>
-                            <div className="col-12 col-md-6 col-lg-4">
-                              <div className="form-group">
-                                <label>College/Institute</label>
-                              </div>
-                            </div>
-                            <div className="col-12 col-md-6 col-lg-4">
-                              <div className="form-group">
-                                <label>Year of Completion</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                 
                     {education?.map((edu, i) => {
                       return (
                         <div key={i}>
@@ -551,6 +529,7 @@ const CoachProfileSetting = () => {
                             <div className="form-group col-11">
                               <div className="row form-row">
                                 <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Degree</label>
                                   <input
                                     name="degree"
                                     className="form-control"
@@ -561,6 +540,7 @@ const CoachProfileSetting = () => {
                                   />
                                 </div>
                                 <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>College/Institute</label>
                                   <input
                                     className="form-control"
                                     name="college"
@@ -571,6 +551,7 @@ const CoachProfileSetting = () => {
                                   />
                                 </div>
                                 <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Year of Completion</label>
                                   <input
                                     className="form-control"
                                     name="year"
@@ -612,31 +593,14 @@ const CoachProfileSetting = () => {
                     })}
                   </div>
                 </div>
-                {/*award*/}
+      
 
                 {/***award** */}
-                {/**************************************************************************************** */}
+                
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Awards</h4>
-                    <div className="awards-info" id="education-info">
-                      <div className="row form-row awards-cont">
-                        <div className="col-12 col-md-10 col-lg-11">
-                          <div className="row form-row">
-                            <div className="col-12 col-md-6 col-lg-6">
-                              <div className="form-group">
-                                <label>Award</label>
-                              </div>
-                            </div>
-                            <div className="col-12 col-md-6 col-lg-6">
-                              <div className="form-group">
-                                <label>Year</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  
                     {awards?.map((edu, i) => {
                       return (
                         <div key={i}>
@@ -644,6 +608,7 @@ const CoachProfileSetting = () => {
                             <div className="form-group col-11">
                               <div className="row form-row">
                                 <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <label>Award</label>
                                   <input
                                     name="award"
                                     className="form-control"
@@ -658,6 +623,7 @@ const CoachProfileSetting = () => {
                                   />
                                 </div>
                                 <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <label>Year</label>
                                   <input
                                     className="form-control"
                                     name="year"
@@ -701,59 +667,11 @@ const CoachProfileSetting = () => {
                     })}
                   </div>
                 </div>
-                {/**************************************************************************************** */}
-                {/* <!-- /About Me --> */}
-                {/* Experience */}
-                {/* <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Experience</h4>
-                    <div class="experience-info" id="experience-info">
-                      {" "}
-                      <div class="row form-row experience-cont">
-                        <div class="col-12 col-md-10 col-lg-11">
-                          <div class="row form-row">
-                            <div class="col-12 col-md-6 col-lg-4">
-                              <div class="form-group">
-                                <label>Hospital Name</label>
-                                <input type="text" class="form-control" />
-                              </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-4">
-                              <div class="form-group">
-                                <label>From</label>
-                                <input type="text" class="form-control" />
-                              </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-4">
-                              <div class="form-group">
-                                <label>To</label>
-                                <input type="text" class="form-control" />
-                              </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-4">
-                              <div class="form-group">
-                                <label>Designation</label>
-                                <input type="text" class="form-control" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="add-more">
-                      <a
-                        href="javascript:void(0);"
-                        class="add-experience"
-                        onClick={addExperience}
-                      >
-                        <i class="fa fa-plus-circle"></i> Add More
-                      </a>
-                    </div>
-                  </div>
-                </div> */}
-                {/* Experience */}
-                {/****************************************************************/}
 
+           
+
+                {/* Experience */}
+               
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Experience</h4>
@@ -853,7 +771,8 @@ const CoachProfileSetting = () => {
                     })}
                   </div>
                 </div>
-                {/*****************************************************************/}
+                {/* Experience */}
+              
                 {/* <!-- Contact Details --> */}
                 <div className="card contact-card">
                   <div className="card-body">
