@@ -13,7 +13,7 @@ const MyClient = () => {
         setMyclient(response?.data?.BookingData);
       })
       .catch((e) => {
-        alert("error", e);
+        console.log("error", e);
       });
   }, []);
   return (

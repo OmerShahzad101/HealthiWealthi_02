@@ -14,7 +14,7 @@ const ClientDashboard = (props) => {
         setMyAppoinment(response?.data?.BookingData);
       })
       .catch((e) => {
-        alert("error", e);
+        console.log("error", e);
       });
   }, []);
   return (
@@ -38,7 +38,7 @@ const ClientDashboard = (props) => {
                             <th>Appt Date</th>
                             <th>Booking Date</th>
                             <th>Amount</th>
-                            <th>Follow Up</th>
+                            {/* <th>Follow Up</th> */}
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -77,7 +77,7 @@ const ClientDashboard = (props) => {
                                   </td>
                                   <td>{item?.bookingDate}</td>
                                   <td>${item?.price}</td>
-                                  <td>16 Feb 2022</td>
+                                  {/* <td>16 Feb 2022</td> */}
                                   <td>
                                     <span className="badge badge-pill bg-success-light">
                                       Confirm
