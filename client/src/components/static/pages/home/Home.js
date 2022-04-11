@@ -14,7 +14,7 @@ export default function Home(props) {
         setCoachList(response.data.data.coaches);
       })
       .catch(() => {
-        alert("error");
+        console.log("error");
       });
   }, []);
 
@@ -92,12 +92,12 @@ export default function Home(props) {
             <div className="col-lg-8 doctor-slider slider">
               {coachList ? (<Slider {...settings}>
                 {coachList.map((e, idx) =>
-                <div className="profile-widget">
+                 e?.firstname && e?.lastname && <div key={`coach_${idx}`}className="profile-widget">
                   <div className="doc-img">
                     <Link to="/coach-profile">
                       <img
                         className="img-fluid"
-                        alt="User Image"
+                        alt="User"
                         src="assets/img/doctors/doctor-02.jpg"
                       />
                     </Link>
@@ -124,7 +124,7 @@ export default function Home(props) {
                       </span>
                     </div> */}
                     <ul className="available-info">
-                     {( e.country || e.city || e.address ) && 
+                     {( e.country || e.city ) && 
                      <li>
                         <i className="fas fa-map-marker-alt"></i>{e?.country + ", " + e?.city}
                       </li>
@@ -163,7 +163,7 @@ export default function Home(props) {
                     <Link to="/coach-profile">
                       <img
                         className="img-fluid"
-                        alt="User Image"
+                        alt="User"
                         src="assets/img/doctors/doctor-08.jpg"
                       />
                     </Link>

@@ -11,29 +11,135 @@ import { useSelector, useDispatch } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
-import { setInfoData } from "../../../../store/slices/user";
-import setAvatar from "../../../../store/slices/user";
+import { setInfoData, setAvatar } from "../../../../store/slices/user";
 
 import { Tabs, Tab } from "react-bootstrap";
 import CoachCalendar from "../Calendar/CoachCalendar";
 
 const CoachProfileSetting = () => {
+  //////Education
+  const [education, setEducation] = useState([
+    { degree: "", college: "", year: "" },
+  ]);
+  const addEducation = () => {
+    setEducation([...education, { degree: "", college: "", year: "" }]);
+    console.log("education", education);
+  };
+  const handleChange = (index, key, value) => {
+    let updatedKeyValue;
+    if (value) {
+      const keyValue = education[index]; // obj{}
+      if (key === "degree") {
+        updatedKeyValue = { ...keyValue, degree: value };
+      } else if (key === "college") {
+        updatedKeyValue = { ...keyValue, college: value };
+      } else if (key === "year") {
+        updatedKeyValue = { ...keyValue, year: value };
+      }
+      const updatedEducation = [...education];
+      updatedEducation.splice(index, 1, updatedKeyValue);
+      setEducation([...updatedEducation]);
+      console.log("education is updated ", education);
+    }
+  };
+  const removeEducation = (i) => {
+    console.log("index ", i);
+
+    if (i) {
+      const newArray = [...education];
+      const updatedEducation = newArray.splice(i, 1);
+      console.log("newArray  ", i, updatedEducation);
+      setEducation([...newArray]);
+    }
+  };
+  //////Education
+
+  /***awards ***/
+  const [awards, setAwards] = useState([{ award: "", year: "" }]);
+  const addAward = () => {
+    debugger;
+    setAwards([...awards, { award: "", year: "" }]);
+    console.log("Awards", awards);
+  };
+  const handleAwardchange = (index, key, value) => {
+    let updatedKeyValue;
+    if (value) {
+      const keyValue = awards[index];
+      if (key === "award") {
+        updatedKeyValue = { ...keyValue, award: value };
+      } else if (key === "year") {
+        updatedKeyValue = { ...keyValue, year: value };
+      }
+      const updatedAwards = [...awards];
+      updatedAwards.splice(index, 1, updatedKeyValue);
+      setEducation([...updatedAwards]);
+      console.log("Awards is updated ", awards);
+    }
+  };
+  const removeAward = (i) => {
+    //console.log("index ", i);
+
+    if (i) {
+      const newArray = [...awards];
+      const updateAwards = newArray.splice(i, 1);
+      console.log("newArray  ", i, updateAwards);
+      setAwards([...newArray]);
+    }
+  };
+  /***awards ***/
+  /*****Experience*****/
+  const [experience, setExperience] = useState([
+    { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+  ]);
+
+  const addExperience = () => {
+    setExperience([
+      ...experience,
+      { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+    ]);
+    console.log("experience", experience);
+  };
+
+  const handleExperiencechange = (index, key, value) => {
+    let updatedKeyValue;
+    if (value) {
+      const keyValue = experience[index];
+      if (key === "hospitalName") {
+        updatedKeyValue = { ...keyValue, hospitalName: value };
+      } else if (key === "dateFrom") {
+        updatedKeyValue = { ...keyValue, dateFrom: value };
+      } else if (key === "dateTo") {
+        updatedKeyValue = { ...keyValue, dateTo: value };
+      } else if (key === "designation") {
+        updatedKeyValue = { ...keyValue, designation: value };
+      }
+      const updateExperience = [...experience];
+      updateExperience.splice(index, 1, updatedKeyValue);
+      setExperience([...updateExperience]);
+      console.log("experience is updated ", experience);
+    }
+  };
+  const removeExpirence = (i) => {
+    if (i) {
+      const newArray = [...experience];
+      const updateAwards = newArray.splice(i, 1);
+      console.log("newArray  ", i, updateAwards);
+      setExperience([...newArray]);
+    }
+  };
+
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
-  const [key, setKey] = useState('user-info');
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const userid = useSelector((state) => state.auth.userid);
   const [profileData, setprofileData] = useState({});
-
   const specializationRef = useRef();
-
   const firstnameRef = useRef();
   const lastnameRef = useRef();
   const phoneRef = useRef();
   const genderRef = useRef();
-
   const aboutRef = useRef();
   const addressRef = useRef();
   const postalCodeRef = useRef();
@@ -41,6 +147,9 @@ const CoachProfileSetting = () => {
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
+  const degree = useRef();
+  const institute = useRef();
+  const yearOfCompletion = useRef();
 
   const checKImage = async (data) => {
     setTimeout(dispatch(setInfoData(data)), 9000);
@@ -89,8 +198,8 @@ const CoachProfileSetting = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-
-      dispatch(setAvatar(files[0].name));
+      console.log("avatar11111111111", files[0], "avatar", files[0].name);
+      // dispatch(setInfoData(files[0]?.name));
       setIsLoading(true);
       postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
         .then((response) => {
@@ -99,11 +208,12 @@ const CoachProfileSetting = () => {
             return;
           }
           console.log("in then");
+          console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
             // Update user data as well in the Redux store
+            //dispatch(setInfoData(response?.data?.avatar);
             checKImage(response.data.user);
-
             Toast.fire({
               icon: "success",
               title: response.data.message,
@@ -224,15 +334,13 @@ const CoachProfileSetting = () => {
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="card">
           <div className="card-body pt-0 user-tabs mb-4">
-      
-    <Tabs
-      id="controlled-tab-example"
-      activeKey={key}
-      onSelect={(k) => setKey(k)}
-      className="mb-3 nav-tabs-bottom nav-justified"
-    >
+            <Tabs
+              defaultActiveKey="user-info"
+              id="uncontrolled-tab-example"
+              className="nav-tabs-bottom nav-justified"
+            >
               <Tab eventKey="user-info" title="Basic">
-                {/* <!-- Basic Information --> */}
+                
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Basic Information</h4>
@@ -246,7 +354,7 @@ const CoachProfileSetting = () => {
                                 alt="user img"
                               />
                             )}
-                            {/* <img className="profilePic" src={imagePath} alt="user img" /> */}
+                           
                           </div>
 
                           <label className="pImage">
@@ -259,32 +367,7 @@ const CoachProfileSetting = () => {
                             />
                           </label>
                         </div>
-                        {/* <div className="form-group mb-4">
-                  <div className="change-avatar">
-                    <div className="profile-img">
-                      <img
-                        src="/assets/img/doctors/doctor-thumb-02.jpg"
-                        alt="User Image"
-                      />
-                   
-                    </div>
-                 
-                    <div className="upload-img">
-                      <div className="change-photo-btn">
-                        <span>
-                          <i className="fa fa-upload"></i> Upload Photo
-                        </span>
-                        <input type="file" className="upload" />
-                      </div>
-                      <small className="form-text text-muted">
-                        Allowed JPG, GIF or PNG. Max size of 2MB
-                      </small>
-                    </div>
-                    <button className="change-account" onClick={upgradePackage}>
-                      Upgrade Account
-                    </button>
-                  </div>
-                </div> */}
+                       
                       </div>
                       <div className="col-md-6">
                         <div className="form-floating mb-4">
@@ -375,14 +458,6 @@ const CoachProfileSetting = () => {
                             ref={genderRef}
                             defaultValue={profileData?.gender}
                           >
-                            {/* {profileData?.gender === "" ? (
-                      <option selected disabled>
-                        Open this select menu
-                      </option>
-                    ) : (
-                      <option disabled>Open this select menu</option>
-                    )} */}
-
                             <option name="male" value="male">
                               Male
                             </option>
@@ -416,8 +491,263 @@ const CoachProfileSetting = () => {
                     </div>
                   </div>
                 </div>
-                {/* <!-- /About Me --> */}
+                {/**about me */}
 
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Education</h4>
+                 
+                    {education?.map((edu, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="row form-row">
+                            <div className="form-group col-11">
+                              <div className="row form-row">
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Degree</label>
+                                  <input
+                                    name="degree"
+                                    className="form-control"
+                                    value={edu.degree}
+                                    onChange={(e) =>
+                                      handleChange(i, "degree", e.target.value)
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>College/Institute</label>
+                                  <input
+                                    className="form-control"
+                                    name="college"
+                                    value={edu.college}
+                                    onChange={(e) =>
+                                      handleChange(i, "college", e.target.value)
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Year of Completion</label>
+                                  <input
+                                    className="form-control"
+                                    name="year"
+                                    value={edu.year}
+                                    onChange={(e) =>
+                                      handleChange(i, "year", e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col-1">
+                              {i > 0 && (
+                                <a
+                                  className="btn btn-danger trash"
+                                  onClick={() => removeEducation(i)}
+                                >
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="btn-box add-more">
+                            {education.length - 1 === i && (
+                              <a
+                                href="javascript:void(0)"
+                                className="add-experience"
+                                onClick={addEducation}
+                              >
+                                <i class="fa fa-plus-circle"></i>
+                                Add more
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+      
+
+                {/***award** */}
+                
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Awards</h4>
+                  
+                    {awards?.map((edu, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="row form-row">
+                            <div className="form-group col-11">
+                              <div className="row form-row">
+                                <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <label>Award</label>
+                                  <input
+                                    name="award"
+                                    className="form-control"
+                                    value={edu.award}
+                                    onChange={(e) =>
+                                      handleAwardchange(
+                                        i,
+                                        "award",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-6">
+                                  <label>Year</label>
+                                  <input
+                                    className="form-control"
+                                    name="year"
+                                    value={edu.year}
+                                    onChange={(e) =>
+                                      handleAwardchange(
+                                        i,
+                                        "year",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-1">
+                              {i > 0 && (
+                                <a
+                                  className="btn btn-danger trash"
+                                  onClick={() => removeAward(i)}
+                                >
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                          <div className="btn-box add-more">
+                            {awards.length - 1 === i && (
+                              <a
+                                href="javascript:void(0)"
+                                className="add-award"
+                                onClick={addAward}
+                              >
+                                <i class="fa fa-plus-circle"></i>
+                                Add more
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+           
+
+                {/* Experience */}
+               
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Experience</h4>
+                    {experience?.map((exp, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="row form-row">
+                            <div className="form-group col-11">
+                              <div className="row form-row">
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Hospital Name</label>
+                                  <input
+                                    name="hospitalName"
+                                    className="form-control"
+                                    value={exp.hospitalName}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "hospitalName",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>From </label>
+                                  <input
+                                    name="dateFrom"
+                                    className="form-control"
+                                    value={exp.dateFrom}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "dateFrom",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>To</label>
+                                  <input
+                                    name="dateTo"
+                                    className="form-control"
+                                    value={exp.dateTo}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "dateTo",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="form-group col-12 col-md-6 col-lg-4">
+                                  <label>Designation</label>
+                                  <input
+                                    name="designation"
+                                    className="form-control"
+                                    value={exp.designation}
+                                    onChange={(e) =>
+                                      handleExperiencechange(
+                                        i,
+                                        "designation",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-1">
+                              {i > 0 && (
+                                <a
+                                  className="btn btn-danger trash"
+                                  onClick={() => removeExpirence(i)}
+                                >
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                          <div className="btn-box add-more">
+                            {experience.length - 1 === i && (
+                              <a
+                                href="javascript:void(0)"
+                                className="add-award"
+                                onClick={addExperience}
+                              >
+                                <i class="fa fa-plus-circle"></i>
+                                Add more
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                {/* Experience */}
+              
                 {/* <!-- Contact Details --> */}
                 <div className="card contact-card">
                   <div className="card-body">
@@ -571,14 +901,11 @@ const CoachProfileSetting = () => {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
-                    <div className="row form-row">
-                      {/* <CoachCalendar calendar={key} /> */}
-                    </div>
+                    <div className="row form-row"></div>
                   </div>
                 </div>
               </Tab>
             </Tabs>
-
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import storage from 'redux-persist/lib/storage';
 import store from '../../store';
 import { logoutUser } from '../../store/actionCreators';
-import { LOGIN, ROOT } from '../../router/constants/ROUTES';
+import {  ROOT } from '../../router/constants/ROUTES';
 import history from '../../router/utils/history';
 
 export default function logout() {

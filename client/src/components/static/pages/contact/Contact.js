@@ -1,12 +1,11 @@
-import { exportDefaultSpecifier } from "@babel/types";
-import validate from "../../../../utils/form-validation/authFormValidation";
-import { postHttpRequest } from "../../../../axios";
+import { useState, useRef } from "react";
 import Toast from "../../../common/toast/Toast";
-import React, { useState, useRef } from "react";
+import { postHttpRequest } from "../../../../axios";
+import validate from "../../../../utils/form-validation/authFormValidation";
 
 const Contact = () => {
   const [validationErrors, setValidationErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaing, setIsLoading] = useState(false);
   const nameRef = useRef();
   const emailRef = useRef();
   const subjectRef = useRef();

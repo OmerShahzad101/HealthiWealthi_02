@@ -1,11 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
-const CoachProfile = () => {
-  const id = useSelector((state) => state.auth.userid);
+const CoachProfile = (props) => {
+  const location = useLocation();
+  const { id } = location.state;
+  console.log("location", id, location);
+  // const id = useSelector((state) => state.auth.userid);
   const [coachProfileData, setCoachProfileData] = useState([]);
 
   useEffect(async () => {
@@ -21,8 +24,8 @@ const CoachProfile = () => {
     }
   }, []);
   return (
-    <>
-      <div className="col-md-7 col-lg-8 col-xl-9">
+    <div className="content">
+      <div className="container">
         <div className="card">
           <div className="card-body">
             <div className="doctor-widget">
@@ -64,7 +67,7 @@ const CoachProfile = () => {
                     <ul className="clinic-gallery">
                       <li>
                         <a
-                          href="assets/img/features/feature-01.jpg"
+                          href="/assets/img/features/feature-01.jpg"
                           data-fancybox="gallery"
                         >
                           <img
@@ -1010,7 +1013,7 @@ const CoachProfile = () => {
         </div>
         {/* <!-- /Doctor Details Tab --> */}
       </div>
-    </>
+    </div>
   );
 };
 
