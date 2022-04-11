@@ -211,7 +211,11 @@ const ClientProfileSetting = () => {
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
-                    <select className="form-select" ref={genderRef}  defaultValue={profileData?.gender}>
+                    <select
+                      className="form-select"
+                      ref={genderRef}
+                      defaultValue={profileData?.gender}
+                    >
                       <option value="" selected disabled>
                         Open this select menu
                       </option>
@@ -227,7 +231,11 @@ const ClientProfileSetting = () => {
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
-                    <select className="form-select" ref={bloodgroupRef} defaultValue={profileData?.bloodgroup}> 
+                    <select
+                      className="form-select"
+                      ref={bloodgroupRef}
+                      defaultValue={profileData?.bloodgroup}
+                    >
                       <option value="" disabled>
                         Open this select menu
                       </option>
