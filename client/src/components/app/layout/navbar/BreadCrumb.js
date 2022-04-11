@@ -4,7 +4,6 @@ const BreadCrumb =  (props)  => {
   const location = useLocation();
   const { pathname } = location;
   const  TITLE_NAME = breadCrumb(pathname)
-
   return (
     <div className="breadcrumb-bar">
       <div className="container-fluid">
