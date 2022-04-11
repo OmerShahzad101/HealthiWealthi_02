@@ -340,7 +340,7 @@ const CoachProfileSetting = () => {
               className="nav-tabs-bottom nav-justified"
             >
               <Tab eventKey="user-info" title="Basic">
-                {/* <!-- Basic Information --> */}
+                
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Basic Information</h4>
@@ -354,7 +354,7 @@ const CoachProfileSetting = () => {
                                 alt="user img"
                               />
                             )}
-                            {/* <img className="profilePic" src={imagePath} alt="user img" /> */}
+                           
                           </div>
 
                           <label className="pImage">
@@ -367,32 +367,7 @@ const CoachProfileSetting = () => {
                             />
                           </label>
                         </div>
-                        {/* <div className="form-group mb-4">
-                  <div className="change-avatar">
-                    <div className="profile-img">
-                      <img
-                        src="/assets/img/doctors/doctor-thumb-02.jpg"
-                        alt="User Image"
-                      />
-                   
-                    </div>
-                 
-                    <div className="upload-img">
-                      <div className="change-photo-btn">
-                        <span>
-                          <i className="fa fa-upload"></i> Upload Photo
-                        </span>
-                        <input type="file" className="upload" />
-                      </div>
-                      <small className="form-text text-muted">
-                        Allowed JPG, GIF or PNG. Max size of 2MB
-                      </small>
-                    </div>
-                    <button className="change-account" onClick={upgradePackage}>
-                      Upgrade Account
-                    </button>
-                  </div>
-                </div> */}
+                       
                       </div>
                       <div className="col-md-6">
                         <div className="form-floating mb-4">
