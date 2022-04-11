@@ -1,11 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
-const CoachProfile = () => {
-  const id = useSelector((state) => state.auth.userid);
+const CoachProfile = (props) => {
+  const location = useLocation();
+  const { id } = location.state;
+  console.log("location", id, location);
+  // const id = useSelector((state) => state.auth.userid);
   const [coachProfileData, setCoachProfileData] = useState([]);
 
   useEffect(async () => {
