@@ -72,7 +72,7 @@ const CoachProfileSetting = () => {
       }
       const updatedAwards = [...awards];
       updatedAwards.splice(index, 1, updatedKeyValue);
-      setEducation([...updatedAwards]);
+      setAwards([...updatedAwards]);
       console.log("Awards is updated ", awards);
     }
   };
