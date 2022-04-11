@@ -17,18 +17,21 @@ import { Tabs, Tab } from "react-bootstrap";
 import CoachCalendar from "../Calendar/CoachCalendar";
 
 const CoachProfileSetting = () => {
-  //////Education
-  const [education, setEducation] = useState([
-    { degree: "", college: "", year: "" },
+  /** Education**/
+  const [qualifications, setqualifications] = useState([
+    { degree: " ", college: " ", year: " " },
   ]);
-  const addEducation = () => {
-    setEducation([...education, { degree: "", college: "", year: "" }]);
-    console.log("education", education);
+  const addqualifications = () => {
+    setqualifications([
+      ...qualifications,
+      { degree: "", college: "", year: "" },
+    ]);
+    console.log("qualifications", qualifications);
   };
   const handleChange = (index, key, value) => {
     let updatedKeyValue;
-    if (value) {
-      const keyValue = education[index]; // obj{}
+    
+      const keyValue = qualifications[index]; // obj{}
       if (key === "degree") {
         updatedKeyValue = { ...keyValue, degree: value };
       } else if (key === "college") {
@@ -36,34 +39,34 @@ const CoachProfileSetting = () => {
       } else if (key === "year") {
         updatedKeyValue = { ...keyValue, year: value };
       }
-      const updatedEducation = [...education];
+      const updatedEducation = [...qualifications];
       updatedEducation.splice(index, 1, updatedKeyValue);
-      setEducation([...updatedEducation]);
-      console.log("education is updated ", education);
-    }
+      setqualifications([...updatedEducation]);
+      console.log("qualifications is updated ", qualifications);
+    
   };
   const removeEducation = (i) => {
     console.log("index ", i);
 
     if (i) {
-      const newArray = [...education];
+      const newArray = [...qualifications];
       const updatedEducation = newArray.splice(i, 1);
       console.log("newArray  ", i, updatedEducation);
-      setEducation([...newArray]);
+      setqualifications([...newArray]);
     }
   };
-  //////Education
-
+  /** Education **/
   /***awards ***/
   const [awards, setAwards] = useState([{ award: "", year: "" }]);
+
   const addAward = () => {
-    debugger;
     setAwards([...awards, { award: "", year: "" }]);
     console.log("Awards", awards);
   };
   const handleAwardchange = (index, key, value) => {
+  
     let updatedKeyValue;
-    if (value) {
+  
       const keyValue = awards[index];
       if (key === "award") {
         updatedKeyValue = { ...keyValue, award: value };
@@ -74,19 +77,18 @@ const CoachProfileSetting = () => {
       updatedAwards.splice(index, 1, updatedKeyValue);
       setAwards([...updatedAwards]);
       console.log("Awards is updated ", awards);
-    }
+  
   };
   const removeAward = (i) => {
     //console.log("index ", i);
-
     if (i) {
       const newArray = [...awards];
       const updateAwards = newArray.splice(i, 1);
-      console.log("newArray  ", i, updateAwards);
+      console.log("newArray", i, updateAwards);
       setAwards([...newArray]);
     }
   };
-  /***awards ***/
+  /***awards***/
   /*****Experience*****/
   const [experience, setExperience] = useState([
     { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
@@ -102,7 +104,7 @@ const CoachProfileSetting = () => {
 
   const handleExperiencechange = (index, key, value) => {
     let updatedKeyValue;
-    if (value) {
+    
       const keyValue = experience[index];
       if (key === "hospitalName") {
         updatedKeyValue = { ...keyValue, hospitalName: value };
@@ -117,13 +119,13 @@ const CoachProfileSetting = () => {
       updateExperience.splice(index, 1, updatedKeyValue);
       setExperience([...updateExperience]);
       console.log("experience is updated ", experience);
-    }
+    
   };
   const removeExpirence = (i) => {
     if (i) {
       const newArray = [...experience];
-      const updateAwards = newArray.splice(i, 1);
-      console.log("newArray  ", i, updateAwards);
+      const updateAwards = newArray;
+      console.log("newArray", i, updateAwards);
       setExperience([...newArray]);
     }
   };
@@ -150,12 +152,9 @@ const CoachProfileSetting = () => {
   const degree = useRef();
   const institute = useRef();
   const yearOfCompletion = useRef();
-
   const checKImage = async (data) => {
     setTimeout(dispatch(setInfoData(data)), 9000);
-
     const exist = await imageExist(data.avatar);
-
     if (exist) {
       dispatch(setInfoData(data));
       return true;
@@ -168,7 +167,7 @@ const CoachProfileSetting = () => {
     const files = e.target.files;
     if (files.length > 0) {
       let _objFiles = files[0];
-      console.log(_objFiles);
+      // console.log(_objFiles);
 
       if (_objFiles.size > 1000000) {
         Toast.fire({
@@ -198,8 +197,6 @@ const CoachProfileSetting = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-      console.log("avatar11111111111", files[0], "avatar", files[0].name);
-      // dispatch(setInfoData(files[0]?.name));
       setIsLoading(true);
       postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
         .then((response) => {
@@ -211,8 +208,7 @@ const CoachProfileSetting = () => {
           console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
-            // Update user data as well in the Redux store
-            //dispatch(setInfoData(response?.data?.avatar);
+
             checKImage(response.data.user);
             Toast.fire({
               icon: "success",
@@ -259,10 +255,12 @@ const CoachProfileSetting = () => {
       price,
       city,
       state,
+      awards,
+      experience,
       country,
       _id: userid,
+      qualifications,
     };
-
     const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
@@ -273,16 +271,15 @@ const CoachProfileSetting = () => {
     }
 
     setIsLoading(true);
+    console.log("payload", payload);
     putHttpRequest("/front/coach/edit", payload)
       .then((response) => {
         setIsLoading(false);
-
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
           return;
         }
-
         if (response.data.success === true) {
           Toast.fire({
             icon: "success",
@@ -312,14 +309,24 @@ const CoachProfileSetting = () => {
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
+        console.log("response", response);
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
           return;
         }
-
         if (response.data.success === true) {
+          console.log("response", response);
           setprofileData(response?.data?.coach);
+          if (response?.data?.coach?.qualifications.length > 0) {
+            setqualifications(response?.data?.coach?.qualifications);
+          }
+          if (response?.data?.coach?.experience.length > 0) {
+            setExperience(response?.data?.coach?.experience);
+          }
+          if (response?.data?.coach?.awards.length > 0) {
+            setAwards(response?.data?.coach?.awards);
+          }
         } else {
           console.log(response.data.message);
         }
@@ -328,7 +335,6 @@ const CoachProfileSetting = () => {
         console.log("Something went wrong...");
       });
   }, []);
-
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -340,7 +346,6 @@ const CoachProfileSetting = () => {
               className="nav-tabs-bottom nav-justified"
             >
               <Tab eventKey="user-info" title="Basic">
-                
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Basic Information</h4>
@@ -354,7 +359,6 @@ const CoachProfileSetting = () => {
                                 alt="user img"
                               />
                             )}
-                           
                           </div>
 
                           <label className="pImage">
@@ -367,7 +371,6 @@ const CoachProfileSetting = () => {
                             />
                           </label>
                         </div>
-                       
                       </div>
                       <div className="col-md-6">
                         <div className="form-floating mb-4">
@@ -496,49 +499,58 @@ const CoachProfileSetting = () => {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Education</h4>
-                 
-                    {education?.map((edu, i) => {
+
+                    {qualifications?.map((edu, i) => {
                       return (
                         <div key={i}>
                           <div className="row form-row">
-                            <div className="form-group col-11">
-                              <div className="row form-row">
-                                <div className="form-group col-12 col-md-6 col-lg-4">
-                                  <label>Degree</label>
-                                  <input
-                                    name="degree"
-                                    className="form-control"
-                                    value={edu.degree}
-                                    onChange={(e) =>
-                                      handleChange(i, "degree", e.target.value)
-                                    }
-                                  />
-                                </div>
-                                <div className="form-group col-12 col-md-6 col-lg-4">
-                                  <label>College/Institute</label>
-                                  <input
-                                    className="form-control"
-                                    name="college"
-                                    value={edu.college}
-                                    onChange={(e) =>
-                                      handleChange(i, "college", e.target.value)
-                                    }
-                                  />
-                                </div>
-                                <div className="form-group col-12 col-md-6 col-lg-4">
-                                  <label>Year of Completion</label>
-                                  <input
-                                    className="form-control"
-                                    name="year"
-                                    value={edu.year}
-                                    onChange={(e) =>
-                                      handleChange(i, "year", e.target.value)
-                                    }
-                                  />
+                            {
+                              <div className="form-group col-11">
+                                <div className="row form-row">
+                                  <div className="form-group col-12 col-md-6 col-lg-4">
+                                    <label>Degree</label>
+                                    <input
+                                      name="degree"
+                                      className="form-control"
+                                      value={edu.degree}
+                                      onChange={(e) =>
+                                        handleChange(
+                                          i,
+                                          "degree",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="form-group col-12 col-md-6 col-lg-4">
+                                    <label>College/Institute</label>
+                                    <input
+                                      className="form-control"
+                                      name="college"
+                                      value={edu.college}
+                                      onChange={(e) =>
+                                        handleChange(
+                                          i,
+                                          "college",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="form-group col-12 col-md-6 col-lg-4">
+                                    <label>Year of Completion</label>
+                                    <input
+                                      className="form-control"
+                                      name="year"
+                                      value={edu.year}
+                                      onChange={(e) =>
+                                        handleChange(i, "year", e.target.value)
+                                      }
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-
+                            }
                             <div className="col-1">
                               {i > 0 && (
                                 <a
@@ -550,13 +562,12 @@ const CoachProfileSetting = () => {
                               )}
                             </div>
                           </div>
-
                           <div className="btn-box add-more">
-                            {education.length - 1 === i && (
+                            {qualifications.length - 1 === i && (
                               <a
                                 href="javascript:void(0)"
                                 className="add-experience"
-                                onClick={addEducation}
+                                onClick={addqualifications}
                               >
                                 <i class="fa fa-plus-circle"></i>
                                 Add more
@@ -568,14 +579,13 @@ const CoachProfileSetting = () => {
                     })}
                   </div>
                 </div>
-      
 
                 {/***award** */}
-                
+
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Awards</h4>
-                  
+
                     {awards?.map((edu, i) => {
                       return (
                         <div key={i}>
@@ -643,10 +653,8 @@ const CoachProfileSetting = () => {
                   </div>
                 </div>
 
-           
-
                 {/* Experience */}
-               
+
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Experience</h4>
@@ -747,7 +755,7 @@ const CoachProfileSetting = () => {
                   </div>
                 </div>
                 {/* Experience */}
-              
+
                 {/* <!-- Contact Details --> */}
                 <div className="card contact-card">
                   <div className="card-body">

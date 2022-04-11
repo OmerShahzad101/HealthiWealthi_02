@@ -7,13 +7,10 @@ import { getHttpRequest } from "../../../../axios";
 const CoachProfile = (props) => {
   const location = useLocation();
   const { id } = location.state;
-  console.log("location", id, location);
-  // const id = useSelector((state) => state.auth.userid);
   const [coachProfileData, setCoachProfileData] = useState([]);
-
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    console.log("RESPONSE", res);
+
     if (res) {
       setCoachProfileData(res?.data?.coach);
       Toast.fire({
@@ -23,6 +20,7 @@ const CoachProfile = (props) => {
       return;
     }
   }, []);
+  console.log("saois", coachProfileData?.qualification);
   return (
     <div className="content">
       <div className="container">
@@ -48,16 +46,6 @@ const CoachProfile = (props) => {
                     />
                     {coachProfileData.specialization}
                   </p>
-                  {/* <div className="rating">
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star filled"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="d-inline-block average-rating">
-                        (35)
-                      </span>
-                    </div> */}
                   <div className="clinic-details">
                     <p className="doc-location">
                       <i className="fas fa-map-marker-alt"></i>
@@ -232,38 +220,28 @@ const CoachProfile = (props) => {
                     {/* <!-- Education Details --> */}
                     <div className="widget education-widget">
                       <h4 className="widget-title">Education</h4>
-                      <div className="experience-box">
-                        <ul className="experience-list">
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <a href="#/" className="name">
-                                  American Dental Medical University
-                                </a>
-                                <div>BDS</div>
-                                <span className="time">1998 - 2003</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <a href="#/" className="name">
-                                  American Dental Medical University
-                                </a>
-                                <div>MDS</div>
-                                <span className="time">2003 - 2005</span>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
+                      {coachProfileData?.qualifications?.map((edu,i) => {
+                        return (
+                          <div className="experience-box">
+                            <ul className="experience-list">
+                              <li>
+                                <div className="experience-user">
+                                  <div className="before-circle"></div>
+                                </div>
+                                <div className="experience-content">
+                                  <div className="timeline-content">
+                                    <a className="name">
+                                      {edu.degree.toUpperCase()}
+                                    </a>
+                                    <div>{edu.college}</div>
+                                    <span className="time">{edu.year}</span>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        );
+                      })}
                     </div>
                     {/* <!-- /Education Details --> */}
 
@@ -272,119 +250,53 @@ const CoachProfile = (props) => {
                       <h4 className="widget-title">Work & Experience</h4>
                       <div className="experience-box">
                         <ul className="experience-list">
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <a href="#/" className="name">
-                                  Glowing Smiles Family Dental Clinic
-                                </a>
-                                <span className="time">
-                                  2010 - Present (5 years)
-                                </span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <a href="#/" className="name">
-                                  Comfort Care Dental Clinic
-                                </a>
-                                <span className="time">
-                                  2007 - 2010 (3 years)
-                                </span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <a href="#/" className="name">
-                                  Dream Smile Dental Practice
-                                </a>
-                                <span className="time">
-                                  2005 - 2007 (2 years)
-                                </span>
-                              </div>
-                            </div>
-                          </li>
+                          {coachProfileData?.experience?.map((element, i) => {
+                            return (
+                              <li>
+                                <div className="experience-user">
+                                  <div className="before-circle"></div>
+                                </div>
+                                <div className="experience-content">
+                                  <div className="timeline-content">
+                                    <a href="#/" className="name">
+                                      {element.hospitalName.toUpperCase()}
+                                    </a>
+                                    <span className="time">
+                                      {element.designation}
+                                    </span>
+                                  </div>
+                                </div>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </div>
                     {/* <!-- /Experience Details --> */}
-
                     {/* <!-- Awards Details --> */}
                     <div className="widget awards-widget">
                       <h4 className="widget-title">Awards</h4>
                       <div className="experience-box">
                         <ul className="experience-list">
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <p className="exp-year">July 2019</p>
-                                <h4 className="exp-title">
-                                  Humanitarian Award
-                                </h4>
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. Proin a ipsum tellus.
-                                  Interdum et malesuada fames ac ante ipsum
-                                  primis in faucibus.
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <p className="exp-year">March 2011</p>
-                                <h4 className="exp-title">
-                                  Certificate for International Volunteer
-                                  Service
-                                </h4>
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. Proin a ipsum tellus.
-                                  Interdum et malesuada fames ac ante ipsum
-                                  primis in faucibus.
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="experience-user">
-                              <div className="before-circle"></div>
-                            </div>
-                            <div className="experience-content">
-                              <div className="timeline-content">
-                                <p className="exp-year">May 2008</p>
-                                <h4 className="exp-title">
-                                  The Dental Professional of The Year Award
-                                </h4>
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. Proin a ipsum tellus.
-                                  Interdum et malesuada fames ac ante ipsum
-                                  primis in faucibus.
-                                </p>
-                              </div>
-                            </div>
-                          </li>
+                          {coachProfileData?.awards?.map((element, i) => {
+                            return (
+                              <li>
+                                <div className="experience-user">
+                                  <div className="before-circle"></div>
+                                </div>
+                                <div className="experience-content">
+                                  <div className="timeline-content">
+                                    <p className="exp-year">
+                                      {element.year.toUpperCase()}
+                                    </p>
+                                    <h4 className="exp-title">
+                                      {element.award}
+                                    </h4>
+                                  </div>
+                                </div>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </div>

@@ -3,7 +3,6 @@ import logout from "./../../../../utils/auth/logout";
 
 const CoachSideBar = () => {
   const imageUpload = () => {
-    console.log("ddjh<");
   };
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
