@@ -20,10 +20,7 @@ export default function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState("");
 
-  // Cancel company creation HTTP call in case component is unmounted due to route change
-  useEffect(() => {
-    return cancelOngoingHttpRequest;
-  }, []);
+
 
   function changePasswordHandler(event) {
     event.preventDefault();

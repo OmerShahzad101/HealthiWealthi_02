@@ -172,7 +172,7 @@ const Login = (props) => {
         console.log("res ", res);
         if (res) {
           const userData = {
-            role: response?.data?.data?.type,
+            role: response?.data?.coach?.type,
             name: response?.data?.data?.name,
             email: response?.data?.data?.email,
             _id: response?.data?.data?._id,
