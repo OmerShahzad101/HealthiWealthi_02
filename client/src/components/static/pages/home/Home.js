@@ -92,7 +92,7 @@ export default function Home(props) {
             <div className="col-lg-8 doctor-slider slider">
               {coachList ? (<Slider {...settings}>
                 {coachList.map((e, idx) =>
-                <div className="profile-widget">
+                 e?.firstname && e?.lastname && <div key={`coach_${idx}`}className="profile-widget">
                   <div className="doc-img">
                     <Link to="/coach-profile">
                       <img
@@ -124,7 +124,7 @@ export default function Home(props) {
                       </span>
                     </div> */}
                     <ul className="available-info">
-                     {( e.country || e.city || e.address ) && 
+                     {( e.country || e.city ) && 
                      <li>
                         <i className="fas fa-map-marker-alt"></i>{e?.country + ", " + e?.city}
                       </li>
