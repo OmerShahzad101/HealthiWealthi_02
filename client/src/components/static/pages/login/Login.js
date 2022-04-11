@@ -41,6 +41,8 @@ const Login = (props) => {
       tokenId: response.tokenId,
     }).then((response) => {
       console.log("google login success", response);
+      dispatch(setAccessToken(response.data.accessToken));
+
     });
   };
 
