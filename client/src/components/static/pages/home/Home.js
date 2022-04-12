@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import { getHttpRequest } from "../../../../axios";
+import { useSelector } from "react-redux";
 
 export default function Home(props) {
 
   const [coachList, setCoachList] = useState([]);
-
+  const role = useSelector(state=>state.auth.userRole);
   useEffect(() => {
     getHttpRequest("/front/coach/list")
       .then((response) => {
@@ -17,8 +18,6 @@ export default function Home(props) {
         console.log("error");
       });
   }, []);
-
-  console.log("data", coachList);
 
   const settings = {
     dots: false,
@@ -148,11 +147,17 @@ export default function Home(props) {
                           View Profile
                         </Link>
                       </div>
-                      <div className="col-6">
-                        <Link to="app/book-appointment" className="btn book-btn">
+                      {role === 3 ? <div className="col-6">
+                        <button disabled className="disable-book-btn">
+                          Book Now
+                        </button>
+                       </div>:
+                       <div className="col-6">
+                       <Link to="app/book-appointment" className="btn book-btn">
                           Book Now
                         </Link>
-                      </div>
+                        </div>
+                        }
                     </div>
                   </div>
                 </div>

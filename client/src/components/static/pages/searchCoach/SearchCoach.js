@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
+import { useSelector } from "react-redux";
 const SearchCoach = () => {
- 
+  const role = useSelector(state=>state.auth.userRole);
   const SearchFilter = useRef("");
   const maleCoach = useRef("");
   const femaleCoach = useRef("");
@@ -291,7 +292,7 @@ const SearchCoach = () => {
                                         <i className="fas fa-map-marker-alt"></i>{" "}
                                         {item.country + ", " + item.city}
                                       </p>
-                                      <ul className="clinic-gallery">
+                                      {/* <ul className="clinic-gallery">
                                         <li>
                                           <a
                                             href="/assets/img/features/feature-01.png"
@@ -336,13 +337,13 @@ const SearchCoach = () => {
                                             />
                                           </a>
                                         </li>
-                                      </ul>
+                                      </ul> */}
                                     </div>
                                   )}
-                                  <div className="clinic-services">
+                                  {/* <div className="clinic-services">
                                     <span>Diet Plan</span>
                                     <span>Fitness</span>
-                                  </div>
+                                  </div> */}
                                 </div>
                               </div>
                               <div className="doc-info-right">
@@ -378,6 +379,21 @@ const SearchCoach = () => {
                                   >
                                     View Profile
                                   </Link>
+                                  </div>
+
+                                 {role === 3 ? <div className="clinic-disable">
+                                  <button
+                                  disabled
+                                    className="clinic-disable"
+                                    to={{
+                                      pathname: "/app/book-appointment",
+                                      state: { id: item._id },
+                                    }}
+                                  >
+                                    Book Appointment
+                                  </button>
+                                </div>:
+                                <div className="clinic-booking">
                                   <Link
                                     className="apt-btn"
                                     to={{
@@ -387,7 +403,7 @@ const SearchCoach = () => {
                                   >
                                     Book Appointment
                                   </Link>
-                                </div>
+                                </div>}
                               </div>
                             </div>
                           </div>
