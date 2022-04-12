@@ -12,10 +12,7 @@ import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
-
 import { Tabs, Tab } from "react-bootstrap";
-import CoachCalendar from "../Calendar/CoachCalendar";
-
 const CoachProfileSetting = () => {
   /** Education**/
   const [qualifications, setqualifications] = useState([
@@ -498,7 +495,7 @@ const CoachProfileSetting = () => {
 
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Education</h4>
+                    <h4 className="card-title">Qualification</h4>
 
                     {qualifications?.map((edu, i) => {
                       return (
@@ -665,7 +662,7 @@ const CoachProfileSetting = () => {
                             <div className="form-group col-11">
                               <div className="row form-row">
                                 <div className="form-group col-12 col-md-6 col-lg-4">
-                                  <label>Hospital Name</label>
+                                  <label>Institute Name</label>
                                   <input
                                     name="hospitalName"
                                     className="form-control"
