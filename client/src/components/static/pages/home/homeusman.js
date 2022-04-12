@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import { getHttpRequest } from "../../../../axios";
-import { useSelector } from "react-redux";
 
 export default function Home(props) {
 
   const [coachList, setCoachList] = useState([]);
-  const role = useSelector(state=>state.auth.userRole);
+
   useEffect(() => {
     getHttpRequest("/front/coach/list")
       .then((response) => {
@@ -19,11 +18,14 @@ export default function Home(props) {
       });
   }, []);
 
+  console.log("data", coachList);
+
   const settings = {
     dots: false,
     autoplay: false,
     infinite: true,
     variableWidth: true,
+    speed: 500,
   };
   return (
     <>
@@ -89,9 +91,13 @@ export default function Home(props) {
               </div>
             </div>
             <div className="col-lg-8 doctor-slider slider">
-              {coachList ? (<Slider {...settings}>
+              {coachList ? (<>
+              
+             {coachList.length > 3 ?
+             <Slider {...settings}>
                 {coachList.map((e, idx) =>
-                 e?.firstname && e?.lastname && <div key={`coach_${idx}`}className="profile-widget">
+                 e?.firstname && e?.lastname &&
+                 <div key={`coach_${idx}`}className="profile-widget">
                   <div className="doc-img">
                     <Link to="/coach-profile">
                       <img
@@ -109,9 +115,9 @@ export default function Home(props) {
                       <Link to="/coach-profile">{e?.firstname + " " + e?.lastname}</Link>
                       <i className="fas fa-check-circle verified"></i>
                     </h3>
-                    <p className="speciality">
-                      {e?.about}
-                    </p>
+                    {e?.specialization && <p className="speciality">
+                      {e?.specialization}
+                    </p>}
                     {/* <div className="rating">
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
@@ -147,17 +153,11 @@ export default function Home(props) {
                           View Profile
                         </Link>
                       </div>
-                      {role === 3 ? <div className="col-6">
-                        <button disabled className="disable-book-btn">
-                          Book Now
-                        </button>
-                       </div>:
-                       <div className="col-6">
-                       <Link to="app/book-appointment" className="btn book-btn">
+                      <div className="col-6">
+                        <Link to="app/book-appointment" className="btn book-btn">
                           Book Now
                         </Link>
-                        </div>
-                        }
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -227,7 +227,77 @@ export default function Home(props) {
                   </div>
                 </div> */}
 
-              </Slider>) : <div className="no_data">
+              </Slider> 
+              : 
+                coachList.map((e, idx) =>
+                 e?.firstname && e?.lastname &&
+                 <div key={`coach_${idx}`}className="profile-widget">
+                  <div className="doc-img">
+                    <Link to="/coach-profile">
+                      <img
+                        className="img-fluid"
+                        alt="User"
+                        src="assets/img/doctors/doctor-02.jpg"
+                      />
+                    </Link>
+                    <a href="#" className="fav-btn">
+                      <i className="far fa-bookmark"></i>
+                    </a>
+                  </div>
+                  <div className="pro-content">
+                    <h3 className="title">
+                      <Link to="/coach-profile">{e?.firstname + " " + e?.lastname}</Link>
+                      <i className="fas fa-check-circle verified"></i>
+                    </h3>
+                    {e?.specialization && <p className="speciality">
+                      {e?.specialization}
+                    </p>}
+                    {/* <div className="rating">
+                      <i className="fas fa-star filled"></i>
+                      <i className="fas fa-star filled"></i>
+                      <i className="fas fa-star filled"></i>
+                      <i className="fas fa-star filled"></i>
+                      <i className="fas fa-star"></i>
+                      <span className="d-inline-block average-rating">
+                        (35)
+                      </span>
+                    </div> */}
+                    <ul className="available-info">
+                     {( e.country || e.city ) && 
+                     <li>
+                        <i className="fas fa-map-marker-alt"></i>{e?.country + ", " + e?.city}
+                      </li>
+                      }
+                      {/* <li>
+                        <i className="far fa-clock"></i> Available on Fri, 22
+                        Mar
+                      </li> */}
+                      <li>
+                        <i className="far fa-money-bill-alt"></i>{e?.price}{" "}
+                        <i
+                          className="fas fa-info-circle"
+                          data-toggle="tooltip"
+                          title="Lorem Ipsum"
+                        ></i>
+                      </li>
+                    </ul>
+                    <div className="row row-sm">
+                      <div className="col-6">
+                        <Link to="/coach-profile" className="btn view-btn">
+                          View Profile
+                        </Link>
+                      </div>
+                      <div className="col-6">
+                        <Link to="app/book-appointment" className="btn book-btn">
+                          Book Now
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                )}
+              </>
+              ) : <div className="no_data">
                 <span>No Coaches found</span>
               </div>}
             </div>

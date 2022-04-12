@@ -7,7 +7,7 @@ const initialState = {
   userRoleId: null,
   permissions: [],
   accessToken: null,
-  acessPageDashboard: null,
+  // acessPageDashboard: null,
   Userabout: null,
   firstName: null,
   secondName: null,
@@ -40,9 +40,9 @@ export const authSlice = createSlice({
       state.specialization = specialization;
       state.profile = profile;
     },
-    setDashboardName(state, { name }) {
-      state.acessPageDashboard = name;
-    },
+    // setDashboardName(state, { name }) {
+    //   state.acessPageDashboard = name;
+    // },
     setUserPermissions(state, { payload: permissions }) {
       state.permissions = permissions;
     },
