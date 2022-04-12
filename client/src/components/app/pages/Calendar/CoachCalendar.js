@@ -21,35 +21,26 @@ const CoachCalendar = ({ calendarTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
-        if (!response) {
-          alert("Something went wrong with response...");
-          console.log("Something went wrong with response...");
-          return;
-        }
-        console.log("first response", response);
-        if (response.data.success === true) {
-          if (response.length > 0) {
-            let newSelections = [];
+        debugger;
+        if (!response) { alert("Something went wrong with response..."); return; }
 
-            if (response[0].selections) {
-              var response = JSON.parse(response[0].selections).map(function (
-                val,
-                key
-              ) {
-                var newobject = {};
-                newobject.start = moment(val.start).toDate();
-                newobject.end = moment(val.end).toDate();
-                newSelections.push(newobject);
-              });
-            }
-            console.log("newSelectionsaaaaaaaaaaaaaaaaaaaaaaa");
-            console.log(newSelections);
-            setSelections(newSelections);
-            setLoadcalender(true);
-          } else {
-            console.log("setLoading");
-            setLoadcalender(true);
+        if (response && response?.data?.success === true) {
+
+          let newSelections = [];
+          if (response?.data?.ScheduleData) {
+            var response = response?.data?.ScheduleData?.selections.map(function (
+              val,
+              key
+            ) {
+              var newobject = {};
+              newobject.start = moment(val.start).toDate();
+              newobject.end = moment(val.end).toDate();
+              newSelections.push(newobject);
+            });
           }
+          setSelections(newSelections);
+          setLoadcalender(true);
+          
         } else {
           console.log(response.data.message);
         }
@@ -97,99 +88,33 @@ const CoachCalendar = ({ calendarTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
+                        debugger;
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);
                           dates.push(moment(start).format("MM/DD/YYYY"));
                         });
 
-                        // let uniqueArray = dates.filter(function(item, pos) {
-                        //   return dates.indexOf(item) == pos;
-                        // });
-
-                        // console.log("dates", dates);
-                        // if(dates.length !== uniqueArray.length){
-                        //   selections.pop();
-                        //   alert("You can't select multiple slot in a day");
-
-                        //   window.location.reload();
-                        //   return false;
-                        // }
-
-                        console.log("aaaaaaaaaaaaaaa", selections);
-                        //   const user = JSON.parse(
-                        //     localStorage.getItem("accessToken")
-                        //   );
                         var formData = {
                           userId: userid,
                           selections: JSON.stringify(selections),
                         };
 
-                        console.log("formData", formData);
-
-                        var response = await getHttpRequest(
-                          `front/schedule/get/${userid}`
-                        );
-                        if (response.length == 1) {
-                          console.log("aaaaaaa", response[0].id);
-
-                          var result = await postHttpRequest(
-                            `front/schedule/set`,
-                            formData
-                          );
-                          if (result.status === 403) {
-                            console.log("status403");
-                            //   this.setState({ errors: result.message });
-                          } else if (result.status === 200) {
-                            Toast.fire({
-                              icon: "success",
-                              title: "Event registered successfully",
-                            });
-                            //   debugger;
-                            //   notify.show(
-                            //     "Event has been registered successfully!!",
-                            //     "success",
-                            //     2000
-                            //   );
-                            //   this.props.history.push({
-                            //     pathname: "/user/activity",
-                            //     state: {
-                            //       key: "value",
-                            //     },
-                            //   });
-                          } else if (result.status === 500) {
-                            console.log("status500");
-                            //   this.setState({ errors: result.message });
-                            //   return;
-                          }
-                        } else {
+                        var response = await getHttpRequest(`front/schedule/get/${userid}`);
+                        if(response){
                           var result = await postHttpRequest(
                             "front/schedule/set",
                             formData
                           );
-                          if (result.status === 403) {
-                            console.log("status403");
-                            //   this.setState({ errors: result.message });
-                          } else if (result.status === 200) {
+                          if (result.status === 200) {
                             Toast.fire({
                               icon: "success",
                               title: "Event registered successfully",
                             });
-                            //   notify.show(
-                            //     "Event has been registered successfully!!",
-                            //     "success",
-                            //     2000
-                            //   );
-                            //   this.props.history.push({
-                            //     pathname: "/user/activity",
-                            //     state: {
-                            //       key: "value",
-                            //     },
-                            //   });
+
                           } else if (result.status === 500) {
                             console.log("status500");
-                            //   this.setState({ errors: result.message });
-                            //   return;
+
                           }
                         }
                       }}
@@ -202,7 +127,7 @@ const CoachCalendar = ({ calendarTab }) => {
                         loadMoreEvents(calendarId, start, end);
                       }}
                       initialSelections={selections}
-                      height={400}
+                      height={600}
                       recurring={false}
                       availableDays={[
                         "monday",
