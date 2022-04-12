@@ -495,7 +495,7 @@ const CoachProfileSetting = () => {
 
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Education</h4>
+                    <h4 className="card-title">Qualification</h4>
 
                     {qualifications?.map((edu, i) => {
                       return (
@@ -662,7 +662,7 @@ const CoachProfileSetting = () => {
                             <div className="form-group col-11">
                               <div className="row form-row">
                                 <div className="form-group col-12 col-md-6 col-lg-4">
-                                  <label>Hospital Name</label>
+                                  <label>Institute Name</label>
                                   <input
                                     name="hospitalName"
                                     className="form-control"
