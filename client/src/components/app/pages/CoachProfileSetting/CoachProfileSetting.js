@@ -14,8 +14,10 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
 import { Tabs, Tab } from "react-bootstrap";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
+import CoachCalendar from "../Calendar/CoachCalendar";
 const CoachProfileSetting = () => {
-  /** Education**/
+  const [key, setKey] = useState('user-info');
+ 
   const [qualifications, setqualifications] = useState([
     { degree: " ", college: " ", year: " " },
   ]);
@@ -335,9 +337,11 @@ const CoachProfileSetting = () => {
         <div className="card">
           <div className="card-body pt-0 user-tabs mb-4">
             <Tabs
-              defaultActiveKey="user-info"
-              id="uncontrolled-tab-example"
+            
+              id="controlled-tab-example"
               className="nav-tabs-bottom nav-justified"
+              activeKey={key}
+      onSelect={(k) => setKey(k)}
             >
               <Tab eventKey="user-info" title="Basic">
                 <div className="card">
@@ -449,7 +453,7 @@ const CoachProfileSetting = () => {
                       </div>
                       <div className="col-md-6">
                         <div className="form-floating mb-4">
-                          {console.log(profileData?.gender)}
+                         
                           <select
                             className="form-select"
                             ref={genderRef}
@@ -903,7 +907,10 @@ const CoachProfileSetting = () => {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
-                    <div className="row form-row"></div>
+                    <div className="row form-row">
+                      <CoachCalendar calendarTab = {key}/>
+                      
+                    </div>
                   </div>
                 </div>
               </Tab>

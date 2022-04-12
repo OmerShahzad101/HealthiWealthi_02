@@ -2737,6 +2737,24 @@ html.menu-opened body {
   border-color: #a52069;
   color: #fff;
 }
+.disable-book-btn {
+  background-color: #bcbbbb;
+  border: 2px solid #bcbbbb;
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  display: block;
+  font-weight: 500;
+  padding: 6px;
+  width: 100px;
+  border-radius: 3px;
+}
+/* .disable-book-btn :hover,
+.disable-book-btn :focus {
+  background-color: #92888e;
+  border-color: #92888e;
+  color: #fff;
+} */
 .section-doctor .profile-widget {
   box-shadow: 2px 2px 13px rgba(0, 0, 0, 0.1);
   margin-bottom: 0;
@@ -3118,11 +3136,29 @@ html.menu-opened body {
   text-align: center;
   text-transform: uppercase;
   width: 100%;
+  margin-top: 10px;
 }
 .clinic-booking a.view-pro-btn:hover,
 .clinic-booking a.view-pro-btn:focus {
   background: #d32986;
   color: #fff;
+}
+.clinic-disable {
+  background-color: #bcbbbb;
+  border: 2px solid #bcbbbb;
+  border-radius: 4px;
+  color: #534e4e;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+padding-top: 2px;
+padding-bottom: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 10px;
+
 }
 .clinic-booking a.apt-btn {
   background-color: #d32986;
@@ -7053,6 +7089,7 @@ font-size: 16px;
   .clinic-booking a.apt-btn {
     width: 100%;
   }
+
   .chat-cont-left
     .chat-users-list
     a.media

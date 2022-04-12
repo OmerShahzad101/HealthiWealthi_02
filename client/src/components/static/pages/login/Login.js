@@ -29,7 +29,6 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const typeRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
