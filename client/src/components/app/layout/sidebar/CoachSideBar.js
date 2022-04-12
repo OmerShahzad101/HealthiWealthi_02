@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
-
+import { useSelector } from "react-redux";
 const CoachSideBar = () => {
+   const data = useSelector((state) => state.auth)
+   console.log("Data",data);
+
   const imageUpload = () => {
   };
   return (
@@ -17,10 +20,12 @@ const CoachSideBar = () => {
               />
             </a>
             <div className="profile-det-info">
-              <h3>Dr. Omer Shahzad</h3>
+              <h3>
+                {data.firstName} {data.secondName}
+              </h3>
 
               <div className="patient-details">
-                <h5 className="mb-0">Donec sollicitudin molestie malesuada.</h5>
+                <h5 className="mb-0">{data.specialization}</h5>
               </div>
             </div>
           </div>

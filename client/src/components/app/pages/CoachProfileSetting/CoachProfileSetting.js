@@ -12,10 +12,7 @@ import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
-
 import { Tabs, Tab } from "react-bootstrap";
-import CoachCalendar from "../Calendar/CoachCalendar";
-
 const CoachProfileSetting = () => {
   /** Education**/
   const [qualifications, setqualifications] = useState([
