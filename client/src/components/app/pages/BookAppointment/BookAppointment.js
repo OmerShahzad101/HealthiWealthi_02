@@ -1,6 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { getHttpRequest } from "../../../../axios";
 const BookAppointment = () => {
+  const location = useLocation();
+  const { id } = location.state;
+  const [coachProfileData, setCoachProfileData] = useState([]);
+  useEffect(async () => {
+    let res = await getHttpRequest(`/front/coach/get/${id}`);
+    console.log(res)
+    setCoachProfileData(res?.data?.coach);
+  }, []);
+
   return (
     <>
       {/* <!-- Page Content --> */}
@@ -17,7 +27,7 @@ const BookAppointment = () => {
               </Link>
               <div className="booking-info">
                 <h4>
-                  <Link to="/coach-profile">Dr. Darren Elder</Link>
+                  <Link to="/coach-profile">{coachProfileData.firstname}{" "}{coachProfileData.lastname}</Link>
                 </h4>
                 <div className="rating">
                   <i className="fas fa-star filled"></i>
@@ -28,7 +38,7 @@ const BookAppointment = () => {
                   <span className="d-inline-block average-rating">35</span>
                 </div>
                 <p className="text-muted mb-0">
-                  <i className="fas fa-map-marker-alt"></i> Newyork, USA
+                  <i className="fas fa-map-marker-alt"></i> {coachProfileData.country}{", "}{coachProfileData.city}
                 </p>
               </div>
             </div>

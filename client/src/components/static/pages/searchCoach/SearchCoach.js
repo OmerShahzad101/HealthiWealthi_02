@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 const SearchCoach = () => {
+ 
   const SearchFilter = useRef("");
   const maleCoach = useRef("");
   const femaleCoach = useRef("");
@@ -242,41 +243,39 @@ const SearchCoach = () => {
                 coachList.map((item, idx) => {
                   return (
                     <>
-                     {item.firstname && item.lastname &&
-                      <div key={`coach_${idx}`} className="card">
-                        <div className="card-body">
-                          <div className="doctor-widget">
-                            <div className="doc-info-left">
-                              <div className="doctor-img">
-                                <Link to="/coach-profile">
-                                  <img
-                                    src="/assets/img/doctors/Ellie-Krieger.png"
-                                    className="img-fluid"
-                                    alt="User"
-                                  />
-                                </Link>
-                              </div>
-                              <div className="doc-info-cont">
-                                <h4 className="doc-name">
+                      {item.firstname && item.lastname && (
+                        <div key={`coach_${idx}`} className="card">
+                          <div className="card-body">
+                            <div className="doctor-widget">
+                              <div className="doc-info-left">
+                                <div className="doctor-img">
                                   <Link to="/coach-profile">
-                                    {item.firstname + " " + item.lastname}
+                                    <img
+                                      src="/assets/img/doctors/Ellie-Krieger.png"
+                                      className="img-fluid"
+                                      alt="User"
+                                    />
                                   </Link>
-                                </h4>
-                                {/* //replaced by specialities */}
-                                {/* //replaced by specialities */}
-                                {/* //replaced by specialities */}
-                                {/* //replaced by specialities */}
-                                <p className="doc-speciality">{item.about}</p>
-                               
-                               {item.specialization && <h5 className="doc-department">
-                                  {/* <img
+                                </div>
+                                <div className="doc-info-cont">
+                                  <h4 className="doc-name">
+                                    <Link to="/coach-profile">
+                                      {item.firstname + " " + item.lastname}
+                                    </Link>
+                                  </h4>
+                                  <p className="doc-speciality">{item.about}</p>
+
+                                  {item.specialization && (
+                                    <h5 className="doc-department">
+                                      {/* <img
                                     src="assets/img/specialities/specialities-05.png"
                                     className="img-fluid"
                                     alt="Speciality"
                                   /> */}
-                                 {item.specialization}
-                                </h5>}
-                                {/* <div className="rating">
+                                      {item.specialization}
+                                    </h5>
+                                  )}
+                                  {/* <div className="rating">
                                   <i className="fas fa-star filled"></i>
                                   <i className="fas fa-star filled"></i>
                                   <i className="fas fa-star filled"></i>
@@ -286,108 +285,115 @@ const SearchCoach = () => {
                                     (17)
                                   </span>
                                 </div> */}
-                               {(item.country || item.city)  && <div className="clinic-details">
-                                  <p className="doc-location">
-                                    <i className="fas fa-map-marker-alt"></i>{" "}
-                                    {item.country + ", " + item.city}
-                                  </p>
-                                  <ul className="clinic-gallery">
-                                    <li>
-                                      <a
-                                        href="/assets/img/features/feature-01.png"
-                                        data-fancybox="gallery"
-                                      >
-                                        <img
-                                          src="assets/img/features/feature-01.png"
-                                          alt="Feature"
-                                        />
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a
-                                        href="/assets/img/features/feature-02.png"
-                                        data-fancybox="gallery"
-                                      >
-                                        <img
-                                          src="assets/img/features/feature-02.png"
-                                          alt="Feature"
-                                        />
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a
-                                        href="assets/img/features/feature-03.jpeg"
-                                        data-fancybox="gallery"
-                                      >
-                                        <img
-                                          src="assets/img/features/feature-03.jpeg"
-                                          alt="Feature"
-                                        />
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a
-                                        href="assets/img/features/feature-04.jpeg"
-                                        data-fancybox="gallery"
-                                      >
-                                        <img
-                                          src="assets/img/features/feature-04.jpeg"
-                                          alt="Feature"
-                                        />
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>}
-                                <div className="clinic-services">
-                                  <span>Diet Plan</span>
-                                  <span>Fitness</span>
+                                  {(item.country || item.city) && (
+                                    <div className="clinic-details">
+                                      <p className="doc-location">
+                                        <i className="fas fa-map-marker-alt"></i>{" "}
+                                        {item.country + ", " + item.city}
+                                      </p>
+                                      <ul className="clinic-gallery">
+                                        <li>
+                                          <a
+                                            href="/assets/img/features/feature-01.png"
+                                            data-fancybox="gallery"
+                                          >
+                                            <img
+                                              src="assets/img/features/feature-01.png"
+                                              alt="Feature"
+                                            />
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="/assets/img/features/feature-02.png"
+                                            data-fancybox="gallery"
+                                          >
+                                            <img
+                                              src="assets/img/features/feature-02.png"
+                                              alt="Feature"
+                                            />
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="assets/img/features/feature-03.jpeg"
+                                            data-fancybox="gallery"
+                                          >
+                                            <img
+                                              src="assets/img/features/feature-03.jpeg"
+                                              alt="Feature"
+                                            />
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            href="assets/img/features/feature-04.jpeg"
+                                            data-fancybox="gallery"
+                                          >
+                                            <img
+                                              src="assets/img/features/feature-04.jpeg"
+                                              alt="Feature"
+                                            />
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  )}
+                                  <div className="clinic-services">
+                                    <span>Diet Plan</span>
+                                    <span>Fitness</span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="doc-info-right">
-                              <div className="clini-infos">
-                                <ul>
-                                  {/* <li>
+                              <div className="doc-info-right">
+                                <div className="clini-infos">
+                                  <ul>
+                                    {/* <li>
                                     <i className="far fa-thumbs-up"></i> 98%
                                   </li>
                                   <li>
                                     <i className="far fa-comment"></i> 17 Feedback
                                   </li> */}
-                                  {(item.country || item.city)  && <li>
-                                    <i className="fas fa-map-marker-alt"></i>{" "}
-                                    {item.country + ", " + item.city}
-                                  </li>}
-                                  <li>
-                                    <i className="far fa-money-bill-alt"></i> $
-                                    {item.price}{" "}
-                                    <i
-                                      className="fas fa-info-circle"
-                                      data-toggle="tooltip"
-                                      title="Lorem Ipsum"
-                                    ></i>{" "}
-                                  </li>
-                                </ul>
-                              </div>
-                              <div className="clinic-booking">
-                                <Link
-                                  className="view-pro-btn"
-                                  to="/coach-profile"
-                                >
-                                  View Profile
-                                </Link>
-                                <Link
-                                  className="apt-btn"
-                                  to="/app/book-appointment"
-                                >
-                                  Book Appointment
-                                </Link>
+                                    {(item.country || item.city) && (
+                                      <li>
+                                        <i className="fas fa-map-marker-alt"></i>{" "}
+                                        {item.country + ", " + item.city}
+                                      </li>
+                                    )}
+                                    <li>
+                                      <i className="far fa-money-bill-alt"></i>{" "}
+                                      ${item.price}{" "}
+                                      <i
+                                        className="fas fa-info-circle"
+                                        data-toggle="tooltip"
+                                        title="Lorem Ipsum"
+                                      ></i>{" "}
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div className="clinic-booking">
+                                  <Link
+                                    className="view-pro-btn"
+                                    to="/coach-profile"
+                                  >
+                                    View Profile
+                                  </Link>
+                                  <Link
+                                    className="apt-btn"
+                                    to={{
+                                      pathname: "/app/book-appointment",
+                                      state: { id: item._id },
+                                    }}
+                                  >
+                                    Book Appointment
+                                  </Link>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>}
+                      )}
                     </>
-
                   );
                 })
               ) : (
