@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
+import LoginWithGoogle from "../login/LoginWithGoogle";
 
 //import Swal from "sweetalert2";
 const Register = () => {
@@ -203,6 +204,12 @@ const Register = () => {
                   <div className="login-or">
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
+                  </div>
+                  <div className="row form-row social-login">
+                    <div className="col-12">
+                      <LoginWithGoogle/>
+                    
+                    </div>
                   </div>
                 </form>
               </div>

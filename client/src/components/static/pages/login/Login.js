@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Spinner } from "react-bootstrap";
+import { Modal, Spinner, Button } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -14,41 +14,26 @@ import {
   cancelOngoingHttpRequest,
   getHttpRequest,
   postHttpRequest,
+  putHttpRequest,
 } from "../../../../axios";
 import {
   setUser,
   setUserPermissions,
   setAccessToken,
 } from "../../../../store/slices/auth";
-import GoogleLogin from "react-google-login";
+import LoginWithGoogle from "./LoginWithGoogle";
 
-import { createCacheKeyComparator } from "reselect/es/defaultMemoize";
 const Login = (props) => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const typeRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleLogin = (response) => {
-    console.log(response.tokenId);
-
-    postHttpRequest("/front/auth/googleLogin", {
-      tokenId: response.tokenId,
-    }).then((response) => {
-      console.log("google login success", response);
-      dispatch(setAccessToken(response.data.accessToken));
-
-    });
-  };
-
-  const handleFail = (googleData) => {
-    console.log(googleData);
-  };
 
   const loginHandler = async (event) => {
     event.preventDefault();
@@ -186,23 +171,10 @@ const Login = (props) => {
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
                   </div>
+
                   <div className="row form-row social-login">
                     <div className="col-12">
-                      <a href="#" className="btn btn-google btn-block">
-                        <i className="fab fa-google mr-1"></i> Login
-                      </a>
-                    </div>
-                  </div>
-                  <div className="row form-row social-login">
-                    <div className="col-12">
-                      <GoogleLogin
-                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                        buttonText="Sign in with Google"
-                        className="ct-button ct-button--secondary"
-                        onSuccess={handleLogin}
-                        onFailure={handleFail}
-                        cookiePolicy="single_host_origin"
-                      ></GoogleLogin>
+                      <LoginWithGoogle />
                     </div>
                   </div>
 
