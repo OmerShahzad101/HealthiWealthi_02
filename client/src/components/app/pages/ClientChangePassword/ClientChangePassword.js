@@ -8,7 +8,7 @@ import { putHttpRequest } from "../../../../axios";
 
 const ChangePassword = () => {
  
-  const userid = useSelector((state) => state.auth.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
   const currentRef = useRef();
   const newRef = useRef();
   const newconfirmPasswordRef = useRef();

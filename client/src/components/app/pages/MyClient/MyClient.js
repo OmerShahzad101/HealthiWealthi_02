@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const MyClient = () => {
-  const coachId = useSelector((state) => state.auth.userid);
+  const coachId = useSelector((state) => state.auth.user.userid);
 
   const [myclient, setMyclient] = useState();
   useEffect(() => {

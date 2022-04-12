@@ -9,7 +9,7 @@ const ClientProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const userid = useSelector((state) => state.auth.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
   const [profileData, setprofileData] = useState({});
   const dispatch = useDispatch();
 

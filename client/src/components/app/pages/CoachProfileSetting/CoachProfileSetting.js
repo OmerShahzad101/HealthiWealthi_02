@@ -16,8 +16,8 @@ import { Tabs, Tab } from "react-bootstrap";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import CoachCalendar from "../Calendar/CoachCalendar";
 const CoachProfileSetting = () => {
-  const [key, setKey] = useState('user-info');
- 
+  const [key, setKey] = useState("user-info");
+
   const [qualifications, setqualifications] = useState([
     { degree: " ", college: " ", year: " " },
   ]);
@@ -276,7 +276,7 @@ const CoachProfileSetting = () => {
           return;
         }
         if (result.data.success === true) {
-          dispatch(setCoachProfile({res :result.data.coach}));
+          dispatch(setCoachProfile({ res: result.data.coach }));
           // dispatch(setUser(response));
           Toast.fire({
             icon: "success",
@@ -306,7 +306,7 @@ const CoachProfileSetting = () => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
         if (!response) {
-          alert("Something went wrong with response...");
+          alert("Something went wrong with response...  front/coach/get");
           console.log("Something went wrong with response...");
           return;
         }
@@ -337,11 +337,10 @@ const CoachProfileSetting = () => {
         <div className="card">
           <div className="card-body pt-0 user-tabs mb-4">
             <Tabs
-            
               id="controlled-tab-example"
               className="nav-tabs-bottom nav-justified"
               activeKey={key}
-      onSelect={(k) => setKey(k)}
+              onSelect={(k) => setKey(k)}
             >
               <Tab eventKey="user-info" title="Basic">
                 <div className="card">
@@ -453,7 +452,6 @@ const CoachProfileSetting = () => {
                       </div>
                       <div className="col-md-6">
                         <div className="form-floating mb-4">
-                         
                           <select
                             className="form-select"
                             ref={genderRef}
@@ -908,8 +906,7 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                      <CoachCalendar calendarTab = {key}/>
-                      
+                      <CoachCalendar calendarTab={key} />
                     </div>
                   </div>
                 </div>

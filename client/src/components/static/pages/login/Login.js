@@ -29,6 +29,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const typeRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -66,21 +67,21 @@ const Login = (props) => {
         });
         return;
       }
-       if (!response.data.success) {
-         setIsLoading(false);
-         Toast.fire({
-           icon: "error",
-           title: response.data.message,
-         });
-         return;
-       }
+      if (!response.data.success) {
+        setIsLoading(false);
+        Toast.fire({
+          icon: "error",
+          title: response.data.message,
+        });
+        return;
+      }
 
       if (response.data.success) {
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.data?._id}`
         );
- 
+
         if (res) {
           const userData = {
             response: response.data.data,

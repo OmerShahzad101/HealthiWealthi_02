@@ -5,7 +5,7 @@ import Toast from "../../../common/toast/Toast";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { putHttpRequest } from "../../../../axios";
 const CoachChangePassword = () => {
-  const userid = useSelector(state=>state.auth.userid);
+  const userid = useSelector(state=>state.auth.user.userid);
   const currentRef = useRef();
   const newRef = useRef();
   const newconfirmPasswordRef = useRef();
