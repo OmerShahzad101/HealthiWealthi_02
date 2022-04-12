@@ -213,7 +213,7 @@ const CoachCalendar = ({ calendarTab }) => {
                         "saturday",
                         "sunday",
                       ]}
-                      availableHourRange={{ start: 3, end: 21 }}
+                      availableHourRange={{ start: 0, end: 24 }}
                     />
                   ) : (
                     ""
