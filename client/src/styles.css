@@ -7361,3 +7361,6 @@ img {
   display: flex;
   justify-content: start;
 }
+.trash{
+  margin-top: 21px;
+}

@@ -67,26 +67,28 @@ const Login = (props) => {
         });
         return;
       }
+       if (!response.data.success) {
+         setIsLoading(false);
+         Toast.fire({
+           icon: "error",
+           title: response.data.message,
+         });
+         return;
+       }
 
-      if (response) {
+      if (response.data.success) {
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.data?._id}`
         );
-        console.log("res ", res);
+ 
         if (res) {
           const userData = {
-            role: response?.data?.data?.type,
-            name: response?.data?.data?.name,
-            email: response?.data?.data?.email,
-            _id: response?.data?.data?._id,
-            about: res?.data.coach.about,
-            firstname: res?.data.coach.firstname,
-            lastname: res?.data.coach.lastname,
-            specialization: res?.data.coach.specialization,
-            profile: res?.data.coach.profile,
+            response: response.data.data,
+            res: res?.data.coach,
           };
           dispatch(setUser(userData));
+
           dispatch(setAccessToken(response.data.data.accessToken));
 
           if (response?.data?.data?.type == 1) {

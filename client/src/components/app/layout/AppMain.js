@@ -10,13 +10,14 @@ export default function AppMain(props) {
 //  console.log('role',role)
   let content = (
     <>
-      <BreadCrumb  name={props}/>
+      <BreadCrumb name={props} />
       <div className="content">
         <div className="container-fluid">
           <div className="row">
-            {
+            <CoachSideBar />
+            {/* {
               role == '1' ?  <ClientSideBar/> : role == '3' ? <CoachSideBar /> :  history.push("/")
-            }
+            } */}
             <RouterConfig />
           </div>
         </div>

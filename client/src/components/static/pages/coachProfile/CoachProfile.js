@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 const CoachProfile = (props) => {
   const location = useLocation();
@@ -10,9 +9,8 @@ const CoachProfile = (props) => {
   const [coachProfileData, setCoachProfileData] = useState([]);
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-
     if (res) {
-      setCoachProfileData(res?.data?.coach);
+     setCoachProfileData(res?.data?.coach);
       Toast.fire({
         icon: "sucess",
         title: res.data.message,

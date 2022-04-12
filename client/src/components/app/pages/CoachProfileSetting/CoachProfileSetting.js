@@ -13,6 +13,7 @@ import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
 import { Tabs, Tab } from "react-bootstrap";
+import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 const CoachProfileSetting = () => {
   /** Education**/
   const [qualifications, setqualifications] = useState([
@@ -27,20 +28,19 @@ const CoachProfileSetting = () => {
   };
   const handleChange = (index, key, value) => {
     let updatedKeyValue;
-    
-      const keyValue = qualifications[index]; // obj{}
-      if (key === "degree") {
-        updatedKeyValue = { ...keyValue, degree: value };
-      } else if (key === "college") {
-        updatedKeyValue = { ...keyValue, college: value };
-      } else if (key === "year") {
-        updatedKeyValue = { ...keyValue, year: value };
-      }
-      const updatedEducation = [...qualifications];
-      updatedEducation.splice(index, 1, updatedKeyValue);
-      setqualifications([...updatedEducation]);
-      console.log("qualifications is updated ", qualifications);
-    
+
+    const keyValue = qualifications[index]; // obj{}
+    if (key === "degree") {
+      updatedKeyValue = { ...keyValue, degree: value };
+    } else if (key === "college") {
+      updatedKeyValue = { ...keyValue, college: value };
+    } else if (key === "year") {
+      updatedKeyValue = { ...keyValue, year: value };
+    }
+    const updatedEducation = [...qualifications];
+    updatedEducation.splice(index, 1, updatedKeyValue);
+    setqualifications([...updatedEducation]);
+    console.log("qualifications is updated ", qualifications);
   };
   const removeEducation = (i) => {
     console.log("index ", i);
@@ -61,20 +61,18 @@ const CoachProfileSetting = () => {
     console.log("Awards", awards);
   };
   const handleAwardchange = (index, key, value) => {
-  
     let updatedKeyValue;
-  
-      const keyValue = awards[index];
-      if (key === "award") {
-        updatedKeyValue = { ...keyValue, award: value };
-      } else if (key === "year") {
-        updatedKeyValue = { ...keyValue, year: value };
-      }
-      const updatedAwards = [...awards];
-      updatedAwards.splice(index, 1, updatedKeyValue);
-      setAwards([...updatedAwards]);
-      console.log("Awards is updated ", awards);
-  
+
+    const keyValue = awards[index];
+    if (key === "award") {
+      updatedKeyValue = { ...keyValue, award: value };
+    } else if (key === "year") {
+      updatedKeyValue = { ...keyValue, year: value };
+    }
+    const updatedAwards = [...awards];
+    updatedAwards.splice(index, 1, updatedKeyValue);
+    setAwards([...updatedAwards]);
+    console.log("Awards is updated ", awards);
   };
   const removeAward = (i) => {
     //console.log("index ", i);
@@ -101,22 +99,21 @@ const CoachProfileSetting = () => {
 
   const handleExperiencechange = (index, key, value) => {
     let updatedKeyValue;
-    
-      const keyValue = experience[index];
-      if (key === "hospitalName") {
-        updatedKeyValue = { ...keyValue, hospitalName: value };
-      } else if (key === "dateFrom") {
-        updatedKeyValue = { ...keyValue, dateFrom: value };
-      } else if (key === "dateTo") {
-        updatedKeyValue = { ...keyValue, dateTo: value };
-      } else if (key === "designation") {
-        updatedKeyValue = { ...keyValue, designation: value };
-      }
-      const updateExperience = [...experience];
-      updateExperience.splice(index, 1, updatedKeyValue);
-      setExperience([...updateExperience]);
-      console.log("experience is updated ", experience);
-    
+
+    const keyValue = experience[index];
+    if (key === "hospitalName") {
+      updatedKeyValue = { ...keyValue, hospitalName: value };
+    } else if (key === "dateFrom") {
+      updatedKeyValue = { ...keyValue, dateFrom: value };
+    } else if (key === "dateTo") {
+      updatedKeyValue = { ...keyValue, dateTo: value };
+    } else if (key === "designation") {
+      updatedKeyValue = { ...keyValue, designation: value };
+    }
+    const updateExperience = [...experience];
+    updateExperience.splice(index, 1, updatedKeyValue);
+    setExperience([...updateExperience]);
+    console.log("experience is updated ", experience);
   };
   const removeExpirence = (i) => {
     if (i) {
@@ -132,7 +129,7 @@ const CoachProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const userid = useSelector((state) => state.auth.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
   const [profileData, setprofileData] = useState({});
   const specializationRef = useRef();
   const firstnameRef = useRef();
@@ -159,7 +156,6 @@ const CoachProfileSetting = () => {
       checKImage(data);
     }
   };
-
   const onChangeImage = async (e) => {
     const files = e.target.files;
     if (files.length > 0) {
@@ -270,22 +266,24 @@ const CoachProfileSetting = () => {
     setIsLoading(true);
     console.log("payload", payload);
     putHttpRequest("/front/coach/edit", payload)
-      .then((response) => {
+      .then((result) => {
         setIsLoading(false);
-        if (!response) {
+        if (!result) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
           return;
         }
-        if (response.data.success === true) {
+        if (result.data.success === true) {
+          dispatch(setCoachProfile({res :result.data.coach}));
+          // dispatch(setUser(response));
           Toast.fire({
             icon: "success",
-            title: response.data.message,
+            title: result.data.message,
           });
         } else {
           Toast.fire({
             icon: "error",
-            title: response.data.message,
+            title: result.data.message,
           });
         }
       })
@@ -300,20 +298,19 @@ const CoachProfileSetting = () => {
 
   const upgradePackage = () => {
     history.push("/coach-upgrade-profile");
-    console.log("dssd");
   };
 
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
-        console.log("response", response);
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
           return;
         }
         if (response.data.success === true) {
-          console.log("response", response);
+          console.log("responseDon", response?.data?.coach);
+
           setprofileData(response?.data?.coach);
           if (response?.data?.coach?.qualifications.length > 0) {
             setqualifications(response?.data?.coach?.qualifications);
@@ -551,7 +548,7 @@ const CoachProfileSetting = () => {
                             <div className="col-1">
                               {i > 0 && (
                                 <a
-                                  className="btn btn-danger trash"
+                                  className="btn btn-danger trash "
                                   onClick={() => removeEducation(i)}
                                 >
                                   <i class="far fa-trash-alt"></i>
