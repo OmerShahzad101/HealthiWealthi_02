@@ -127,7 +127,7 @@ const LoginWithGoogle = () => {
         return;
       }
 
-      if (response.data.coach.status === true) {
+      if (response.data.coach.isEmailVerified === true) {
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.coach?._id}`
