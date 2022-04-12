@@ -23,7 +23,7 @@ const ClientSideBar = () => {
                   <i className="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years
                 </h5>
                 <h5 className="mb-0">
-                  <i className="fas fa-map-marker-alt"></i> Newyork, USA
+                  <i className="fas fa-map-marker-alt"></i> {data.country}, {data.city}
                 </h5>
               </div>
             </div>
