@@ -21,7 +21,7 @@ const CoachCalendar = ({ availabilityTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
-        debugger;
+        
         if (!response) {
           alert("Something went wrong with response...");
           return;
@@ -85,7 +85,7 @@ const CoachCalendar = ({ availabilityTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
-                        debugger;
+                        
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);
