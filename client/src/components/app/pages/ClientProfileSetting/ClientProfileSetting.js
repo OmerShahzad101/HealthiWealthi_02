@@ -3,14 +3,15 @@ import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
 import { getHttpRequest, putHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setClientProfile } from "../../../../store/slices/auth";
 const ClientProfileSetting = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const userid = useSelector((state) => state.auth.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
   const [profileData, setprofileData] = useState({});
+  const dispatch = useDispatch();
 
   const firstnameRef = useRef();
   const lastnameRef = useRef();
@@ -66,24 +67,28 @@ const ClientProfileSetting = () => {
 
     setIsLoading(true);
     putHttpRequest("/front/client/edit", payload)
-      .then((response) => {
+      .then((res) => {
+        console.log("client", res?.data.client);
         setIsLoading(false);
 
-        if (!response) {
-          alert("Something went wrong with response...");
-          console.log("Something went wrong with response...");
+        if (!res) {
+          alert("Something went wrong with res...");
+          console.log("Something went wrong with res...");
           return;
         }
 
-        if (response.data.success === true) {
+        if (res) {
+          console.log("coach ", res);
+          const userData = { res: res?.data.client };
+          dispatch(setClientProfile(userData));
           Toast.fire({
             icon: "success",
-            title: response.data.message,
+            title: res.data.message,
           });
         } else {
           Toast.fire({
             icon: "error",
-            title: response.data.message,
+            title: res.data.message,
           });
         }
       })
@@ -104,6 +109,7 @@ const ClientProfileSetting = () => {
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`)
       .then((response) => {
+        console.log("coach", response?.data.coach);
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
@@ -119,7 +125,7 @@ const ClientProfileSetting = () => {
       .catch(() => {
         console.log("Something went wrong...");
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

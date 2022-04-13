@@ -2,11 +2,8 @@ import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
 const CoachSideBar = () => {
-   const data = useSelector((state) => state.auth)
-   console.log("Data",data);
-
-  const imageUpload = () => {
-  };
+  const data = useSelector((state) => state.auth.coachProfile);
+  const imageUpload = () => {};
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
       <div className="profile-sidebar">
@@ -21,7 +18,7 @@ const CoachSideBar = () => {
             </a>
             <div className="profile-det-info">
               <h3>
-                {data.firstName} {data.secondName}
+                {data.firstName} {data.lastName}
               </h3>
 
               <div className="patient-details">

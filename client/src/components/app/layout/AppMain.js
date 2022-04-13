@@ -5,18 +5,23 @@ import ClientSideBar from "./sidebar/ClientSideBar";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function AppMain(props) {
- const role = useSelector(state=>state.auth.userRole);
- let history = useHistory();
-//  console.log('role',role)
+  const role = useSelector((state) => state.auth.user.userRole);
+  let history = useHistory();
+  //  console.log('role',role)
   let content = (
     <>
-      <BreadCrumb  name={props}/>
+      <BreadCrumb name={props} />
       <div className="content">
         <div className="container-fluid">
           <div className="row">
-            {
-              role == '1' ?  <ClientSideBar/> : role == '3' ? <CoachSideBar /> :  history.push("/")
-            }
+            {/* <CoachSideBar /> */}
+            {role == "1" ? (
+              <ClientSideBar />
+            ) : role == "3" ? (
+              <CoachSideBar />
+            ) : (
+              history.push("/")
+            )}
             <RouterConfig />
           </div>
         </div>

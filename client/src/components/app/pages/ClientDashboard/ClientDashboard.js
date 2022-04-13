@@ -4,7 +4,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 const ClientDashboard = (props) => {
-  const clientId = useSelector((state) => state.auth.userid);
+  const clientId = useSelector((state) => state.auth.user.userid);
 
   const [myAppoinment, setMyAppoinment] = useState();
   useEffect(() => {

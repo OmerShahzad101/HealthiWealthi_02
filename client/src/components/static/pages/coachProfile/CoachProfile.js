@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 const CoachProfile = (props) => {
   const location = useLocation();
@@ -10,17 +9,15 @@ const CoachProfile = (props) => {
   const [coachProfileData, setCoachProfileData] = useState([]);
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-
     if (res) {
       setCoachProfileData(res?.data?.coach);
-      Toast.fire({
-        icon: "sucess",
-        title: res.data.message,
-      });
+      // Toast.fire({
+      //   icon: "success",
+      //   title: res.data.message,
+      // });
       return;
     }
   }, []);
-  console.log("saois", coachProfileData?.qualification);
   return (
     <div className="content">
       <div className="container">
@@ -36,23 +33,27 @@ const CoachProfile = (props) => {
                   />
                 </div>
                 <div className="doc-info-cont">
-                  <h4 className="doc-name">{}</h4>
-                  <p className="doc-speciality">{coachProfileData.username}</p>
+                  <h4 className="doc-name">
+                    {coachProfileData.firstname} {coachProfileData.lastname}
+                  </h4>
+                  <p className="doc-speciality">{coachProfileData.about}</p>
                   <p className="doc-department">
-                    <img
+                    {/* <img
                       src="assets/img/specialities/specialities-05.png"
                       className="img-fluid"
                       alt="Speciality"
-                    />
+                    /> */}
                     {coachProfileData.specialization}
                   </p>
                   <div className="clinic-details">
                     <p className="doc-location">
                       <i className="fas fa-map-marker-alt"></i>
-                      {coachProfileData.address}
-                      <a href="#;">Get Directions</a>
+                      &nbsp; {coachProfileData.country}
+                      {", "}
+                      {coachProfileData.city}
+                      {/* <a href="#;"> Get Directions</a> */}
                     </p>
-                    <ul className="clinic-gallery">
+                    {/* <ul className="clinic-gallery">
                       <li>
                         <a
                           href="/assets/img/features/feature-01.jpg"
@@ -97,11 +98,11 @@ const CoachProfile = (props) => {
                           />
                         </a>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
                   <div className="clinic-services">
-                    <span>Diet</span>
-                    <span>Fitness</span>
+                    {/* <span>Diet</span>
+                    <span>Fitness</span> */}
                   </div>
                 </div>
               </div>
@@ -116,7 +117,9 @@ const CoachProfile = (props) => {
                     </li>
                     <li>
                       <i className="fas fa-map-marker-alt"></i>{" "}
-                      {coachProfileData.address}
+                      {coachProfileData.country}
+                      {", "}
+                      {coachProfileData.city}
                     </li>
                     <li>
                       <i className="far fa-money-bill-alt"></i> $100 per hour{" "}
@@ -220,7 +223,7 @@ const CoachProfile = (props) => {
                     {/* <!-- Education Details --> */}
                     <div className="widget education-widget">
                       <h4 className="widget-title">Education</h4>
-                      {coachProfileData?.qualifications?.map((edu,i) => {
+                      {coachProfileData?.qualifications?.map((edu, i) => {
                         return (
                           <div className="experience-box">
                             <ul className="experience-list">
@@ -260,9 +263,15 @@ const CoachProfile = (props) => {
                                   <div className="timeline-content">
                                     <a href="#/" className="name">
                                       {element.hospitalName.toUpperCase()}
+                                      {"  ("}
+                                      {element.designation}
+                                      {")"}
                                     </a>
                                     <span className="time">
-                                      {element.designation}
+                                      {/* {element.designation} */}
+                                      {element.dateFrom}
+                                      {" -- "}
+                                      {element.dateTo}
                                     </span>
                                   </div>
                                 </div>
@@ -300,35 +309,6 @@ const CoachProfile = (props) => {
                         </ul>
                       </div>
                     </div>
-                    {/* <!-- /Awards Details --> */}
-
-                    {/* <!-- Services List --> */}
-                    <div className="service-list">
-                      <h4>Services</h4>
-                      <ul className="clearfix">
-                        <li>Tooth cleaning </li>
-                        <li>Root Canal Therapy</li>
-                        <li>Implants</li>
-                        <li>Composite Bonding</li>
-                        <li>Fissure Sealants</li>
-                        <li>Surgical Extractions</li>
-                      </ul>
-                    </div>
-                    {/* <!-- /Services List --> */}
-
-                    {/* <!-- Specializations List --> */}
-                    <div className="service-list">
-                      <h4>Specializations</h4>
-                      <ul className="clearfix">
-                        <li>Children Care</li>
-                        <li>Dental Care</li>
-                        <li>Oral and Maxillofacial Surgery </li>
-                        <li>Orthodontist</li>
-                        <li>Periodontist</li>
-                        <li>Prosthodontics</li>
-                      </ul>
-                    </div>
-                    {/* <!-- /Specializations List --> */}
                   </div>
                 </div>
               </div>
