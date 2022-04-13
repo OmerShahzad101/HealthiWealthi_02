@@ -126,7 +126,6 @@ const CoachProfileSetting = () => {
       setExperience([...newArray]);
     }
   };
-
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
   const history = useHistory();
