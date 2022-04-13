@@ -2235,7 +2235,7 @@ html.menu-opened body {
   display: grid;
   align-items: center;
   background: url(assets/img/bg-ath.png) no-repeat 50% 50%, #eaf3fc;
-    background-size: cover;
+  background-size: cover;
 }
 .account-page .content {
   padding: 50px 0;
@@ -2253,8 +2253,16 @@ html.menu-opened body {
   top: 0;
   height: 5px;
   width: 100%;
-  content: '';
-  background: repeating-linear-gradient(90deg, #00bffa 0%, #00bffa 33.34%, #1b57fe 33.35%, #1b57fe 66.68%, #8255fd 66.69%, #8255fd 100%);
+  content: "";
+  background: repeating-linear-gradient(
+    90deg,
+    #00bffa 0%,
+    #00bffa 33.34%,
+    #1b57fe 33.35%,
+    #1b57fe 66.68%,
+    #8255fd 66.69%,
+    #8255fd 100%
+  );
   background-size: 50.5%;
   overflow: hidden;
   border-top-left-radius: 4px;
@@ -2328,13 +2336,13 @@ html.menu-opened body {
   padding: 8px 12px;
 }
 .btn-google {
-  background-color: #dd4b39!important;
-  color: #fff!important;
-  font-size: 14px!important;
+  background-color: #dd4b39 !important;
+  color: #fff !important;
+  font-size: 14px !important;
   padding: 8px 12px;
-  box-shadow: none!important;
+  box-shadow: none !important;
   justify-content: center;
-  border-radius: 5px!important;
+  border-radius: 5px !important;
 }
 
 .social-login .btn:hover,
@@ -3152,13 +3160,12 @@ html.menu-opened body {
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 1px;
-padding-top: 2px;
-padding-bottom: 4px;
+  padding-top: 2px;
+  padding-bottom: 4px;
   text-align: center;
   text-transform: uppercase;
   width: 100%;
   margin-top: 10px;
-
 }
 .clinic-booking a.apt-btn {
   background-color: #d32986;
@@ -3215,7 +3222,7 @@ padding-bottom: 4px;
   border-color: #d32986;
   color: #fff;
 }
-.user-tabs .nav-tabs > li >  button {
+.user-tabs .nav-tabs > li > button {
   border: 0;
   border-bottom: 3px solid transparent;
   color: #3e3e3e;
@@ -4765,7 +4772,7 @@ padding-bottom: 4px;
   width: 220px;
 }
 /* by Jamal Hassouni*/
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300");
 /* body{
   margin: 0;
   padding: 0;
@@ -4778,112 +4785,107 @@ padding-bottom: 4px;
           box-sizing: border-box;
           padding: 140px 0;
 } */
-.cards{
+.cards {
   position: relative;
   max-width: 300px;
   height: auto;
-  background: linear-gradient(-45deg,#fe0847,#feae3f);
+  background: linear-gradient(-45deg, #fe0847, #feae3f);
   border-radius: 15px;
   margin: 0 auto;
   padding: 40px 20px;
-  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1) ;
-          box-shadow: 0 10px 15px rgba(0,0,0,.1) ;
--webkit-transition: .5s;
-transition: .5s;
+  -webkit-box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
-.cards:hover{
+.cards:hover {
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
-.col-sm-4:nth-child(1) .card ,
-.col-sm-4:nth-child(1) .card .title .fa{
-  background: linear-gradient(-45deg,#f403d1,#64b5f6);
-
+.col-sm-4:nth-child(1) .card,
+.col-sm-4:nth-child(1) .card .title .fa {
+  background: linear-gradient(-45deg, #f403d1, #64b5f6);
 }
 .col-sm-4:nth-child(2) .card,
-.col-sm-4:nth-child(2) .card .title .fa{
-  background: linear-gradient(-45deg,#ffec61,#f321d7);
-
+.col-sm-4:nth-child(2) .card .title .fa {
+  background: linear-gradient(-45deg, #ffec61, #f321d7);
 }
 .col-sm-4:nth-child(3) .card,
-.col-sm-4:nth-child(3) .card .title .fa{
-  background: linear-gradient(-45deg,#24ff72,#9a4eff);
-
+.col-sm-4:nth-child(3) .card .title .fa {
+  background: linear-gradient(-45deg, #24ff72, #9a4eff);
 }
-.cards::before{
-  content: '';
+.cards::before {
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 40%;
-  background: rgba(255, 255, 255, .1);
-z-index: 1;
--webkit-transform: skewY(-5deg) scale(1.5);
-        transform: skewY(-5deg) scale(1.5);
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  -webkit-transform: skewY(-5deg) scale(1.5);
+  transform: skewY(-5deg) scale(1.5);
 }
-.title .fa{
-  color:#fff;
+.title .fa {
+  color: #fff;
   font-size: 60px;
   width: 100px;
   height: 100px;
-  border-radius:  50%;
+  border-radius: 50%;
   text-align: center;
   line-height: 100px;
-  -webkit-box-shadow: 0 10px 10px rgba(0,0,0,.1) ;
-          box-shadow: 0 10px 10px rgba(0,0,0,.1) ;
-
+  -webkit-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 .title h2 {
   position: relative;
-  margin: 20px  0 0;
+  margin: 20px 0 0;
   padding: 0;
   color: #fff;
   font-size: 28px;
- z-index: 2;
+  z-index: 2;
 }
-.price,.option{
+.price,
+.option {
   position: relative;
   z-index: 2;
 }
 .price h4 {
-margin: 0;
-padding: 20px 0 ;
-color: #fff;
-font-size: 60px;
+  margin: 0;
+  padding: 20px 0;
+  color: #fff;
+  font-size: 60px;
 }
 .option ul {
   margin: 0;
   padding: 0;
-
 }
 .option ul li {
-margin: 0 0 10px;
-padding: 0;
-list-style: none;
-color: #fff;
-font-size: 16px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  color: #fff;
+  font-size: 16px;
 }
 .cards a {
   position: relative;
   z-index: 2;
   background: #fff;
-  color : black;
+  color: black;
   width: 150px;
   height: 40px;
   line-height: 40px;
   border-radius: 40px;
   display: block;
   text-align: center;
-  margin: 20px auto 0 ;
+  margin: 20px auto 0;
   font-size: 16px;
   cursor: pointer;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.cards a:hover{
-    text-decoration: none;
+.cards a:hover {
+  text-decoration: none;
 }
 
 .chat-msg-info li {
@@ -7287,11 +7289,11 @@ font-size: 16px;
   display: block;
   width: 100%;
 }
-.account-page .form-floating label{
+.account-page .form-floating label {
   color: #ccc;
   font-size: 14px;
 }
-.account-page .form-floating .form-select{
+.account-page .form-floating .form-select {
   font-size: 14px;
 }
 .form-floating .errors {
@@ -7307,7 +7309,7 @@ font-size: 16px;
   font-size: 12px;
 }
 .userProfileWrapper {
-    padding: 32px;
+  padding: 32px;
 }
 .userProfileWrapper .label {
   font-size: 18px;
@@ -7322,70 +7324,69 @@ font-size: 16px;
   color: #4d4d53;
 }
 .userProfileWrapper h3 {
- 
   font-size: clamp(1rem, 0.8786rem + 0.5178vw, 1.5rem);
   line-height: 1;
   color: var(--dark-border);
   margin-bottom: 8px;
 }
 .profilePic {
-    max-height: 100%;
-    object-fit: cover;
-    height: 200px;
-    width: 200px;
-    max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+  max-width: 100%;
 }
 .imageUploaderWrapper {
-    position: relative;
+  position: relative;
 }
 .fileUpload {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    left: 1px;
-    top: 1px;
-    border-radius: 50px;
-    opacity: 0;
-    cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  border-radius: 50px;
+  opacity: 0;
+  cursor: pointer;
 }
 .circle {
-    border-radius: 100% !important;
-    overflow: hidden;
-    width: 145px;
-    height: 145px;
-    
-    top: 72px;
+  border-radius: 100% !important;
+  overflow: hidden;
+  width: 145px;
+  height: 145px;
+
+  top: 72px;
 }
 img {
-    max-width: 100%;
-    height: 100%;
+  max-width: 100%;
+  height: 100%;
 }
 .pImage {
-    position: absolute;
-    top: 102px;
-    color: #666666;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    left: 110px;
-    padding: 6px;
-    border-radius: 25px;
-    line-height: 0;
-    box-shadow: 0px 4px 16px rgba(175, 185, 222, 0.3);
-    background-color: var(--white);
+  position: absolute;
+  top: 102px;
+  color: #666666;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  left: 110px;
+  padding: 6px;
+  border-radius: 25px;
+  line-height: 0;
+  box-shadow: 0px 4px 16px rgba(175, 185, 222, 0.3);
+  background-color: var(--white);
 }
 
 .pImage:hover {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .uploadButton {
-    font-size: 1.2em;
-    cursor: pointer;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 .uploadButton:hover {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    color: #999;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #999;
 }
-.table>:not(:first-child){
+.table > :not(:first-child) {
   border: 0;
 }
 .profile-img label {
@@ -7397,6 +7398,87 @@ img {
 .profile-img {
   display: flex;
   justify-content: start;
+}
+
+
+
+.gridDays {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.text-right{
+  text-align: right;
+}
+.datepick-wrap{
+  display: none;
+}
+.week-controls .btn{
+  background-color: #e9e9e9;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  color: #757575;
+  font-size: 14px;
+  margin: 0 10px 0px 0px;
+  padding: 7px 10px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.booking-form .gridDayHeaderFull {
+  display: none;
+}
+.booking-form .aria-hidden{
+  display: none;
+}
+.gridDayHeaderName {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.today .gridDayHeaderToday {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: auto;
+  height: auto;
+  color: #fff;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  border-radius: 4px;
+  padding: 2px 4px;
+  background-color: #d32986 !important;
+}
+.gridDayHeader .gridDayHeaderDate {
+  font-size: 32px;
+  display: block;
+  color: #757575;
+  font-weight: 300;
+}
+.gridDayHeader h3{
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+.gridSlot a{
+  background-color: #e9e9e9;
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+    color: #757575;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 10px 30px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: .3s ease;
+}
+.gridSlot a:hover{
+  background-color: #fff;
+  transition: .3s ease;
 }
 .trash{
   margin-top: 21px;
