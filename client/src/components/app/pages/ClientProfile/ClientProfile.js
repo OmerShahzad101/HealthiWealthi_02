@@ -9,7 +9,7 @@ import {
   postHttpRequest,
 } from "../../../../axios";
 const ClientProfile = () => {
-  const id = useSelector((state) => state.auth.userid);
+  const id = useSelector((state) => state.auth.user.userid);
   const [clientProfileData, setClientProfileData] = useState([]);
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);

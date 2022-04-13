@@ -53,18 +53,11 @@ const LoginWithGoogle = () => {
             getHttpRequest(
               `/front/coach/get/${response?.data?.user?._id}`
             ).then((res) => {
-              console.log("res ", res);
+              console.log("resqqqqqqqqqqqqqqqqqqq ", res);
               if (res) {
                 const userData = {
-                  role: response?.data?.user?.type,
-                  name: response?.data?.user?.name,
-                  email: response?.data?.user?.email,
-                  _id: response?.data?.user?._id,
-                  about: res?.data.coach.about,
-                  firstname: res?.data.coach.firstname,
-                  lastname: res?.data.coach.lastname,
-                  specialization: res?.data.coach.specialization,
-                  profile: res?.data.coach.profile,
+                  response: response.data.user,
+                  res: res?.data.coach,
                 };
                 dispatch(setUser(userData));
                 dispatch(setAccessToken(response.data.accessToken));
@@ -118,7 +111,7 @@ const LoginWithGoogle = () => {
 
     try {
       let response = await putHttpRequest("/front/auth/role", payload);
-      console.log(response);
+      console.log("/front/auth/role", response);
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -127,23 +120,16 @@ const LoginWithGoogle = () => {
         return;
       }
 
-      if (response.data.coach.status === true) {
+      if (response.data.coach.isEmailVerified === true) {
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.coach?._id}`
         );
-        console.log("res ", res);
+        console.log("/front/coach/get/", res);
         if (res) {
           const userData = {
-            role: response?.data?.coach?.type,
-            name: response?.data?.coach?.name,
-            email: response?.data?.coach?.email,
-            _id: response?.data?.coach?._id,
-            about: res?.data.coach.about,
-            firstname: res?.data.coach.firstname,
-            lastname: res?.data.coach.lastname,
-            specialization: res?.data.coach.specialization,
-            profile: res?.data.coach.profile,
+            response: response.data.coach,
+            res: res?.data.coach,
           };
           dispatch(setUser(userData));
 

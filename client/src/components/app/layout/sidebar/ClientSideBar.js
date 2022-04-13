@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
-const ClientSideBar = () => {
+import { useSelector } from "react-redux";
 
- 
+const ClientSideBar = () => {
+  const data = useSelector((state) => state.auth.clientProfile);
+  console.log("data111",data)
+
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
       <div className="profile-sidebar">
@@ -12,13 +15,15 @@ const ClientSideBar = () => {
               <img src="/assets/img/patients/patient.jpg" alt="User Image" />
             </a>
             <div className="profile-det-info">
-              <h3>Richard Wilson</h3>
+              <h3>
+                {data.firstName} {data.lastName}
+              </h3>
               <div className="patient-details">
                 <h5>
                   <i className="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years
                 </h5>
                 <h5 className="mb-0">
-                  <i className="fas fa-map-marker-alt"></i> Newyork, USA
+                  <i className="fas fa-map-marker-alt"></i> {data.country}, {data.city}
                 </h5>
               </div>
             </div>

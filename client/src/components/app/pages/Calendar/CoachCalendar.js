@@ -5,8 +5,8 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 
-const CoachCalendar = ({ availabilityTab }) => {
-  const userid = useSelector((state) => state.auth.userid);
+const CoachCalendar = ({ calendarTab }) => {
+  const userid = useSelector((state) => state.auth.user.userid);
   const start = moment();
 
   const [selections, setSelections] = useState([]);

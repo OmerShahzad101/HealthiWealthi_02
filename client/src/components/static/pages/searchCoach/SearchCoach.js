@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const SearchCoach = () => {
-  const role = useSelector(state=>state.auth.userRole);
+  const role = useSelector((state) => state.auth.userRole);
   const SearchFilter = useRef("");
   const maleCoach = useRef("");
   const femaleCoach = useRef("");
@@ -375,35 +375,41 @@ const SearchCoach = () => {
                                 <div className="clinic-booking">
                                   <Link
                                     className="view-pro-btn"
-                                    to="/coach-profile"
+                                    to={{
+                                      pathname: "/coach-profile",
+                                      state: { id: item._id },
+                                    }}
                                   >
                                     View Profile
                                   </Link>
-                                  </div>
+                                </div>
 
-                                 {role === 3 ? <div className="clinic-disable">
-                                  <button
-                                  disabled
-                                    className="clinic-disable"
-                                    to={{
-                                      pathname: "/app/book-appointment",
-                                      state: { id: item._id },
-                                    }}
-                                  >
-                                    Book Appointment
-                                  </button>
-                                </div>:
-                                <div className="clinic-booking">
-                                  <Link
-                                    className="apt-btn"
-                                    to={{
-                                      pathname: "/app/book-appointment",
-                                      state: { id: item._id },
-                                    }}
-                                  >
-                                    Book Appointment
-                                  </Link>
-                                </div>}
+                                {role === 3 ? (
+                                  <div className="clinic-disable">
+                                    <button
+                                      disabled
+                                      className="clinic-disable"
+                                      to={{
+                                        pathname: "/app/book-appointment",
+                                        state: { id: item._id },
+                                      }}
+                                    >
+                                      Book Appointment
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div className="clinic-booking">
+                                    <Link
+                                      className="apt-btn"
+                                      to={{
+                                        pathname: "/app/book-appointment",
+                                        state: { id: item._id },
+                                      }}
+                                    >
+                                      Book Appointment
+                                    </Link>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>

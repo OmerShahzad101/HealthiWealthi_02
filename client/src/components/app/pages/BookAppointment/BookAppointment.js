@@ -7,7 +7,7 @@ const BookAppointment = () => {
   const [coachProfileData, setCoachProfileData] = useState([]);
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    console.log(res)
+    console.log(res);
     setCoachProfileData(res?.data?.coach);
   }, []);
 
@@ -27,7 +27,9 @@ const BookAppointment = () => {
               </Link>
               <div className="booking-info">
                 <h4>
-                  <Link to="/coach-profile">{coachProfileData.firstname}{" "}{coachProfileData.lastname}</Link>
+                  <Link to="/coach-profile">
+                    {coachProfileData.firstname} {coachProfileData.lastname}
+                  </Link>
                 </h4>
                 <div className="rating">
                   <i className="fas fa-star filled"></i>
@@ -38,7 +40,10 @@ const BookAppointment = () => {
                   <span className="d-inline-block average-rating">35</span>
                 </div>
                 <p className="text-muted mb-0">
-                  <i className="fas fa-map-marker-alt"></i> {coachProfileData.country}{", "}{coachProfileData.city}
+                  <i className="fas fa-map-marker-alt"></i>{" "}
+                  {coachProfileData.country}
+                  {", "}
+                  {coachProfileData.city}
                 </p>
               </div>
             </div>
