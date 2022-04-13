@@ -907,12 +907,8 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-<<<<<<< HEAD
                      <ClientCalendar/>
                       
-=======
-                      <CoachCalendar calendarTab={key} />
->>>>>>> aaef711101cad564b0b56b25bb6694146a15cfc0
                     </div>
                   </div>
                 </div>

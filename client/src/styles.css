@@ -7474,9 +7474,11 @@ img {
     text-align: center;
     position: relative;
     cursor: pointer;
+    transition: .3s ease;
 }
 .gridSlot:hover{
   background-color: #fff;
+  transition: .3s ease;
 }
 .trash{
   margin-top: 21px;
