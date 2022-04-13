@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const SearchCoach = () => {
-  const role = useSelector((state) => state.auth.userRole);
+  const role = useSelector((state) => state.auth.user.userRole);
   const SearchFilter = useRef("");
   const maleCoach = useRef("");
   const femaleCoach = useRef("");
