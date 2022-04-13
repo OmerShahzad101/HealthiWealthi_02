@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
-import { getHttpRequest } from "../../../../axios";
+import { getHttpRequest,postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 
 export default function Home(props) {
-
+  const userId = useSelector((state) => state.auth.user.userid);
   const [coachList, setCoachList] = useState([]);
-  const role = useSelector(state=>state.auth.userRole);
+  const role = useSelector(state=>state.auth.user.userRole);
   useEffect(() => {
     getHttpRequest("/front/coach/list")
       .then((response) => {
@@ -25,6 +25,13 @@ export default function Home(props) {
     infinite: true,
     variableWidth: true,
   };
+  const favorite = (e) =>{
+    const payload = {
+      coach_id: e,
+      client_id: userId
+    }
+    let response =  postHttpRequest("/front/favorite/create", payload)
+  }
   return (
     <>
       <section className="section section-search">
@@ -100,9 +107,10 @@ export default function Home(props) {
                         src="assets/img/doctors/doctor-02.jpg"
                       />
                     </Link>
-                    <a href="#" className="fav-btn">
-                      <i className="far fa-bookmark"></i>
-                    </a>
+                    {console.log("role",role)}
+                    {role == 1 && <a className="fav-btn">
+                      <i className="far fa-bookmark" onClick={()=>favorite(e?._id)} ></i>
+                    </a>}
                   </div>
                   <div className="pro-content">
                     <h3 className="title">

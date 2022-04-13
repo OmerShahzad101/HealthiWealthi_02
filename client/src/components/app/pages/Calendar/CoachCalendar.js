@@ -5,7 +5,7 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 
-const CoachCalendar = ({ calendarTab }) => {
+const CoachCalendar = ({ availabilityTab }) => {
   const userid = useSelector((state) => state.auth.user.userid);
   const start = moment();
 
@@ -21,26 +21,26 @@ const CoachCalendar = ({ calendarTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
-        debugger;
-        if (!response) { alert("Something went wrong with response..."); return; }
+        
+        if (!response) {
+          alert("Something went wrong with response...");
+          return;
+        }
 
         if (response && response?.data?.success === true) {
-
           let newSelections = [];
           if (response?.data?.ScheduleData) {
-            var response = response?.data?.ScheduleData?.selections.map(function (
-              val,
-              key
-            ) {
-              var newobject = {};
-              newobject.start = moment(val.start).toDate();
-              newobject.end = moment(val.end).toDate();
-              newSelections.push(newobject);
-            });
+            var response = response?.data?.ScheduleData?.selections.map(
+              function (val, key) {
+                var newobject = {};
+                newobject.start = moment(val.start).toDate();
+                newobject.end = moment(val.end).toDate();
+                newSelections.push(newobject);
+              }
+            );
           }
           setSelections(newSelections);
           setLoadcalender(true);
-          
         } else {
           console.log(response.data.message);
         }
@@ -52,17 +52,14 @@ const CoachCalendar = ({ calendarTab }) => {
   }, []);
 
   return (
-    calendarTab === "calendar" && (
+    availabilityTab === "availability" && (
       <div class="dashboard-content">
         <div class="row">
           <div class="col-lg-12">
             <div id="add-listing">
               <div class="add-listing-section">
                 <div class="add-listing-headline">
-                  <h3 class="inner-custom-color">
-                    <i class="sl sl-icon-doc"></i> Trainer Schedule
-                  </h3>
-                  <h5 style={{ marginLeft: "20%", color: "grey" }}>
+                  <h5 style={{ color: "grey" }}>
                     {" "}
                     Open time slots on your calendar so clients know when they
                     can book a session with you.
@@ -88,7 +85,7 @@ const CoachCalendar = ({ calendarTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
-                        debugger;
+                        
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);
@@ -100,8 +97,10 @@ const CoachCalendar = ({ calendarTab }) => {
                           selections: JSON.stringify(selections),
                         };
 
-                        var response = await getHttpRequest(`front/schedule/get/${userid}`);
-                        if(response){
+                        var response = await getHttpRequest(
+                          `front/schedule/get/${userid}`
+                        );
+                        if (response) {
                           var result = await postHttpRequest(
                             "front/schedule/set",
                             formData
@@ -111,10 +110,8 @@ const CoachCalendar = ({ calendarTab }) => {
                               icon: "success",
                               title: "Event registered successfully",
                             });
-
                           } else if (result.status === 500) {
                             console.log("status500");
-
                           }
                         }
                       }}

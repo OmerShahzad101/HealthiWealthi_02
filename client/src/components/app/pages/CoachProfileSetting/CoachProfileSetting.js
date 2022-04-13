@@ -15,6 +15,7 @@ import { setInfoData, setAvatar } from "../../../../store/slices/user";
 import { Tabs, Tab } from "react-bootstrap";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import CoachCalendar from "../Calendar/CoachCalendar";
+import ClientCalendar from "../Calendar/ClientCalendar";
 const CoachProfileSetting = () => {
   const [key, setKey] = useState("user-info");
 
@@ -125,7 +126,6 @@ const CoachProfileSetting = () => {
       setExperience([...newArray]);
     }
   };
-
   const userInfo = useSelector((state) => state.user.info);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -896,8 +896,8 @@ const CoachProfileSetting = () => {
               <Tab eventKey="availability" title="Availability">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Availability</h4>
-                    <div className="row form-row"></div>
+                    <h4 className="card-title">Trainer Schedule</h4>
+                    <div className="row form-row"> <CoachCalendar availabilityTab = {key}/></div>
                   </div>
                 </div>
               </Tab>
@@ -906,7 +906,8 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                      <CoachCalendar calendarTab={key} />
+                     <ClientCalendar/>
+                      
                     </div>
                   </div>
                 </div>

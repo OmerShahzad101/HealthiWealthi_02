@@ -1,11 +1,17 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
-
+import { useEffect } from "react";
 const ClientSideBar = () => {
-  const data = useSelector((state) => state.auth.clientProfile);
-  console.log("data111",data)
-
+let data;
+const user = useSelector((state) => state.auth.user);
+const clientProfile = useSelector((state) => state.auth.clientProfile);
+if (clientProfile.firstName || clientProfile.lastName) {
+  data = clientProfile;
+} else {
+  data = user;
+}
+ // console.log("data111",data)
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
       <div className="profile-sidebar">
@@ -23,7 +29,8 @@ const ClientSideBar = () => {
                   <i className="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years
                 </h5> */}
                 <h5 className="mb-0">
-                  <i className="fas fa-map-marker-alt"></i> {data.country}, {data.city}
+                  <i className="fas fa-map-marker-alt"></i> {data.country},{" "}
+                  {data.city}
                 </h5>
               </div>
             </div>

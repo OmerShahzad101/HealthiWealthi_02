@@ -11,7 +11,7 @@ const initialState = {
     // acessPageDashboard: null,
     Userabout: null,
     firstName: null,
-    secondName: null,
+    lastName: null,
     profile: null,
     specialization: null,
   },
@@ -38,7 +38,8 @@ const initialState = {
     state: null,
     country: null,
     postalCode: null,
-    specialization:null },
+    specialization: null,
+  },
 };
 
 export const authSlice = createSlice({
@@ -56,7 +57,7 @@ export const authSlice = createSlice({
             ...state.user,
             Userabout: res.about,
             firstName: res.firstname,
-            secondName: res.lastname,
+            lastName: res.lastname,
             specialization: res?.specialization,
             profile: res?.profile,
           },

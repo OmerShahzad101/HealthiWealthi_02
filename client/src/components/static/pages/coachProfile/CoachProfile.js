@@ -2,13 +2,19 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Toast from "../../../common/toast/Toast";
 import { Link, useLocation } from "react-router-dom";
-import { getHttpRequest } from "../../../../axios";
+import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import { useSelector } from "react-redux";
 const CoachProfile = (props) => {
   const location = useLocation();
+  const userRole = useSelector((state) => state.auth.user.userRole);
+  const userId = useSelector((state) => state.auth.user.userid);
   const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
+
+  console.log("role", userRole)
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
+
     if (res) {
       setCoachProfileData(res?.data?.coach);
       // Toast.fire({
@@ -18,6 +24,16 @@ const CoachProfile = (props) => {
       return;
     }
   }, []);
+
+
+  const favorite = () => {
+    const payload = {
+      coach_id: coachProfileData._id,
+      client_id: userId
+    }
+    let response = postHttpRequest("/front/favorite/create", payload)
+  }
+
   return (
     <div className="content">
       <div className="container">
@@ -127,9 +143,9 @@ const CoachProfile = (props) => {
                   </ul>
                 </div>
                 <div className="doctor-action">
-                  <a href="#" className="btn btn-white fav-btn">
-                    <i className="far fa-bookmark"></i>
-                  </a>
+                  {userRole == 1 && <a className="btn btn-white fav-btn">
+                    <i className="far fa-bookmark" onClick={() => favorite()}></i>
+                  </a>}
                   <Link to="/chat" className="btn btn-white msg-btn">
                     <i className="far fa-comment-alt"></i>
                   </Link>
@@ -151,7 +167,7 @@ const CoachProfile = (props) => {
                   </Link>
                 </div>
                 <div className="clinic-booking">
-                  <Link className="apt-btn" to="/book-appointment">
+                  <Link className="apt-btn" to="/app/book-appointment">
                     Book Appointment
                   </Link>
                 </div>
