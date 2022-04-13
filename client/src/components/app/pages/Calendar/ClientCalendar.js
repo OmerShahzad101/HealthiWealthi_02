@@ -45,14 +45,29 @@ const ClientCalendar = () => {
         }
 
         if (response && response?.data?.success === true) {
-          console.log("get schedule API working", response);
-
-          for (var i = 0; i < response?.data?.ScheduleData?.selections?.length; i++) {
-            if (!isDateInArray(dates[i], uniqueDates)) {
-              uniqueDates.push(dates[i]);
-            }
+          debugger;
+          let slotsByEachDate = {};
+          let selections = response?.data?.ScheduleData?.selections;
+          for (var i = 0; i < selections.length; i++) {
+            let _start = selections[i]?.start;
+            let _end = selections[i]?.end;
+            let _dateAsIndexed = moment(_start).format("MM_DD_YYYY");
+            let _formatedStartDate = moment(_start).format("MM-DD-YYYY");
+            let _formatedStartTime = moment(_start).format("HH:mm");
+            let _formatedEndTime = moment(_end).format("HH:mm");
+            if(slotsByEachDate[_dateAsIndexed])
+            slotsByEachDate[_dateAsIndexed].push({start: _formatedStartTime, end: _formatedEndTime});
+            else
+              slotsByEachDate[_dateAsIndexed] = [{start: _formatedStartTime, end: _formatedEndTime}];
+            // console.log(_fStart);
+            // console.log(slotsByEachDate);
+            // slotsByEachDate
+            // debugger;
+            // if (!isDateInArray(dates[i], uniqueDates)) {
+            //   uniqueDates.push(dates[i]);
+            // }
           }
-          console.log(uniqueDates)
+          console.log(slotsByEachDate)
         } else {
           console.log(response.data.message);
         }
