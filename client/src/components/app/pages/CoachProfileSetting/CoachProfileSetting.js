@@ -14,8 +14,9 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
 import { Tabs, Tab } from "react-bootstrap";
 import CoachCalendar from "../Calendar/CoachCalendar";
+import ClientCalendar from "../Calendar/ClientCalendar";
 const CoachProfileSetting = () => {
-  const [key, setKey] = useState('user-info');
+  const [key, setKey] = useState('calendar');
  
   const [qualifications, setqualifications] = useState([
     { degree: " ", college: " ", year: " " },
@@ -901,8 +902,8 @@ const CoachProfileSetting = () => {
               <Tab eventKey="availability" title="Availability">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Availability</h4>
-                    <div className="row form-row"></div>
+                    <h4 className="card-title">Trainer Schedule</h4>
+                    <div className="row form-row"> <CoachCalendar availabilityTab = {key}/></div>
                   </div>
                 </div>
               </Tab>
@@ -911,7 +912,7 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                      <CoachCalendar calendarTab = {key}/>
+                     <ClientCalendar/>
                       
                     </div>
                   </div>
