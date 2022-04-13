@@ -19,7 +19,7 @@
     "fullcalendar-reactwrapper": "^1.0.7",
     "google-meet-api": "^1.0.0",
     "jquery": "^3.6.0",
-    "luxon": "^2.1.1",
+    "luxon": "^2.1.1", 
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-available-times": "^1.4.0",
