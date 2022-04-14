@@ -9,6 +9,7 @@ import moment from "moment";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
+import { createGlobalStyle } from "styled-components";
 window.jQuery = $;
 
 const ClientCalendar = () => {
@@ -24,52 +25,55 @@ const ClientCalendar = () => {
   const [loading, setLoading] = useState(false);
   const [disabledPrevButton, setDisabledPrevButton] = useState(true);
   const [slotsByEachDate, setslotsByEachDate] = useState({});
+  //   const[disabled, setDisabled] = useState(true)
 
   useEffect(() => {
     setLoading(true);
-    console.log(endDate);
-    getHttpRequest(`/front/schedule/get/${userid}`)
-      .then((response) => {
-        if (!response) {
-          alert("Something went wrong with response...");
-          return;
-        }
-
-        if (response && response?.data?.success === true) {
-          //let slotsByEachDate = {};
-          let selections = response?.data?.ScheduleData?.selections;
-          for (var i = 0; i < selections.length; i++) {
-            let _start = selections[i]?.start;
-            let _end = selections[i]?.end;
-            let _dateAsIndexed = moment(_start).format("MM/DD/YYYY");
-            let _formatedStartDate = moment(_start).format("MM-DD-YYYY");
-            let _formatedStartTime = moment(_start).format("HH:mm");
-            let _formatedEndTime = moment(_end).format("HH:mm");
-            if (slotsByEachDate[_dateAsIndexed])
-              slotsByEachDate[_dateAsIndexed].push({
-                start: _formatedStartTime,
-                end: _formatedEndTime,
-              });
-            else
-              slotsByEachDate[_dateAsIndexed] = [
-                { start: _formatedStartTime, end: _formatedEndTime },
-              ];
-          }
-          console.log(slotsByEachDate);
-        } else {
-          console.log(response.data.message);
-        }
-      })
-      .catch((e) => {
-        alert(e);
-        console.log("Something went wrongggg...");
-      });
+  console.log(endDate,"useEffect endate")
+   
     generateWeekDates();
-  }, [startDate]);
+  }, [endDate, startDate]);
 
-  const slotsWeekArray = (arr) => {
+  useEffect(()=>{
+    getHttpRequest(`/front/schedule/get/${userid}`)
+    .then((response) => {
+      if (!response) {
+        alert("Something went wrong with response...");
+        return;
+      }
 
-  }
+      if (response && response?.data?.success === true) {
+        //let slotsByEachDate = {};
+        let selections = response?.data?.ScheduleData?.selections;
+        for (var i = 0; i < selections.length; i++) {
+          let _start = selections[i]?.start;
+          let _end = selections[i]?.end;
+          let _dateAsIndexed = moment(_start).format("MM/DD/YYYY");
+          let _formatedStartDate = moment(_start).format("MM-DD-YYYY");
+          let _formatedStartTime = moment(_start).format("HH:mm");
+          let _formatedEndTime = moment(_end).format("HH:mm");
+          if (slotsByEachDate[_dateAsIndexed])
+            slotsByEachDate[_dateAsIndexed].push({
+              start: _formatedStartTime,
+              end: _formatedEndTime,
+            });
+          else
+            slotsByEachDate[_dateAsIndexed] = [
+              { start: _formatedStartTime, end: _formatedEndTime },
+            ];
+        }
+        //console.log(slotsByEachDate);
+      } else {
+        console.log(response.data.message);
+      }
+    })
+    .catch((e) => {
+      alert(e);
+      console.log("Something went wrongggg...");
+    });
+  },[])
+
+  const slotsWeekArray = (arr) => {};
   const generateWeekDates = () => {
     setTimeout(() => {
       if (startDate > today) {
@@ -112,28 +116,33 @@ const ClientCalendar = () => {
     Toast.fire("TimeSlot!", "Date: " + date + ", Time: " + time, "success");
   };
 
-  const handleOnClickNextButton = async () => {
-    var endDate = await endDate;
+  const handleOnClickNextButton =  () => {
+    //   debugger;
+      
+    //  var endDate = endDate;
+    console.log(endDate,"end date message");
 
-    var startDate = moment(endDate).add(1, "days").format("MM/DD/YYYY");
-    endDate = moment(startDate).add(6, "days").format("MM/DD/YYYY");
+    // var startDate = moment(endDate).add(1, "days").format("MM/DD/YYYY");
+    // endDate = moment(startDate).add(6, "days").format("MM/DD/YYYY");
 
-    setDate(startDate);
-    setStartDate(startDate);
-    setEndDate(endDate);
+    
+    setStartDate( (endate) => moment(endDate).add(1, "days").format("MM/DD/YYYY"));
+    setDate( (endate) => moment(endDate).add(1, "days").format("MM/DD/YYYY"));
+    setEndDate((startDate) => moment(startDate).add(6, "days").format("MM/DD/YYYY"));
     setLoading(true);
-    await setInitDatePicker(true);
+    setInitDatePicker(true);
     generateWeekDates();
   };
 
   const handleOnClickPrevButton = () => {
-    var startDate = startDate;
-    var endDate = moment(startDate).subtract(1, "days").format("MM/DD/YYYY");
-    startDate = moment(endDate).subtract(6, "days").format("MM/DD/YYYY");
+    // var startDate = startDate;
+    // var endDate = moment(startDate).subtract(1, "days").format("MM/DD/YYYY");
+    // startDate = moment(endDate).subtract(6, "days").format("MM/DD/YYYY");
 
-    setDate(startDate);
-    setStartDate(startDate);
-    setEndDate(endDate);
+    
+    setStartDate((endDate)=>moment(endDate).subtract(6, "days").format("MM/DD/YYYY"));
+    setDate((endDate)=>moment(endDate).subtract(6, "days").format("MM/DD/YYYY"));
+    setEndDate((startdate)=>moment(startDate).subtract(1, "days").format("MM/DD/YYYY"));
     setLoading(true);
     setInitDatePicker(true);
     generateWeekDates();
@@ -143,18 +152,9 @@ const ClientCalendar = () => {
 
   var timeStops = getTimeStops("00:00", "23:00");
   var selectedHumanReadableDate = moment(date).format("MMM DD, YYYY");
-//   let highlights = [];
-//   var myAray = [];
-//   myAray.push(slotsByEachDate);
-//   console.log("myAray", myAray);
-//   highlights = myAray.map((data) => {
-//     for (const highlightData in data) {
-//       if (highlightData == today) {
-//         return data[highlightData][0].start;
-//       }
-//     }
-//   });
-//   console.log(highlights);
+ let allActiveSlots = [];
+ let activeSlot = [];
+
 
   const gridSlots = dates.map((date, index) => {
     var day = moment(date).format("DD");
@@ -167,7 +167,7 @@ const ClientCalendar = () => {
 
     return (
       <div className={`gridDay ${gridClass}`} key={date}>
-        {console.log("date", date)}
+        {/* {console.log("date", date)} */}
         <div className="gridDayHeader">
           <h3>
             <span
@@ -190,29 +190,47 @@ const ClientCalendar = () => {
           </h3>
         </div>
         <div className="gridSlots">
-          {console.log("stops", timeStops)}
-          {console.log("mytime", slotsByEachDate)}
-          {/* {console.log("myTimeALlIndexData",slotsByEachDateslotsByEachDate)} */}
-          {/* {console.log("Type of slots",typeof(slotsByEachDate[0]))} */}
-          
+          {/* {console.log("stops", timeStops)}
+          {console.log("mytime", slotsByEachDate)} */}
+
+
           {timeStops.map((timeStop) => {
-
-            //   slotsByEachDate.filter((filterActiveDate)=>{
-
-            //   })
+            let disabled = true;
+            for (const filterCurrentDate in slotsByEachDate) {
+              if (filterCurrentDate == date) {
+                // console.log("matched", filterCurrentDate, date);
+                // console.log("asjkhdajkhda", slotsByEachDate[filterCurrentDate]);
+                allActiveSlots = [];
+                activeSlot = [];
+            
+                allActiveSlots = slotsByEachDate[filterCurrentDate].map((data) => {
+                 //console.log(data.start);
+                  return data.start;
+                });
+                //console.log(allActiveSlots);
+                activeSlot = allActiveSlots.filter((val) => timeStop == val);
+                //console.log(activeSlot);
+                if (activeSlot.length) {
+                 // console.log(disabled);
+                  disabled = false; 
+                }
+              }
+            }
+          
             return (
               <div className="gridSlot" key={timeStop}>
                 {date < today ? (
                   <span>{timeStop}</span>
                 ) : (
-                  <Link
+                  <button
+                    disabled={disabled}
                     to="#"
                     onClick={(event) =>
                       handleOnClickGridSlot(event, timeStop, humanReadableDate)
                     }
                   >
                     {timeStop}
-                  </Link>
+                  </button>
                 )}
               </div>
             );

@@ -7400,20 +7400,18 @@ img {
   justify-content: start;
 }
 
-
-
 .gridDays {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.text-right{
+.text-right {
   text-align: right;
 }
-.datepick-wrap{
+.datepick-wrap {
   display: none;
 }
-.week-controls .btn{
+.week-controls .btn {
   background-color: #e9e9e9;
   border: 1px solid #e9e9e9;
   border-radius: 3px;
@@ -7428,7 +7426,7 @@ img {
 .booking-form .gridDayHeaderFull {
   display: none;
 }
-.booking-form .aria-hidden{
+.booking-form .aria-hidden {
   display: none;
 }
 .gridDayHeaderName {
@@ -7455,31 +7453,38 @@ img {
   color: #757575;
   font-weight: 300;
 }
-.gridDayHeader h3{
+.gridDayHeader h3 {
   display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
 }
-.gridSlot a{
+.gridSlot button {
+  background-color: #d32986;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  color: #757575;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.gridSlot button:disabled {
   background-color: #e9e9e9;
-    border: 1px solid #e9e9e9;
-    border-radius: 3px;
-    color: #757575;
-    display: block;
-    font-size: 14px;
-    margin-bottom: 10px;
-    padding: 10px 30px;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
-    transition: .3s ease;
 }
-.gridSlot a:hover{
+.gridSlot button:disabled:hover {
+  background-color: #e9e9e9;
+}
+
+.gridSlot button:hover {
   background-color: #fff;
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
-.trash{
+.trash {
   margin-top: 21px;
 }
