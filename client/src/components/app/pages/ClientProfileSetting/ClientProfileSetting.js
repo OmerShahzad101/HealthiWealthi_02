@@ -99,6 +99,9 @@ const ClientProfileSetting = () => {
           title: "Something went wrong...",
         });
       });
+    
+      window.scrollTo(0, 0);
+
   }
 
   const Upgrade = () => {

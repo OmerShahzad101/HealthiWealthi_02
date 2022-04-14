@@ -14,19 +14,17 @@ const CoachCalendar = ({ availabilityTab }) => {
   const [loadcalender, setLoadcalender] = useState(false);
 
   function loadMoreEvents(calendarId, start, end) {
-    console.log("calendarId");
-    console.log(calendarId, start, end);
+    //console.log("calendarId");
+    console.log("calendarId",calendarId, start, end);
   }
 
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
-        debugger;
         if (!response) {
           alert("Something went wrong with response...");
           return;
         }
-
         if (response && response?.data?.success === true) {
           let newSelections = [];
           if (response?.data?.ScheduleData) {
@@ -41,7 +39,8 @@ const CoachCalendar = ({ availabilityTab }) => {
           }
           setSelections(newSelections);
           setLoadcalender(true);
-        } else {
+        } 
+        else {
           console.log(response.data.message);
         }
       })

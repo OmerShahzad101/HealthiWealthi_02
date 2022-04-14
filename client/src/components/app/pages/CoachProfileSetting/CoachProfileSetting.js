@@ -89,13 +89,13 @@ const CoachProfileSetting = () => {
   /***awards***/
   /*****Experience*****/
   const [experience, setExperience] = useState([
-    { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+    { companyName: "", dateFrom: "", dateTo: "", designation: "" },
   ]);
 
   const addExperience = () => {
     setExperience([
       ...experience,
-      { hospitalName: "", dateFrom: "", dateTo: "", designation: "" },
+      { companyName: "", dateFrom: "", dateTo: "", designation: "" },
     ]);
     console.log("experience", experience);
   };
@@ -104,8 +104,8 @@ const CoachProfileSetting = () => {
     let updatedKeyValue;
 
     const keyValue = experience[index];
-    if (key === "hospitalName") {
-      updatedKeyValue = { ...keyValue, hospitalName: value };
+    if (key === "companyName") {
+      updatedKeyValue = { ...keyValue, companyName: value };
     } else if (key === "dateFrom") {
       updatedKeyValue = { ...keyValue, dateFrom: value };
     } else if (key === "dateTo") {
@@ -296,6 +296,7 @@ const CoachProfileSetting = () => {
           title: "Something went wrong...",
         });
       });
+       window.scrollTo(0, 0);
   }
 
   const upgradePackage = () => {
@@ -663,13 +664,13 @@ const CoachProfileSetting = () => {
                                 <div className="form-group col-12 col-md-6 col-lg-4">
                                   <label>Institute Name</label>
                                   <input
-                                    name="hospitalName"
+                                    name="companyName"
                                     className="form-control"
-                                    value={exp.hospitalName}
+                                    value={exp.companyName}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
-                                        "hospitalName",
+                                        "companyName",
                                         e.target.value
                                       )
                                     }
@@ -897,7 +898,10 @@ const CoachProfileSetting = () => {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Trainer Schedule</h4>
-                    <div className="row form-row"> <CoachCalendar availabilityTab = {key}/></div>
+                    <div className="row form-row">
+                      {" "}
+                      <CoachCalendar availabilityTab={key} />
+                    </div>
                   </div>
                 </div>
               </Tab>
@@ -906,8 +910,7 @@ const CoachProfileSetting = () => {
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
-                     <ClientCalendar/>
-                      
+                      <ClientCalendar />
                     </div>
                   </div>
                 </div>
