@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
+import { check } from "prettier";
 const SearchCoach = () => {
+  // const [male, setmale] = useState(false);
+  // console.log(male)
   const role = useSelector((state) => state.auth.user.userRole);
   const SearchFilter = useRef("");
-  const maleCoach = useRef("");
+  const maleCoach = useRef(false);
   const femaleCoach = useRef("");
   const Certified_Phlebotomy = useRef("");
   const ProfessionalCoder = useRef("");
@@ -15,6 +18,7 @@ const SearchCoach = () => {
   const WellnessHealth = useRef("");
   const PaleoHealth = useRef("");
   const kickBoxing = useRef("");
+  console.log(!maleCoach)
   const coachGender = {
     maleCoach,
     femaleCoach,
@@ -30,7 +34,6 @@ const SearchCoach = () => {
     Certified_Phlebotomy,
     ProfessionalCoder,
   };
-
   const [coachList, setCoachList] = useState([]);
   useEffect(() => {
     getHttpRequest("/front/coach/list")
@@ -43,14 +46,14 @@ const SearchCoach = () => {
       });
   }, []);
   function handleChange(event) {
-    console.log(" kickBoxing", kickBoxing.current.value);
+    console.log(maleCoach)
+    console.log("kickBoxing", kickBoxing.current.value);
     console.log("SearchFilter", SearchFilter.current.value);
   }
 
   return (
     <>
       <div className="breadcrumb-bar">
-        {console.log(coachList)}{" "}
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-md-8 col-12">
@@ -118,8 +121,11 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="gender_type"
+                          // value={male}
+                          // onClick={!setmale}
                           ref={maleCoach}
-                          checked
+                          
+                          // checked
                         />
                         <span className="checkmark"></span> Male Coach
                       </label>
@@ -218,7 +224,6 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          // onChange={handleChange}
                           ref={ProfessionalCoder}
                         />
                         <span className="checkmark"></span> Professional Coder
@@ -383,8 +388,18 @@ const SearchCoach = () => {
                                     View Profile
                                   </Link>
                                 </div>
-
-                                {role === 3 ? (
+                                {role == 1 ? <div className="clinic-booking">
+                                    <Link
+                                      className="apt-btn"
+                                      to={{
+                                        pathname: "/app/book-appointment",
+                                        state: { id: item._id },
+                                      }}
+                                    >
+                                      Book Appointment
+                                    </Link>
+                                  </div>:""}
+                                {/* {role === 3 ? (
                                   <div className="clinic-disable">
                                     <button
                                       disabled
@@ -409,7 +424,7 @@ const SearchCoach = () => {
                                       Book Appointment
                                     </Link>
                                   </div>
-                                )}
+                                )} */}
                               </div>
                             </div>
                           </div>
