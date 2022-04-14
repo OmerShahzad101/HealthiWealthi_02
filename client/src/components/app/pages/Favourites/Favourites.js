@@ -43,7 +43,7 @@ const Favourites = () => {
         icon: "success",
         title: response.data.message
       })
-      getHttpRequest(`/front/favourites/get/${id}`)
+      // getHttpRequest(`/front/favourites/get/${id}`)
     })
     .catch((response) => {
       Toast.fire({
