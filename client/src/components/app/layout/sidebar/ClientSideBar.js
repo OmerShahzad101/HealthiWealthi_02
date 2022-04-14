@@ -25,9 +25,9 @@ if (clientProfile.firstName || clientProfile.lastName) {
                 {data.firstName} {data.lastName}
               </h3>
               <div className="patient-details">
-                <h5>
+                {/* <h5>
                   <i className="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years
-                </h5>
+                </h5> */}
                 <h5 className="mb-0">
                   <i className="fas fa-map-marker-alt"></i> {data.country},{" "}
                   {data.city}
@@ -45,12 +45,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Dashboard</span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/app/favourites">
-                  <i className="fas fa-bookmark"></i>
-                  <span>Client Longevity Club</span>
-                </NavLink>
-              </li>
+             
               <li>
                 <NavLink to="/app/favourites">
                   <i className="fas fa-bookmark"></i>
