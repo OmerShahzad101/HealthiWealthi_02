@@ -10,7 +10,7 @@ export default function Header() {
   const { pathname } = location;
   const splitLocation = pathname.split("/");
   const loginToken = useSelector((state) => state.auth.accessToken);
-  const userRole = useSelector((state) => state.auth.userRole);
+  const userRole = useSelector((state) => state.auth.user.userRole);
 
   useEffect(() => {
     $("body").append('<div class="sidebar-overlay"></div>');

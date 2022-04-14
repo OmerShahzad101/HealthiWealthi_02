@@ -84,7 +84,7 @@ const CoachCalendar = ({ availabilityTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
-                        debugger;
+                        
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);

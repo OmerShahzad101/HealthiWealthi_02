@@ -7,7 +7,7 @@ export default function userHasRole(roleId) {
 
     // Get the user's role ID from store
     const state = store.getState();
-    const userRoleId = state.auth.userRoleId;
+    const userRoleId = state.auth.user.userRoleId;
 
     // Check if user has permission
     return userRoleId && userRoleId === roleId;
