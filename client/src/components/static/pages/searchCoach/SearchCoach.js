@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
-
 const SearchCoach = () => {
+  // const [male, setmale] = useState(false);
+  // console.log(male)
   const role = useSelector((state) => state.auth.user.userRole);
   const SearchFilter = useRef();
   const maleCoach = useRef();
@@ -76,7 +77,6 @@ const SearchCoach = () => {
   return (
     <>
       <div className="breadcrumb-bar">
-        {console.log(coachList)}{" "}
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-md-8 col-12">
@@ -166,7 +166,6 @@ const SearchCoach = () => {
                           name="select_specialist"
                           ref={kickBoxing}
                           value={!kickBoxing}
-                          value="kickBoxing"
                         />
                         <span className="checkmark"></span> Kick Boxing
                       </label>
@@ -413,8 +412,18 @@ const SearchCoach = () => {
                                     View Profile
                                   </Link>
                                 </div>
-
-                                {role === 3 ? (
+                                {role == 1 ? <div className="clinic-booking">
+                                    <Link
+                                      className="apt-btn"
+                                      to={{
+                                        pathname: "/app/book-appointment",
+                                        state: { id: item._id },
+                                      }}
+                                    >
+                                      Book Appointment
+                                    </Link>
+                                  </div>:""}
+                                {/* {role === 3 ? (
                                   <div className="clinic-disable">
                                     <button
                                       disabled
@@ -439,7 +448,7 @@ const SearchCoach = () => {
                                       Book Appointment
                                     </Link>
                                   </div>
-                                )}
+                                )} */}
                               </div>
                             </div>
                           </div>
