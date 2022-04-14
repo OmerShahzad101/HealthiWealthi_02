@@ -23,20 +23,11 @@ const ClientCalendar = () => {
   const [initDatePicker, setInitDatePicker] = useState(true);
   const [loading, setLoading] = useState(false);
   const [disabledPrevButton, setDisabledPrevButton] = useState(true);
-  const [uniqueDates , setUniqueDates] = useState([])
-
-  function isDateInArray(needle, haystack) {
-    for (var i = 0; i < haystack.length; i++) {
-      if (needle.getTime() === haystack[i].getTime()) {
-        return true;
-      }
-    }
-    return false;
-  }
+  const [slotsByEachDate, setslotsByEachDate] = useState({});
 
   useEffect(() => {
     setLoading(true);
-
+    console.log(endDate);
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
         if (!response) {
@@ -45,29 +36,26 @@ const ClientCalendar = () => {
         }
 
         if (response && response?.data?.success === true) {
-          debugger;
-          let slotsByEachDate = {};
+          //let slotsByEachDate = {};
           let selections = response?.data?.ScheduleData?.selections;
           for (var i = 0; i < selections.length; i++) {
             let _start = selections[i]?.start;
             let _end = selections[i]?.end;
-            let _dateAsIndexed = moment(_start).format("MM_DD_YYYY");
+            let _dateAsIndexed = moment(_start).format("MM/DD/YYYY");
             let _formatedStartDate = moment(_start).format("MM-DD-YYYY");
             let _formatedStartTime = moment(_start).format("HH:mm");
             let _formatedEndTime = moment(_end).format("HH:mm");
-            if(slotsByEachDate[_dateAsIndexed])
-            slotsByEachDate[_dateAsIndexed].push({start: _formatedStartTime, end: _formatedEndTime});
+            if (slotsByEachDate[_dateAsIndexed])
+              slotsByEachDate[_dateAsIndexed].push({
+                start: _formatedStartTime,
+                end: _formatedEndTime,
+              });
             else
-              slotsByEachDate[_dateAsIndexed] = [{start: _formatedStartTime, end: _formatedEndTime}];
-            // console.log(_fStart);
-            // console.log(slotsByEachDate);
-            // slotsByEachDate
-            // debugger;
-            // if (!isDateInArray(dates[i], uniqueDates)) {
-            //   uniqueDates.push(dates[i]);
-            // }
+              slotsByEachDate[_dateAsIndexed] = [
+                { start: _formatedStartTime, end: _formatedEndTime },
+              ];
           }
-          console.log(slotsByEachDate)
+          console.log(slotsByEachDate);
         } else {
           console.log(response.data.message);
         }
@@ -77,8 +65,11 @@ const ClientCalendar = () => {
         console.log("Something went wrongggg...");
       });
     generateWeekDates();
-  }, []);
+  }, [startDate]);
 
+  const slotsWeekArray = (arr) => {
+
+  }
   const generateWeekDates = () => {
     setTimeout(() => {
       if (startDate > today) {
@@ -111,7 +102,7 @@ const ClientCalendar = () => {
     var timeStops = [];
 
     while (startTime <= endTime) {
-      timeStops.push(new moment(startTime).format("hh:mm A"));
+      timeStops.push(new moment(startTime).format("HH:mm"));
       startTime.add(60, "minutes");
     }
     return timeStops;
@@ -119,11 +110,11 @@ const ClientCalendar = () => {
   const handleOnClickGridSlot = (event, time, date) => {
     event.preventDefault();
     Toast.fire("TimeSlot!", "Date: " + date + ", Time: " + time, "success");
-
   };
 
-  const handleOnClickNextButton = () => {
-    var endDate = endDate;
+  const handleOnClickNextButton = async () => {
+    var endDate = await endDate;
+
     var startDate = moment(endDate).add(1, "days").format("MM/DD/YYYY");
     endDate = moment(startDate).add(6, "days").format("MM/DD/YYYY");
 
@@ -131,7 +122,7 @@ const ClientCalendar = () => {
     setStartDate(startDate);
     setEndDate(endDate);
     setLoading(true);
-    setInitDatePicker(true);
+    await setInitDatePicker(true);
     generateWeekDates();
   };
 
@@ -152,6 +143,18 @@ const ClientCalendar = () => {
 
   var timeStops = getTimeStops("00:00", "23:00");
   var selectedHumanReadableDate = moment(date).format("MMM DD, YYYY");
+//   let highlights = [];
+//   var myAray = [];
+//   myAray.push(slotsByEachDate);
+//   console.log("myAray", myAray);
+//   highlights = myAray.map((data) => {
+//     for (const highlightData in data) {
+//       if (highlightData == today) {
+//         return data[highlightData][0].start;
+//       }
+//     }
+//   });
+//   console.log(highlights);
 
   const gridSlots = dates.map((date, index) => {
     var day = moment(date).format("DD");
@@ -164,6 +167,7 @@ const ClientCalendar = () => {
 
     return (
       <div className={`gridDay ${gridClass}`} key={date}>
+        {console.log("date", date)}
         <div className="gridDayHeader">
           <h3>
             <span
@@ -186,22 +190,33 @@ const ClientCalendar = () => {
           </h3>
         </div>
         <div className="gridSlots">
-          {timeStops.map((timeStop) => (
-            <div className="gridSlot" key={timeStop}>
-              {date < today ? (
-                <span>{timeStop}</span>
-              ) : (
-                <Link
-                  to="#"
-                  onClick={(event) =>
-                    handleOnClickGridSlot(event, timeStop, humanReadableDate)
-                  }
-                >
-                  {timeStop}
-                </Link>
-              )}
-            </div>
-          ))}
+          {console.log("stops", timeStops)}
+          {console.log("mytime", slotsByEachDate)}
+          {/* {console.log("myTimeALlIndexData",slotsByEachDateslotsByEachDate)} */}
+          {/* {console.log("Type of slots",typeof(slotsByEachDate[0]))} */}
+          
+          {timeStops.map((timeStop) => {
+
+            //   slotsByEachDate.filter((filterActiveDate)=>{
+
+            //   })
+            return (
+              <div className="gridSlot" key={timeStop}>
+                {date < today ? (
+                  <span>{timeStop}</span>
+                ) : (
+                  <Link
+                    to="#"
+                    onClick={(event) =>
+                      handleOnClickGridSlot(event, timeStop, humanReadableDate)
+                    }
+                  >
+                    {timeStop}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
