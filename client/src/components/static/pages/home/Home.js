@@ -107,44 +107,6 @@ export default function Home(props) {
                   <a href="#">Read More..</a>
                 </div>
               </div>
-<<<<<<< HEAD
-            </div>
-            <div className="col-lg-8 doctor-slider slider">
-              {coachList ? (
-                <Slider {...settings}>
-                  {coachList.map(
-                    (e, idx) =>
-                      e?.firstname &&
-                      e?.lastname && (
-                        <div key={`coach_${idx}`} className="profile-widget">
-                          <div className="doc-img">
-                            <Link to="/coach-profile">
-                              <img
-                                className="img-fluid"
-                                alt="User"
-                                src="assets/img/doctors/doctor-02.jpg"
-                              />
-                            </Link>
-                            {console.log("role", role)}
-                            {role == 1 && (
-                              <a className="fav-btn">
-                                <i
-                                  className="far fa-bookmark"
-                                  onClick={() => favorite(e?._id)}
-                                ></i>
-                              </a>
-                            )}
-                          </div>
-                          <div className="pro-content">
-                            <h3 className="title">
-                              <Link to="/coach-profile">
-                                {e?.firstname + " " + e?.lastname}
-                              </Link>
-                              <i className="fas fa-check-circle verified"></i>
-                            </h3>
-                            <p className="speciality">{e?.about}</p>
-                            {/* <div className="rating">
-=======
               <div className="col-lg-8 doctor-slider slider">
                 {coachList ? (<Slider {...settings}>
                   {coachList.map((e, idx) =>
@@ -170,7 +132,6 @@ export default function Home(props) {
                           {e?.specialization && e.specialization != ''  ? e.specialization: 'N/A'}
                         </p>
                         {/* <div className="rating">
->>>>>>> a5bf3158f4e83bd7b83b2eb4ce5c577190fe57f7
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
                       <i className="fas fa-star filled"></i>
@@ -180,62 +141,6 @@ export default function Home(props) {
                         (35)
                       </span>
                     </div> */}
-<<<<<<< HEAD
-                            <ul className="available-info">
-                              {(e.country || e.city) && (
-                                <li>
-                                  <i className="fas fa-map-marker-alt"></i>
-                                  {e?.country + ", " + e?.city}
-                                </li>
-                              )}
-                              {/* <li>
-                        <i className="far fa-clock"></i> Available on Fri, 22
-                        Mar
-                      </li> */}
-                              <li>
-                                <i className="far fa-money-bill-alt"></i>
-                                {e?.price}{" "}
-                                <i
-                                  className="fas fa-info-circle"
-                                  data-toggle="tooltip"
-                                  title="Lorem Ipsum"
-                                ></i>
-                              </li>
-                            </ul>
-                            <div className="row row-sm">
-                              <div className="col-6">
-                                <Link
-                                  to={{
-                                    pathname: "/coach-profile",
-                                    state: { id: e?._id },
-                                  }}
-                                  // to="/coach-profile"
-                                  className="btn view-btn"
-                                >
-                                  View Profile
-                                </Link>
-                              </div>
-                              {role === 3 ? (
-                                <div className="col-6">
-                                  <button disabled className="disable-book-btn">
-                                    Book Now
-                                  </button>
-                                </div>
-                              ) : (
-                                <div className="col-6">
-                                  <Link
-                                    to="app/book-appointment"
-                                    className="btn book-btn"
-                                  >
-                                    Book Now
-                                  </Link>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )
-=======
                         <ul className="available-info">
                           {(e.country || e.city) &&
                             <li>
@@ -276,7 +181,6 @@ export default function Home(props) {
                         </div>
                       </div>
                     </div>
->>>>>>> a5bf3158f4e83bd7b83b2eb4ce5c577190fe57f7
                   )}
 
                   {/* <div className="profile-widget">
@@ -342,20 +246,11 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div> */}
-<<<<<<< HEAD
-                </Slider>
-              ) : (
-                <div className="no_data">
-                  <span>No Coaches found</span>
-                </div>
-              )}
-=======
 
                 </Slider>) : <div className="no_data">
                   <span>No Coaches found</span>
                 </div>}
               </div>
->>>>>>> a5bf3158f4e83bd7b83b2eb4ce5c577190fe57f7
             </div>
           </div>
         </section>
