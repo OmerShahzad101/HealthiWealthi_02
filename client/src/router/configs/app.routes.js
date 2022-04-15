@@ -10,9 +10,6 @@ const CoachDashboardWithSuspense = withSuspense(CoachDashboard);
 const CoachChangePassword = lazy(() =>import( /* webpackChunkName: "CoachChangePassword" */ "../../components/app/pages/CoachChangePassword/CoachChangePassword"));
 const CoachChangePasswordWithSuspense = withSuspense(CoachChangePassword);
 
-// const CoachProfile = lazy(() =>import(/* webpackChunkName: "CoachProfile" */ "../../components/app/pages/CoachProfile/CoachProfile"));
-// const CoachProfileWithSuspense = withSuspense(CoachProfile);
-
 const UpgradeProfile = lazy(() =>import( /* webpackChunkName: "CoachProfile" */ "../../components/app/pages/UpgradeProfile/UpgradeProfile"));
 const UpgradeProfileWithSuspense = withSuspense(UpgradeProfile);
 
@@ -63,11 +60,6 @@ const ClientChangePasswordWithSuspense = withSuspense(ClientChangePassword);
 
 function getRouteConfigs() {
   return [
-    // {
-    //   path: routes.APP,
-    //   exact: true,
-    //   redirect: routes.DASHBOARD,
-    // },
     {
       // Coach Dashboard ROUTE
       path: routes.COACH_DASHBOARD,
@@ -80,12 +72,6 @@ function getRouteConfigs() {
       exact: true,
       element: <CoachChangePasswordWithSuspense />,
     },
-    // {
-    //   // Coach Profile ROUTE
-    //   path: routes.COACH_PROFILE,
-    //   exact: true,
-    //   element: <CoachProfileWithSuspense />,
-    // },
     {
       // Coach Profile Setting ROUTE
       path: routes.COACH_PROFILE_SETTING,
@@ -176,7 +162,6 @@ function getRouteConfigs() {
       exact: true,
       element: <ClientChangePasswordWithSuspense />,
     },
-
     {
       // NOT FOUND ROUTE
       path: "*",

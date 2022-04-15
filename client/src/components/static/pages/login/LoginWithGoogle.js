@@ -6,6 +6,8 @@ import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import {
   DASHBOARD,
+  CLIENT_PROFILE_SETTING,
+  COACH_PROFILE_SETTING,
   CLIENT_DASHBOARD,
   COACH_DASHBOARD,
 } from "../../../../router/constants/ROUTES";
@@ -62,9 +64,9 @@ const LoginWithGoogle = () => {
                 dispatch(setUser(userData));
                 dispatch(setAccessToken(response.data.accessToken));
                 if (response?.data?.user?.type == 1) {
-                  history.replace(CLIENT_DASHBOARD);
+                  history.replace(CLIENT_PROFILE_SETTING);
                 } else if (response?.data?.user?.type == 3) {
-                  history.replace(COACH_DASHBOARD);
+                  history.replace(COACH_PROFILE_SETTING);
                 }
               } else {
                 Toast.fire({

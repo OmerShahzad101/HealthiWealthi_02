@@ -1,27 +1,14 @@
-import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Spinner, Button } from "react-bootstrap";
+import LoginWithGoogle from "./LoginWithGoogle";
 import Toast from "../../../common/toast/Toast";
+import { useRef, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { setInfoData } from "../../../../store/slices/user";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import {
-  DASHBOARD,
-  CLIENT_DASHBOARD,
-  COACH_DASHBOARD,
-} from "../../../../router/constants/ROUTES";
+import { getHttpRequest, postHttpRequest} from "../../../../axios";
+import { setUser, setAccessToken} from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import {
-  cancelOngoingHttpRequest,
-  getHttpRequest,
-  postHttpRequest,
-  putHttpRequest,
-} from "../../../../axios";
-import {
-  setUser,
-  setUserPermissions,
-  setAccessToken,
-} from "../../../../store/slices/auth";
-import LoginWithGoogle from "./LoginWithGoogle";
+import {CLIENT_PROFILE_SETTING,COACH_PROFILE_SETTING,} from "../../../../router/constants/ROUTES";
 
 const Login = (props) => {
   const history = useHistory();
@@ -41,11 +28,7 @@ const Login = (props) => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const loginData = {
-      email,
-      password,
-    };
-
+    const loginData = { email, password };
     const errors = validate(loginData);
 
     if (Object.keys(errors).length > 0) {
@@ -59,7 +42,6 @@ const Login = (props) => {
     // __ __ __ __ //
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
-      console.log(response);
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -75,26 +57,21 @@ const Login = (props) => {
         });
         return;
       }
-
       if (response.data.success) {
         setIsLoading(false);
-        let res = await getHttpRequest(
-          `/front/coach/get/${response?.data?.data?._id}`
-        );
-
+        let res = await getHttpRequest( `/front/coach/get/${response?.data?.data?._id}`);
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
           dispatch(setUser(userData));
-
           dispatch(setAccessToken(response.data.data.accessToken));
 
           if (response?.data?.data?.type == 1) {
-            history.replace(CLIENT_DASHBOARD);
+            history.replace(CLIENT_PROFILE_SETTING);
           } else if (response?.data?.data?.type == 3) {
-            history.replace(COACH_DASHBOARD);
+            history.replace(COACH_PROFILE_SETTING);
           }
         } else {
           Toast.fire({
@@ -116,7 +93,6 @@ const Login = (props) => {
   return (
     <div className="account-page">
       <div className="content">
-        <div className="text-center mb-md-5 mb-3">{/* <Logo /> */}</div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-7 text-center ">
