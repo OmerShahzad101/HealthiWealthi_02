@@ -18,7 +18,8 @@ const Favourites = () => {
             icon: "success",
             title: response.data.message
           })
-        }else{
+        }
+        else{
           Toast.fire({
             icon: "info",
             title: "No data found"
@@ -32,6 +33,7 @@ const Favourites = () => {
         })
       });
   }, []);
+
   const favorite = (e) =>{
     const payload = {
       coachId: e,
@@ -43,7 +45,6 @@ const Favourites = () => {
         icon: "success",
         title: response.data.message
       })
-      // getHttpRequest(`/front/favourites/get/${id}`)
     })
     .catch((response) => {
       Toast.fire({
@@ -51,14 +52,19 @@ const Favourites = () => {
         title: response.data.message
       })
     });
+    getHttpRequest(`/front/favourites/get/${id}`)
+      .then((response) => {
+        setfavouriteList(response.data.favouriteData);
+      })
   }
+
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="row row-grid">
           {
           favouriteList ? favouriteList?.clientFavourite?.map((e,idx)=>
-            <div className="col-md-6 col-lg-4 col-xl-3">
+            <div className="col-md-6 col-lg-4 col-xl-3" key={idx}>
             <div className="profile-widget">
               <div className="doc-img">
                 <Link to="/coach-profile">
