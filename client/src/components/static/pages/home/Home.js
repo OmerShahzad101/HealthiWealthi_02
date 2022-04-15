@@ -27,26 +27,23 @@ export default function Home(props) {
   }, []);
   const searchHandler = (e) => {
     e.preventDefault();
-     payload = {
-      searchName : searchNameRef.current.value
-    }
-    postHttpRequest("/front/search", payload).then((response) => {
-      if(response.data){
-        history.push({
-          pathname: "/search-coach",
-          state: { name: payload }
-        })
-      }
-      // Toast.fire({
-      //   icon: "success",
-      //   title: response.data.message
-      // })
-    })
-    .catch((response) => {
-     console.log("Error")
-    });
-    console.log(payload)
-  }
+    payload = {
+      searchName: searchNameRef.current.value,
+    };
+    postHttpRequest("/front/search", payload)
+      .then((response) => {
+        if (response.data) {
+          history.push({
+            pathname: "/search-coach",
+            state: { name: { payload } },
+          });
+        }
+      })
+      .catch((response) => {
+        console.log("Error");
+      });
+    console.log(payload);
+  };
   const settings = {
     dots: false,
     autoplay: false,
@@ -60,10 +57,10 @@ export default function Home(props) {
     };
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
-        Toast.fire({
-          icon: "success",
-          title: response.data.message,
-        });
+        // Toast.fire({
+        //   icon: "success",
+        //   title: response.data.message,
+        // });
       })
       .catch((response) => {
         Toast.fire({
