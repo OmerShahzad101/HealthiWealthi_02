@@ -121,110 +121,111 @@ export default function Home(props) {
                 <h2>Book Our Coach</h2>
                 <p>Lorem Ipsum is simply dummy text </p>
               </div>
-              <div className="col-lg-8 doctor-slider slider">
-                {coachList ? (
-                  <Slider {...settings}>
-                    {coachList.map(
-                      (e, idx) =>
-                        e?.firstname &&
-                        e?.lastname && (
-                          <div key={`coach_${idx}`} className="profile-widget">
-                            <div className="doc-img">
-                              <Link to="/coach-profile">
-                                <img
-                                  className="img-fluid"
-                                  alt="User"
-                                  src={
-                                    e?.profileImage
-                                      ? mediaPath + e.profileImage
-                                      : mediaPath + "avatar.jpg"
-                                  }
-                                />
-                              </Link>
-                              {role === 1 && (
-                                <>
-                                  {e?.isFavourite === true ? (
-                                    <a className="not-fav-btn">
-                                      <i
-                                        className="far fa-bookmark"
-                                        onClick={() => favorite(e?._id)}
-                                      ></i>
-                                    </a>
-                                  ) : (
-                                    <a className="fav-btn">
-                                      <i
-                                        className="far fa-bookmark"
-                                        onClick={() => favorite(e?._id)}
-                                      ></i>
-                                    </a>
-                                  )}
-                                </>
-                              )}
-                            </div>
-                            <div className="pro-content">
-                              <h3 className="title">
-                                <Link to="/coach-profile">
-                                  {e?.firstname + " " + e?.lastname}
-                                </Link>
-                                <i className="fas fa-check-circle verified"></i>
-                              </h3>
-                              <p className="speciality">
-                                {e?.specialization && e.specialization != ""
-                                  ? e.specialization
-                                  : "N/A"}
-                              </p>
+            </div>
 
-                              <ul className="available-info">
-                                {(e.country || e.city) && (
-                                  <li>
-                                    <i className="fas fa-map-marker-alt"></i>
-                                    {e?.country + ", " + e?.city}
-                                  </li>
+            <div className="col-lg-8 doctor-slider slider">
+              {coachList ? (
+                <Slider {...settings}>
+                  {coachList.map(
+                    (e, idx) =>
+                      e?.firstname &&
+                      e?.lastname && (
+                        <div key={`coach_${idx}`} className="profile-widget">
+                          <div className="doc-img">
+                            <Link to="/coach-profile">
+                              <img
+                                className="img-fluid"
+                                alt="User"
+                                src={
+                                  e?.profileImage
+                                    ? mediaPath + e.profileImage
+                                    : mediaPath + "avatar.jpg"
+                                }
+                              />
+                            </Link>
+                            {role === 1 && (
+                              <>
+                                {e?.isFavourite === true ? (
+                                  <a className="not-fav-btn">
+                                    <i
+                                      className="far fa-bookmark"
+                                      onClick={() => favorite(e?._id)}
+                                    ></i>
+                                  </a>
+                                ) : (
+                                  <a className="fav-btn">
+                                    <i
+                                      className="far fa-bookmark"
+                                      onClick={() => favorite(e?._id)}
+                                    ></i>
+                                  </a>
                                 )}
+                              </>
+                            )}
+                          </div>
+                          <div className="pro-content">
+                            <h3 className="title">
+                              <Link to="/coach-profile">
+                                {e?.firstname + " " + e?.lastname}
+                              </Link>
+                              <i className="fas fa-check-circle verified"></i>
+                            </h3>
+                            <p className="speciality">
+                              {e?.specialization && e.specialization != ""
+                                ? e.specialization
+                                : "N/A"}
+                            </p>
 
+                            <ul className="available-info">
+                              {(e.country || e.city) && (
                                 <li>
-                                  <i className="far fa-money-bill-alt"></i>
-                                  {e?.price}{" "}
-                                  <i
-                                    className="fas fa-info-circle"
-                                    data-toggle="tooltip"
-                                    title="Lorem Ipsum"
-                                  ></i>
+                                  <i className="fas fa-map-marker-alt"></i>
+                                  {e?.country + ", " + e?.city}
                                 </li>
-                              </ul>
-                              <div className="row row-sm">
+                              )}
+
+                              <li>
+                                <i className="far fa-money-bill-alt"></i>
+                                {e?.price}{" "}
+                                <i
+                                  className="fas fa-info-circle"
+                                  data-toggle="tooltip"
+                                  title="Lorem Ipsum"
+                                ></i>
+                              </li>
+                            </ul>
+                            <div className="row row-sm">
+                              <div className="col-6">
+                                <Link
+                                  to="/coach-profile"
+                                  className="btn view-btn"
+                                >
+                                  View Profile
+                                </Link>
+                              </div>
+                              {role === 1 ? (
                                 <div className="col-6">
                                   <Link
-                                    to="/coach-profile"
-                                    className="btn view-btn"
+                                    to="app/book-appointment"
+                                    className="btn book-btn"
                                   >
-                                    View Profile
+                                    Book Now
                                   </Link>
                                 </div>
-                                {role === 1 ? (
-                                  <div className="col-6">
-                                    <Link
-                                      to="app/book-appointment"
-                                      className="btn book-btn"
-                                    >
-                                      Book Now
-                                    </Link>
-                                  </div>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </div>
-                        )
-                    )}
-                  </Slider>
-                ) : (
-                  <div className="no_data">
-                    <span>No Coaches found</span>
-                  </div>
-                )}
-              </div>
+                        </div>
+                      )
+                  )}
+                </Slider>
+              ) : (
+                <div className="no_data">
+                  <span>No Coaches found</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
