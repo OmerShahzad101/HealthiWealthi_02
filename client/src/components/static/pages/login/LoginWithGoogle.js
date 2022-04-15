@@ -151,7 +151,7 @@ const LoginWithGoogle = () => {
     <>
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Continue with google"
+        buttonText="Continue with Google"
         className=" btn btn-google btn-block "
         onSuccess={handleLogin}
         onFailure={handleFail}
