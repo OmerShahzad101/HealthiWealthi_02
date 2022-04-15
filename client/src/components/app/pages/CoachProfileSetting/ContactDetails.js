@@ -14,6 +14,7 @@ import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 
 const ContactDetails = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const userid = useSelector((state) => state.auth.user.userid);
@@ -41,13 +42,10 @@ const ContactDetails = () => {
 
     const payload = {
       phone,
-
       address,
       postalCode,
-
       city,
       state,
-
       country,
       _id: userid,
     };
@@ -70,8 +68,7 @@ const ContactDetails = () => {
           return;
         }
         if (result.data.success === true) {
-          // dispatch(setCoachProfile({ res: result.data.coach }));
-          // dispatch(setUser(response));
+          dispatch(setCoachProfile({ res: result.data.coach }));
           Toast.fire({
             icon: "success",
             title: result.data.message,
@@ -204,14 +201,14 @@ const ContactDetails = () => {
               </div>
             </div>
             <div className="submit-section submit-btn-bottom">
-                  <button
-                    type="button"
-                    onClick={updateProfileHandler}
-                    className="btn btn-primary submit-btn"
-                  >
-                    Save Changes
-                  </button>
-                </div>
+              <button
+                type="button"
+                onClick={updateProfileHandler}
+                className="btn btn-primary submit-btn"
+              >
+                Save Changes
+              </button>
+            </div>
           </div>
         </div>
       </div>
