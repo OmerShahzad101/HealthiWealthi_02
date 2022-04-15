@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
+import { useHistory } from "react-router-dom";
 export default function Home(props) {
   const mediaPath = process.env.REACT_APP_IMG;
   console.log("process.env", process.env);
   const userId = useSelector((state) => state.auth.user.userid);
   const [coachList, setCoachList] = useState([]);
+  const searchNameRef = useRef();
+  const history = useHistory();
+  let payload;
   const role = useSelector(state => state.auth.user.userRole);
   useEffect(() => {
     getHttpRequest("/front/coach/list")
@@ -19,7 +23,28 @@ export default function Home(props) {
         console.log("error");
       });
   }, []);
-
+  const searchHandler= (e)=>{
+    e.preventDefault();
+     payload = {
+      searchName : searchNameRef.current.value
+    }
+    postHttpRequest("/front/search", payload).then((response) => {
+      if(response.data){
+        history.push({
+          pathname: "/search-coach",
+          state: { name: {payload} }
+        })
+      }
+      // Toast.fire({
+      //   icon: "success",
+      //   title: response.data.message
+      // })
+    })
+    .catch((response) => {
+     console.log("Error")
+    });
+    console.log(payload)
+  }
   const settings = {
     dots: false,
     autoplay: false,
@@ -56,7 +81,7 @@ export default function Home(props) {
 
               {/* <!-- Search --> */}
               <div className="search-box">
-                <form action="#">
+                <form>
                   <div className="form-group search-location">
                     <input
                       type="text"
@@ -70,12 +95,13 @@ export default function Home(props) {
                       type="text"
                       className="form-control"
                       placeholder="Search Coach"
+                      ref={searchNameRef}
                     />
                     <span className="form-text">
                       Ex : Nutritionists or Yoga Expert etc
                     </span>
                   </div>
-                  <button type="submit" className="btn btn-primary search-btn">
+                  <button type="submit" className="btn btn-primary search-btn" onClick={searchHandler}>
                     <i className="fas fa-search"></i> <span>Search</span>
                   </button>
                 </form>
@@ -119,9 +145,18 @@ export default function Home(props) {
                             src={e?.profileImage ? mediaPath+e.profileImage : mediaPath+'avatar.jpg'}
                           />
                         </Link>
-                        {role == 1 && <a className="fav-btn">
+                        {
+                        role === 1 && <>
+                        {
+                        e?.isFavourite === true ?
+                        <a className="not-fav-btn">
                           <i className="far fa-bookmark" onClick={() => favorite(e?._id)} ></i>
-                        </a>}
+                        </a>:
+                        <a className="fav-btn">
+                        <i className="far fa-bookmark" onClick={() => favorite(e?._id)} ></i>
+                      </a>
+                        }</>
+                        }
                       </div>
                       <div className="pro-content">
                         <h3 className="title">
