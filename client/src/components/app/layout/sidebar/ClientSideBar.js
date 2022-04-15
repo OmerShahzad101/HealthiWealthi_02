@@ -5,7 +5,7 @@ import imagePath from "../../../../utils/url/imagePath";
 import { useEffect } from "react";
 const ClientSideBar = () => {
 let data;
-const user = useSelector((state) => state.auth.user);
+const user = useSelector((state) => state.user);
 const clientProfile = useSelector((state) => state.auth.clientProfile);
 console.log("clientProfile", clientProfile);
 if (clientProfile.firstName || clientProfile.lastName) {
@@ -47,6 +47,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Dashboard</span>
                 </NavLink>
               </li>
+              {/* <li>
               <li>
                 <NavLink to="/app/client-profile-setting">
                   <i className="fas fa-user-cog"></i>
@@ -58,7 +59,8 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <i className="fas fa-bookmark"></i>
                   <span>Booking</span>
                 </NavLink>
-              </li>
+              </li> */}
+
               <li>
                 <NavLink to="/app/favourites">
                   <i className="fas fa-bookmark"></i>
