@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
+import imagePath from "../../../../utils/url/imagePath";
 import { useEffect } from "react";
 const ClientSideBar = () => {
 let data;
 const user = useSelector((state) => state.auth.user);
 const clientProfile = useSelector((state) => state.auth.clientProfile);
+console.log("clientProfile", clientProfile);
 if (clientProfile.firstName || clientProfile.lastName) {
   data = clientProfile;
 } else {
@@ -18,7 +20,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-              <img src="/assets/img/patients/patient.jpg" alt="User Image" />
+              <img src={imagePath(user.avatar)} alt="User Image" />
             </a>
             <div className="profile-det-info">
               <h3>
@@ -49,6 +51,12 @@ if (clientProfile.firstName || clientProfile.lastName) {
                 <NavLink to="/app/client-profile-setting">
                   <i className="fas fa-user-cog"></i>
                   <span>Profile Settings</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/app/book-appointment">
+                  <i className="fas fa-bookmark"></i>
+                  <span>Booking</span>
                 </NavLink>
               </li>
               <li>

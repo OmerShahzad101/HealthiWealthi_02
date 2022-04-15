@@ -73,7 +73,7 @@ const ClientProfileSetting = () => {
     setIsLoading(true);
     putHttpRequest("/front/client/edit", payload)
       .then((res) => {
-        console.log("client", res?.data.client);
+ 
         setIsLoading(false);
 
         if (!res) {
@@ -83,7 +83,7 @@ const ClientProfileSetting = () => {
         }
 
         if (res) {
-          console.log("coach ", res);
+       
           const userData = { res: res?.data.client };
           dispatch(setClientProfile(userData));
           Toast.fire({
@@ -111,13 +111,13 @@ const ClientProfileSetting = () => {
 
   const Upgrade = () => {
     history.push("/coach-upgrade-profile");
-    console.log("dssd");
+ 
   };
 
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`)
       .then((response) => {
-        console.log("coach", response?.data.coach);
+      
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
@@ -249,7 +249,7 @@ const ClientProfileSetting = () => {
                       name="username"
                       className="form-control"
                       placeholder="username"
-                      value={profileData?.username}
+                      value={profileData?.username || ""}
                       disabled
                     />
                     <label>Username</label>
@@ -262,7 +262,7 @@ const ClientProfileSetting = () => {
                       name="email"
                       className="form-control"
                       placeholder="email"
-                      value={profileData?.email}
+                      value={profileData?.email || ""}
                       disabled
                     />
                     <label>Email</label>
@@ -276,12 +276,14 @@ const ClientProfileSetting = () => {
                       ref={firstnameRef}
                       className="form-control"
                       placeholder="first name"
-                      defaultValue={profileData?.firstname}
+                      defaultValue={profileData?.firstname || ""}
                     />
                     <label>
                       First Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">{validationErrors.firstname}</span>
+                    <span className="errors">
+                      {validationErrors.firstname || ""}
+                    </span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -292,12 +294,14 @@ const ClientProfileSetting = () => {
                       ref={lastnameRef}
                       className="form-control"
                       placeholder="last name"
-                      defaultValue={profileData?.lastname}
+                      defaultValue={profileData?.lastname || ""}
                     />
                     <label>
                       Last Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">{validationErrors.lastname}</span>
+                    <span className="errors">
+                      {validationErrors.lastname || ""}
+                    </span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -305,9 +309,9 @@ const ClientProfileSetting = () => {
                     <select
                       className="form-select"
                       ref={genderRef}
-                      defaultValue={profileData?.gender}
+                      defaultValue={profileData?.gender || ""}
                     >
-                      <option value="" selected disabled>
+                      <option value="" disabled>
                         Open this select menu
                       </option>
                       <option name="male" value="male">
@@ -325,7 +329,7 @@ const ClientProfileSetting = () => {
                     <select
                       className="form-select"
                       ref={bloodgroupRef}
-                      defaultValue={profileData?.bloodgroup}
+                      defaultValue={profileData?.bloodgroup || ""}
                     >
                       <option value="" disabled>
                         Open this select menu
@@ -367,7 +371,7 @@ const ClientProfileSetting = () => {
                       ref={phoneRef}
                       className="form-control"
                       placeholder="Phone Number"
-                      defaultValue={profileData?.phone}
+                      defaultValue={profileData?.phone || ""}
                     />
                     <label>Phone Number</label>
                   </div>
@@ -381,7 +385,7 @@ const ClientProfileSetting = () => {
                       className="form-control"
                       placeholder="about"
                       style={{ minHeight: "100px" }}
-                      defaultValue={profileData?.about}
+                      defaultValue={profileData?.about || ""}
                     />
                     <label>Briefly describe about yourself</label>
                   </div>
@@ -392,7 +396,7 @@ const ClientProfileSetting = () => {
                       ref={addressRef}
                       className="form-control"
                       placeholder="address"
-                      defaultValue={profileData?.address}
+                      defaultValue={profileData?.address || ""}
                     />
                     <label>Address</label>
                   </div>
@@ -405,7 +409,7 @@ const ClientProfileSetting = () => {
                       ref={cityRef}
                       className="form-control"
                       placeholder="city"
-                      defaultValue={profileData?.city}
+                      defaultValue={profileData?.city || ""}
                     />
                     <label>City</label>
                   </div>
@@ -418,7 +422,7 @@ const ClientProfileSetting = () => {
                       ref={stateRef}
                       className="form-control"
                       placeholder="state"
-                      defaultValue={profileData?.state}
+                      defaultValue={profileData?.state || ""}
                     />
                     <label>State</label>
                   </div>
@@ -431,7 +435,7 @@ const ClientProfileSetting = () => {
                       ref={countryRef}
                       className="form-control"
                       placeholder="country"
-                      defaultValue={profileData?.country}
+                      defaultValue={profileData?.country || ""}
                     />
                     <label>Country</label>
                   </div>
@@ -444,7 +448,7 @@ const ClientProfileSetting = () => {
                       ref={postalCodeRef}
                       className="form-control"
                       placeholder="postalCode"
-                      defaultValue={profileData?.postalCode}
+                      defaultValue={profileData?.postalCode || ""}
                     />
                     <label>Postal Code</label>
                   </div>

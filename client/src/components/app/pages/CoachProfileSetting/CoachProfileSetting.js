@@ -123,7 +123,7 @@ const CoachProfileSetting = () => {
   const removeExpirence = (i) => {
     if (i) {
       const newArray = [...experience];
-      const updateAwards = newArray.splice(i, 1);;
+      const updateAwards = newArray.splice(i, 1);
       console.log("newArray", i, updateAwards);
       setExperience([...newArray]);
     }
@@ -138,15 +138,11 @@ const CoachProfileSetting = () => {
   const specializationRef = useRef();
   const firstnameRef = useRef();
   const lastnameRef = useRef();
-  const phoneRef = useRef();
+ 
   const genderRef = useRef();
   const aboutRef = useRef();
-  const addressRef = useRef();
-  const postalCodeRef = useRef();
+ 
   const priceRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const countryRef = useRef();
   const degree = useRef();
   const institute = useRef();
   const yearOfCompletion = useRef();
@@ -233,31 +229,26 @@ const CoachProfileSetting = () => {
     const specialization = specializationRef.current.value;
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phone = phoneRef.current.value;
+    
     const gender = genderRef.current.value;
     const about = aboutRef.current.value;
-    const address = addressRef.current.value;
-    const postalCode = postalCodeRef.current.value;
+  
     const price = priceRef.current.value;
-    const city = cityRef.current.value;
-    const state = stateRef.current.value;
-    const country = countryRef.current.value;
+
 
     const payload = {
       specialization,
       firstname,
       lastname,
-      phone,
+     
       gender,
       about,
-      address,
-      postalCode,
+    
       price,
-      city,
-      state,
+    
       awards,
       experience,
-      country,
+      
       _id: userid,
       qualifications,
     };
@@ -301,7 +292,7 @@ const CoachProfileSetting = () => {
           title: "Something went wrong...",
         });
       });
-       window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
 
   const upgradePackage = () => {
@@ -318,7 +309,6 @@ const CoachProfileSetting = () => {
         }
         if (response.data.success === true) {
           console.log("responseDon", response?.data?.coach);
-
           setprofileData(response?.data?.coach);
           if (response?.data?.coach?.qualifications.length > 0) {
             setqualifications(response?.data?.coach?.qualifications);
@@ -382,7 +372,7 @@ const CoachProfileSetting = () => {
                             name="username"
                             className="form-control"
                             placeholder="username"
-                            value={profileData?.username}
+                            defaultValue={profileData?.username}
                             disabled
                           />
                           <label>Username</label>
@@ -395,7 +385,7 @@ const CoachProfileSetting = () => {
                             name="email"
                             className="form-control"
                             placeholder="Email"
-                            value={profileData?.email}
+                            defaultValue={profileData?.email}
                             disabled
                           />
                           <label>Email</label>
@@ -409,13 +399,13 @@ const CoachProfileSetting = () => {
                             ref={firstnameRef}
                             className="form-control"
                             placeholder="Email"
-                            defaultValue={profileData?.firstname}
+                            defaultValue={profileData?.firstname || ""}
                           />
                           <label>
                             First Name <span className="text-danger">*</span>
                           </label>
                           <span className="errors">
-                            {validationErrors.firstname}
+                            {validationErrors.firstname || ""}
                           </span>
                         </div>
                       </div>
@@ -427,7 +417,7 @@ const CoachProfileSetting = () => {
                             ref={lastnameRef}
                             className="form-control"
                             placeholder="Last Name"
-                            defaultValue={profileData?.lastname}
+                            defaultValue={profileData?.lastname || ""}
                           />
                           <label>
                             Last Name <span className="text-danger">*</span>
@@ -445,14 +435,14 @@ const CoachProfileSetting = () => {
                             ref={specializationRef}
                             className="form-control"
                             placeholder="specialization"
-                            defaultValue={profileData?.specialization}
+                            defaultValue={profileData?.specialization || ""}
                           />
                           <label>
                             Specialization{" "}
                             <span className="text-danger">*</span>
                           </label>
                           <span className="errors">
-                            {validationErrors.specialization}
+                            {validationErrors.specialization || ""}
                           </span>
                         </div>
                       </div>
@@ -514,7 +504,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       name="degree"
                                       className="form-control"
-                                      value={edu.degree}
+                                      defaultValue={edu.degree}
                                       onChange={(e) =>
                                         handleChange(
                                           i,
@@ -529,7 +519,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       className="form-control"
                                       name="college"
-                                      value={edu.college}
+                                      defaultValue={edu.college}
                                       onChange={(e) =>
                                         handleChange(
                                           i,
@@ -544,7 +534,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       className="form-control"
                                       name="year"
-                                      value={edu.year}
+                                      defaultValue={edu.year}
                                       onChange={(e) =>
                                         handleChange(i, "year", e.target.value)
                                       }
@@ -559,7 +549,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash "
                                   onClick={() => removeEducation(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -567,11 +557,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {qualifications.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-experience"
                                 onClick={addqualifications}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -599,7 +589,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="award"
                                     className="form-control"
-                                    value={edu.award}
+                                    defaultValue={edu.award}
                                     onChange={(e) =>
                                       handleAwardchange(
                                         i,
@@ -614,7 +604,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     className="form-control"
                                     name="year"
-                                    value={edu.year}
+                                    defaultValue={edu.year}
                                     onChange={(e) =>
                                       handleAwardchange(
                                         i,
@@ -632,7 +622,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash"
                                   onClick={() => removeAward(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -640,11 +630,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {awards.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-award"
                                 onClick={addAward}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -671,7 +661,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="companyName"
                                     className="form-control"
-                                    value={exp.companyName}
+                                    defaultValue={exp.companyName}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -686,7 +676,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="dateFrom"
                                     className="form-control"
-                                    value={exp.dateFrom}
+                                    defaultValue={exp.dateFrom}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -701,7 +691,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="dateTo"
                                     className="form-control"
-                                    value={exp.dateTo}
+                                    defaultValue={exp.dateTo}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -716,7 +706,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="designation"
                                     className="form-control"
-                                    value={exp.designation}
+                                    defaultValue={exp.designation}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -734,7 +724,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash"
                                   onClick={() => removeExpirence(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -742,11 +732,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {experience.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-award"
                                 onClick={addExperience}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -759,93 +749,7 @@ const CoachProfileSetting = () => {
                 {/* Experience */}
 
                 {/* <!-- Contact Details --> */}
-                <div className="card contact-card">
-                  <div className="card-body">
-                    <h4 className="card-title">Contact Details</h4>
-                    <div className="row form-row">
-                      <div className="col-md-12">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="address"
-                            name="address"
-                            ref={addressRef}
-                            className="form-control"
-                            placeholder="address"
-                            defaultValue={profileData?.address}
-                          />
-                          <label>Address</label>
-                        </div>
-                      </div>
-
-                      <div className="col-md-6">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="city"
-                            name="city"
-                            ref={cityRef}
-                            className="form-control"
-                            placeholder="city"
-                            defaultValue={profileData?.city}
-                          />
-                          <label>City</label>
-                        </div>
-                      </div>
-
-                      <div className="col-md-6">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="state"
-                            name="state"
-                            ref={stateRef}
-                            className="form-control"
-                            placeholder="state"
-                            defaultValue={profileData?.state}
-                          />
-                          <label>State</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="country"
-                            name="country"
-                            ref={countryRef}
-                            className="form-control"
-                            placeholder="country"
-                            defaultValue={profileData?.country}
-                          />
-                          <label>Country</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="postal"
-                            name="postal"
-                            ref={postalCodeRef}
-                            className="form-control"
-                            placeholder="postal"
-                            defaultValue={profileData?.postalCode}
-                          />
-                          <label>Postal Code</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-floating mb-4">
-                          <input
-                            type="text"
-                            name="phonenumber"
-                            ref={phoneRef}
-                            className="form-control"
-                            placeholder="Phone"
-                            defaultValue={profileData?.phone}
-                          />
-                          <label>Phone Number</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               
                 {/* <!-- /Contact Details --> */}
 
                 {/* <!-- Pricing --> */}
@@ -858,7 +762,7 @@ const CoachProfileSetting = () => {
                         <div className="custom-control custom-radio custom-control-inline">
                           <label
                             className="custom-control-label"
-                            for="price_custom"
+                            htmlFor="price_custom"
                           >
                             Custom Price (per hour)
                           </label>
@@ -926,7 +830,7 @@ const CoachProfileSetting = () => {
                     <h4 className="card-title">Contact Details</h4>
                     <div className="row form-row">
                       {" "}
-                      {/* <ContactDetails /> */}
+                      <ContactDetails />
                     </div>
                   </div>
                 </div>
