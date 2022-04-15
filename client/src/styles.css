@@ -7527,3 +7527,15 @@ img {
 .trash {
   margin-top: 21px;
 }
+.no_data {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px dashed #d44f86 !important;
+  width: calc(100% - 30px);
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #d44f86
+}
