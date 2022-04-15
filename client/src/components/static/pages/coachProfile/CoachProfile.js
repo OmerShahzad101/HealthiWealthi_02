@@ -11,15 +11,14 @@ const CoachProfile = (props) => {
   const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
 
-  console.log("role", userRole)
+  console.log("role", userRole);
   console.log("userid", userId);
   console.log("IDD", id);
-  
+
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-   console.log("console for response",res);
+    console.log("console for response", res);
     if (res) {
-
       setCoachProfileData(res?.data?.coach);
       Toast.fire({
         icon: "success",
@@ -32,10 +31,10 @@ const CoachProfile = (props) => {
   const favorite = () => {
     const payload = {
       coachId: coachProfileData._id,
-      clientId: userId
-    }
-    let response = postHttpRequest("/front/favourites/create", payload)
-  }
+      clientId: userId,
+    };
+    let response = postHttpRequest("/front/favourites/create", payload);
+  };
 
   return (
     <div className="content">
@@ -55,7 +54,9 @@ const CoachProfile = (props) => {
                   <h4 className="doc-name">
                     {coachProfileData.firstname} {coachProfileData.lastname}
                   </h4>
-                  <p className="doc-speciality">{coachProfileData.specialization}</p>
+                  <p className="doc-speciality">
+                    {coachProfileData.specialization}
+                  </p>
                   <p className="doc-department">
                     {/* <img
                       src="assets/img/specialities/specialities-05.png"
@@ -141,42 +142,48 @@ const CoachProfile = (props) => {
                       {coachProfileData.city}
                     </li>
                     <li>
-                      <i className="far fa-money-bill-alt"></i> {coachProfileData?.price}{"$ "}
+                      <i className="far fa-money-bill-alt"></i>{" "}
+                      {coachProfileData?.price}
+                      {"$ "}
                     </li>
                   </ul>
                 </div>
-                {userRole == 1 && 
-                <>
-                <div className="doctor-action">
-                   <a className="btn btn-white fav-btn">
-                    <i className="far fa-bookmark" onClick={() => favorite()}></i>
-                  </a>
-                  <Link to="/chat" className="btn btn-white msg-btn">
-                    <i className="far fa-comment-alt"></i>
-                  </Link>
-                  <Link
-                    to="/audiocall"
-                    className="btn btn-white call-btn"
-                    data-toggle="modal"
-                    data-target="#voice_call"
-                  >
-                    <i className="fas fa-phone"></i>
-                  </Link>
-                  <Link
-                    to="/videocall"
-                    className="btn btn-white call-btn"
-                    data-toggle="modal"
-                    data-target="#video_call"
-                  >
-                    <i className="fas fa-video"></i>
-                  </Link>
-                </div>
-                <div className="clinic-booking">
-                  <Link className="apt-btn" to="/app/book-appointment">
-                    Book Appointment
-                  </Link>
-                </div>
-                </>}
+                {userRole == 1 && (
+                  <>
+                    <div className="doctor-action">
+                      <a className="btn btn-white fav-btn">
+                        <i
+                          className="far fa-bookmark"
+                          onClick={() => favorite()}
+                        ></i>
+                      </a>
+                      <Link to="/chat" className="btn btn-white msg-btn">
+                        <i className="far fa-comment-alt"></i>
+                      </Link>
+                      <Link
+                        to="/audiocall"
+                        className="btn btn-white call-btn"
+                        data-toggle="modal"
+                        data-target="#voice_call"
+                      >
+                        <i className="fas fa-phone"></i>
+                      </Link>
+                      <Link
+                        to="/videocall"
+                        className="btn btn-white call-btn"
+                        data-toggle="modal"
+                        data-target="#video_call"
+                      >
+                        <i className="fas fa-video"></i>
+                      </Link>
+                    </div>
+                    <div className="clinic-booking">
+                      <Link className="apt-btn" to="/app/book-appointment">
+                        Book Appointment
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -247,7 +254,7 @@ const CoachProfile = (props) => {
                       <h4 className="widget-title">Education</h4>
                       {coachProfileData?.qualifications?.map((edu, i) => {
                         return (
-                          <div className="experience-box">
+                          <div className="experience-box" key={i}>
                             <ul className="experience-list">
                               <li>
                                 <div className="experience-user">
@@ -277,7 +284,7 @@ const CoachProfile = (props) => {
                         <ul className="experience-list">
                           {coachProfileData?.experience?.map((element, i) => {
                             return (
-                              <li>
+                              <li key={i}>
                                 <div className="experience-user">
                                   <div className="before-circle"></div>
                                 </div>
@@ -311,7 +318,7 @@ const CoachProfile = (props) => {
                         <ul className="experience-list">
                           {coachProfileData?.awards?.map((element, i) => {
                             return (
-                              <li>
+                              <li key={i}>
                                 <div className="experience-user">
                                   <div className="before-circle"></div>
                                 </div>
@@ -753,7 +760,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-5"
                         />
-                        <label for="star-5" title="5 stars">
+                        <label htmlFor="star-5" title="5 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -762,7 +769,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-4"
                         />
-                        <label for="star-4" title="4 stars">
+                        <label htmlFor="star-4" title="4 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -771,7 +778,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-3"
                         />
-                        <label for="star-3" title="3 stars">
+                        <label htmlFor="star-3" title="3 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -780,7 +787,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-2"
                         />
-                        <label for="star-2" title="2 stars">
+                        <label htmlFor="star-2" title="2 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -789,7 +796,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-1"
                         />
-                        <label for="star-1" title="1 star">
+                        <label htmlFor="star-1" title="1 star">
                           <i className="active fa fa-star"></i>
                         </label>
                       </div>
@@ -806,7 +813,7 @@ const CoachProfile = (props) => {
                       <label>Your review</label>
                       <textarea
                         id="review_desc"
-                        maxlength="100"
+                        maxLength="100"
                         className="form-control"
                       ></textarea>
 
@@ -821,7 +828,7 @@ const CoachProfile = (props) => {
                       <div className="terms-accept">
                         <div className="custom-checkbox">
                           <input type="checkbox" id="terms_accept" />
-                          <label for="terms_accept">
+                          <label htmlFor="terms_accept">
                             I have read and accept{" "}
                             <a href="#">Terms &amp; Conditions</a>
                           </label>
