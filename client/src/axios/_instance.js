@@ -23,7 +23,8 @@ instance.interceptors.request.use(
         const accessToken = appState.auth.accessToken || null;
 
         if (accessToken !== null) {
-            config.headers.Authorization = `Bearer ${accessToken}`;
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+            config.headers['x-access-token'] = `${accessToken}`;
         }
 
         // Return the modified request config object for proceeding
