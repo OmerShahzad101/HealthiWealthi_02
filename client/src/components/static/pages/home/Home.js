@@ -110,7 +110,7 @@ export default function Home(props) {
         </div>
       </section>
       <section class="section section-specialities">
-        <Specialities />
+        {/* <Specialities /> */}
       </section>
 
       <section className="section section-doctor">
