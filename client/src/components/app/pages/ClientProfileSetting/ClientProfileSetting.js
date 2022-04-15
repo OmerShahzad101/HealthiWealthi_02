@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { getHttpRequest, putHttpRequest } from "../../../../axios";
+import { getHttpRequest, putHttpRequest ,postHttpRequest} from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { setClientProfile } from "../../../../store/slices/auth";
+import imagePath from "../../../../utils/url/imagePath";
+import imageExist from "../../../../utils/url/imageExist";
+import { setInfoData, setAvatar } from "../../../../store/slices/user";
+
+import { AiOutlineCamera } from "react-icons/ai";
 const ClientProfileSetting = () => {
+  const mediaPath = process.env.REACT_APP_IMG;
+  const userInfo = useSelector((state) => state.user.avatar);
+
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -127,6 +135,84 @@ const ClientProfileSetting = () => {
       });
   }, [dispatch]);
 
+  const checKImage = async (data) => {
+    // console.log(data, 'my dataaaaaaaaaa')
+    setTimeout(dispatch(setInfoData(data)), 9000);
+
+    const exist = await imageExist(data.avatar);
+    if (exist) {
+      dispatch(setInfoData(data));
+      return true;
+    } else {
+      checKImage(data);
+    }
+  };
+
+  const onChangeImage = async (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      let _objFiles = files[0];
+      // console.log(_objFiles);
+
+      if (_objFiles.size > 1000000) {
+        Toast.fire({
+          icon: "error",
+          title: "File too Big, please select a file less than 1MB ",
+        });
+        return;
+      }
+
+      if (
+        _objFiles.type.toLowerCase() !== "image/png" &&
+        _objFiles.type.toLowerCase() !== "image/jpg" &&
+        _objFiles.type.toLowerCase() !== "image/jpeg"
+      ) {
+        Toast.fire({
+          icon: "error",
+          title:
+            "Only files with the following extensions are allowed: png, jpg, jpeg",
+        });
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("avatar", files[0], files[0].name);
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      setIsLoading(true);
+      postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
+        .then((response) => {
+          if (!response) {
+            console.log("Something went wrong with response...");
+            return;
+          }
+          console.log(response, 'ressssssssssssssssss');
+          console.log("response", response);
+          if (response.data.success === true) {
+            setValidationErrors({});
+
+            checKImage(response.data.file);
+            Toast.fire({
+              icon: "success",
+              title: response.data.message,
+            });
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+          console.log("in finally");
+        });
+    }
+  };
+
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -134,29 +220,28 @@ const ClientProfileSetting = () => {
           <div className="card-body">
             <form noValidate onSubmit={updateProfileHandler}>
               <div className="row form-row">
-                <div className="col-12 col-md-12">
-                  <div className="form-group">
-                    <div className="change-avatar">
-                      <div className="profile-img">
-                        <img
-                          src="/assets/img/patients/patient.jpg"
-                          alt="User Image"
-                        />
-                      </div>
-                      <div className="upload-img">
-                        <div className="change-photo-btn">
-                          <span>
-                            <i className="fa fa-upload"></i> Upload Photo
-                          </span>
-                          <input type="file" className="upload" />
+              <div className="col-md-12">
+                        <div className="imageUploaderWrapper profile-img">
+                          <div className="circle">
+                            {userInfo && (
+                              <img
+                                src={imagePath(userInfo)}
+                                alt="user img"
+                              />
+                            )}
+                          </div>
+
+                          <label className="pImage">
+                            <AiOutlineCamera className="uploadButton" />
+                            <input
+                              className="fileUpload"
+                              type="file"
+                              accept="image/png, image/jpeg"
+                              onChange={onChangeImage}
+                            />
+                          </label>
                         </div>
-                        <small className="form-text text-muted">
-                          Allowed JPG, GIF or PNG. Max size of 2MB
-                        </small>
                       </div>
-                    </div>
-                  </div>
-                </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input

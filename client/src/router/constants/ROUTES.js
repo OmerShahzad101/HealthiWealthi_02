@@ -9,7 +9,7 @@ export const APP = '/app';
  export const ABOUT = '/about';
  export const CONTACT = '/contact-us';
  export const SEARCH_COACH = '/search-coach';
- export const COACH_PROFILE = '/coach-profile';
+ export const COACH_PROFILE = '/coach-profile/:coachId';
 
  
 
