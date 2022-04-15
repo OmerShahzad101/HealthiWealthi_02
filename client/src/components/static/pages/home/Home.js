@@ -111,7 +111,7 @@ export default function Home(props) {
           </div>
         </div>
       </section>
-      <section class="section section-specialities">
+      <section className="section section-specialities">
         {/* <Specialities /> */}
       </section>
 
@@ -126,15 +126,15 @@ export default function Home(props) {
             </div>
 
             <div className="col-lg-8 doctor-slider slider">
+              {console.log("coachList",coachList)}
               {coachList ? (
                 <Slider {...settings}>
                   {coachList.map(
                     (e, idx) =>
-                      e?.firstname &&
-                      e?.lastname && (
+                      e?.firstname && e?.lastname && (
                         <div key={`coach_${idx}`} className="profile-widget">
                           <div className="doc-img">
-                            <Link to="/coach-profile">
+                            <Link to={"/coach-profile/"+e?._id}>
                               <img
                                 className="img-fluid"
                                 alt="User"
@@ -165,7 +165,7 @@ export default function Home(props) {
                           </div>
                           <div className="pro-content">
                             <h3 className="title">
-                              <Link to="/coach-profile">
+                              <Link to={"/coach-profile/"+e?._id}>
                                 {e?.firstname + " " + e?.lastname}
                               </Link>
                               <i className="fas fa-check-circle verified"></i>
@@ -197,7 +197,7 @@ export default function Home(props) {
                             <div className="row row-sm">
                               <div className="col-6">
                                 <Link
-                                  to="/coach-profile"
+                                  to={"/coach-profile/"+e?._id}
                                   className="btn view-btn"
                                 >
                                   View Profile
