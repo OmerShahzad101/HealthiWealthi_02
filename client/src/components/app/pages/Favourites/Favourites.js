@@ -26,10 +26,10 @@ const Favourites = () => {
         }
       })
       .catch((response) => {
-        Toast.fire({
-          icon: "error",
-          title: response.data.message,
-        });
+        // Toast.fire({
+        //   icon: "error",
+        //   title: response.data.message,
+        // });
       });
   }, []);
 
@@ -132,7 +132,7 @@ const Favourites = () => {
                   </div>
                 </div>
               ))
-            : <div className="no_data">No Favourite Coach Added</div> }
+            : <div className="no_fav_data">No Favourite Coach Added</div> }
         </div>
       </div>
     </>

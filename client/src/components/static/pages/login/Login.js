@@ -3,8 +3,7 @@ import LoginWithGoogle from "./LoginWithGoogle";
 import Toast from "../../../common/toast/Toast";
 import { useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import { setInfoData } from "../../../../store/slices/user";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getHttpRequest, postHttpRequest} from "../../../../axios";
 import { setUser, setAccessToken} from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
@@ -12,14 +11,11 @@ import {CLIENT_PROFILE_SETTING,COACH_PROFILE_SETTING,} from "../../../../router/
 
 const Login = (props) => {
   const history = useHistory();
-  const location = useLocation();
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const typeRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const loginHandler = async (event) => {
@@ -68,9 +64,9 @@ const Login = (props) => {
           dispatch(setUser(userData));
           dispatch(setAccessToken(response.data.data.accessToken));
 
-          if (response?.data?.data?.type == 1) {
+          if (response?.data?.data?.type === 1) {
             history.replace(CLIENT_PROFILE_SETTING);
-          } else if (response?.data?.data?.type == 3) {
+          } else if (response?.data?.data?.type === 3) {
             history.replace(COACH_PROFILE_SETTING);
           }
         } else {
