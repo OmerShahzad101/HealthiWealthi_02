@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
+const mediaPath = process.env.REACT_APP_IMG;
 const CoachSideBar = () => {
+  
   let data;
   const user = useSelector((state) => state.auth.user);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
@@ -10,6 +12,8 @@ if (coachProfile.firstName || coachProfile.lastName) {
 } else {
   data = user;
 }
+
+console.log("data", data);
   const imageUpload = () => {};
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
@@ -18,7 +22,7 @@ if (coachProfile.firstName || coachProfile.lastName) {
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
               <img
-                src="/assets/img/doctors/doctor-02.jpg"
+                src={data?.fileName ? mediaPath+data.fileName : mediaPath+'avatar.jpg'}
                 onClick={imageUpload()}
                 alt="User Image"
               />
@@ -41,6 +45,12 @@ if (coachProfile.firstName || coachProfile.lastName) {
                 <NavLink to="/app/coach-dashboard">
                   <i className="fas fa-columns"></i>
                   <span>Dashboard</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/app/coach-profile-setting">
+                  <i className="fas fa-user-cog"></i>
+                  <span>Profile Settings</span>
                 </NavLink>
               </li>
               <li>
@@ -86,12 +96,6 @@ if (coachProfile.firstName || coachProfile.lastName) {
                     <span>Voice Call</span>
                   </NavLink>
                 </li> */}
-              <li>
-                <NavLink to="/app/coach-profile-setting">
-                  <i className="fas fa-user-cog"></i>
-                  <span>Profile Settings</span>
-                </NavLink>
-              </li>
 
               <li>
                 <NavLink to="/app/coach-change-password">

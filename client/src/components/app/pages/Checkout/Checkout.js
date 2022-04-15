@@ -3,50 +3,13 @@ import { Link } from "react-router-dom";
 
 const Checkout = () => {
   return (
-    <div>
-    
-
-        {/* <!-- Page Content --> */}
-    
+        
             <div className="col-md-7 col-lg-8 col-xl-9">
               <div className="card">
                 <div className="card-body">
                   {/* <!-- Checkout Form --> */}
                   <form action="booking-successful">
-                    {/* <!-- Personal Information --> */}
-                    <div className="info-widget">
-                      <h4 className="card-title">Personal Information</h4>
-                      <div className="row">
-                        <div className="col-md-6 col-sm-12">
-                          <div className="form-group card-label">
-                            <label>First Name</label>
-                            <input className="form-control" type="text" />
-                          </div>
-                        </div>
-                        <div className="col-md-6 col-sm-12">
-                          <div className="form-group card-label">
-                            <label>Last Name</label>
-                            <input className="form-control" type="text" />
-                          </div>
-                        </div>
-                        <div className="col-md-6 col-sm-12">
-                          <div className="form-group card-label">
-                            <label>Email</label>
-                            <input className="form-control" type="email" />
-                          </div>
-                        </div>
-                        <div className="col-md-6 col-sm-12">
-                          <div className="form-group card-label">
-                            <label>Phone</label>
-                            <input className="form-control" type="text" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="exist-customer">
-                        Existing Customer? <a href="#">Click here to login</a>
-                      </div>
-                    </div>
-                    {/* <!-- /Personal Information --> */}
+
 
                     <div className="payment-widget">
                       <h4 className="card-title">Payment Method</h4>
@@ -154,15 +117,17 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
+ );
+};
 
-            <div className="col-md-5 col-lg-4 theiaStickySidebar">
-              {/* <!-- Booking Summary --> */}
+export default Checkout;
+
+            {/* <div className="col-md-5 col-lg-4 theiaStickySidebar">
               <div className="card booking-card">
                 <div className="card-header">
                   <h4 className="card-title">Booking Summary</h4>
                 </div>
                 <div className="card-body">
-                  {/* <!-- Booking Doctor Info --> */}
                   <div className="booking-doc-info">
                     <Link to="/coach-profile" className="booking-doc-img">
                       <img
@@ -191,7 +156,6 @@ const Checkout = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <!-- Booking Doctor Info --> */}
 
                   <div className="booking-summary">
                     <div className="booking-item-wrap">
@@ -226,12 +190,6 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              {/* <!-- /Booking Summary --> */}
-            </div>
+            </div> */}
          
-      {/* <!-- /Page Content --> */}
-    </div>
-  );
-};
-
-export default Checkout;
+ 

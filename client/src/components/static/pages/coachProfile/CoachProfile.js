@@ -31,10 +31,10 @@ const CoachProfile = (props) => {
 
   const favorite = () => {
     const payload = {
-      coach_id: coachProfileData._id,
-      client_id: userId
+      coachId: coachProfileData._id,
+      clientId: userId
     }
-    let response = postHttpRequest("/front/favorite/create", payload)
+    let response = postHttpRequest("/front/favourites/create", payload)
   }
 
   return (
@@ -55,14 +55,14 @@ const CoachProfile = (props) => {
                   <h4 className="doc-name">
                     {coachProfileData.firstname} {coachProfileData.lastname}
                   </h4>
-                  <p className="doc-speciality">{coachProfileData.about}</p>
+                  <p className="doc-speciality">{coachProfileData.specialization}</p>
                   <p className="doc-department">
                     {/* <img
                       src="assets/img/specialities/specialities-05.png"
                       className="img-fluid"
                       alt="Speciality"
                     /> */}
-                    {coachProfileData.specialization}
+                    {coachProfileData.about}
                   </p>
                   <div className="clinic-details">
                     <p className="doc-location">
@@ -128,12 +128,12 @@ const CoachProfile = (props) => {
               <div className="doc-info-right">
                 <div className="clini-infos">
                   <ul>
-                    <li>
+                    {/* <li>
                       <i className="far fa-thumbs-up"></i> 99%
                     </li>
                     <li>
                       <i className="far fa-comment"></i> 35 Feedback
-                    </li>
+                    </li> */}
                     <li>
                       <i className="fas fa-map-marker-alt"></i>{" "}
                       {coachProfileData.country}
@@ -141,14 +141,16 @@ const CoachProfile = (props) => {
                       {coachProfileData.city}
                     </li>
                     <li>
-                      <i className="far fa-money-bill-alt"></i> $100 per hour{" "}
+                      <i className="far fa-money-bill-alt"></i> {coachProfileData?.price}{"$ "}
                     </li>
                   </ul>
                 </div>
+                {userRole == 1 && 
+                <>
                 <div className="doctor-action">
-                  {userRole == 1 && <a className="btn btn-white fav-btn">
+                   <a className="btn btn-white fav-btn">
                     <i className="far fa-bookmark" onClick={() => favorite()}></i>
-                  </a>}
+                  </a>
                   <Link to="/chat" className="btn btn-white msg-btn">
                     <i className="far fa-comment-alt"></i>
                   </Link>
@@ -174,6 +176,7 @@ const CoachProfile = (props) => {
                     Book Appointment
                   </Link>
                 </div>
+                </>}
               </div>
             </div>
           </div>
