@@ -123,7 +123,7 @@ const CoachProfileSetting = () => {
   const removeExpirence = (i) => {
     if (i) {
       const newArray = [...experience];
-      const updateAwards = newArray.splice(i, 1);;
+      const updateAwards = newArray.splice(i, 1);
       console.log("newArray", i, updateAwards);
       setExperience([...newArray]);
     }
@@ -301,7 +301,7 @@ const CoachProfileSetting = () => {
           title: "Something went wrong...",
         });
       });
-       window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
 
   const upgradePackage = () => {
@@ -318,7 +318,6 @@ const CoachProfileSetting = () => {
         }
         if (response.data.success === true) {
           console.log("responseDon", response?.data?.coach);
-
           setprofileData(response?.data?.coach);
           if (response?.data?.coach?.qualifications.length > 0) {
             setqualifications(response?.data?.coach?.qualifications);
@@ -382,7 +381,7 @@ const CoachProfileSetting = () => {
                             name="username"
                             className="form-control"
                             placeholder="username"
-                            value={profileData?.username}
+                            defaultValue={profileData?.username}
                             disabled
                           />
                           <label>Username</label>
@@ -395,7 +394,7 @@ const CoachProfileSetting = () => {
                             name="email"
                             className="form-control"
                             placeholder="Email"
-                            value={profileData?.email}
+                            defaultValue={profileData?.email}
                             disabled
                           />
                           <label>Email</label>
@@ -409,13 +408,13 @@ const CoachProfileSetting = () => {
                             ref={firstnameRef}
                             className="form-control"
                             placeholder="Email"
-                            defaultValue={profileData?.firstname}
+                            defaultValue={profileData?.firstname || ""}
                           />
                           <label>
                             First Name <span className="text-danger">*</span>
                           </label>
                           <span className="errors">
-                            {validationErrors.firstname}
+                            {validationErrors.firstname || ""}
                           </span>
                         </div>
                       </div>
@@ -427,7 +426,7 @@ const CoachProfileSetting = () => {
                             ref={lastnameRef}
                             className="form-control"
                             placeholder="Last Name"
-                            defaultValue={profileData?.lastname}
+                            defaultValue={profileData?.lastname || ""}
                           />
                           <label>
                             Last Name <span className="text-danger">*</span>
@@ -445,14 +444,14 @@ const CoachProfileSetting = () => {
                             ref={specializationRef}
                             className="form-control"
                             placeholder="specialization"
-                            defaultValue={profileData?.specialization}
+                            defaultValue={profileData?.specialization || ""}
                           />
                           <label>
                             Specialization{" "}
                             <span className="text-danger">*</span>
                           </label>
                           <span className="errors">
-                            {validationErrors.specialization}
+                            {validationErrors.specialization || ""}
                           </span>
                         </div>
                       </div>
@@ -514,7 +513,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       name="degree"
                                       className="form-control"
-                                      value={edu.degree}
+                                      defaultValue={edu.degree}
                                       onChange={(e) =>
                                         handleChange(
                                           i,
@@ -529,7 +528,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       className="form-control"
                                       name="college"
-                                      value={edu.college}
+                                      defaultValue={edu.college}
                                       onChange={(e) =>
                                         handleChange(
                                           i,
@@ -544,7 +543,7 @@ const CoachProfileSetting = () => {
                                     <input
                                       className="form-control"
                                       name="year"
-                                      value={edu.year}
+                                      defaultValue={edu.year}
                                       onChange={(e) =>
                                         handleChange(i, "year", e.target.value)
                                       }
@@ -559,7 +558,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash "
                                   onClick={() => removeEducation(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -567,11 +566,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {qualifications.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-experience"
                                 onClick={addqualifications}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -599,7 +598,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="award"
                                     className="form-control"
-                                    value={edu.award}
+                                    defaultValue={edu.award}
                                     onChange={(e) =>
                                       handleAwardchange(
                                         i,
@@ -614,7 +613,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     className="form-control"
                                     name="year"
-                                    value={edu.year}
+                                    defaultValue={edu.year}
                                     onChange={(e) =>
                                       handleAwardchange(
                                         i,
@@ -632,7 +631,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash"
                                   onClick={() => removeAward(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -640,11 +639,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {awards.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-award"
                                 onClick={addAward}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -671,7 +670,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="companyName"
                                     className="form-control"
-                                    value={exp.companyName}
+                                    defaultValue={exp.companyName}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -686,7 +685,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="dateFrom"
                                     className="form-control"
-                                    value={exp.dateFrom}
+                                    defaultValue={exp.dateFrom}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -701,7 +700,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="dateTo"
                                     className="form-control"
-                                    value={exp.dateTo}
+                                    defaultValue={exp.dateTo}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -716,7 +715,7 @@ const CoachProfileSetting = () => {
                                   <input
                                     name="designation"
                                     className="form-control"
-                                    value={exp.designation}
+                                    defaultValue={exp.designation}
                                     onChange={(e) =>
                                       handleExperiencechange(
                                         i,
@@ -734,7 +733,7 @@ const CoachProfileSetting = () => {
                                   className="btn btn-danger trash"
                                   onClick={() => removeExpirence(i)}
                                 >
-                                  <i class="far fa-trash-alt"></i>
+                                  <i className="far fa-trash-alt"></i>
                                 </a>
                               )}
                             </div>
@@ -742,11 +741,11 @@ const CoachProfileSetting = () => {
                           <div className="btn-box add-more">
                             {experience.length - 1 === i && (
                               <a
-                                href="javascript:void(0)"
+                                href="#javascript"
                                 className="add-award"
                                 onClick={addExperience}
                               >
-                                <i class="fa fa-plus-circle"></i>
+                                <i className="fa fa-plus-circle"></i>
                                 Add more
                               </a>
                             )}
@@ -772,7 +771,7 @@ const CoachProfileSetting = () => {
                         <div className="custom-control custom-radio custom-control-inline">
                           <label
                             className="custom-control-label"
-                            for="price_custom"
+                            htmlFor="price_custom"
                           >
                             Custom Price (per hour)
                           </label>

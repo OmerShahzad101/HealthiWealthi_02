@@ -5,15 +5,18 @@ import { Link, useLocation } from "react-router-dom";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const CoachProfile = (props) => {
+
   const location = useLocation();
   const userRole = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
-  const { id } = location.state;
+  // const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
 
-  console.log("role", userRole);
-  console.log("userid", userId);
-  console.log("IDD", id);
+  debugger;
+  const url = window.location.pathname;
+  const id = url.split("/").pop();
+  
+  console.log(window.location.pathname);
 
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
@@ -252,7 +255,7 @@ const CoachProfile = (props) => {
                       <h4 className="widget-title">Education</h4>
                       {coachProfileData?.qualifications?.map((edu, i) => {
                         return (
-                          <div className="experience-box">
+                          <div className="experience-box" key={i}>
                             <ul className="experience-list">
                               <li>
                                 <div className="experience-user">
@@ -282,7 +285,7 @@ const CoachProfile = (props) => {
                         <ul className="experience-list">
                           {coachProfileData?.experience?.map((element, i) => {
                             return (
-                              <li>
+                              <li key={i}>
                                 <div className="experience-user">
                                   <div className="before-circle"></div>
                                 </div>
@@ -316,7 +319,7 @@ const CoachProfile = (props) => {
                         <ul className="experience-list">
                           {coachProfileData?.awards?.map((element, i) => {
                             return (
-                              <li>
+                              <li key={i}>
                                 <div className="experience-user">
                                   <div className="before-circle"></div>
                                 </div>
@@ -758,7 +761,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-5"
                         />
-                        <label for="star-5" title="5 stars">
+                        <label htmlFor="star-5" title="5 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -767,7 +770,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-4"
                         />
-                        <label for="star-4" title="4 stars">
+                        <label htmlFor="star-4" title="4 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -776,7 +779,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-3"
                         />
-                        <label for="star-3" title="3 stars">
+                        <label htmlFor="star-3" title="3 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -785,7 +788,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-2"
                         />
-                        <label for="star-2" title="2 stars">
+                        <label htmlFor="star-2" title="2 stars">
                           <i className="active fa fa-star"></i>
                         </label>
                         <input
@@ -794,7 +797,7 @@ const CoachProfile = (props) => {
                           name="rating"
                           value="star-1"
                         />
-                        <label for="star-1" title="1 star">
+                        <label htmlFor="star-1" title="1 star">
                           <i className="active fa fa-star"></i>
                         </label>
                       </div>
@@ -811,7 +814,7 @@ const CoachProfile = (props) => {
                       <label>Your review</label>
                       <textarea
                         id="review_desc"
-                        maxlength="100"
+                        maxLength="100"
                         className="form-control"
                       ></textarea>
 
@@ -826,7 +829,7 @@ const CoachProfile = (props) => {
                       <div className="terms-accept">
                         <div className="custom-checkbox">
                           <input type="checkbox" id="terms_accept" />
-                          <label for="terms_accept">
+                          <label htmlFor="terms_accept">
                             I have read and accept{" "}
                             <a href="#">Terms &amp; Conditions</a>
                           </label>

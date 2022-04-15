@@ -47,7 +47,7 @@ const ClientDashboard = (props) => {
                           {myAppoinment ? (
                             myAppoinment.map((item, idx) => {
                               return (
-                                <tr>
+                                <tr key={idx}>
                                   <td>
                                     <h2 className="table-avatar">
                                       <Link
@@ -103,9 +103,9 @@ const ClientDashboard = (props) => {
                               );
                             })
                           ) : (
-                            <div className="no_data">
-                              <span>You don't book any coach</span>
-                            </div>
+                            <tr className="no_data">
+                              <td>You don't book any coach</td>
+                            </tr>
                           )}
                         </tbody>
                       </table>
@@ -130,7 +130,7 @@ const ClientDashboard = (props) => {
                           {myAppoinment ? (
                             myAppoinment.map((item, idx) => {
                               return (
-                                <tr>
+                                <tr key={idx}>
                                   <td>14 Feb 2022</td>
                                   <td>Plan 1</td>
                                   <td>
@@ -148,7 +148,7 @@ const ClientDashboard = (props) => {
                                       <Link to="/coach-profile">
                                         {item?.coachData?.firstname +
                                           item?.coachData?.lastname}{" "}
-                                        <span>Nutritionists</span>
+                                        <td>Nutritionists</td>
                                       </Link>
                                     </h2>
                                   </td>
@@ -172,9 +172,9 @@ const ClientDashboard = (props) => {
                               );
                             })
                           ) : (
-                            <div className="no_data">
-                              <span>You don't book any coach</span>
-                            </div>
+                            <tr className="no_data">
+                              <td>You don't book any coach</td>
+                            </tr>
                           )}
                         </tbody>
                       </table>

@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { getHttpRequest, putHttpRequest } from "../../../../axios";
+import { getHttpRequest, putHttpRequest ,postHttpRequest} from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { setClientProfile } from "../../../../store/slices/auth";
+import imagePath from "../../../../utils/url/imagePath";
+import imageExist from "../../../../utils/url/imageExist";
+import { setInfoData, setAvatar } from "../../../../store/slices/user";
+
+import { AiOutlineCamera } from "react-icons/ai";
 const ClientProfileSetting = () => {
+  const mediaPath = process.env.REACT_APP_IMG;
+  const userInfo = useSelector((state) => state.user.avatar);
+
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -65,7 +73,7 @@ const ClientProfileSetting = () => {
     setIsLoading(true);
     putHttpRequest("/front/client/edit", payload)
       .then((res) => {
-        console.log("client", res?.data.client);
+ 
         setIsLoading(false);
 
         if (!res) {
@@ -75,7 +83,7 @@ const ClientProfileSetting = () => {
         }
 
         if (res) {
-          console.log("coach ", res);
+       
           const userData = { res: res?.data.client };
           dispatch(setClientProfile(userData));
           Toast.fire({
@@ -103,13 +111,13 @@ const ClientProfileSetting = () => {
 
   const Upgrade = () => {
     history.push("/coach-upgrade-profile");
-    console.log("dssd");
+ 
   };
 
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`)
       .then((response) => {
-        console.log("coach", response?.data.coach);
+      
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
@@ -127,6 +135,84 @@ const ClientProfileSetting = () => {
       });
   }, [dispatch]);
 
+  const checKImage = async (data) => {
+    // console.log(data, 'my dataaaaaaaaaa')
+    setTimeout(dispatch(setInfoData(data)), 9000);
+
+    const exist = await imageExist(data.avatar);
+    if (exist) {
+      dispatch(setInfoData(data));
+      return true;
+    } else {
+      checKImage(data);
+    }
+  };
+
+  const onChangeImage = async (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      let _objFiles = files[0];
+      // console.log(_objFiles);
+
+      if (_objFiles.size > 1000000) {
+        Toast.fire({
+          icon: "error",
+          title: "File too Big, please select a file less than 1MB ",
+        });
+        return;
+      }
+
+      if (
+        _objFiles.type.toLowerCase() !== "image/png" &&
+        _objFiles.type.toLowerCase() !== "image/jpg" &&
+        _objFiles.type.toLowerCase() !== "image/jpeg"
+      ) {
+        Toast.fire({
+          icon: "error",
+          title:
+            "Only files with the following extensions are allowed: png, jpg, jpeg",
+        });
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("avatar", files[0], files[0].name);
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      setIsLoading(true);
+      postHttpRequest(`/front/coach/uploadImage/${userid}`, formData, config)
+        .then((response) => {
+          if (!response) {
+            console.log("Something went wrong with response...");
+            return;
+          }
+          console.log(response, 'ressssssssssssssssss');
+          console.log("response", response);
+          if (response.data.success === true) {
+            setValidationErrors({});
+
+            checKImage(response.data.file);
+            Toast.fire({
+              icon: "success",
+              title: response.data.message,
+            });
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+          console.log("in finally");
+        });
+    }
+  };
+
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
@@ -134,29 +220,28 @@ const ClientProfileSetting = () => {
           <div className="card-body">
             <form noValidate onSubmit={updateProfileHandler}>
               <div className="row form-row">
-                <div className="col-12 col-md-12">
-                  <div className="form-group">
-                    <div className="change-avatar">
-                      <div className="profile-img">
-                        <img
-                          src="/assets/img/patients/patient.jpg"
-                          alt="User Image"
-                        />
-                      </div>
-                      <div className="upload-img">
-                        <div className="change-photo-btn">
-                          <span>
-                            <i className="fa fa-upload"></i> Upload Photo
-                          </span>
-                          <input type="file" className="upload" />
+              <div className="col-md-12">
+                        <div className="imageUploaderWrapper profile-img">
+                          <div className="circle">
+                            {userInfo && (
+                              <img
+                                src={imagePath(userInfo)}
+                                alt="user img"
+                              />
+                            )}
+                          </div>
+
+                          <label className="pImage">
+                            <AiOutlineCamera className="uploadButton" />
+                            <input
+                              className="fileUpload"
+                              type="file"
+                              accept="image/png, image/jpeg"
+                              onChange={onChangeImage}
+                            />
+                          </label>
                         </div>
-                        <small className="form-text text-muted">
-                          Allowed JPG, GIF or PNG. Max size of 2MB
-                        </small>
                       </div>
-                    </div>
-                  </div>
-                </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
@@ -164,7 +249,7 @@ const ClientProfileSetting = () => {
                       name="username"
                       className="form-control"
                       placeholder="username"
-                      value={profileData?.username}
+                      value={profileData?.username || ""}
                       disabled
                     />
                     <label>Username</label>
@@ -177,7 +262,7 @@ const ClientProfileSetting = () => {
                       name="email"
                       className="form-control"
                       placeholder="email"
-                      value={profileData?.email}
+                      value={profileData?.email || ""}
                       disabled
                     />
                     <label>Email</label>
@@ -191,12 +276,14 @@ const ClientProfileSetting = () => {
                       ref={firstnameRef}
                       className="form-control"
                       placeholder="first name"
-                      defaultValue={profileData?.firstname}
+                      defaultValue={profileData?.firstname || ""}
                     />
                     <label>
                       First Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">{validationErrors.firstname}</span>
+                    <span className="errors">
+                      {validationErrors.firstname || ""}
+                    </span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -207,12 +294,14 @@ const ClientProfileSetting = () => {
                       ref={lastnameRef}
                       className="form-control"
                       placeholder="last name"
-                      defaultValue={profileData?.lastname}
+                      defaultValue={profileData?.lastname || ""}
                     />
                     <label>
                       Last Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">{validationErrors.lastname}</span>
+                    <span className="errors">
+                      {validationErrors.lastname || ""}
+                    </span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -220,9 +309,9 @@ const ClientProfileSetting = () => {
                     <select
                       className="form-select"
                       ref={genderRef}
-                      defaultValue={profileData?.gender}
+                      defaultValue={profileData?.gender || ""}
                     >
-                      <option value="" selected disabled>
+                      <option value="" disabled>
                         Open this select menu
                       </option>
                       <option name="male" value="male">
@@ -240,7 +329,7 @@ const ClientProfileSetting = () => {
                     <select
                       className="form-select"
                       ref={bloodgroupRef}
-                      defaultValue={profileData?.bloodgroup}
+                      defaultValue={profileData?.bloodgroup || ""}
                     >
                       <option value="" disabled>
                         Open this select menu
@@ -282,7 +371,7 @@ const ClientProfileSetting = () => {
                       ref={phoneRef}
                       className="form-control"
                       placeholder="Phone Number"
-                      defaultValue={profileData?.phone}
+                      defaultValue={profileData?.phone || ""}
                     />
                     <label>Phone Number</label>
                   </div>
@@ -296,7 +385,7 @@ const ClientProfileSetting = () => {
                       className="form-control"
                       placeholder="about"
                       style={{ minHeight: "100px" }}
-                      defaultValue={profileData?.about}
+                      defaultValue={profileData?.about || ""}
                     />
                     <label>Briefly describe about yourself</label>
                   </div>
@@ -307,7 +396,7 @@ const ClientProfileSetting = () => {
                       ref={addressRef}
                       className="form-control"
                       placeholder="address"
-                      defaultValue={profileData?.address}
+                      defaultValue={profileData?.address || ""}
                     />
                     <label>Address</label>
                   </div>
@@ -320,7 +409,7 @@ const ClientProfileSetting = () => {
                       ref={cityRef}
                       className="form-control"
                       placeholder="city"
-                      defaultValue={profileData?.city}
+                      defaultValue={profileData?.city || ""}
                     />
                     <label>City</label>
                   </div>
@@ -333,7 +422,7 @@ const ClientProfileSetting = () => {
                       ref={stateRef}
                       className="form-control"
                       placeholder="state"
-                      defaultValue={profileData?.state}
+                      defaultValue={profileData?.state || ""}
                     />
                     <label>State</label>
                   </div>
@@ -346,7 +435,7 @@ const ClientProfileSetting = () => {
                       ref={countryRef}
                       className="form-control"
                       placeholder="country"
-                      defaultValue={profileData?.country}
+                      defaultValue={profileData?.country || ""}
                     />
                     <label>Country</label>
                   </div>
@@ -359,7 +448,7 @@ const ClientProfileSetting = () => {
                       ref={postalCodeRef}
                       className="form-control"
                       placeholder="postalCode"
-                      defaultValue={profileData?.postalCode}
+                      defaultValue={profileData?.postalCode || ""}
                     />
                     <label>Postal Code</label>
                   </div>
