@@ -5,7 +5,7 @@ import imagePath from "../../../../utils/url/imagePath";
 import { useEffect } from "react";
 const ClientSideBar = () => {
 let data;
-const user = useSelector((state) => state.auth.user);
+const user = useSelector((state) => state.user);
 const clientProfile = useSelector((state) => state.auth.clientProfile);
 console.log("clientProfile", clientProfile);
 if (clientProfile.firstName || clientProfile.lastName) {

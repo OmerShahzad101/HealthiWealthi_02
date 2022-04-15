@@ -814,7 +814,7 @@ const CoachProfileSetting = () => {
                   </div>
                 </div>
               </Tab>
-              <Tab eventKey="calendar" title="Calendar">
+              {/* <Tab eventKey="calendar" title="Calendar">
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title">Calendar</h4>
@@ -823,7 +823,7 @@ const CoachProfileSetting = () => {
                     </div>
                   </div>
                 </div>
-              </Tab>
+              </Tab> */}
               <Tab eventKey="contact" title="Contact Details">
                 <div className="card">
                   <div className="card-body">
