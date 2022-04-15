@@ -57,10 +57,12 @@ export default function Home(props) {
     };
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
-        // Toast.fire({
-        //   icon: "success",
-        //   title: response.data.message,
-        // });
+        if(response){
+        getHttpRequest("/front/coach/list")
+        .then((response) => {
+          setCoachList(response.data.data.coaches);
+        })
+      }
       })
       .catch((response) => {
         Toast.fire({
@@ -146,17 +148,15 @@ export default function Home(props) {
                             {role === 1 && (
                               <>
                                 {e?.isFavourite === true ? (
-                                  <a className="not-fav-btn">
+                                  <a className="not-fav-btn" onClick={() => favorite(e?._id)}>
                                     <i
-                                      className="far fa-bookmark"
-                                      onClick={() => favorite(e?._id)}
+                                      className="far fa-bookmark" 
                                     ></i>
                                   </a>
                                 ) : (
-                                  <a className="fav-btn">
+                                  <a className="fav-btn" onClick={() => favorite(e?._id)}>
                                     <i
                                       className="far fa-bookmark"
-                                      onClick={() => favorite(e?._id)}
                                     ></i>
                                   </a>
                                 )}

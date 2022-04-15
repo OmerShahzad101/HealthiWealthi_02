@@ -78,8 +78,8 @@ const Favourites = () => {
                     {/* <a className="fav-btn">
                   <i className="far fa-bookmark"></i>
                 </a> */}
-                    <a className="not-fav-btn">
-                      <i className="far fa-bookmark" onClick={() => favorite(e?._id,idx)} ></i>
+                    <a className="not-fav-btn" onClick={() => favorite(e?._id,idx)}>
+                      <i className="far fa-bookmark" ></i>
                     </a>
                   </div>
                   <div className="pro-content">
