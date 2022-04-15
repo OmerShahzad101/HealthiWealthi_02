@@ -1,17 +1,19 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
+import imagePath from "../../../../utils/url/imagePath";
 import { useSelector } from "react-redux";
-const mediaPath = process.env.REACT_APP_IMG;
+
 const CoachSideBar = () => {
   
   let data;
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
 if (coachProfile.firstName || coachProfile.lastName) {
   data = coachProfile;
 } else {
   data = user;
 }
+
 
 console.log("data", data);
   const imageUpload = () => {};
@@ -21,11 +23,13 @@ console.log("data", data);
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-              <img
-                src={data?.fileName ? mediaPath+data.fileName : mediaPath+'avatar.jpg'}
-                onClick={imageUpload()}
-                alt="User Image"
-              />
+           
+              {user && (
+                              <img
+                                src={imagePath(user.avatar)}
+                                alt="user img"
+                              />
+                            )}
             </a>
             <div className="profile-det-info">
               <h3>
