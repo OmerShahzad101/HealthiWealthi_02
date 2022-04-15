@@ -13,7 +13,7 @@ if (coachProfile.firstName || coachProfile.lastName) {
   data = user;
 }
 
-console.log("data", data);
+console.log("data", data.fileName);
   const imageUpload = () => {};
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
