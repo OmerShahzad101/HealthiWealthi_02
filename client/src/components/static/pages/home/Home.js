@@ -5,6 +5,8 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 export default function Home(props) {
+  const mediaPath = process.env.REACT_APP_IMG;
+  console.log("process.env", process.env);
   const userId = useSelector((state) => state.auth.user.userid);
   const [coachList, setCoachList] = useState([]);
   const role = useSelector(state => state.auth.user.userRole);
@@ -114,7 +116,7 @@ export default function Home(props) {
                           <img
                             className="img-fluid"
                             alt="User"
-                            src="assets/img/doctors/doctor-02.jpg"
+                            src={e?.profileImage ? mediaPath+e.profileImage : mediaPath+'avatar.jpg'}
                           />
                         </Link>
                         {role == 1 && <a className="fav-btn">
@@ -127,7 +129,7 @@ export default function Home(props) {
                           <i className="fas fa-check-circle verified"></i>
                         </h3>
                         <p className="speciality">
-                          {e?.specialization}
+                          {e?.specialization && e.specialization != ''  ? e.specialization: 'N/A'}
                         </p>
                         {/* <div className="rating">
                       <i className="fas fa-star filled"></i>

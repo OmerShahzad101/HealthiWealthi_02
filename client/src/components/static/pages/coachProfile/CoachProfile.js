@@ -12,19 +12,22 @@ const CoachProfile = (props) => {
   const [coachProfileData, setCoachProfileData] = useState([]);
 
   console.log("role", userRole)
+  console.log("userid", userId);
+  console.log("IDD", id);
+  
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-
+   console.log("console for response",res);
     if (res) {
+
       setCoachProfileData(res?.data?.coach);
-      // Toast.fire({
-      //   icon: "success",
-      //   title: res.data.message,
-      // });
+      Toast.fire({
+        icon: "success",
+        title: res.data.message,
+      });
       return;
     }
   }, []);
-
 
   const favorite = () => {
     const payload = {
@@ -281,7 +284,7 @@ const CoachProfile = (props) => {
                                 <div className="experience-content">
                                   <div className="timeline-content">
                                     <a href="#/" className="name">
-                                      {element.hospitalName.toUpperCase()}
+                                      {element.companyName.toUpperCase()}
                                       {"  ("}
                                       {element.designation}
                                       {")"}

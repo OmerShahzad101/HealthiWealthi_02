@@ -78,7 +78,6 @@ const CoachProfileSetting = () => {
     console.log("Awards is updated ", awards);
   };
   const removeAward = (i) => {
-    //console.log("index ", i);
     if (i) {
       const newArray = [...awards];
       const updateAwards = newArray.splice(i, 1);
@@ -121,7 +120,7 @@ const CoachProfileSetting = () => {
   const removeExpirence = (i) => {
     if (i) {
       const newArray = [...experience];
-      const updateAwards = newArray;
+      const updateAwards = newArray.splice(i, 1);;
       console.log("newArray", i, updateAwards);
       setExperience([...newArray]);
     }

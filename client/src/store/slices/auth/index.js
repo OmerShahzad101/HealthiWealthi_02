@@ -12,7 +12,7 @@ const initialState = {
     Userabout: null,
     firstName: null,
     lastName: null,
-    profile: null,
+    fileName: null,
     specialization: null,
   },
   clientProfile: {
@@ -59,7 +59,7 @@ export const authSlice = createSlice({
             firstName: res.firstname,
             lastName: res.lastname,
             specialization: res?.specialization,
-            profile: res?.profile,
+            fileName: res?.fileName,
           },
           clientProfile: { ...state.clientProfile },
           coachProfile: { ...state.coachProfile },
