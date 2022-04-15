@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Spinner, Button } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
-import {  useHistory } from "react-router-dom";
+import { setInfoData } from "../../../../store/slices/user";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import {
+  DASHBOARD,
   CLIENT_PROFILE_SETTING,
   COACH_PROFILE_SETTING,
   CLIENT_DASHBOARD,
@@ -11,26 +13,31 @@ import {
 } from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import {
+  cancelOngoingHttpRequest,
   getHttpRequest,
   postHttpRequest,
   putHttpRequest,
 } from "../../../../axios";
 import {
   setUser,
+  setUserPermissions,
   setAccessToken,
 } from "../../../../store/slices/auth";
 import GoogleLogin from "react-google-login";
 
 const LoginWithGoogle = () => {
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const typeRef = useRef();
 
   const [show, setShow] = useState(false);
   const [_id, setId] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
-  const [setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = async (response) => {
+    console.log(response);
 
     try {
       postHttpRequest("/front/auth/googleLogin", {
@@ -48,6 +55,7 @@ const LoginWithGoogle = () => {
             getHttpRequest(
               `/front/coach/get/${response?.data?.user?._id}`
             ).then((res) => {
+              console.log("resqqqqqqqqqqqqqqqqqqq ", res);
               if (res) {
                 const userData = {
                   response: response.data.user,
@@ -55,9 +63,9 @@ const LoginWithGoogle = () => {
                 };
                 dispatch(setUser(userData));
                 dispatch(setAccessToken(response.data.accessToken));
-                if (response?.data?.user?.type === 1) {
+                if (response?.data?.user?.type == 1) {
                   history.replace(CLIENT_PROFILE_SETTING);
-                } else if (response?.data?.user?.type === 3) {
+                } else if (response?.data?.user?.type == 3) {
                   history.replace(COACH_PROFILE_SETTING);
                 }
               } else {
@@ -126,9 +134,9 @@ const LoginWithGoogle = () => {
           };
           dispatch(setUser(userData));
 
-          if (response?.data?.coach?.type === 1) {
+          if (response?.data?.coach?.type == 1) {
             history.replace(CLIENT_DASHBOARD);
-          } else if (response?.data?.coach?.type === 3) {
+          } else if (response?.data?.coach?.type == 3) {
             history.replace(COACH_DASHBOARD);
           }
         } else {
@@ -151,7 +159,7 @@ const LoginWithGoogle = () => {
     <>
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Continue with Google"
+        buttonText="Continue with google"
         className=" btn btn-google btn-block "
         onSuccess={handleLogin}
         onFailure={handleFail}
