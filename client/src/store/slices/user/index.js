@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  info:null,
+  avatar:null,
   subscriptionPlan: null,
   company: null,
   departments: [],
@@ -10,7 +10,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setInfoData(state, { payload: userData }) {
-      state.info = userData;
+      state.avatar = userData;
     },
     setSubscriptionPlan: (state, { payload: planDetails }) => {
       state.subscriptionPlan = planDetails;
@@ -21,9 +21,7 @@ export const authSlice = createSlice({
     setDepartment: (state, { payload: planDetails }) => {
       state.departments = planDetails;
     },
-    // setInfo: (state, { payload }) => {
-    //   return { ...state, info: { ...state.info, avatar: payload } };
-    // },
+   
   },
 });
 

@@ -16,7 +16,10 @@ import { Tabs, Tab } from "react-bootstrap";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import CoachCalendar from "../Calendar/CoachCalendar";
 import ClientCalendar from "../Calendar/ClientCalendar";
+import ContactDetails from "./ContactDetails";
+
 const CoachProfileSetting = () => {
+  const mediaPath = process.env.REACT_APP_IMG;
   const [key, setKey] = useState("user-info");
 
   const [qualifications, setqualifications] = useState([
@@ -125,7 +128,7 @@ const CoachProfileSetting = () => {
       setExperience([...newArray]);
     }
   };
-  const userInfo = useSelector((state) => state.user.info);
+  const userInfo = useSelector((state) => state.user.avatar);
   const dispatch = useDispatch();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -148,7 +151,9 @@ const CoachProfileSetting = () => {
   const institute = useRef();
   const yearOfCompletion = useRef();
   const checKImage = async (data) => {
+    // console.log(data, 'my dataaaaaaaaaa')
     setTimeout(dispatch(setInfoData(data)), 9000);
+
     const exist = await imageExist(data.avatar);
     if (exist) {
       dispatch(setInfoData(data));
@@ -157,6 +162,7 @@ const CoachProfileSetting = () => {
       checKImage(data);
     }
   };
+
   const onChangeImage = async (e) => {
     const files = e.target.files;
     if (files.length > 0) {
@@ -198,12 +204,12 @@ const CoachProfileSetting = () => {
             console.log("Something went wrong with response...");
             return;
           }
-          console.log("in then");
+          console.log(response, 'ressssssssssssssssss');
           console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
 
-            checKImage(response.data.user);
+            checKImage(response.data.file);
             Toast.fire({
               icon: "success",
               title: response.data.message,
@@ -352,7 +358,7 @@ const CoachProfileSetting = () => {
                           <div className="circle">
                             {userInfo && (
                               <img
-                                src={imagePath(userInfo.avatar)}
+                                src={imagePath(userInfo)}
                                 alt="user img"
                               />
                             )}
@@ -910,6 +916,17 @@ const CoachProfileSetting = () => {
                     <h4 className="card-title">Calendar</h4>
                     <div className="row form-row">
                       <ClientCalendar />
+                    </div>
+                  </div>
+                </div>
+              </Tab>
+              <Tab eventKey="contact" title="Contact Details">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Contact Details</h4>
+                    <div className="row form-row">
+                      {" "}
+                      {/* <ContactDetails /> */}
                     </div>
                   </div>
                 </div>
