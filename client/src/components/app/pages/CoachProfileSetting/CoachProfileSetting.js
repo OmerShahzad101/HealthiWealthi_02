@@ -138,15 +138,11 @@ const CoachProfileSetting = () => {
   const specializationRef = useRef();
   const firstnameRef = useRef();
   const lastnameRef = useRef();
-  const phoneRef = useRef();
+ 
   const genderRef = useRef();
   const aboutRef = useRef();
-  const addressRef = useRef();
-  const postalCodeRef = useRef();
+ 
   const priceRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const countryRef = useRef();
   const degree = useRef();
   const institute = useRef();
   const yearOfCompletion = useRef();
@@ -233,31 +229,26 @@ const CoachProfileSetting = () => {
     const specialization = specializationRef.current.value;
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
-    const phone = phoneRef.current.value;
+    
     const gender = genderRef.current.value;
     const about = aboutRef.current.value;
-    const address = addressRef.current.value;
-    const postalCode = postalCodeRef.current.value;
+  
     const price = priceRef.current.value;
-    const city = cityRef.current.value;
-    const state = stateRef.current.value;
-    const country = countryRef.current.value;
+
 
     const payload = {
       specialization,
       firstname,
       lastname,
-      phone,
+     
       gender,
       about,
-      address,
-      postalCode,
+    
       price,
-      city,
-      state,
+    
       awards,
       experience,
-      country,
+      
       _id: userid,
       qualifications,
     };
@@ -839,7 +830,7 @@ const CoachProfileSetting = () => {
                     <h4 className="card-title">Contact Details</h4>
                     <div className="row form-row">
                       {" "}
-                      {/* <ContactDetails /> */}
+                      <ContactDetails />
                     </div>
                   </div>
                 </div>
