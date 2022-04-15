@@ -6,6 +6,7 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const CoachProfile = (props) => {
 
+  const mediaPath = process.env.REACT_APP_IMG;
   const location = useLocation();
   const userRole = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
@@ -48,9 +49,13 @@ const CoachProfile = (props) => {
               <div className="doc-info-left">
                 <div className="doctor-img">
                   <img
-                    src="/assets/img/doctors/doctor-thumb-02.jpg"
+                    src={
+                      coachProfileData?.fileName
+                        ? mediaPath + coachProfileData.fileName
+                        : mediaPath + "avatar.jpg"
+                    }
                     className="img-fluid"
-                    alt="User Image"
+                    alt="User"
                   />
                 </div>
                 <div className="doc-info-cont">

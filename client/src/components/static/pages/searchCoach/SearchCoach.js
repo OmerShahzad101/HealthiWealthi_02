@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const SearchCoach = () => {
-  // const [male, setmale] = useState(false);
-  // console.log(male)
+  const mediaPath = process.env.REACT_APP_IMG;
   const role = useSelector((state) => state.auth.user.userRole);
   const SearchFilter = useRef();
   const maleCoach = useRef();
@@ -281,7 +280,11 @@ const SearchCoach = () => {
                                 <div className="doctor-img">
                                   <Link to="/coach-profile">
                                     <img
-                                      src="/assets/img/doctors/Ellie-Krieger.png"
+                                      src={
+                                        item?.fileName
+                                          ? mediaPath + item.fileName
+                                          : mediaPath + "avatar.jpg"
+                                      }
                                       className="img-fluid"
                                       alt="User"
                                     />

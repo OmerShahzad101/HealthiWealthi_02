@@ -139,8 +139,8 @@ export default function Home(props) {
                                 className="img-fluid"
                                 alt="User"
                                 src={
-                                  e?.profileImage
-                                    ? mediaPath + e.profileImage
+                                  e?.fileName
+                                    ? mediaPath + e.fileName
                                     : mediaPath + "avatar.jpg"
                                 }
                               />
