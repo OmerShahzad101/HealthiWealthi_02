@@ -47,13 +47,20 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Dashboard</span>
                 </NavLink>
               </li>
+              {/* <li>
+              <li>
+                <NavLink to="/app/client-profile-setting">
+                  <i className="fas fa-user-cog"></i>
+                  <span>Profile Settings</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/app/book-appointment">
                   <i className="fas fa-bookmark"></i>
                   <span>Booking</span>
                 </NavLink>
-              </li>
-             
+              </li> */}
+
               <li>
                 <NavLink to="/app/favourites">
                   <i className="fas fa-bookmark"></i>
@@ -79,12 +86,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Voice Call</span>
                 </NavLink>
               </li> */}
-              <li>
-                <NavLink to="/app/client-profile-setting">
-                  <i className="fas fa-user-cog"></i>
-                  <span>Profile Settings</span>
-                </NavLink>
-              </li>
+           
               <li>
                 <NavLink to="/app/client-change-password">
                   <i className="fas fa-lock"></i>

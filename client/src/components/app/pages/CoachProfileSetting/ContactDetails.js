@@ -64,7 +64,6 @@ const ContactDetails = () => {
       .then((result) => {
         setIsLoading(false);
         if (!result) {
-          alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
           return;
         }
@@ -95,7 +94,6 @@ const ContactDetails = () => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
         if (!response) {
-          alert("Something went wrong with response...  front/coach/get");
           console.log("Something went wrong with response...");
           return;
         }

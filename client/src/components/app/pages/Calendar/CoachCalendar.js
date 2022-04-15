@@ -22,7 +22,6 @@ const CoachCalendar = ({ availabilityTab }) => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
         if (!response) {
-          alert("Something went wrong with response...");
           return;
         }
         if (response && response?.data?.success === true) {
@@ -45,7 +44,6 @@ const CoachCalendar = ({ availabilityTab }) => {
         }
       })
       .catch((e) => {
-        alert(e);
         console.log("Something went wrong...");
       });
   }, []);
