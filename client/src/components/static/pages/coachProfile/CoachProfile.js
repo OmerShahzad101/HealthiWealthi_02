@@ -5,15 +5,18 @@ import { Link, useLocation } from "react-router-dom";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 const CoachProfile = (props) => {
+
   const location = useLocation();
   const userRole = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
-  const { id } = location.state;
+  // const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
 
-  console.log("role", userRole);
-  console.log("userid", userId);
-  console.log("IDD", id);
+  debugger;
+  const url = window.location.pathname;
+  const id = url.split("/").pop();
+  
+  console.log(window.location.pathname);
 
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
