@@ -85,7 +85,6 @@ const LoginWithGoogle = () => {
       });
     }
   };
-
   const handleFail = (googleData) => {
     console.log(googleData);
   };

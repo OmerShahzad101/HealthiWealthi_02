@@ -11,10 +11,13 @@ const CoachProfile = (props) => {
   const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
 
-  console.log("role", userRole)
+  console.log("role", userRole);
+  console.log("userid", userId);
+  console.log("IDD", id);
+
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-
+    console.log("console for response", res);
     if (res) {
       setCoachProfileData(res?.data?.coach);
       // Toast.fire({
@@ -25,14 +28,13 @@ const CoachProfile = (props) => {
     }
   }, []);
 
-
   const favorite = () => {
     const payload = {
       coachId: coachProfileData._id,
-      clientId: userId
-    }
-    let response = postHttpRequest("/front/favourites/create", payload)
-  }
+      clientId: userId,
+    };
+     postHttpRequest("/front/favourites/create", payload);
+  };
 
   return (
     <div className="content">
@@ -43,7 +45,7 @@ const CoachProfile = (props) => {
               <div className="doc-info-left">
                 <div className="doctor-img">
                   <img
-                    src="assets/img/doctors/doctor-thumb-02.jpg"
+                    src="/assets/img/doctors/doctor-thumb-02.jpg"
                     className="img-fluid"
                     alt="User Image"
                   />
@@ -52,14 +54,14 @@ const CoachProfile = (props) => {
                   <h4 className="doc-name">
                     {coachProfileData.firstname} {coachProfileData.lastname}
                   </h4>
-                  <p className="doc-speciality">{coachProfileData.specialization}</p>
+                  <p className="doc-speciality"> {coachProfileData.about}</p>
                   <p className="doc-department">
                     {/* <img
                       src="assets/img/specialities/specialities-05.png"
                       className="img-fluid"
                       alt="Speciality"
                     /> */}
-                    {coachProfileData.about}
+                    {coachProfileData.specialization}
                   </p>
                   <div className="clinic-details">
                     <p className="doc-location">
@@ -138,42 +140,48 @@ const CoachProfile = (props) => {
                       {coachProfileData.city}
                     </li>
                     <li>
-                      <i className="far fa-money-bill-alt"></i> {coachProfileData?.price}{"$ "}
+                      <i className="far fa-money-bill-alt"></i>{" "}
+                      {coachProfileData?.price}
+                      {"$ "}
                     </li>
                   </ul>
                 </div>
-                {userRole == 1 && 
-                <>
-                <div className="doctor-action">
-                   <a className="btn btn-white fav-btn">
-                    <i className="far fa-bookmark" onClick={() => favorite()}></i>
-                  </a>
-                  <Link to="/chat" className="btn btn-white msg-btn">
-                    <i className="far fa-comment-alt"></i>
-                  </Link>
-                  <Link
-                    to="/audiocall"
-                    className="btn btn-white call-btn"
-                    data-toggle="modal"
-                    data-target="#voice_call"
-                  >
-                    <i className="fas fa-phone"></i>
-                  </Link>
-                  <Link
-                    to="/videocall"
-                    className="btn btn-white call-btn"
-                    data-toggle="modal"
-                    data-target="#video_call"
-                  >
-                    <i className="fas fa-video"></i>
-                  </Link>
-                </div>
-                <div className="clinic-booking">
-                  <Link className="apt-btn" to="/app/book-appointment">
-                    Book Appointment
-                  </Link>
-                </div>
-                </>}
+                {userRole == 1 && (
+                  <>
+                    <div className="doctor-action">
+                      <a className="btn btn-white fav-btn">
+                        <i
+                          className="far fa-bookmark"
+                          onClick={() => favorite()}
+                        ></i>
+                      </a>
+                      <Link to="/chat" className="btn btn-white msg-btn">
+                        <i className="far fa-comment-alt"></i>
+                      </Link>
+                      <Link
+                        to="/audiocall"
+                        className="btn btn-white call-btn"
+                        data-toggle="modal"
+                        data-target="#voice_call"
+                      >
+                        <i className="fas fa-phone"></i>
+                      </Link>
+                      <Link
+                        to="/videocall"
+                        className="btn btn-white call-btn"
+                        data-toggle="modal"
+                        data-target="#video_call"
+                      >
+                        <i className="fas fa-video"></i>
+                      </Link>
+                    </div>
+                    <div className="clinic-booking">
+                      <Link className="apt-btn" to="/app/book-appointment">
+                        Book Appointment
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -281,7 +289,7 @@ const CoachProfile = (props) => {
                                 <div className="experience-content">
                                   <div className="timeline-content">
                                     <a href="#/" className="name">
-                                      {element.hospitalName.toUpperCase()}
+                                      {element.companyName.toUpperCase()}
                                       {"  ("}
                                       {element.designation}
                                       {")"}

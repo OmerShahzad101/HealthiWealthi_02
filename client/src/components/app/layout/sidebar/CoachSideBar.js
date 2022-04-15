@@ -15,7 +15,6 @@ if (coachProfile.firstName || coachProfile.lastName) {
 }
 
 
-console.log("data", data);
   const imageUpload = () => {};
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">

@@ -25,10 +25,8 @@ const ClientProfileSetting = () => {
   const stateRef = useRef();
   const countryRef = useRef();
   const bloodgroupRef = useRef();
-
   function updateProfileHandler(event) {
     event.preventDefault();
-
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
     const phone = phoneRef.current.value;
@@ -40,7 +38,6 @@ const ClientProfileSetting = () => {
     const state = stateRef.current.value;
     const country = countryRef.current.value;
     const bloodgroup = bloodgroupRef.current.value;
-
     const payload = {
       firstname,
       lastname,
