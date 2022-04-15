@@ -47,6 +47,12 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Dashboard</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/app/book-appointment">
+                  <i className="fas fa-bookmark"></i>
+                  <span>Booking</span>
+                </NavLink>
+              </li>
              
               <li>
                 <NavLink to="/app/favourites">

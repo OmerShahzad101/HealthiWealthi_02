@@ -7498,7 +7498,7 @@ img {
   align-items: center;
 }
 .gridSlot button {
-  background-color: #e9e9e9;
+  background-color: #fff;
   border: 1px solid #e9e9e9;
   border-radius: 3px;
   color: #757575;
@@ -7512,12 +7512,12 @@ img {
   cursor: pointer;
   transition: 0.3s ease;
 }
-/* .gridSlot button:disabled {
+.gridSlot button:disabled {
   background-color: #e9e9e9;
 }
 .gridSlot button:disabled:hover {
   background-color: #e9e9e9;
-} */
+}
 
 .gridSlot button:hover {
   background-color: #d32986;
