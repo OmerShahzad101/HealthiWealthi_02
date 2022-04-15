@@ -32,7 +32,7 @@ export default function Home(props) {
       if(response.data){
         history.push({
           pathname: "/search-coach",
-          state: { name: {payload} }
+          state: { name: payload }
         })
       }
       // Toast.fire({
