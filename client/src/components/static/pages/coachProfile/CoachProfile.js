@@ -20,10 +20,10 @@ const CoachProfile = (props) => {
     console.log("console for response", res);
     if (res) {
       setCoachProfileData(res?.data?.coach);
-      Toast.fire({
-        icon: "success",
-        title: res.data.message,
-      });
+      // Toast.fire({
+      //   icon: "success",
+      //   title: res.data.message,
+      // });
       return;
     }
   }, []);
@@ -33,7 +33,7 @@ const CoachProfile = (props) => {
       coachId: coachProfileData._id,
       clientId: userId,
     };
-    let response = postHttpRequest("/front/favourites/create", payload);
+     postHttpRequest("/front/favourites/create", payload);
   };
 
   return (
@@ -45,7 +45,7 @@ const CoachProfile = (props) => {
               <div className="doc-info-left">
                 <div className="doctor-img">
                   <img
-                    src="assets/img/doctors/doctor-thumb-02.jpg"
+                    src="/assets/img/doctors/doctor-thumb-02.jpg"
                     className="img-fluid"
                     alt="User Image"
                   />
@@ -54,16 +54,14 @@ const CoachProfile = (props) => {
                   <h4 className="doc-name">
                     {coachProfileData.firstname} {coachProfileData.lastname}
                   </h4>
-                  <p className="doc-speciality">
-                    {coachProfileData.specialization}
-                  </p>
+                  <p className="doc-speciality"> {coachProfileData.about}</p>
                   <p className="doc-department">
                     {/* <img
                       src="assets/img/specialities/specialities-05.png"
                       className="img-fluid"
                       alt="Speciality"
                     /> */}
-                    {coachProfileData.about}
+                    {coachProfileData.specialization}
                   </p>
                   <div className="clinic-details">
                     <p className="doc-location">
