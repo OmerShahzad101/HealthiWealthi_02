@@ -405,9 +405,11 @@ const SearchCoach = () => {
                                 <div className="clinic-booking">
                                   <Link
                                     className="view-pro-btn"
+                                   
                                     to={{
+                                      
                                       pathname: "/coach-profile",
-                                      state: { id: item._id },
+                                      state: { id: item?._id },
                                     }}
                                   >
                                     View Profile
