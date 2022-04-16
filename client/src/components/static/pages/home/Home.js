@@ -140,7 +140,7 @@ export default function Home(props) {
                                 alt="User"
                                 src={
                                   e?.profileImage
-                                    ? mediaPath + e.profileImage
+                                    ? mediaPath + e.profileImage 
                                     : mediaPath + "avatar.jpg"
                                 }
                               />
