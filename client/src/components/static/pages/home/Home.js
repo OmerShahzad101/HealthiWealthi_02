@@ -45,17 +45,20 @@ export default function Home(props) {
       });
     console.log(payload);
   };
+
   const settings = {
     dots: false,
     autoplay: false,
     infinite: true,
     variableWidth: true,
   };
+
   const favorite = (e) => {
     const payload = {
       coachId: e,
       clientId: userId,
     };
+    
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
         if(response){

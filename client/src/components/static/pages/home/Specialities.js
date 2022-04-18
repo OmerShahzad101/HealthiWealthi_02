@@ -2,19 +2,27 @@ import React from "react";
 import Slider from "react-slick";
 
 const Specialities = () => {
+  const settingsSpecialities = {
+    dots: true,
+    autoplay:false,
+    infinite: true,
+    variableWidth: true,
+    arrows: false,
+  };
+  
   return (
-      <div className="container-fluid">
-        <div className="section-header text-center">
-          <h2>Clinic and Specialities</h2>
-          <p className="sub-title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-md-9">
-            <Slider>
-            <div className="specialities-slider">
+    <div className="container-fluid">
+      <div className="section-header text-center">
+        <h2>Clinic and Specialities</h2>
+        <p className="sub-title">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-md-9">
+          <div className="specialities-slider slider">
+            <Slider {...settingsSpecialities}>
               <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
@@ -80,11 +88,11 @@ const Specialities = () => {
                 </div>
                 <p>Dentist</p>
               </div>
-            </div>
             </Slider>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
