@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setClientProfile } from "../../../../store/slices/auth";
 import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
-import { setInfoData, setAvatar } from "../../../../store/slices/user";
+import { setImage } from "../../../../store/slices/auth";
 
 import { AiOutlineCamera } from "react-icons/ai";
 const ClientProfileSetting = () => {
   const mediaPath = process.env.REACT_APP_IMG;
-  const userInfo = useSelector((state) => state.user.avatar);
+  const fileName = useSelector((state) => state.auth.user.fileName);
 
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -137,11 +137,11 @@ const ClientProfileSetting = () => {
 
   const checKImage = async (data) => {
     // console.log(data, 'my dataaaaaaaaaa')
-    setTimeout(dispatch(setInfoData(data)), 9000);
+    setTimeout(dispatch(setImage(data)), 9000);
 
     const exist = await imageExist(data.avatar);
     if (exist) {
-      dispatch(setInfoData(data));
+      dispatch(setImage(data));
       return true;
     } else {
       checKImage(data);
@@ -223,9 +223,9 @@ const ClientProfileSetting = () => {
               <div className="col-md-12">
                         <div className="imageUploaderWrapper profile-img">
                           <div className="circle">
-                            {userInfo && (
+                            {fileName && (
                               <img
-                                src={imagePath(userInfo)}
+                                src={imagePath(fileName)}
                                 alt="user img"
                               />
                             )}
