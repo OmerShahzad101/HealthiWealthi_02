@@ -248,9 +248,9 @@ const ClientCalendar = (props) => {
 
         <div className="container booking">
           <div className="row align-items-center mb-4">
-            {/* <div className="col-md-6">
+            <div className="col-md-6">
               <h3 className="booking-title m-0">{selectedHumanReadableDate}</h3>
-            </div> */}
+            </div>
             <div className="col-md-6 text-right">
               <div className="week-controls">
                 <button

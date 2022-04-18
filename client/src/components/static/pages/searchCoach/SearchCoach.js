@@ -292,7 +292,9 @@ const SearchCoach = () => {
                                 </div>
                                 <div className="doc-info-cont">
                                   <h4 className="doc-name">
-                                    <Link to="/coach-profile">
+                                  
+
+                                    <Link to={"/coach-profile/"+item?._id}>
                                       {item.firstname + " " + item.lastname}
                                     </Link>
                                   </h4>
