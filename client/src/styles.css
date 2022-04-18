@@ -2355,7 +2355,7 @@ html.menu-opened body {
 -----------------------*/
 
 .section-search {
-  background: #f9f9f9 url(assets/img/search-bg.png) no-repeat bottom center;
+  background: #f9f9f9 url(assets/img/banner.jpg) no-repeat bottom center;
   min-height: 450px;
   background-size: 100% auto;
   position: relative;
@@ -7289,7 +7289,7 @@ html.menu-opened body {
   margin: 0;
 }
 .website-banner {
-  background: url("assets/img/search-bg.png");
+  background: url("assets/img/banner.jpg");
   background-size: cover;
   background-position: center;
   padding: 130px 0;
@@ -7387,32 +7387,31 @@ html.menu-opened body {
   cursor: pointer;
 }
 .circle {
-  border-radius: 100% !important;
-  overflow: hidden;
-  width: 145px;
-  height: 145px;
+  display: inline-block;
+  margin: 0 0 15px;
+  width: auto;
+  padding: 8px;
+  background-color: #f7f7f7;
+  border-radius: 50%;
+}
 
-  top: 72px;
-}
-img {
-  max-width: 100%;
-  height: 100%;
-}
 .pImage {
   position: absolute;
   top: 102px;
   color: #666666;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   left: 110px;
   padding: 6px;
   border-radius: 25px;
   line-height: 0;
   box-shadow: 0px 4px 16px rgba(175, 185, 222, 0.3);
-  background-color: var(--white);
+  background-color: #fff;
+  transition: all .3s ease;
 }
 
 .pImage:hover {
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: #d32986;
+  color: #fff;
+  transition: all .3s ease;
 }
 .uploadButton {
   font-size: 1.2em;
@@ -7434,7 +7433,13 @@ img {
 }
 .profile-img {
   display: flex;
-  justify-content: start;
+  justify-content: center;
+}
+.profile-img img{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .gridDays {
@@ -7551,4 +7556,8 @@ button.btn.btn-google.btn-block {
 button.btn.btn-google.btn-block span{
   flex: auto;
   font-weight: 600 !important;
+}
+
+.rat-TimeSlot_component {
+  background-color: rgb(211, 41, 134, 0.7);
 }

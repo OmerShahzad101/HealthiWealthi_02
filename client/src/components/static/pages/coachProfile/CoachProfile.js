@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import $ from "jquery"
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { Tabs, Tab } from "react-bootstrap";
 const CoachProfile = (props) => {
@@ -14,6 +15,7 @@ const CoachProfile = (props) => {
   const id = url.split("/").pop();
 
   useEffect(async () => {
+    $('html,body').animate({scrollTop: 0}, 'slow');
     let res = await getHttpRequest(`/front/coach/get/${id}`);
     if (res) {
       setCoachProfileData(res?.data?.coach)
@@ -70,7 +72,7 @@ const CoachProfile = (props) => {
                       <Link to="/#" className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call"><i className="fas fa-video"></i></Link>
                     </div>
                     <div className="clinic-booking">
-                      <Link className="apt-btn" to="/app/book-appointment">Book Appointment</Link>
+                      <Link className="apt-btn"to={"/app/book-appointment/"+coachProfileData?._id}>Book Appointment</Link>
                     </div>
                   </>
                 )}

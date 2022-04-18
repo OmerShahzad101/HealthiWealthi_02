@@ -193,8 +193,8 @@ export default function Home(props) {
                               {role === 1 ? (
                                 <div className="col-6">
                                   <Link
-                                    to="app/book-appointment"
-                                    className="btn book-btn"
+                                      to={"/app/book-appointment/"+e?._id}
+                                      className="btn book-btn"
                                   >
                                     Book Now
                                   </Link>
