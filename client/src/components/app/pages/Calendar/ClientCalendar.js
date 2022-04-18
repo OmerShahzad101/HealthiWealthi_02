@@ -75,6 +75,7 @@ const ClientCalendar = () => {
 
   
   const generateWeekDates = () => {
+    debugger;
     setTimeout(() => {
       if (startDate > today) {
         setDisabledPrevButton(false);
@@ -125,13 +126,13 @@ const ClientCalendar = () => {
     // var startDate = moment(endDate).add(1, "days").format("MM/DD/YYYY");
     // endDate = moment(startDate).add(6, "days").format("MM/DD/YYYY");
 
-    
+
     setStartDate(  moment(endDate).add(1, "days").format("MM/DD/YYYY"));
     setDate(  moment(endDate).add(1, "days").format("MM/DD/YYYY"));
-    setEndDate( moment(startDate).add(6, "days").format("MM/DD/YYYY"));
+    setEndDate( moment(endDate).add(7, "days").format("MM/DD/YYYY"));
     setLoading(true);
     setInitDatePicker(true);
-    generateWeekDates();
+    // generateWeekDates();
   };
 
   const handleOnClickPrevButton = () => {
@@ -139,10 +140,10 @@ const ClientCalendar = () => {
     // var endDate = moment(startDate).subtract(1, "days").format("MM/DD/YYYY");
     // startDate = moment(endDate).subtract(6, "days").format("MM/DD/YYYY");
 
-    
-    setStartDate(moment(endDate).subtract(6, "days").format("MM/DD/YYYY"));
-    setDate(moment(endDate).subtract(6, "days").format("MM/DD/YYYY"));
-    setEndDate(moment(startDate).subtract(1, "days").format("MM/DD/YYYY"));
+    debugger;
+    setStartDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
+    setDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
+    setEndDate(moment(endDate).subtract(7, "days").format("MM/DD/YYYY"));
     setLoading(true);
     setInitDatePicker(true);
     generateWeekDates();
