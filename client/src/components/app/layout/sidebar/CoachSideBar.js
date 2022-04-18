@@ -5,9 +5,12 @@ import { useSelector } from "react-redux";
 
 const CoachSideBar = () => {
   
+
   let data;
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
+    console.log("khaliq Mehmood===" ,user);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
+  console.log("COACH PROFILEDATA", coachProfile);
 if (coachProfile.firstName || coachProfile.lastName) {
   data = coachProfile;
 } else {
