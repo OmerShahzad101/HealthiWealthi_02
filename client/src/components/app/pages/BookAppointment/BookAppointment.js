@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ClientCalendar from "../Calendar/ClientCalendar";
-
+import imagePath from "../../../../utils/url/imagePath";
 import { getHttpRequest } from "../../../../axios";
 const BookAppointment = () => {
+  const mediaPath = process.env.REACT_APP_IMG;
   const url = window.location.pathname;
   const id = url.split("/").pop();
   const [coachProfileData, setCoachProfileData] = useState([]);
@@ -23,7 +24,7 @@ const BookAppointment = () => {
             <div className="booking-doc-info">
               <Link to="/coach-profile" className="booking-doc-img">
                 <img
-                  src="assets/img/doctors/doctor-thumb-02.jpg"
+                  src={imagePath(coachProfileData.fileName)}
                   alt="User Image"
                 />
               </Link>
