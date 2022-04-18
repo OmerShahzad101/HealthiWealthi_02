@@ -30,11 +30,10 @@ const CoachProfileSetting = () => {
       ...qualifications,
       { degree: "", college: "", year: "" },
     ]);
-    console.log("qualifications", qualifications);
+    //console.log("qualifications", qualifications);
   };
   const handleChange = (index, key, value) => {
     let updatedKeyValue;
-
     const keyValue = qualifications[index]; // obj{}
     if (key === "degree") {
       updatedKeyValue = { ...keyValue, degree: value };
@@ -84,7 +83,7 @@ const CoachProfileSetting = () => {
     if (i) {
       const newArray = [...awards];
       const updateAwards = newArray.splice(i, 1);
-      console.log("newArray", i, updateAwards);
+     // console.log("newArray", i, updateAwards);
       setAwards([...newArray]);
     }
   };
@@ -99,7 +98,7 @@ const CoachProfileSetting = () => {
       ...experience,
       { companyName: "", dateFrom: "", dateTo: "", designation: "" },
     ]);
-    console.log("experience", experience);
+    //console.log("experience", experience);
   };
 
   const handleExperiencechange = (index, key, value) => {
@@ -118,7 +117,7 @@ const CoachProfileSetting = () => {
     const updateExperience = [...experience];
     updateExperience.splice(index, 1, updatedKeyValue);
     setExperience([...updateExperience]);
-    console.log("experience is updated ", experience);
+    //console.log("experience is updated ", experience);
   };
   const removeExpirence = (i) => {
     if (i) {
@@ -204,7 +203,7 @@ const CoachProfileSetting = () => {
             console.log("Something went wrong with response...");
             return;
           }
-          console.log(response, 'ressssssssssssssssss');
+          //console.log(response, 'ressssssssssssssssss');
           console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
@@ -312,6 +311,7 @@ const CoachProfileSetting = () => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
         if (!response) {
+          
           alert("Something went wrong with response...  front/coach/get");
           console.log("Something went wrong with response...");
           return;
@@ -451,7 +451,7 @@ const CoachProfileSetting = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <span className="errors">
-                            {validationErrors.specialization || ""}
+                            {validationErrors.specialization}
                           </span>
                         </div>
                       </div>
