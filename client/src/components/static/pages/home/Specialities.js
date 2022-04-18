@@ -75,7 +75,7 @@ const Specialities = () => {
                 </div>
                 <p>Cardiologist</p>
               </div>
-              <div className="speicality-item text-center">
+              {/* <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
                     src="assets/img/specialities/specialities-05.png"
@@ -87,7 +87,7 @@ const Specialities = () => {
                   </span>
                 </div>
                 <p>Dentist</p>
-              </div>
+              </div> */}
             </Slider>
           </div>
         </div>

@@ -69,7 +69,7 @@ const ClientCalendar = (props) => {
 
   
   const generateWeekDates = () => {
-    debugger;
+    // debugger;
     setTimeout(() => {
       if (startDate > today) {
         setDisabledPrevButton(false);
