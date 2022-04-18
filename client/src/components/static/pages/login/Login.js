@@ -1,36 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Spinner, Button } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
-import { setInfoData } from "../../../../store/slices/user";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import {
-  CLIENT_PROFILE_SETTING,
-  COACH_PROFILE_SETTING,
-} from "../../../../router/constants/ROUTES";
-import validate from "../../../../utils/form-validation/authFormValidation";
-import {
-  getHttpRequest,
-  postHttpRequest,
-  putHttpRequest,
-} from "../../../../axios";
-import {
-  setUser,
-  setUserPermissions,
-  setAccessToken,
-} from "../../../../store/slices/auth";
 import LoginWithGoogle from "./LoginWithGoogle";
+import { Link, useHistory } from "react-router-dom";
+import { getHttpRequest,postHttpRequest,} from "../../../../axios";
+import { setUser, setAccessToken } from "../../../../store/slices/auth";
+import validate from "../../../../utils/form-validation/authFormValidation";
+import { CLIENT_PROFILE_SETTING, COACH_PROFILE_SETTING,} from "../../../../router/constants/ROUTES";
 
 const Login = (props) => {
   const history = useHistory();
-  const location = useLocation();
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const typeRef = useRef();
 
   const [validationErrors, setValidationErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const loginHandler = async (event) => {
@@ -76,22 +61,18 @@ const Login = (props) => {
 
       if (response.data.success) {
         setIsLoading(false);
-        let res = await getHttpRequest(
-          `/front/coach/get/${response?.data?.data?._id}`
-        );
-
+        let res = await getHttpRequest(`/front/coach/get/${response?.data?.data?._id}`);
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
           dispatch(setUser(userData));
-
           dispatch(setAccessToken(response.data.data.accessToken));
 
-          if (response?.data?.data?.type == 1) {
+          if (response?.data?.data?.type === 1) {
             history.replace(CLIENT_PROFILE_SETTING);
-          } else if (response?.data?.data?.type == 3) {
+          } else if (response?.data?.data?.type === 3) {
             history.replace(COACH_PROFILE_SETTING);
           }
         } else {

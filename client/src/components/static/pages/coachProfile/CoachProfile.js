@@ -1,43 +1,31 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import Toast from "../../../common/toast/Toast";
-import { Link, useLocation } from "react-router-dom";
-import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getHttpRequest, postHttpRequest } from "../../../../axios";
 const CoachProfile = (props) => {
 
   const mediaPath = process.env.REACT_APP_IMG;
-  const location = useLocation();
   const userRole = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
-  // const { id } = location.state;
   const [coachProfileData, setCoachProfileData] = useState([]);
-
-  debugger;
   const url = window.location.pathname;
   const id = url.split("/").pop();
   
-  console.log(window.location.pathname);
-
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    console.log("console for response", res);
-    if (res) {
-      setCoachProfileData(res?.data?.coach);
-      // Toast.fire({
-      //   icon: "success",
-      //   title: res.data.message,
-      // });
+    if (res) { 
+      setCoachProfileData(res?.data?.coach)
       return;
     }
   }, []);
 
+  // API Function TO Add Favourit
   const favorite = () => {
     const payload = {
       coachId: coachProfileData._id,
       clientId: userId,
     };
-     postHttpRequest("/front/favourites/create", payload);
+    postHttpRequest("/front/favourites/create", payload);
   };
 
   return (
@@ -48,145 +36,39 @@ const CoachProfile = (props) => {
             <div className="doctor-widget">
               <div className="doc-info-left">
                 <div className="doctor-img">
-                  <img
-                    src={
-                      coachProfileData?.fileName
-                        ? mediaPath + coachProfileData.fileName
-                        : mediaPath + "avatar.jpg"
-                    }
-                    className="img-fluid"
-                    alt="User"
-                  />
+                  <img src={coachProfileData?.fileName ? mediaPath + coachProfileData.fileName : mediaPath + "avatar.jpg" } className="img-fluid" alt="User"/>
                 </div>
                 <div className="doc-info-cont">
-                  <h4 className="doc-name">
-                    {coachProfileData.firstname} {coachProfileData.lastname}
-                  </h4>
-                  <p className="doc-speciality"> {coachProfileData.about}</p>
-                  <p className="doc-department">
-                    {/* <img
-                      src="assets/img/specialities/specialities-05.png"
-                      className="img-fluid"
-                      alt="Speciality"
-                    /> */}
-                    {coachProfileData.specialization}
-                  </p>
+                  <h4 className="doc-name">{coachProfileData.firstname} {coachProfileData.lastname}</h4>
+                  <p className="doc-speciality">{coachProfileData.about}</p>
+                  <p className="doc-department">{coachProfileData.specialization}</p>
                   <div className="clinic-details">
                     <p className="doc-location">
                       <i className="fas fa-map-marker-alt"></i>
-                      &nbsp; {coachProfileData.country}
-                      {", "}
-                      {coachProfileData.city}
-                      {/* <a href="#;"> Get Directions</a> */}
+                      &nbsp;{coachProfileData.country}{", "}{coachProfileData.city}
                     </p>
-                    {/* <ul className="clinic-gallery">
-                      <li>
-                        <a
-                          href="/assets/img/features/feature-01.jpg"
-                          data-fancybox="gallery"
-                        >
-                          <img
-                            src="assets/img/features/feature-01.jpg"
-                            alt="Feature"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="assets/img/features/feature-02.jpg"
-                          data-fancybox="gallery"
-                        >
-                          <img
-                            src="assets/img/features/feature-02.jpg"
-                            alt="Feature Image"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="assets/img/features/feature-03.jpg"
-                          data-fancybox="gallery"
-                        >
-                          <img
-                            src="assets/img/features/feature-03.jpg"
-                            alt="Feature"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="assets/img/features/feature-04.jpg"
-                          data-fancybox="gallery"
-                        >
-                          <img
-                            src="assets/img/features/feature-04.jpg"
-                            alt="Feature"
-                          />
-                        </a>
-                      </li>
-                    </ul> */}
-                  </div>
-                  <div className="clinic-services">
-                    {/* <span>Diet</span>
-                    <span>Fitness</span> */}
                   </div>
                 </div>
               </div>
               <div className="doc-info-right">
                 <div className="clini-infos">
                   <ul>
-                    {/* <li>
-                      <i className="far fa-thumbs-up"></i> 99%
-                    </li>
-                    <li>
-                      <i className="far fa-comment"></i> 35 Feedback
-                    </li> */}
-                    <li>
-                      <i className="fas fa-map-marker-alt"></i>{" "}
-                      {coachProfileData.country}
-                      {", "}
-                      {coachProfileData.city}
-                    </li>
-                    <li>
-                      <i className="far fa-money-bill-alt"></i>{" "}
-                      {coachProfileData?.price}
-                      {"$ "}
-                    </li>
+                    {/*<li><i className="far fa-thumbs-up"></i> 99%</li>
+                    <li><i className="far fa-comment"></i> 35 Feedback</li> */}
+                    <li><i className="fas fa-map-marker-alt"></i>&nbsp;{coachProfileData.country}{","}&nbsp;{coachProfileData.city}</li>
+                    <li><i className="far fa-money-bill-alt"></i>&nbsp;{coachProfileData?.price}{"$"}&nbsp;</li>
                   </ul>
                 </div>
                 {userRole == 1 && (
                   <>
                     <div className="doctor-action">
-                      <a className="btn btn-white fav-btn">
-                        <i
-                          className="far fa-bookmark"
-                          onClick={() => favorite()}
-                        ></i>
-                      </a>
-                      <Link to="/chat" className="btn btn-white msg-btn">
-                        <i className="far fa-comment-alt"></i>
-                      </Link>
-                      <Link
-                        to="/audiocall"
-                        className="btn btn-white call-btn"
-                        data-toggle="modal"
-                        data-target="#voice_call"
-                      >
-                        <i className="fas fa-phone"></i>
-                      </Link>
-                      <Link
-                        to="/videocall"
-                        className="btn btn-white call-btn"
-                        data-toggle="modal"
-                        data-target="#video_call"
-                      >
-                        <i className="fas fa-video"></i>
-                      </Link>
+                      <a className="btn btn-white fav-btn"><i  className="far fa-bookmark" onClick={() => favorite()}></i></a>
+                      <Link to="/chat" className="btn btn-white msg-btn"><i className="far fa-comment-alt"></i></Link>
+                      <Link to="/#" className="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call"> <i className="fas fa-phone"></i></Link>
+                      <Link to="/#" className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call"><i className="fas fa-video"></i></Link>
                     </div>
                     <div className="clinic-booking">
-                      <Link className="apt-btn" to="/app/book-appointment">
-                        Book Appointment
-                      </Link>
+                      <Link className="apt-btn" to="/app/book-appointment">Book Appointment</Link>
                     </div>
                   </>
                 )}
@@ -194,7 +76,7 @@ const CoachProfile = (props) => {
             </div>
           </div>
         </div>
-        {/* <!-- /Doctor Widget --> */}
+       
 
         {/* <!-- Doctor Details Tab --> */}
         <div className="card">
@@ -203,13 +85,7 @@ const CoachProfile = (props) => {
             <nav className="user-tabs mb-4">
               <ul className="nav nav-tabs nav-tabs-bottom nav-justified">
                 <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    href="#doc_overview"
-                    data-toggle="tab"
-                  >
-                    Overview
-                  </a>
+                  <a className="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
                 </li>
                 <li className="nav-item">
                   <a
@@ -253,7 +129,6 @@ const CoachProfile = (props) => {
                       <h4 className="widget-title">About Me</h4>
                       <p>{coachProfileData.about}</p>
                     </div>
-                    {/* <!-- /About Details --> */}
 
                     {/* <!-- Education Details --> */}
                     <div className="widget education-widget">
@@ -281,7 +156,6 @@ const CoachProfile = (props) => {
                         );
                       })}
                     </div>
-                    {/* <!-- /Education Details --> */}
 
                     {/* <!-- Experience Details --> */}
                     <div className="widget experience-widget">
@@ -316,7 +190,6 @@ const CoachProfile = (props) => {
                         </ul>
                       </div>
                     </div>
-                    {/* <!-- /Experience Details --> */}
                     {/* <!-- Awards Details --> */}
                     <div className="widget awards-widget">
                       <h4 className="widget-title">Awards</h4>
@@ -347,7 +220,6 @@ const CoachProfile = (props) => {
                   </div>
                 </div>
               </div>
-              {/* <!-- /Overview Content --> */}
 
               {/* <!-- Locations Content --> */}
               <div role="tabpanel" id="doc_locations" className="tab-pane fade">
