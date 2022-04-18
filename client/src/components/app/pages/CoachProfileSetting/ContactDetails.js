@@ -110,10 +110,7 @@ const ContactDetails = () => {
   }, []);
   return (
     <>
-      <div className="col-md-7 col-lg-8 col-xl-9">
-        <div className="card">
-          <div className="card-body pt-0 user-tabs mb-4">
-            <div className="card contact-card">
+       <div className="card contact-card">
               <div className="card-body">
                 <h4 className="card-title">Contact Details</h4>
                 <div className="row form-row">
@@ -209,9 +206,9 @@ const ContactDetails = () => {
                 Save Changes
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+       
+        
+      
     </>
   );
 };
