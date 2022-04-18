@@ -30,9 +30,9 @@ const BookAppointment = () => {
               </Link>
               <div className="booking-info">
                 <h4>
-                  <Link to="/coach-profile">
+                  <div>
                     {coachProfileData.firstname} {coachProfileData.lastname}
-                  </Link>
+                  </div>
                 </h4>
                 <div className="rating">
                   <i className="fas fa-star filled"></i>
