@@ -22,114 +22,122 @@ const BasicInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [profileData, setprofileData] = useState({});
+  let payload = { ...profileData };
 
   const [qualifications, setqualifications] = useState([
-    { degree: " ", college: " ", year: " " },
+    { degree: "", college: "", year: "" },
   ]);
+
+  const [awards, setAwards] = useState([{ award: "", year: "" }]);
+
+  const [experience, setExperience] = useState([
+    { companyName: "", dateFrom: "", dateTo: "", designation: "" },
+  ]);
+
+  /** Qualification **/
   const addqualifications = () => {
     setqualifications([
       ...qualifications,
       { degree: "", college: "", year: "" },
     ]);
-    console.log("qualifications", qualifications);
+    setprofileData({ ...profileData, qualifications });
   };
-  const handleChange = (index, key, value) => {
-    let updatedKeyValue;
 
-    const keyValue = qualifications[index]; // obj{}
+  const handleChange = (index, key, value) => {
     if (key === "degree") {
-      updatedKeyValue = { ...keyValue, degree: value };
+      qualifications[index] = { ...qualifications[index], degree: value };
     } else if (key === "college") {
-      updatedKeyValue = { ...keyValue, college: value };
+      qualifications[index] = { ...qualifications[index], college: value };
     } else if (key === "year") {
-      updatedKeyValue = { ...keyValue, year: value };
+      qualifications[index] = { ...qualifications[index], year: value };
     }
     const updatedEducation = [...qualifications];
-    updatedEducation.splice(index, 1, updatedKeyValue);
+    updatedEducation.splice(index, 1, qualifications[index]);
     setqualifications([...updatedEducation]);
-    console.log("qualifications is updated ", qualifications);
+    setprofileData({ ...profileData, qualifications });
   };
-  const removeEducation = (i) => {
-    console.log("index ", i);
 
+  const removeQualification = (i) => {
     if (i) {
-      const newArray = [...qualifications];
-      const updatedEducation = newArray.splice(i, 1);
-      console.log("newArray  ", i, updatedEducation);
-      setqualifications([...newArray]);
+      qualifications.splice(i, 1);
+      setqualifications([...qualifications]);
+      setprofileData({
+        ...profileData,
+        qualifications,
+      });
     }
   };
-  /** Education **/
-  /***awards ***/
-  const [awards, setAwards] = useState([{ award: "", year: "" }]);
+
+  /***Awards ***/
 
   const addAward = () => {
     setAwards([...awards, { award: "", year: "" }]);
-    console.log("Awards", awards);
   };
-  const handleAwardchange = (index, key, value) => {
-    let updatedKeyValue;
 
-    const keyValue = awards[index];
+  const handleAwardchange = (index, key, value) => {
     if (key === "award") {
-      updatedKeyValue = { ...keyValue, award: value };
+      awards[index] = { ...awards[index], award: value };
     } else if (key === "year") {
-      updatedKeyValue = { ...keyValue, year: value };
+      awards[index] = { ...awards[index], year: value };
     }
     const updatedAwards = [...awards];
-    updatedAwards.splice(index, 1, updatedKeyValue);
+    updatedAwards.splice(index, 1, awards[index]);
     setAwards([...updatedAwards]);
-    console.log("Awards is updated ", awards);
+    setprofileData({ ...profileData, awards });
   };
+
   const removeAward = (i) => {
     if (i) {
-      const newArray = [...awards];
-      const updateAwards = newArray.splice(i, 1);
-      console.log("newArray", i, updateAwards);
-      setAwards([...newArray]);
+      awards.splice(i, 1);
+      setAwards([...awards]);
+      setprofileData({
+        ...profileData,
+        awards,
+      });
     }
   };
   /***awards***/
+
   /*****Experience*****/
-  const [experience, setExperience] = useState([
-    { companyName: "", dateFrom: "", dateTo: "", designation: "" },
-  ]);
+
   const addExperience = () => {
     setExperience([
       ...experience,
       { companyName: "", dateFrom: "", dateTo: "", designation: "" },
     ]);
-    console.log("experience", experience);
+    console.log("exp :", experience);
+    setprofileData({ ...profileData, experience });
   };
-  const handleExperiencechange = (index, key, value) => {
-    let updatedKeyValue;
 
-    const keyValue = experience[index];
+  const handleExperiencechange = (index, key, value) => {
     if (key === "companyName") {
-      updatedKeyValue = { ...keyValue, companyName: value };
+      experience[index] = { ...experience[index], companyName: value };
     } else if (key === "dateFrom") {
-      updatedKeyValue = { ...keyValue, dateFrom: value };
+      experience[index] = { ...experience[index], dateFrom: value };
     } else if (key === "dateTo") {
-      updatedKeyValue = { ...keyValue, dateTo: value };
+      experience[index] = { ...experience[index], dateTo: value };
     } else if (key === "designation") {
-      updatedKeyValue = { ...keyValue, designation: value };
+      experience[index] = { ...experience[index], designation: value };
     }
     const updateExperience = [...experience];
-    updateExperience.splice(index, 1, updatedKeyValue);
+    updateExperience.splice(index, 1, experience[index]);
     setExperience([...updateExperience]);
-    console.log("experience is updated ", experience);
-  };
-  const removeExpirence = (i) => {
-    if (i) {
-      const newArray = [...experience];
-      const updateAwards = newArray.splice(i, 1);
-      console.log("newArray", i, updateAwards);
-      setExperience([...newArray]);
-    }
+    setprofileData({ ...profileData, experience });
   };
 
+  const removeExpirence = (i) => {
+    if (i) {
+      experience.splice(i, 1);
+      setExperience([...experience]);
+      setprofileData({
+        ...profileData,
+        experience,
+      });
+    }
+  };
+  /**********/
+
   const checKImage = async (data) => {
-    // console.log(data, 'my dataaaaaaaaaa')
     setTimeout(dispatch(setInfoData(data)), 9000);
 
     const exist = await imageExist(data.avatar);
@@ -145,7 +153,6 @@ const BasicInfo = () => {
     const files = e.target.files;
     if (files.length > 0) {
       let _objFiles = files[0];
-      // console.log(_objFiles);
 
       if (_objFiles.size > 1000000) {
         Toast.fire({
@@ -217,21 +224,18 @@ const BasicInfo = () => {
   function updateProfileHandler(event) {
     event.preventDefault();
 
-    const payload = profileData;
-
     const errors = validate(payload);
-
     if (Object.keys(errors).length > 0) {
       setValidationErrors({ ...errors });
       return;
     } else {
       setValidationErrors({});
     }
-
     setIsLoading(true);
-    console.log("payload", payload);
+
     putHttpRequest("/front/coach/edit", payload)
       .then((result) => {
+        console.log("payload", payload);
         setIsLoading(false);
         if (!result) {
           console.log("Something went wrong with response...");
@@ -239,7 +243,6 @@ const BasicInfo = () => {
         }
         if (result.data.success === true) {
           dispatch(setCoachProfile({ res: result.data.coach }));
-          // dispatch(setUser(response));
           Toast.fire({
             icon: "success",
             title: result.data.message,
@@ -292,6 +295,10 @@ const BasicInfo = () => {
         console.log("Something went wrong...");
       });
   }, []);
+
+  useEffect(() => {
+    payload = { ...profileData };
+  }, [profileData, experience, awards, qualifications]);
 
   return (
     <div>
@@ -491,7 +498,7 @@ const BasicInfo = () => {
                     {i > 0 && (
                       <a
                         className="btn btn-danger trash "
-                        onClick={() => removeEducation(i)}
+                        onClick={() => removeQualification(i)}
                       >
                         <i className="far fa-trash-alt"></i>
                       </a>
