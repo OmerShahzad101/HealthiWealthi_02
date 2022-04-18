@@ -2355,7 +2355,7 @@ html.menu-opened body {
 -----------------------*/
 
 .section-search {
-  background: #f9f9f9 url(assets/img/search-bg.png) no-repeat bottom center;
+  background: #f9f9f9 url(assets/img/banner.jpg) no-repeat bottom center;
   min-height: 450px;
   background-size: 100% auto;
   position: relative;
@@ -7289,7 +7289,7 @@ html.menu-opened body {
   margin: 0;
 }
 .website-banner {
-  background: url("assets/img/search-bg.png");
+  background: url("assets/img/banner.jpg");
   background-size: cover;
   background-position: center;
   padding: 130px 0;

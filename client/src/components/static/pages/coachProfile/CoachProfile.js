@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import $ from "jquery"
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import { Tabs, Tab } from "react-bootstrap";
 const CoachProfile = (props) => {
 
   const mediaPath = process.env.REACT_APP_IMG;
   const userRole = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
   const [coachProfileData, setCoachProfileData] = useState([]);
+  const [key, setKey] = useState("overview");
   const url = window.location.pathname;
   const id = url.split("/").pop();
-  
+
   useEffect(async () => {
+    $('html,body').animate({scrollTop: 0}, 'slow');
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    if (res) { 
+    if (res) {
       setCoachProfileData(res?.data?.coach)
       return;
     }
@@ -68,7 +72,7 @@ const CoachProfile = (props) => {
                       <Link to="/#" className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call"><i className="fas fa-video"></i></Link>
                     </div>
                     <div className="clinic-booking">
-                      <Link className="apt-btn" to="/app/book-appointment">Book Appointment</Link>
+                      <Link className="apt-btn"to={"/app/book-appointment/"+coachProfileData?._id}>Book Appointment</Link>
                     </div>
                   </>
                 )}
@@ -76,13 +80,13 @@ const CoachProfile = (props) => {
             </div>
           </div>
         </div>
-       
+
 
         {/* <!-- Doctor Details Tab --> */}
         <div className="card">
           <div className="card-body pt-0">
             {/* <!-- Tab Menu --> */}
-            <nav className="user-tabs mb-4">
+            {/* <nav className="user-tabs mb-4">
               <ul className="nav nav-tabs nav-tabs-bottom nav-justified">
                 <li className="nav-item">
                   <a className="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
@@ -111,16 +115,24 @@ const CoachProfile = (props) => {
                   </a>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
+            <Tabs
+              id="controlled-tab-example"
+              className="nav nav-tabs nav-tabs-bottom nav-justified"
+              activeKey={key}
+              onSelect={(k) => setKey(k)}
+            >
+
             {/* <!-- /Tab Menu --> */}
 
             {/* <!-- Tab Content --> */}
-            <div className="tab-content pt-0">
+            {/* <div className="tab-content pt-0"> */}
               {/* <!-- Overview Content --> */}
+              <Tab eventKey="overview" title="Overview">
               <div
                 role="tabpanel"
                 id="doc_overview"
-                className="tab-pane fade show active"
+                className="nav-tabs-bottom nav-justified"
               >
                 <div className="row">
                   <div className="col-md-12 col-lg-9">
@@ -220,9 +232,11 @@ const CoachProfile = (props) => {
                   </div>
                 </div>
               </div>
+              </Tab>
 
               {/* <!-- Locations Content --> */}
-              <div role="tabpanel" id="doc_locations" className="tab-pane fade">
+              <Tab eventKey="locations" title="Locations">
+              <div role="tabpanel" id="doc_locations" className="tab-pane">
                 {/* <!-- Location List --> */}
                 <div className="location-list">
                   <div className="row">
@@ -447,10 +461,12 @@ const CoachProfile = (props) => {
                 </div>
                 {/* <!-- /Location List --> */}
               </div>
+              </Tab>
               {/* <!-- /Locations Content --> */}
 
               {/* <!-- Reviews Content --> */}
-              <div role="tabpanel" id="doc_reviews" className="tab-pane fade">
+             <Tab eventKey="review" title="Reviews">
+             <div role="tabpanel" id="doc_reviews" className="tab-pane">
                 {/* <!-- Review Listing --> */}
                 <div className="widget review-listing">
                   <ul className="comments-list">
@@ -726,13 +742,15 @@ const CoachProfile = (props) => {
                 </div>
                 {/* <!-- /Write Review --> */}
               </div>
+             </Tab>
               {/* <!-- /Reviews Content --> */}
 
               {/* <!-- Business Hours Content --> */}
+              <Tab eventKey="business-hours" title="Business Hours">
               <div
                 role="tabpanel"
                 id="doc_business_hours"
-                className="tab-pane fade"
+                className="tab-pane"
               >
                 <div className="row">
                   <div className="col-md-6 offset-md-3">
@@ -801,13 +819,15 @@ const CoachProfile = (props) => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>                   
                     {/* <!-- /Business Hours Widget --> */}
                   </div>
                 </div>
               </div>
+              </Tab>
               {/* <!-- /Business Hours Content --> */}
-            </div>
+            {/* </div> */}
+            </Tabs>
           </div>
         </div>
         {/* <!-- /Doctor Details Tab --> */}
