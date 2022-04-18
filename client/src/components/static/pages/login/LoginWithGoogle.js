@@ -38,7 +38,7 @@ const LoginWithGoogle = () => {
       postHttpRequest("/front/auth/googleLogin", {
         tokenId: response.tokenId,
       }).then((response) => {
-        console.log("google login success", response);
+   
         if (response.status === 200) {
           console.log("alert", response.data.user._id);
 
@@ -55,6 +55,7 @@ const LoginWithGoogle = () => {
                   response: response.data.user,
                   res: res?.data.coach,
                 };
+               
                 dispatch(setUser(userData));
                 dispatch(setAccessToken(response.data.accessToken));
                 if (response?.data?.user?.type == 1) {
