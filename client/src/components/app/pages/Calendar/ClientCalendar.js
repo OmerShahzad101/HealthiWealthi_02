@@ -14,28 +14,23 @@ window.jQuery = $;
 
 const ClientCalendar = (props) => {
   const userid = useSelector((state) => state.auth.user.userid);
-  const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
-  const [date, setDate] = useState(moment().format("MM/DD/YYYY"));
-  const [startDate, setStartDate] = useState(moment().format("MM/DD/YYYY"));
-  const [endDate, setEndDate] = useState(
-    moment().add(6, "days").format("MM/DD/YYYY")
-  );
   const [dates, setDates] = useState([]);
-  const [initDatePicker, setInitDatePicker] = useState(true);
+  const [booking, setBooking] = useState();
   const [loading, setLoading] = useState(false);
-  const [disabledPrevButton, setDisabledPrevButton] = useState(true);
+  const [initDatePicker, setInitDatePicker] = useState(true);
   const [slotsByEachDate, setslotsByEachDate] = useState({});
+  const [disabledPrevButton, setDisabledPrevButton] = useState(true);
+  const [date, setDate] = useState(moment().format("MM/DD/YYYY"));
+  const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
+  const [startDate, setStartDate] = useState(moment().format("MM/DD/YYYY"));
+  const [endDate, setEndDate] = useState(moment().add(6, "days").format("MM/DD/YYYY"));
 
   useEffect(() => {
-    setLoading(true);
-//   console.log(endDate,"useEffect endate")
-   
+    setLoading(true);   
     generateWeekDates();
   }, [startDate]);
 
   useEffect(()=>{
-   
-    
     getHttpRequest(`/front/schedule/get/${props.id}`)
     .then((response) => {
       if (!response) {
@@ -152,9 +147,44 @@ const ClientCalendar = (props) => {
 
   var timeStops = getTimeStops("00:00", "23:00");
   var selectedHumanReadableDate = moment(date).format("MMM DD, YYYY");
- let allActiveSlots = [];
- let activeSlot = [];
-
+  let allActiveSlots = [];
+  let activeSlot = [];
+  // ------B------------A---------------------------------------
+  // -------O------------P-------------------------------------
+  // --------O------------P--------T---------------------------
+  // ---------K------------O------N----------------------------
+  // ----------I------------I----E-----------------------------
+  // -----------N------------N--M-------------------------------
+  // ------------G------------T--------------------------------
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBooking({
+      ...booking,
+      [name]: value,
+    });
+  };
+  const bookHandler = () => {
+    const payload= {
+      clientId : userid,
+      coachId: props.id,
+      // slot: startTime of appoinment
+      // date: startDate of Appointments
+      // bookingDetail: both time and date
+      status: true,
+    }
+    console.log(payload)
+    // postHttpRequest(`/front/booking/create` , payload)
+  }
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
 
   const gridSlots = dates.map((date, index) => {
     var day = moment(date).format("DD");
@@ -164,6 +194,7 @@ const ClientCalendar = (props) => {
     var gridClass = "";
     if (date == today) gridClass = "today";
     else if (date < today) gridClass = "disabled-slot";
+
 
     return (
       <div className={`gridDay ${gridClass}`} key={date}>
@@ -279,9 +310,9 @@ const ClientCalendar = (props) => {
         </div>
         {/* <!-- Submit Section --> */}
         <div className="submit-section proceed-btn text-end">
-          <Link to="/app/checkout" className="btn btn-primary submit-btn">
+          <button type="submit" onClick={bookHandler}  className="btn btn-primary submit-btn">
             Proceed to Pay
-          </Link>
+          </button >
         </div>
         {/* <!-- /Submit Section --> */}
       
