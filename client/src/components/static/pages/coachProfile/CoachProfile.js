@@ -70,7 +70,7 @@ const CoachProfile = (props) => {
                       <Link to="/#" className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call"><i className="fas fa-video"></i></Link>
                     </div>
                     <div className="clinic-booking">
-                      <Link className="apt-btn" to="/app/book-appointment">Book Appointment</Link>
+                      <Link className="apt-btn"to={"/app/book-appointment/"+coachProfileData?._id}>Book Appointment</Link>
                     </div>
                   </>
                 )}
