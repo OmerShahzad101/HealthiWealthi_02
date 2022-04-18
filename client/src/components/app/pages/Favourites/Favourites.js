@@ -14,22 +14,22 @@ const Favourites = () => {
       .then((response) => {
         setfavouriteList(response.data.favouriteData.clientFavourite);
         if (response.data.favouriteData.clientFavourite[0]) {
-          Toast.fire({
-            icon: "success",
-            title: response.data.message,
-          });
+          // Toast.fire({
+          //   icon: "success",
+          //   title: response.data.message,
+          // });
         } else {
-          Toast.fire({
-            icon: "info",
-            title: "No data found",
-          });
+          // Toast.fire({
+          //   icon: "info",
+          //   title: "No data found",
+          // });
         }
       })
       .catch((response) => {
-        Toast.fire({
-          icon: "error",
-          title: response.data.message,
-        });
+        // Toast.fire({
+        //   icon: "error",
+        //   title: response.data.message,
+        // });
       });
   }, []);
 
@@ -62,7 +62,7 @@ const Favourites = () => {
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="row row-grid">
-          {favouriteList
+          {favouriteList[0]
             ? favouriteList?.map((e, idx) => (
                 <div className="col-md-6 col-lg-4 col-xl-3" key={idx}>
                   <div className="profile-widget">
@@ -74,9 +74,6 @@ const Favourites = () => {
                           src="/assets/img/doctors/doctor-01.jpg"
                         />
                       </Link>
-                      {/* <a className="fav-btn">
-                  <i className="far fa-bookmark"></i>
-                </a> */}
                       <a
                         className="not-fav-btn"
                         onClick={() => favorite(e?._id, idx)}
@@ -135,7 +132,7 @@ const Favourites = () => {
                   </div>
                 </div>
               ))
-            : "No Data Found"}
+            : <div className="no_fav_data">No Favourite Coach Added</div> }
         </div>
       </div>
     </>

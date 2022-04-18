@@ -22,7 +22,6 @@ const CoachCalendar = ({ availabilityTab }) => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
         if (!response) {
-          alert("Something went wrong with response...");
           return;
         }
         if (response && response?.data?.success === true) {
@@ -45,26 +44,25 @@ const CoachCalendar = ({ availabilityTab }) => {
         }
       })
       .catch((e) => {
-        alert(e);
         console.log("Something went wrong...");
       });
   }, []);
 
   return (
     availabilityTab === "availability" && (
-      <div class="dashboard-content">
-        <div class="row">
-          <div class="col-lg-12">
+      <div className="dashboard-content">
+        <div className="row">
+          <div className="col-lg-12">
             <div id="add-listing">
-              <div class="add-listing-section">
-                <div class="add-listing-headline">
+              <div className="add-listing-section">
+                <div className="add-listing-headline">
                   <h5 style={{ color: "grey" }}>
                     {" "}
                     Open time slots on your calendar so clients know when they
                     can book a session with you.
                   </h5>
                 </div>
-                <div class="submit-section">
+                <div className="submit-section">
                   {loadcalender ? (
                     <AvailableTimes
                       weekStartsOn="monday"
