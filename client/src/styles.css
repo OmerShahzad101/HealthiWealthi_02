@@ -2688,7 +2688,7 @@ html.menu-opened body {
   transform: translate3d(0, 0, 0);
 }
 .profile-widget .fav-btn:hover {
-  background-color: #fb1612;
+  background-color: #d44f86;
   color: #fff;
 }
 .pro-content {
@@ -7443,11 +7443,17 @@ html.menu-opened body {
   border-radius: 50%;
   object-fit: cover;
 }
-
+.wraper-calander{
+  overflow: hidden;
+}
 .gridDays {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  overflow-x: auto;
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .text-right {
   text-align: right;
@@ -7474,28 +7480,38 @@ html.menu-opened body {
   display: none;
 }
 .gridDayHeaderName {
-  font-size: 18px;
+  font-size: 15px;
   text-transform: uppercase;
 }
+.gridSlot button:hover{
+  color: #fff !important;
+  background-color: #d32986 !important;
+  border: 1px solid #d32986;
+}
 .today .gridDayHeaderToday {
-  font-size: 10px;
+  font-size: 8px;
   text-transform: uppercase;
-  font-weight: 500;
-  width: auto;
-  height: auto;
+  font-weight: 500; 
   color: #fff;
   position: absolute;
-  top: -2px;
+  top: 0px;
   right: -2px;
   border-radius: 4px;
   padding: 2px 4px;
-  background-color: #d32986 !important;
+  background-color: #D32985 !important;
+  height: 13px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
 }
 .gridDayHeader .gridDayHeaderDate {
-  font-size: 18px;
+  font-size: 15px;
   display: block;
   color: #757575;
   font-weight: 300;
+  margin-top: 5px;
 }
 .gridDayHeader h3 {
   display: flex;
@@ -7513,7 +7529,7 @@ html.menu-opened body {
   width: 100%;
   font-size: 14px;
   margin-bottom: 10px;
-  padding: 15px 30px;
+  padding: 8px 37px;
   text-align: center;
   position: relative;
   cursor: pointer;
@@ -7630,4 +7646,17 @@ button.btn.btn-google.btn-block span{
 }
 .entry-content li:last-child {
   border: none;
+}
+
+
+
+.custom-controls button.btn.btn-arrow {
+  background: none;
+  border: none;
+  position: relative;
+  bottom: -30px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  z-index: 9;
 }
