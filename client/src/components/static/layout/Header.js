@@ -13,7 +13,7 @@ export default function Header() {
   const userRole = useSelector((state) => state.auth.user.userRole);
 
   useEffect(() => {
-    $("body").append('<div class="sidebar-overlay"></div>');
+    $("body").append('<div className="sidebar-overlay"></div>');
     $(document).on("click", "#mobile_btn", function () {
       $("main-wrapper").toggleClass("slide-nav");
       $(".sidebar-overlay").toggleClass("opened");
@@ -47,7 +47,7 @@ export default function Header() {
               </span>
             </a>
             <Link to="/" className="navbar-brand logo">
-              <img src="assets/img/Logo.svg" className="img-fluid" alt="Logo" />
+              <img src="/assets/img/Logo.svg" className="img-fluid" alt="Logo" />
             </Link>
           </div>
           <div className="main-menu-wrapper">

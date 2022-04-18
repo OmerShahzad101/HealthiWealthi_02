@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Spinner, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { setInfoData } from "../../../../store/slices/user";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
-  DASHBOARD,
   CLIENT_PROFILE_SETTING,
   COACH_PROFILE_SETTING,
   CLIENT_DASHBOARD,
@@ -13,28 +12,24 @@ import {
 } from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import {
-  cancelOngoingHttpRequest,
   getHttpRequest,
   postHttpRequest,
   putHttpRequest,
 } from "../../../../axios";
 import {
   setUser,
-  setUserPermissions,
   setAccessToken,
 } from "../../../../store/slices/auth";
 import GoogleLogin from "react-google-login";
 
 const LoginWithGoogle = () => {
   const history = useHistory();
-  const location = useLocation();
   const dispatch = useDispatch();
   const typeRef = useRef();
 
   const [show, setShow] = useState(false);
   const [_id, setId] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const handleLogin = async (response) => {
     console.log(response);
@@ -55,7 +50,6 @@ const LoginWithGoogle = () => {
             getHttpRequest(
               `/front/coach/get/${response?.data?.user?._id}`
             ).then((res) => {
-              console.log("resqqqqqqqqqqqqqqqqqqq ", res);
               if (res) {
                 const userData = {
                   response: response.data.user,
