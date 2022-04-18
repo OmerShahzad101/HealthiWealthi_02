@@ -807,7 +807,7 @@ const CoachProfileSetting = () => {
                     <h4 className="card-title">Trainer Schedule</h4>
                     <div className="row form-row">
                       {" "}
-                      <CoachCalendar availabilityTab={key} />
+                      <ClientCalendar availabilityTab={key} />
                     </div>
                   </div>
                 </div>
