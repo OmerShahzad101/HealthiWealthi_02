@@ -8,13 +8,11 @@ import { getHttpRequest,postHttpRequest,} from "../../../../axios";
 import { setUser, setAccessToken } from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { CLIENT_PROFILE_SETTING, COACH_PROFILE_SETTING,} from "../../../../router/constants/ROUTES";
-
 const Login = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
-
   const [validationErrors, setValidationErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +40,7 @@ const Login = (props) => {
     // __ __ __ __ //
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
-      console.log(response);
+    
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -61,13 +59,17 @@ const Login = (props) => {
 
       if (response.data.success) {
         setIsLoading(false);
-        let res = await getHttpRequest(`/front/coach/get/${response?.data?.data?._id}`);
+        let res = await getHttpRequest(
+          `/front/coach/get/${response?.daloginDatata?.data?._id}`
+        );
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
+      
           dispatch(setUser(userData));
+
           dispatch(setAccessToken(response.data.data.accessToken));
 
           if (response?.data?.data?.type === 1) {
@@ -91,7 +93,6 @@ const Login = (props) => {
       });
     }
   };
-
   return (
     <div className="account-page">
       <div className="content">

@@ -11,10 +11,8 @@ import {
 const ClientProfile = () => {
   const id = useSelector((state) => state.auth.user.userid);
   const [clientProfileData, setClientProfileData] = useState([]);
-
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
-    console.log("res11111111111111111111111111111111 ", res?.data?.coach);
     if (res) {
       setClientProfileData(res?.data?.coach);
       Toast.fire({
