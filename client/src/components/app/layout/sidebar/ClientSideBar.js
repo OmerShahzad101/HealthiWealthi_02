@@ -50,12 +50,12 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Profile Settings</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/app/book-appointment">
                   <i className="fas fa-bookmark"></i>
                   <span>Booking</span>
                 </NavLink>
-              </li>
+              </li> */}
 
               <li>
                 <NavLink to="/app/favourites">
