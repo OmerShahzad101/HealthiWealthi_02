@@ -292,7 +292,9 @@ const SearchCoach = () => {
                                 </div>
                                 <div className="doc-info-cont">
                                   <h4 className="doc-name">
-                                    <Link to="/coach-profile">
+                                  
+
+                                    <Link to={"/coach-profile/"+item?._id}>
                                       {item.firstname + " " + item.lastname}
                                     </Link>
                                   </h4>
@@ -405,14 +407,11 @@ const SearchCoach = () => {
                                   </ul>
                                 </div>
                                 <div className="clinic-booking">
+
                                   <Link
                                     className="view-pro-btn"
-                                   
-                                    to={{
-                                      
-                                      pathname: "/coach-profile",
-                                      state: { id: item?._id },
-                                    }}
+                                    to={"/coach-profile/"+item?._id}
+                                  
                                   >
                                     View Profile
                                   </Link>
@@ -420,10 +419,9 @@ const SearchCoach = () => {
                                 {role == 1 ? <div className="clinic-booking">
                                     <Link
                                       className="apt-btn"
-                                      to={{
-                                        pathname: "/app/book-appointment",
-                                        state: { id: item._id },
-                                      }}
+                                      to={"/app/book-appointment/"+item?._id}
+
+                                    
                                     >
                                       Book Appointment
                                     </Link>

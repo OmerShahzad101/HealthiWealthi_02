@@ -12,7 +12,7 @@ import Toast from "../../../common/toast/Toast";
 import { createGlobalStyle } from "styled-components";
 window.jQuery = $;
 
-const ClientCalendar = () => {
+const ClientCalendar = (props) => {
   const userid = useSelector((state) => state.auth.user.userid);
   const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
   const [date, setDate] = useState(moment().format("MM/DD/YYYY"));
@@ -36,7 +36,7 @@ const ClientCalendar = () => {
   useEffect(()=>{
    
     
-    getHttpRequest(`/front/schedule/get/${userid}`)
+    getHttpRequest(`/front/schedule/get/${props.id}`)
     .then((response) => {
       if (!response) {
         alert("Something went wrong with response...");
@@ -68,13 +68,13 @@ const ClientCalendar = () => {
       }
     })
     .catch((e) => {
-      alert(e);
       console.log("Something went wrongggg...");
     });
   },[])
 
   
   const generateWeekDates = () => {
+    // debugger;
     setTimeout(() => {
       if (startDate > today) {
         setDisabledPrevButton(false);
@@ -242,9 +242,9 @@ const ClientCalendar = () => {
   return (
     <div>
       <section className="account-wrapper section-pd pb-0">
-        <h3 className="page-title">
+        {/* <h3 className="page-title">
           <span className="title-align"> Book Your Video Consultation</span>
-        </h3>
+        </h3> */}
 
         <div className="container booking">
           <div className="row align-items-center mb-4">
@@ -277,6 +277,14 @@ const ClientCalendar = () => {
             <div className="gridDays">{gridSlots}</div>
           </div>
         </div>
+        {/* <!-- Submit Section --> */}
+        <div className="submit-section proceed-btn text-end">
+          <Link to="/app/checkout" className="btn btn-primary submit-btn">
+            Proceed to Pay
+          </Link>
+        </div>
+        {/* <!-- /Submit Section --> */}
+      
       </section>
     </div>
   );

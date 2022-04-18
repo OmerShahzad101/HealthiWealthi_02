@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import withSuspense from '../../hoc/withSuspense';
-import { ROOT, ABOUT, CONTACT ,SEARCH_COACH, COACH_PROFILE} from '../constants/ROUTES';
+import { ROOT, ABOUT, CONTACT ,SEARCH_COACH, COACH_PROFILE, PRICING} from '../constants/ROUTES';
 
 // Home
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ `../../components/static/pages/home/Home`));
@@ -21,6 +21,10 @@ const SearchCoachWithSuspense = withSuspense(SearchCoach);
 //coach profile
 const CoachProfile = lazy(() => import(/* webpackChunkName: "SearchCoach" */ '../../components/static/pages/coachProfile/CoachProfile'));
 const CoachProfileWithSuspense = withSuspense(CoachProfile);
+
+//pricing
+const Pricing = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/pricing/Pricing'));
+const PricingWithSuspense = withSuspense(Pricing);
 
 
 
@@ -58,6 +62,12 @@ function getRouteConfigs() {
             path: COACH_PROFILE,
             exact: true,
             element: <CoachProfileWithSuspense />,
+        },
+        {
+            // Pricing
+            path: PRICING,
+            exact: true,
+            element: <PricingWithSuspense />,
         },
         
         {

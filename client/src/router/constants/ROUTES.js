@@ -10,6 +10,8 @@ export const APP = '/app';
  export const CONTACT = '/contact-us';
  export const SEARCH_COACH = '/search-coach';
  export const COACH_PROFILE = '/coach-profile/:coachId';
+ export const PRICING = '/pricing';
+
 
 // Base Routes
 export const LOGIN = '/login';
@@ -34,7 +36,7 @@ export const COACH_CHANGE_PASSWORD = `${APP}/coach-change-password`;
 //Clients Routes
 
 export const APPOINTMENTS = `${APP}/appointments`;
-export const BOOK_APPOINTMENTS = `${APP}/book-appointment`;
+export const BOOK_APPOINTMENTS = `${APP}/book-appointment/:coachId`;
 export const BOOK_SUCCESSFUL = `${APP}/booking-successful`;
 export const CHECKOUT = `${APP}/checkout`;
 export const CLIENT_DASHBOARD = `${APP}/client-dashboard`;

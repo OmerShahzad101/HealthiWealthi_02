@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { CgPhone } from 'react-icons/cg'
+import { CgPhone } from "react-icons/cg";
 import $ from "jquery";
 import { useSelector } from "react-redux";
-import { CLIENT_DASHBOARD,COACH_DASHBOARD } from "../../../router/constants/ROUTES";
+import {
+  CLIENT_DASHBOARD,
+  COACH_DASHBOARD,
+} from "../../../router/constants/ROUTES";
 
 export default function Header() {
   const location = useLocation();
@@ -47,7 +50,11 @@ export default function Header() {
               </span>
             </a>
             <Link to="/" className="navbar-brand logo">
-              <img src="/assets/img/Logo.svg" className="img-fluid" alt="Logo" />
+              <img
+                src="/assets/img/Logo.svg"
+                className="img-fluid"
+                alt="Logo"
+              />
             </Link>
           </div>
           <div className="main-menu-wrapper">
@@ -69,18 +76,15 @@ export default function Header() {
               </li>{" "}
               <li className={splitLocation[1] === "about" ? "active" : ""}>
                 <Link to="/about">About</Link>
+              </li>              
+              <li className={splitLocation[1] === "pricing" ? "active" : ""}>
+                <Link to="/pricing">Pricing</Link>
               </li>
               <li
                 className={splitLocation[1] === "search-coach" ? "active" : ""}
               >
                 <Link to="/search-coach">Search Coach</Link>
               </li>
-              {/* <li>
-                <Link to="/app/coach-dashboard">Coach Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/client-dashboard">Client Dashboard</Link>
-              </li> */}
               <li className={splitLocation[1] === "contact-us" ? "active" : ""}>
                 <Link to="/contact-us">Contact us</Link>
               </li>
@@ -89,9 +93,9 @@ export default function Header() {
           <ul className="nav header-navbar-rht">
             <li className="nav-item contact-item">
               <div className="header-contact-img">
-              <CgPhone size={28}/>
+                <CgPhone size={28} />
               </div>
-              
+
               <div className="header-contact-detail">
                 <p className="contact-header">Contact</p>
                 <p className="contact-info-header">+1 315 369 5943</p>
@@ -99,7 +103,10 @@ export default function Header() {
             </li>
             <li className="nav-item">
               {loginToken ? (
-                <Link className="nav-link header-login" to = { userRole==1 ? CLIENT_DASHBOARD : COACH_DASHBOARD}>
+                <Link
+                  className="nav-link header-login"
+                  to={userRole == 1 ? CLIENT_DASHBOARD : COACH_DASHBOARD}
+                >
                   Go to Dashboard
                 </Link>
               ) : (
