@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import $ from "jquery"
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 const CoachProfile = (props) => {
 
@@ -12,6 +13,7 @@ const CoachProfile = (props) => {
   const id = url.split("/").pop();
   
   useEffect(async () => {
+    $('html,body').animate({scrollTop: 0}, 'slow');
     let res = await getHttpRequest(`/front/coach/get/${id}`);
     if (res) { 
       setCoachProfileData(res?.data?.coach)

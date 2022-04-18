@@ -4,8 +4,8 @@ import ClientCalendar from "../Calendar/ClientCalendar";
 
 import { getHttpRequest } from "../../../../axios";
 const BookAppointment = () => {
-  const location = useLocation();
-  const { id } = location.state;
+  const url = window.location.pathname;
+  const id = url.split("/").pop();
   const [coachProfileData, setCoachProfileData] = useState([]);
   useEffect(async () => {
     let res = await getHttpRequest(`/front/coach/get/${id}`);
@@ -51,7 +51,7 @@ const BookAppointment = () => {
             </div>
           </div>
         </div>
-        <ClientCalendar/>
+        <ClientCalendar id={id}/>
  
       </div>
 
