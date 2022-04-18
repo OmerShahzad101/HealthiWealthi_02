@@ -7,15 +7,16 @@ import Toast from "../../../common/toast/Toast";
 import Specialities from "./Specialities";
 
 import { useHistory } from "react-router-dom";
+import AvaliableFeature from "./avaliableFeature";
 export default function Home(props) {
-  const mediaPath = process.env.REACT_APP_IMG;
-  console.log("process.env", process.env);
-  const userId = useSelector((state) => state.auth.user.userid);
-  const [coachList, setCoachList] = useState([]);
-  const searchNameRef = useRef();
-  const history = useHistory();
   let payload;
+  const history = useHistory();
+  const searchNameRef = useRef();
+  const mediaPath = process.env.REACT_APP_IMG;
+  const [coachList, setCoachList] = useState([]);
+  const userId = useSelector((state) => state.auth.user.userid);
   const role = useSelector((state) => state.auth.user.userRole);
+
   useEffect(() => {
     getHttpRequest("/front/coach/list")
       .then((response) => {
@@ -102,7 +103,7 @@ export default function Home(props) {
                     Ex : Nutritionists or Yoga Expert etc
                   </span>
                 </div>
-                <button type="submit" className="btn btn-primary search-btn">
+                <button type="submit" className="btn btn-primary search-btn" onClick={searchHandler}>
                   <i className="fas fa-search"></i> <span>Search</span>
                 </button>
               </form>
@@ -111,8 +112,9 @@ export default function Home(props) {
           </div>
         </div>
       </section>
+
       <section className="section section-specialities">
-        {/* <Specialities /> */}
+        <Specialities/>
       </section>
 
       <section className="section section-doctor">
@@ -126,7 +128,6 @@ export default function Home(props) {
             </div>
 
             <div className="col-lg-8 doctor-slider slider">
-              {console.log("coachList",coachList)}
               {coachList ? (
                 <Slider {...settings}>
                   {coachList.map(
@@ -139,9 +140,7 @@ export default function Home(props) {
                                 className="img-fluid"
                                 alt="User"
                                 src={
-                                  e?.profileImage
-                                    ? mediaPath + e.profileImage
-                                    : mediaPath + "avatar.jpg"
+                                  e?.fileName ? mediaPath + e.fileName : mediaPath + "avatar.jpg"
                                 }
                               />
                             </Link>
@@ -149,15 +148,11 @@ export default function Home(props) {
                               <>
                                 {e?.isFavourite === true ? (
                                   <a className="not-fav-btn" onClick={() => favorite(e?._id)}>
-                                    <i
-                                      className="far fa-bookmark" 
-                                    ></i>
+                                    <i className="far fa-bookmark"></i>
                                   </a>
                                 ) : (
                                   <a className="fav-btn" onClick={() => favorite(e?._id)}>
-                                    <i
-                                      className="far fa-bookmark"
-                                    ></i>
+                                    <i className="far fa-bookmark"></i>
                                   </a>
                                 )}
                               </>
@@ -165,16 +160,10 @@ export default function Home(props) {
                           </div>
                           <div className="pro-content">
                             <h3 className="title">
-                              <Link to={"/coach-profile/"+e?._id}>
-                                {e?.firstname + " " + e?.lastname}
-                              </Link>
+                              <Link to={"/coach-profile/"+e?._id}>{e?.firstname + " " + e?.lastname}</Link>
                               <i className="fas fa-check-circle verified"></i>
                             </h3>
-                            <p className="speciality">
-                              {e?.specialization && e.specialization != ""
-                                ? e.specialization
-                                : "N/A"}
-                            </p>
+                            <p className="speciality">{e?.specialization && e.specialization != "" ? e.specialization : "N/A"}</p>
 
                             <ul className="available-info">
                               {(e.country || e.city) && (
@@ -187,10 +176,8 @@ export default function Home(props) {
                               <li>
                                 <i className="far fa-money-bill-alt"></i>
                                 {e?.price}{" "}
-                                <i
-                                  className="fas fa-info-circle"
-                                  data-toggle="tooltip"
-                                  title="Lorem Ipsum"
+                                <i className="fas fa-info-circle"
+                                  data-toggle="tooltip" title="Lorem Ipsum"
                                 ></i>
                               </li>
                             </ul>
@@ -229,6 +216,10 @@ export default function Home(props) {
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="section section-features">
+        <AvaliableFeature/>
       </section>
     </>
   );

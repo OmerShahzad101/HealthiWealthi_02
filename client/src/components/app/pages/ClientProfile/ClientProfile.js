@@ -28,21 +28,21 @@ const ClientProfile = () => {
   return (
     <div>
       {/* <!-- Breadcrumb --> */}
-      <div class="breadcrumb-bar">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col-md-12 col-12">
-              <nav aria-label="breadcrumb" class="page-breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
+      <div className="breadcrumb-bar">
+        <div className="container-fluid">
+          <div className="row align-items-center">
+            <div className="col-md-12 col-12">
+              <nav aria-label="breadcrumb" className="page-breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
                     <Link to="/">Home </Link>
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">
+                  <li className="breadcrumb-item active" aria-current="page">
                     Profile
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Profile</h2>
+              <h2 className="breadcrumb-title">Profile</h2>
             </div>
           </div>
         </div>
@@ -50,38 +50,38 @@ const ClientProfile = () => {
       {/* <!-- /Breadcrumb --> */}
 
       {/* <!-- Page Content --> */}
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
+      <div className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
               {/* <!-- Profile Widget --> */}
-              <div class="card widget-profile pat-widget-profile">
-                <div class="card-body">
-                  <div class="pro-widget-content">
-                    <div class="profile-info-widget">
-                      <a href="#" class="booking-doc-img">
+              <div className="card widget-profile pat-widget-profile">
+                <div className="card-body">
+                  <div className="pro-widget-content">
+                    <div className="profile-info-widget">
+                      <a href="#" className="booking-doc-img">
                         <img
                           src="assets/img/patients/patient.jpg"
                           alt="User Image"
                         />
                       </a>
-                      <div class="profile-det-info">
+                      <div className="profile-det-info">
                         <h3>{clientProfileData.username}</h3>
 
-                        <div class="patient-details">
+                        <div className="patient-details">
                           <h5>
                             <b>Patient ID :</b>
                             {clientProfileData._id}
                           </h5>
-                          <h5 class="mb-0">
-                            <i class="fas fa-map-marker-alt"></i>{" "}
+                          <h5 className="mb-0">
+                            <i className="fas fa-map-marker-alt"></i>{" "}
                             {clientProfileData.address}
                           </h5>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="patient-info">
+                  <div className="patient-info">
                     <ul>
                       <li>
                         Phone <span>{clientProfileData.phone}</span>
@@ -99,42 +99,42 @@ const ClientProfile = () => {
               {/* <!-- /Profile Widget --> */}
 
               {/* <!-- Last Booking --> */}
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Last Booking</h4>
+              <div className="card">
+                <div className="card-header">
+                  <h4 className="card-title">Last Booking</h4>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <div class="media align-items-center">
-                      <div class="mr-3">
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    <div className="media align-items-center">
+                      <div className="mr-3">
                         <img
                           alt="Image placeholder"
                           src="assets/img/doctors/doctor-thumb-02.jpg"
-                          class="avatar  rounded-circle"
+                          className="avatar  rounded-circle"
                         />
                       </div>
-                      <div class="media-body">
-                        <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                        <span class="d-block text-sm text-muted">Dentist</span>
-                        <span class="d-block text-sm text-muted">
+                      <div className="media-body">
+                        <h5 className="d-block mb-0">Dr. Darren Elder </h5>
+                        <span className="d-block text-sm text-muted">Dentist</span>
+                        <span className="d-block text-sm text-muted">
                           14 Nov 2019 5.00 PM
                         </span>
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item">
-                    <div class="media align-items-center">
-                      <div class="mr-3">
+                  <li className="list-group-item">
+                    <div className="media align-items-center">
+                      <div className="mr-3">
                         <img
                           alt="Image placeholder"
                           src="assets/img/doctors/doctor-thumb-02.jpg"
-                          class="avatar  rounded-circle"
+                          className="avatar  rounded-circle"
                         />
                       </div>
-                      <div class="media-body">
-                        <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                        <span class="d-block text-sm text-muted">Dentist</span>
-                        <span class="d-block text-sm text-muted">
+                      <div className="media-body">
+                        <h5 className="d-block mb-0">Dr. Darren Elder </h5>
+                        <span className="d-block text-sm text-muted">Dentist</span>
+                        <span className="d-block text-sm text-muted">
                           12 Nov 2019 11.00 AM
                         </span>
                       </div>
@@ -145,47 +145,47 @@ const ClientProfile = () => {
               {/* <!-- /Last Booking --> */}
             </div>
 
-            <div class="col-md-7 col-lg-8 col-xl-9 dct-appoinment">
-              <div class="card">
-                <div class="card-body pt-0">
-                  <div class="user-tabs">
-                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
-                      <li class="nav-item">
+            <div className="col-md-7 col-lg-8 col-xl-9 dct-appoinment">
+              <div className="card">
+                <div className="card-body pt-0">
+                  <div className="user-tabs">
+                    <ul className="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
+                      <li className="nav-item">
                         <a
-                          class="nav-link active"
+                          className="nav-link active"
                           href="#pat_appointments"
                           data-toggle="tab"
                         >
                           Appointments
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#pres" data-toggle="tab">
+                      <li className="nav-item">
+                        <a className="nav-link" href="#pres" data-toggle="tab">
                           <span>Prescription</span>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#medical" data-toggle="tab">
-                          <span class="med-records">Medical Records</span>
+                      <li className="nav-item">
+                        <a className="nav-link" href="#medical" data-toggle="tab">
+                          <span className="med-records">Medical Records</span>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#billing" data-toggle="tab">
+                      <li className="nav-item">
+                        <a className="nav-link" href="#billing" data-toggle="tab">
                           <span>Billing</span>
                         </a>
                       </li>
                     </ul>
                   </div>
-                  <div class="tab-content">
+                  <div className="tab-content">
                     {/* <!-- Appointment Tab --> */}
                     <div
                       id="pat_appointments"
-                      class="tab-pane fade show active"
+                      className="tab-pane fade show active"
                     >
-                      <div class="card card-table mb-0">
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
+                      <div className="card card-table mb-0">
+                        <div className="card-body">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
                                   <th>Doctor</th>
@@ -200,13 +200,13 @@ const ClientProfile = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -218,7 +218,7 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     14 Nov 2019{" "}
-                                    <span class="d-block text-info">
+                                    <span className="d-block text-info">
                                       10.00 AM
                                     </span>
                                   </td>
@@ -226,30 +226,30 @@ const ClientProfile = () => {
                                   <td>$160</td>
                                   <td>16 Nov 2019</td>
                                   <td>
-                                    <span class="badge badge-pill bg-success-light">
+                                    <span className="badge badge-pill bg-success-light">
                                       Confirm
                                     </span>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="far fa-edit"></i> Edit
+                                        <i className="far fa-edit"></i> Edit
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -261,7 +261,7 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     12 Nov 2019{" "}
-                                    <span class="d-block text-info">
+                                    <span className="d-block text-info">
                                       8.00 PM
                                     </span>
                                   </td>
@@ -269,30 +269,30 @@ const ClientProfile = () => {
                                   <td>$250</td>
                                   <td>14 Nov 2019</td>
                                   <td>
-                                    <span class="badge badge-pill bg-success-light">
+                                    <span className="badge badge-pill bg-success-light">
                                       Confirm
                                     </span>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="far fa-edit"></i> Edit
+                                        <i className="far fa-edit"></i> Edit
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -304,7 +304,7 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     11 Nov 2019{" "}
-                                    <span class="d-block text-info">
+                                    <span className="d-block text-info">
                                       11.00 AM
                                     </span>
                                   </td>
@@ -312,30 +312,30 @@ const ClientProfile = () => {
                                   <td>$400</td>
                                   <td>13 Nov 2019</td>
                                   <td>
-                                    <span class="badge badge-pill bg-danger-light">
+                                    <span className="badge badge-pill bg-danger-light">
                                       Cancelled
                                     </span>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="far fa-edit"></i> Edit
+                                        <i className="far fa-edit"></i> Edit
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -347,7 +347,7 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     10 Nov 2019{" "}
-                                    <span class="d-block text-info">
+                                    <span className="d-block text-info">
                                       3.00 PM
                                     </span>
                                   </td>
@@ -355,36 +355,36 @@ const ClientProfile = () => {
                                   <td>$350</td>
                                   <td>12 Nov 2019</td>
                                   <td>
-                                    <span class="badge badge-pill bg-warning-light">
+                                    <span className="badge badge-pill bg-warning-light">
                                       Pending
                                     </span>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="#"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="far fa-edit"></i> Edit
+                                        <i className="far fa-edit"></i> Edit
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-danger-light"
+                                        className="btn btn-sm bg-danger-light"
                                       >
-                                        <i class="far fa-trash-alt"></i> Cancel
+                                        <i className="far fa-trash-alt"></i> Cancel
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -396,7 +396,7 @@ const ClientProfile = () => {
                                   </td>
                                   <td>
                                     9 Nov 2019{" "}
-                                    <span class="d-block text-info">
+                                    <span className="d-block text-info">
                                       7.00 PM
                                     </span>
                                   </td>
@@ -404,17 +404,17 @@ const ClientProfile = () => {
                                   <td>$75</td>
                                   <td>11 Nov 2019</td>
                                   <td>
-                                    <span class="badge badge-pill bg-success-light">
+                                    <span className="badge badge-pill bg-success-light">
                                       Confirm
                                     </span>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="far fa-edit"></i> Edit
+                                        <i className="far fa-edit"></i> Edit
                                       </a>
                                     </div>
                                   </td>
@@ -428,16 +428,16 @@ const ClientProfile = () => {
                     {/* <!-- /Appointment Tab --> */}
 
                     {/* <!-- Prescription Tab --> */}
-                    <div class="tab-pane fade" id="pres">
-                      <div class="text-right">
-                        <a href="#" class="add-new-btn">
+                    <div className="tab-pane fade" id="pres">
+                      <div className="text-right">
+                        <a href="#" className="add-new-btn">
                           Add Prescription
                         </a>
                       </div>
-                      <div class="card card-table mb-0">
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
+                      <div className="card card-table mb-0">
+                        <div className="card-body">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
                                   <th>Date </th>
@@ -451,13 +451,13 @@ const ClientProfile = () => {
                                   <td>14 Nov 2019</td>
                                   <td>Prescription 1</td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
@@ -467,19 +467,19 @@ const ClientProfile = () => {
                                       </Link>
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
@@ -488,13 +488,13 @@ const ClientProfile = () => {
                                   <td>13 Nov 2019</td>
                                   <td>Prescription 2</td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -504,31 +504,31 @@ const ClientProfile = () => {
                                       </Link>
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                       <a
                                         href="#"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i className="fas fa-edit"></i> Edit
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-danger-light"
+                                        className="btn btn-sm bg-danger-light"
                                       >
-                                        <i class="far fa-trash-alt"></i> Delete
+                                        <i className="far fa-trash-alt"></i> Delete
                                       </a>
                                     </div>
                                   </td>
@@ -542,21 +542,21 @@ const ClientProfile = () => {
                     {/* <!-- /Prescription Tab --> */}
 
                     {/* <!-- Medical Records Tab --> */}
-                    <div class="tab-pane fade" id="medical">
-                      <div class="text-right">
+                    <div className="tab-pane fade" id="medical">
+                      <div className="text-right">
                         <a
                           href="#"
-                          class="add-new-btn"
+                          className="add-new-btn"
                           data-toggle="modal"
                           data-target="#add_medical_records"
                         >
                           Add Medical Records
                         </a>
                       </div>
-                      <div class="card card-table mb-0">
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
+                      <div className="card card-table mb-0">
+                        <div className="card-body">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
                                   <th>ID</th>
@@ -578,13 +578,13 @@ const ClientProfile = () => {
                                     <a href="#">dental-test.pdf</a>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
@@ -594,19 +594,19 @@ const ClientProfile = () => {
                                       </Link>
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
@@ -621,13 +621,13 @@ const ClientProfile = () => {
                                     <a href="#">dental-test.pdf</a>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -637,33 +637,33 @@ const ClientProfile = () => {
                                       </Link>
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                       <a
                                         href="#"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                         data-toggle="modal"
                                         data-target="#add_medical_records"
                                       >
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i className="fas fa-edit"></i> Edit
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-danger-light"
+                                        className="btn btn-sm bg-danger-light"
                                       >
-                                        <i class="far fa-trash-alt"></i> Delete
+                                        <i className="far fa-trash-alt"></i> Delete
                                       </a>
                                     </div>
                                   </td>
@@ -677,16 +677,16 @@ const ClientProfile = () => {
                     {/* <!-- /Medical Records Tab --> */}
 
                     {/* <!-- Billing Tab --> */}
-                    <div class="tab-pane" id="billing">
-                      <div class="text-right">
-                        <a class="add-new-btn" href="#">
+                    <div className="tab-pane" id="billing">
+                      <div className="text-right">
+                        <a className="add-new-btn" href="#">
                           Add Billing
                         </a>
                       </div>
-                      <div class="card card-table mb-0">
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
+                      <div className="card card-table mb-0">
+                        <div className="card-body">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
                                   <th>Invoice No</th>
@@ -702,13 +702,13 @@ const ClientProfile = () => {
                                     <Link to="invoice">#INV-0010</Link>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
@@ -720,19 +720,19 @@ const ClientProfile = () => {
                                   </td>
                                   <td>$450</td>
                                   <td>14 Nov 2019</td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
@@ -742,13 +742,13 @@ const ClientProfile = () => {
                                     <Link to="/invoice">#INV-0009</Link>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
@@ -760,31 +760,31 @@ const ClientProfile = () => {
                                   </td>
                                   <td>$300</td>
                                   <td>13 Nov 2019</td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                       <a
                                         href="#"
-                                        class="btn btn-sm bg-success-light"
+                                        className="btn btn-sm bg-success-light"
                                       >
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i className="fas fa-edit"></i> Edit
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-danger-light"
+                                        className="btn btn-sm bg-danger-light"
                                       >
-                                        <i class="far fa-trash-alt"></i> Delete
+                                        <i className="far fa-trash-alt"></i> Delete
                                       </a>
                                     </div>
                                   </td>
@@ -794,13 +794,13 @@ const ClientProfile = () => {
                                     <Link to="/invoice">#INV-0008</Link>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-03.jpg"
                                           alt="User Image"
                                         />
@@ -813,19 +813,19 @@ const ClientProfile = () => {
                                   </td>
                                   <td>$150</td>
                                   <td>12 Nov 2019</td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
@@ -835,13 +835,13 @@ const ClientProfile = () => {
                                     <Link to="/invoice">#INV-0007</Link>
                                   </td>
                                   <td>
-                                    <h2 class="table-avatar">
+                                    <h2 className="table-avatar">
                                       <Link
                                         to="/client-profile"
-                                        class="avatar avatar-sm mr-2"
+                                        className="avatar avatar-sm mr-2"
                                       >
                                         <img
-                                          class="avatar-img rounded-circle"
+                                          className="avatar-img rounded-circle"
                                           src="assets/img/doctors/doctor-thumb-04.jpg"
                                           alt="User Image"
                                         />
@@ -853,19 +853,19 @@ const ClientProfile = () => {
                                   </td>
                                   <td>$50</td>
                                   <td>11 Nov 2019</td>
-                                  <td class="text-right">
-                                    <div class="table-action">
+                                  <td className="text-right">
+                                    <div className="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        className="btn btn-sm bg-primary-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i className="fas fa-print"></i> Print
                                       </a>
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
+                                        className="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i className="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
