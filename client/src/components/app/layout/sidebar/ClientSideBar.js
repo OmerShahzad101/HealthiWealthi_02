@@ -13,7 +13,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
 } else {
   data = user;
 }
- // console.log("data111",data)
+
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
       <div className="profile-sidebar">
@@ -24,15 +24,11 @@ if (clientProfile.firstName || clientProfile.lastName) {
             </a>
             <div className="profile-det-info">
               <h3>
-                {data.firstName} {data.lastName}
+                {data?.firstName} {data?.lastName}
               </h3>
               <div className="patient-details">
-                {/* <h5>
-                  <i className="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years
-                </h5> */}
                 <h5 className="mb-0">
-                  <i className="fas fa-map-marker-alt"></i> {data.country},{" "}
-                  {data.city}
+                  <i className="fas fa-map-marker-alt"></i> {data?.country || data?.city ? data?.country+' '+data?.city: "No Location Setup" }
                 </h5>
               </div>
             </div>
