@@ -13,6 +13,7 @@ import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
 import { setInfoData, setAvatar } from "../../../../store/slices/user";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
+import Resizer from "react-image-file-resizer";
 
 const BasicInfo = () => {
   const userid = useSelector((state) => state.auth.user.userid);
@@ -96,6 +97,23 @@ const BasicInfo = () => {
       });
     }
   };
+
+  //Image resize
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      300,
+      300,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "blob"
+    );
+  });
   /***awards***/
 
   /*****Experience*****/
@@ -174,9 +192,9 @@ const BasicInfo = () => {
         });
         return;
       }
-
+      const image = await resizeFile(files[0]);
       const formData = new FormData();
-      formData.append("avatar", files[0], files[0].name);
+      formData.append("avatar", image, files[0].name);
       let config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -309,7 +327,7 @@ const BasicInfo = () => {
             <div className="col-md-12">
               <div className="imageUploaderWrapper profile-img">
                 <div className="circle">
-                  {userInfo && <img src={imagePath(userInfo)} alt="user img" />}
+                  { <img src={imagePath(userInfo)} alt="user img" />}
                 </div>
 
                 <label className="pImage">
