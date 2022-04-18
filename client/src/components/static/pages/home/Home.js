@@ -45,17 +45,20 @@ export default function Home(props) {
       });
     console.log(payload);
   };
+
   const settings = {
     dots: false,
     autoplay: false,
     infinite: true,
     variableWidth: true,
   };
+
   const favorite = (e) => {
     const payload = {
       coachId: e,
       clientId: userId,
     };
+    
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
         if(response){
@@ -122,8 +125,11 @@ export default function Home(props) {
           <div className="row">
             <div className="col-lg-4">
               <div className="section-header ">
-                <h2>Book Our Coach</h2>
-                <p>Lorem Ipsum is simply dummy text </p>
+                <h2 className="mb-4 mt-1">Book Our Coach</h2>
+                <p className="mb-3">Lorem Ipsum is simply dummy text </p>
+                <p className="mb-3">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum. </p>
+                <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </p>
+
               </div>
             </div>
 

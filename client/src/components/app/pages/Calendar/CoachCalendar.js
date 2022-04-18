@@ -21,6 +21,7 @@ const CoachCalendar = ({ availabilityTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
+        console.log(response?.data?.data,"kahskjhasjkdhajksdhjkahsdjkahjksdhajkhsd")
         if (!response) {
           return;
         }
@@ -97,12 +98,15 @@ const CoachCalendar = ({ availabilityTab }) => {
                         var response = await getHttpRequest(
                           `front/schedule/get/${userid}`
                         );
+                        console.log(response,"responseOnChnage")
                         if (response) {
                           var result = await postHttpRequest(
                             "front/schedule/set",
                             formData
                           );
+                          console.log(result,"result")
                           if (result.status === 200) {
+
                             Toast.fire({
                               icon: "success",
                               title: "Event registered successfully",

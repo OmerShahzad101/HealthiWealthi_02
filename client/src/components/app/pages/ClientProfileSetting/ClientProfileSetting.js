@@ -12,7 +12,7 @@ import { setImage } from "../../../../store/slices/auth";
 import { AiOutlineCamera } from "react-icons/ai";
 const ClientProfileSetting = () => {
   const mediaPath = process.env.REACT_APP_IMG;
-  const fileName = useSelector((state) => state.auth.user.fileName);
+  const userImage = useSelector((state) => state.auth.user.fileName);
 
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -223,9 +223,9 @@ const ClientProfileSetting = () => {
               <div className="col-md-12">
                         <div className="imageUploaderWrapper profile-img">
                           <div className="circle">
-                            {fileName && (
+                            {(
                               <img
-                                src={imagePath(fileName)}
+                                src={imagePath(userImage)}
                                 alt="user img"
                               />
                             )}

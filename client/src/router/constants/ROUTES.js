@@ -10,6 +10,8 @@ export const APP = '/app';
  export const CONTACT = '/contact-us';
  export const SEARCH_COACH = '/search-coach';
  export const COACH_PROFILE = '/coach-profile/:coachId';
+ export const PRICING = '/pricing';
+
 
 // Base Routes
 export const LOGIN = '/login';
