@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import imagePath from "../../../../utils/url/imagePath";
 import { useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom'
 
 const CoachSideBar = () => {
+  const location = useLocation()
+  console.log(location, 'yesssssssssssss')
   
   let data;
   const user = useSelector((state) => state.auth.user);
@@ -16,13 +19,16 @@ if (coachProfile.firstName || coachProfile.lastName) {
 }
 
   const imageUpload = () => {};
+if (location.pathname == '/app/chat') {
+  return '';
+}
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
       <div className="profile-sidebar">
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-           
+
               {user && (
                               <img
                                 src={imagePath(userImage)}
@@ -80,13 +86,13 @@ if (coachProfile.firstName || coachProfile.lastName) {
                   <span>Reviews</span>
                 </NavLink>
               </li>
-              {/* <li>
+              <li>
                   <NavLink to="/app/chat">
                     <i className="fas fa-comments"></i>
                     <span>Message</span>
                     <small className="unread-msg">23</small>
                   </NavLink>
-                </li> */}
+                </li>
               {/* <li>
                   <NavLink to="/app/videocall">
                     <i className="fas fa-comments"></i>
