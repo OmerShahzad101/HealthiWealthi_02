@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
-import { useEffect } from "react";
 const ClientSideBar = () => {
 let data;
-const user = useSelector((state) => state.user);
+const user = useSelector((state) => state.auth.user);
+const userImage = useSelector((state) => state.auth.user.fileName);
 const clientProfile = useSelector((state) => state.auth.clientProfile);
 console.log("clientProfile", clientProfile);
 if (clientProfile.firstName || clientProfile.lastName) {
@@ -20,7 +20,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-              <img src={imagePath(user.avatar)} alt="User Image" />
+              <img src={imagePath(userImage)} alt="User Image" />
             </a>
             <div className="profile-det-info">
               <h3>

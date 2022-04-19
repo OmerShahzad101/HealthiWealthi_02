@@ -5,18 +5,15 @@ import { useSelector } from "react-redux";
 
 const CoachSideBar = () => {
   
-
   let data;
   const user = useSelector((state) => state.auth.user);
-    console.log("khaliq Mehmood===" ,user);
+  const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
-  console.log("COACH PROFILEDATA", coachProfile);
 if (coachProfile.firstName || coachProfile.lastName) {
   data = coachProfile;
 } else {
   data = user;
 }
-
 
   const imageUpload = () => {};
   return (
@@ -28,7 +25,7 @@ if (coachProfile.firstName || coachProfile.lastName) {
            
               {user && (
                               <img
-                                src={imagePath(user.avatar)}
+                                src={imagePath(userImage)}
                                 alt="user img"
                               />
                             )}

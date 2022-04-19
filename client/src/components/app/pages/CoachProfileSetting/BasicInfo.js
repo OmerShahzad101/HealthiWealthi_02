@@ -11,13 +11,13 @@ import { useSelector, useDispatch } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { AiOutlineCamera } from "react-icons/ai";
-import { setInfoData, setAvatar } from "../../../../store/slices/user";
+import { setImage } from "../../../../store/slices/auth";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import Resizer from "react-image-file-resizer";
 
 const BasicInfo = () => {
   const userid = useSelector((state) => state.auth.user.userid);
-  const userInfo = useSelector((state) => state.user.avatar);
+  const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -156,11 +156,11 @@ const BasicInfo = () => {
   /**********/
 
   const checKImage = async (data) => {
-    setTimeout(dispatch(setInfoData(data)), 9000);
+    setTimeout(dispatch(setImage(data)), 9000);
 
     const exist = await imageExist(data.avatar);
     if (exist) {
-      dispatch(setInfoData(data));
+      dispatch(setImage(data));
       return true;
     } else {
       checKImage(data);
@@ -327,7 +327,7 @@ const BasicInfo = () => {
             <div className="col-md-12">
               <div className="imageUploaderWrapper profile-img">
                 <div className="circle">
-                  { <img src={imagePath(userInfo)} alt="user img" />}
+                  { <img src={imagePath(userImage)} alt="user img" />}
                 </div>
 
                 <label className="pImage">
