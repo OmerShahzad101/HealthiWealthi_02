@@ -37,7 +37,7 @@ const Contact = () => {
     }
     setIsLoading(true);
 
-    postHttpRequest("front/contact/create/", loginData)
+    postHttpRequest("admin/contacts/create/", loginData)
       .then((response) => {
         setIsLoading(false);
         if (!response) {
