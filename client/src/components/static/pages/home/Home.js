@@ -224,7 +224,7 @@ export default function Home(props) {
         </div>
       </section>
 
-      <section class="section section-features">
+      <section className="section section-features">
         <AvaliableFeature/>
       </section>
     </>
