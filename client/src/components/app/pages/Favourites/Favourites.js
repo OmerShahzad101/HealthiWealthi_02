@@ -8,6 +8,7 @@ import Toast from "../../../common/toast/Toast";
 const Favourites = () => {
   const id = useSelector((state) => state.auth.user.userid);
   const [favouriteList, setfavouriteList] = useState([]);
+  const mediaPath = process.env.REACT_APP_IMG;
 
   useEffect(() => {
     getHttpRequest(`/front/favourites/get/${id}`)
@@ -15,10 +16,23 @@ const Favourites = () => {
         console.log(response);
         setfavouriteList(response.data.favouriteCoaches);
         if (response.data.favouriteCoaches[0]) {
+          // Toast.fire({
+          //   icon: "success",
+          //   title: response.data.message,
+          // });
+        } else {
+          // Toast.fire({
+          //   icon: "info",
+          //   title: "No data found",
+          // });
         }
       })
       .catch((response) => {
         console.log(response);
+        // Toast.fire({
+        //   icon: "error",
+        //   title: response.data.message,
+        // });
       });
   }, []);
 
@@ -59,8 +73,12 @@ const Favourites = () => {
                     <Link to="/coach-profile">
                       <img
                         className="img-fluid"
-                        alt="User Image"
-                        src="/assets/img/doctors/doctor-01.jpg"
+                        alt="User"
+                        src={
+                          e?.fileName
+                            ? mediaPath + e.fileName
+                            : mediaPath + "avatar.jpg"
+                        }
                       />
                     </Link>
                     <a
@@ -72,10 +90,10 @@ const Favourites = () => {
                   </div>
                   <div className="pro-content">
                     <h3 className="title">
-                      <Link to="/coach-profile">
+                      <div>
                         {e?.firstname + " " + e?.lastname}
-                      </Link>
-                      <i className="fas fa-check-circle verified"></i>
+                        <i className="fas fa-check-circle verified"></i>
+                      </div>
                     </h3>
                     {e?.specialization && (
                       <p className="speciality">{e?.specialization}</p>
@@ -104,13 +122,17 @@ const Favourites = () => {
                     </ul>
                     <div className="row row-sm">
                       <div className="col-6">
-                        <Link to="/coach-profile" className="btn view-btn">
+                        <Link
+                          to={"/coach-profile/" + e?._id}
+                          className="btn view-btn"
+                        >
                           View Profile
                         </Link>
                       </div>
                       <div className="col-6">
                         <Link
-                          to="/app/book-appointment"
+                          to={"/app/book-appointment/" + e?._id}
+
                           className="btn book-btn"
                         >
                           Book Now

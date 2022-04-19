@@ -58,15 +58,18 @@ export default function Home(props) {
       coachId: e,
       clientId: userId,
     };
-    
+
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
-        if(response){
-        getHttpRequest("/front/coach/list")
-        .then((response) => {
-          setCoachList(response.data.data.coaches);
-        })
-      }
+        if (response) {
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          });
+          getHttpRequest("/front/coach/list").then((response) => {
+            setCoachList(response.data.data.coaches);
+          });
+        }
       })
       .catch((response) => {
         Toast.fire({
@@ -106,7 +109,11 @@ export default function Home(props) {
                     Ex : Nutritionists or Yoga Expert etc
                   </span>
                 </div>
-                <button type="submit" className="btn btn-primary search-btn" onClick={searchHandler}>
+                <button
+                  type="submit"
+                  className="btn btn-primary search-btn"
+                  onClick={searchHandler}
+                >
                   <i className="fas fa-search"></i> <span>Search</span>
                 </button>
               </form>
@@ -117,7 +124,7 @@ export default function Home(props) {
       </section>
 
       <section className="section section-specialities">
-        <Specialities/>
+        <Specialities />
       </section>
 
       <section className="section section-doctor">
@@ -127,9 +134,17 @@ export default function Home(props) {
               <div className="section-header ">
                 <h2 className="mb-4 mt-1">Book Our Coach</h2>
                 <p className="mb-3">Lorem Ipsum is simply dummy text </p>
-                <p className="mb-3">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum. </p>
-                <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </p>
-
+                <p className="mb-3">
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                  The point of using Lorem Ipsum.{" "}
+                </p>
+                <p>
+                  web page editors now use Lorem Ipsum as their default model
+                  text, and a search for 'lorem ipsum' will uncover many web
+                  sites still in their infancy. Various versions have evolved
+                  over the years, sometimes{" "}
+                </p>
               </div>
             </div>
 
@@ -138,26 +153,35 @@ export default function Home(props) {
                 <Slider {...settings}>
                   {coachList.map(
                     (e, idx) =>
-                      e?.firstname && e?.lastname && (
+                      e?.firstname &&
+                      e?.lastname && (
                         <div key={`coach_${idx}`} className="profile-widget">
                           <div className="doc-img">
-                            <Link to={"/coach-profile/"+e?._id}>
+                            <Link to={"/coach-profile/" + e?._id}>
                               <img
                                 className="img-fluid"
                                 alt="User"
                                 src={
-                                  e?.fileName ? mediaPath + e.fileName : mediaPath + "avatar.jpg"
+                                  e?.fileName
+                                    ? mediaPath + e.fileName
+                                    : mediaPath + "avatar.jpg"
                                 }
                               />
                             </Link>
                             {role === 1 && (
                               <>
                                 {e?.isFavourite === true ? (
-                                  <a className="not-fav-btn" onClick={() => favorite(e?._id)}>
+                                  <a
+                                    className="not-fav-btn"
+                                    onClick={() => favorite(e?._id)}
+                                  >
                                     <i className="far fa-bookmark"></i>
                                   </a>
                                 ) : (
-                                  <a className="fav-btn" onClick={() => favorite(e?._id)}>
+                                  <a
+                                    className="fav-btn"
+                                    onClick={() => favorite(e?._id)}
+                                  >
                                     <i className="far fa-bookmark"></i>
                                   </a>
                                 )}
@@ -166,10 +190,16 @@ export default function Home(props) {
                           </div>
                           <div className="pro-content">
                             <h3 className="title">
-                              <Link to={"/coach-profile/"+e?._id}>{e?.firstname + " " + e?.lastname}</Link>
+                              <Link to={"/coach-profile/" + e?._id}>
+                                {e?.firstname + " " + e?.lastname}
+                              </Link>
                               <i className="fas fa-check-circle verified"></i>
                             </h3>
-                            <p className="speciality">{e?.specialization && e.specialization != "" ? e.specialization : "N/A"}</p>
+                            <p className="speciality">
+                              {e?.specialization && e.specialization != ""
+                                ? e.specialization
+                                : "N/A"}
+                            </p>
 
                             <ul className="available-info">
                               {(e.country || e.city) && (
@@ -182,15 +212,17 @@ export default function Home(props) {
                               <li>
                                 <i className="far fa-money-bill-alt"></i>
                                 {e?.price}{" "}
-                                <i className="fas fa-info-circle"
-                                  data-toggle="tooltip" title="Lorem Ipsum"
+                                <i
+                                  className="fas fa-info-circle"
+                                  data-toggle="tooltip"
+                                  title="Lorem Ipsum"
                                 ></i>
                               </li>
                             </ul>
                             <div className="row row-sm">
                               <div className="col-6">
                                 <Link
-                                  to={"/coach-profile/"+e?._id}
+                                  to={"/coach-profile/" + e?._id}
                                   className="btn view-btn"
                                 >
                                   View Profile
@@ -199,8 +231,8 @@ export default function Home(props) {
                               {role === 1 ? (
                                 <div className="col-6">
                                   <Link
-                                      to={"/app/book-appointment/"+e?._id}
-                                      className="btn book-btn"
+                                    to={"/app/book-appointment/" + e?._id}
+                                    className="btn book-btn"
                                   >
                                     Book Now
                                   </Link>
@@ -225,7 +257,7 @@ export default function Home(props) {
       </section>
 
       <section className="section section-features">
-        <AvaliableFeature/>
+        <AvaliableFeature />
       </section>
     </>
   );

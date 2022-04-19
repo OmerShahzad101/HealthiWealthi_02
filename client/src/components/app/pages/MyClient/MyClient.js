@@ -82,7 +82,7 @@ const MyClient = () => {
               );
             })
           ) : (
-            <div className="no_data">
+            <div className="no-Appoinents">
               <span>You Don't Have any Appoinments</span>
             </div>
           )}

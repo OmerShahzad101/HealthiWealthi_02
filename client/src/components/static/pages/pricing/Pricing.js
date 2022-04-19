@@ -56,7 +56,7 @@ const Pricing = () => {
             );
           })
         ) : (
-          <div className="no_data">
+          <div className="no_data_found">
             <span>No Coaches found</span>
           </div>
         )}

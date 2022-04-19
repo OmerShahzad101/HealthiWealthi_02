@@ -14,6 +14,7 @@ const CoachProfile = (props) => {
   const [key, setKey] = useState("overview");
   const url = window.location.pathname;
   const id = url.split("/").pop();
+  const [coachList, setCoachList] = useState([]);
 
   useEffect(async () => {
     $("html,body").animate({ scrollTop: 0 }, "slow");
@@ -25,16 +26,34 @@ const CoachProfile = (props) => {
   }, []);
 
   // API Function TO Add Favourit
-  const favorite = (e) => {
-    
+  const favorite = (id, err) => {
+    console.log("dddd")
     if (userId) {
+      console.log(userId, "userId")
       const payload = {
-        coachId: coachProfileData._id,
+        coachId: id,
         clientId: userId,
       };
-      postHttpRequest("/front/favourites/create", payload);
+      postHttpRequest("/front/favourites/create", payload)
+        .then((response) => {
+          if (response) {
+            Toast.fire({
+              icon: "success",
+              title: response.data.message,
+            });
+            getHttpRequest("/front/coach/list").then((response) => {
+              setCoachList(response.data.data.coaches);
+            });
+          }
+        })
+        .catch((response) => {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
+        });
     } else {
-      e.preventDefault();
+      err.preventDefault();
       Toast.fire({
         icon: "error",
         title: "Login Required",
@@ -42,8 +61,8 @@ const CoachProfile = (props) => {
     }
   };
 
-  const unAuth = (e) => {
-    e.preventDefault();
+  const unAuth = (err) => {
+    err.preventDefault();
     Toast.fire({
       icon: "error",
       title: "Login Required",
@@ -106,12 +125,27 @@ const CoachProfile = (props) => {
                 {userRole !== 3 && (
                   <>
                     <div className="doctor-action">
-                      <a className="btn btn-white fav-btn">
-                        <i
-                          className="far fa-bookmark"
-                          onClick={(e) => favorite(e)}
-                        ></i>
-                      </a>
+                      {coachProfileData?.isFavourite === true ? (
+                        <a className="btn btn-white fav-btn fav-bookmark">
+                          {" "}
+                          <i
+                            className="far fa-bookmark"
+                            onClick={(err) =>
+                              favorite(coachProfileData?._id, err)
+                            }
+                          ></i>
+                        </a>
+                      ) : (
+                        <a className="btn btn-white fav-btn ">
+                          <i
+                            className="far fa-bookmark "
+                            onClick={(err) =>
+                              favorite(coachProfileData?._id, err)
+                            }
+                          ></i>
+                        </a>
+                      )}
+
                       <Link to="#" className="btn btn-white msg-btn">
                         <i className="far fa-comment-alt"></i>
                       </Link>
@@ -142,7 +176,10 @@ const CoachProfile = (props) => {
                           Book Appointment
                         </Link>
                       ) : (
-                        <Link className="apt-btn" onClick={(e) => unAuth(e)}>
+                        <Link
+                          className="apt-btn"
+                          onClick={(err) => unAuth(err)}
+                        >
                           Book Appointment
                         </Link>
                       )}

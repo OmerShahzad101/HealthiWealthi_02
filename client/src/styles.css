@@ -2679,6 +2679,7 @@ html.menu-opened body {
   background-color: #f9f9f9;
   color: rgb(11, 11, 11);
 }
+
 .profile-widget:hover .fav-btn {
   opacity: 1;
   visibility: visible;
@@ -7562,7 +7563,7 @@ html.menu-opened body {
   color: #d44f86;
 }
 
-.no_data {
+.no-Appoinents {
   height: 200px;
   display: flex;
   align-items: center;
@@ -7674,4 +7675,23 @@ button.btn.btn-google.btn-block span {
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+.fav-bookmark
+{
+  background-color: #d32986;
+}
+::-webkit-scrollbar-track {
+  border: 1px solid #fff;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #ffff;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #d32986;	
+  border-radius: 15px 0px 0px 15px;
 }
