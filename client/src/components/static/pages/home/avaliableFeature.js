@@ -40,36 +40,18 @@ const AvaliableFeature = () => {
           </div>
           <div className="features-slider slider">
             <Slider {...settingsAvaliableFeature}>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-01.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Patient Ward</p>
-              </div>
 
               <div className="feature-item text-center">
                 <img
-                  src="/assets/img/features/feature-02.jpg"
+                  src="/assets/img/features/call.png"
                   className="img-fluid"
                   alt="Feature"
                 />
-                <p>Test Room</p>
+                <p>Audio consultation</p>
               </div>
-
               <div className="feature-item text-center">
                 <img
-                  src="/assets/img/features/feature-03.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>ICU</p>
-              </div>
-
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-01.jpg"
+                  src="/assets/img/features/customer-service.png"
                   className="img-fluid"
                   alt="Feature"
                 />
@@ -78,56 +60,7 @@ const AvaliableFeature = () => {
 
               <div className="feature-item text-center">
                 <img
-                  src="/assets/img/features/feature-05.jpg"
-                  className="img-fluid"
-                  alt="audio"
-                />
-                <p>Audio consultation</p>
-              </div>
-
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Video consultation</p>
-              </div>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Video consultation</p>
-              </div>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Video consultation</p>
-              </div>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Video consultation</p>
-              </div>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
-                  className="img-fluid"
-                  alt="Feature"
-                />
-                <p>Video consultation</p>
-              </div>
-              <div className="feature-item text-center">
-                <img
-                  src="/assets/img/features/feature-06.jpg"
+                  src="/assets/img/features/video-call.png"
                   className="img-fluid"
                   alt="Feature"
                 />

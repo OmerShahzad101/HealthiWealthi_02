@@ -26,7 +26,7 @@ const Specialities = () => {
               <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
-                    src="assets/img/specialities/specialities-01.png"
+                    src="assets/img/specialities/meditation.png"
                     className="img-fluid"
                     alt="Speciality"
                   />
@@ -34,12 +34,12 @@ const Specialities = () => {
                     <i className="fa fa-circle" aria-hidden="true"></i>
                   </span>
                 </div>
-                <p>Urology</p>
+                <p>Yoga Experts</p>
               </div>
               <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
-                    src="assets/img/specialities/specialities-02.png"
+                    src="assets/img/specialities/nutrition.png"
                     className="img-fluid"
                     alt="Speciality"
                   />
@@ -47,12 +47,12 @@ const Specialities = () => {
                     <i className="fa fa-circle" aria-hidden="true"></i>
                   </span>
                 </div>
-                <p>Neurology</p>
+                <p>Nutritionist</p>
               </div>
               <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
-                    src="assets/img/specialities/specialities-03.png"
+                    src="assets/img/specialities/suncream.png"
                     className="img-fluid"
                     alt="Speciality"
                   />
@@ -60,12 +60,12 @@ const Specialities = () => {
                     <i className="fa fa-circle" aria-hidden="true"></i>
                   </span>
                 </div>
-                <p>Orthopedic</p>
+                <p>Dermatologist</p>
               </div>
               <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
-                    src="assets/img/specialities/specialities-04.png"
+                    src="assets/img/specialities/liposuction.png"
                     className="img-fluid"
                     alt="Speciality"
                   />
@@ -73,12 +73,12 @@ const Specialities = () => {
                     <i className="fa fa-circle" aria-hidden="true"></i>
                   </span>
                 </div>
-                <p>Cardiologist</p>
+                <p>Gym Coaches</p>
               </div>
-              {/* <div className="speicality-item text-center">
+              <div className="speicality-item text-center">
                 <div className="speicality-img">
                   <img
-                    src="assets/img/specialities/specialities-05.png"
+                    src="assets/img/specialities/dumbbell.png"
                     className="img-fluid"
                     alt="Speciality"
                   />
@@ -86,8 +86,8 @@ const Specialities = () => {
                     <i className="fa fa-circle" aria-hidden="true"></i>
                   </span>
                 </div>
-                <p>Dentist</p>
-              </div> */}
+                <p>Cardio Care</p>
+              </div>
             </Slider>
           </div>
         </div>

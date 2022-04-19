@@ -2841,7 +2841,7 @@ html.menu-opened body {
   border-radius: 100%;
   box-shadow: 1px 6px 14px rgba(0, 0, 0, 0.2);
   height: 115px;
-  object-fit: cover;
+  object-fit: scale-down;
   width: 115px;
 }
 .feature-item p {
