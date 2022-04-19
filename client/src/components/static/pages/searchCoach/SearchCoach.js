@@ -27,7 +27,7 @@ const SearchCoach = () => {
     maleCoach: maleCoach.current?.checked,
   };
   let Services = {
-    kickBoxing: kickBoxing.current?.checked,//false
+    kickBoxing: kickBoxing.current?.checked, //false
     Yoga: Yoga.current?.checked,
     Nutritionists: Nutritionists.current?.checked,
     HolisticHealth: HolisticHealth.current?.checked,
@@ -278,23 +278,20 @@ const SearchCoach = () => {
                             <div className="doctor-widget">
                               <div className="doc-info-left">
                                 <div className="doctor-img">
-                                  <Link to="/coach-profile">
-                                    <img
-                                      src={
-                                        item?.fileName
-                                          ? mediaPath + item.fileName
-                                          : mediaPath + "avatar.jpg"
-                                      }
-                                      className="img-fluid"
-                                      alt="User"
-                                    />
-                                  </Link>
+                                  <img
+                                    src={
+                                      item?.fileName
+                                        ? mediaPath + item.fileName
+                                        : mediaPath + "avatar.jpg"
+                                    }
+                                    className="img-fluid search-image"
+                                    alt="User"
+                                  />
+                                  
                                 </div>
                                 <div className="doc-info-cont">
                                   <h4 className="doc-name">
-                                  
-
-                                    <Link to={"/coach-profile/"+item?._id}>
+                                    <Link to={"/coach-profile/" + item?._id}>
                                       {item.firstname + " " + item.lastname}
                                     </Link>
                                   </h4>
@@ -326,58 +323,8 @@ const SearchCoach = () => {
                                         <i className="fas fa-map-marker-alt"></i>{" "}
                                         {item.country + ", " + item.city}
                                       </p>
-                                      {/* <ul className="clinic-gallery">
-                                        <li>
-                                          <a
-                                            href="/assets/img/features/feature-01.png"
-                                            data-fancybox="gallery"
-                                          >
-                                            <img
-                                              src="assets/img/features/feature-01.png"
-                                              alt="Feature"
-                                            />
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a
-                                            href="/assets/img/features/feature-02.png"
-                                            data-fancybox="gallery"
-                                          >
-                                            <img
-                                              src="assets/img/features/feature-02.png"
-                                              alt="Feature"
-                                            />
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a
-                                            href="assets/img/features/feature-03.jpeg"
-                                            data-fancybox="gallery"
-                                          >
-                                            <img
-                                              src="assets/img/features/feature-03.jpeg"
-                                              alt="Feature"
-                                            />
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a
-                                            href="assets/img/features/feature-04.jpeg"
-                                            data-fancybox="gallery"
-                                          >
-                                            <img
-                                              src="assets/img/features/feature-04.jpeg"
-                                              alt="Feature"
-                                            />
-                                          </a>
-                                        </li>
-                                      </ul> */}
                                     </div>
                                   )}
-                                  {/* <div className="clinic-services">
-                                    <span>Diet Plan</span>
-                                    <span>Fitness</span>
-                                  </div> */}
                                 </div>
                               </div>
                               <div className="doc-info-right">
@@ -407,25 +354,25 @@ const SearchCoach = () => {
                                   </ul>
                                 </div>
                                 <div className="clinic-booking">
-
                                   <Link
                                     className="view-pro-btn"
-                                    to={"/coach-profile/"+item?._id}
-                                  
+                                    to={"/coach-profile/" + item?._id}
                                   >
                                     View Profile
                                   </Link>
                                 </div>
-                                {role == 1 ? <div className="clinic-booking">
+                                {role == 1 ? (
+                                  <div className="clinic-booking">
                                     <Link
                                       className="apt-btn"
-                                      to={"/app/book-appointment/"+item?._id}
-
-                                    
+                                      to={"/app/book-appointment/" + item?._id}
                                     >
                                       Book Appointment
                                     </Link>
-                                  </div>:""}
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
                                 {/* {role === 3 ? (
                                   <div className="clinic-disable">
                                     <button

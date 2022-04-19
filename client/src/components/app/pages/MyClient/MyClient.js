@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
+const mediaPath = process.env.REACT_APP_IMG;
+
 const MyClient = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
 
@@ -20,7 +22,7 @@ const MyClient = () => {
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">
         <div className="row row-grid">
-          {myclient ? (
+          {myclient && myclient.length > 0 ? (
             myclient.map((item, idx) => {
               return (
                 <div className="col-md-6 col-lg-4 col-xl-3">
@@ -28,22 +30,22 @@ const MyClient = () => {
                     <div className="card-body">
                       <div className="pro-widget-content">
                         <div className="profile-info-widget">
-                          <Link
-                            to="/client-profile"
-                            className="booking-doc-img"
-                          >
+                          
                             <img
-                              src="assets/img/patients/patient.jpg"
+                              src={
+                                item?.fileName
+                                  ? mediaPath + item.fileName
+                                  : mediaPath + "avatar.jpg"
+                              }
                               alt="User Image"
                             />
-                          </Link>{" "}
                           <div className="profile-det-info">
                             <h3>
-                              <Link to="/app/client-profile">
+                              <div >
                                 {item?.clientData?.firstname +
                                   " " +
                                   item?.clientData?.lastname}{" "}
-                              </Link>
+                              </div>
                             </h3>
 
                             <div className="patient-details">
@@ -81,7 +83,7 @@ const MyClient = () => {
             })
           ) : (
             <div className="no_data">
-              <span className="no_data">You Don't Have any Appoinments</span>
+              <span>You Don't Have any Appoinments</span>
             </div>
           )}
         </div>
