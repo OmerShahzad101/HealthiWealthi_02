@@ -2,19 +2,18 @@ import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import imagePath from "../../../../utils/url/imagePath";
 import { useSelector } from "react-redux";
-
 const CoachSideBar = () => {
-  
   let data;
   const user = useSelector((state) => state.auth.user);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
-if (coachProfile.firstName || coachProfile.lastName) {
-  data = coachProfile;
-} else {
-  data = user;
-}
-
+  if (coachProfile.firstName || coachProfile.lastName) {
+    data = coachProfile;
+  }
+  else 
+  {
+    data = user;
+  }
   const imageUpload = () => {};
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
@@ -22,13 +21,7 @@ if (coachProfile.firstName || coachProfile.lastName) {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-           
-              {user && (
-                              <img
-                                src={imagePath(userImage)}
-                                alt="user img"
-                              />
-                            )}
+              {user && <img src={imagePath(userImage)} alt="user img" />}
             </a>
             <div className="profile-det-info">
               <h3>
@@ -119,5 +112,4 @@ if (coachProfile.firstName || coachProfile.lastName) {
     </div>
   );
 };
-
 export default CoachSideBar;

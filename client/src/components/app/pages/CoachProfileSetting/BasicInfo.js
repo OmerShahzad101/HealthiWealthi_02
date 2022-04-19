@@ -128,6 +128,8 @@ const BasicInfo = () => {
   };
 
   const handleExperiencechange = (index, key, value) => {
+        console.log("exp :", experience);
+
     if (key === "companyName") {
       experience[index] = { ...experience[index], companyName: value };
     } else if (key === "dateFrom") {
@@ -207,7 +209,6 @@ const BasicInfo = () => {
             console.log("Something went wrong with response...");
             return;
           }
-          console.log(response, "ressssssssssssssssss");
           console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
@@ -295,19 +296,23 @@ const BasicInfo = () => {
         }
         if (response.data.success === true) {
           console.log("responseDon", response?.data?.coach);
-          setprofileData(response?.data?.coach);
+           
+          if (response?.data?.coach?.awards.length > 0) {
+            setAwards(response?.data?.coach?.awards);
+          }
+             
           if (response?.data?.coach?.qualifications.length > 0) {
             setqualifications(response?.data?.coach?.qualifications);
           }
           if (response?.data?.coach?.experience.length > 0) {
             setExperience(response?.data?.coach?.experience);
           }
-          if (response?.data?.coach?.awards.length > 0) {
-            setAwards(response?.data?.coach?.awards);
-          }
-        } else {
+          
+        } 
+        else {
           console.log(response.data.message);
         }
+          setprofileData(response?.data?.coach);
       })
       .catch(() => {
         console.log("Something went wrong...");
