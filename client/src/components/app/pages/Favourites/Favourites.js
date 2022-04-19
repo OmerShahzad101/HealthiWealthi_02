@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
+import imagePath from "../../../../utils/url/imagePath";
 
 const Favourites = () => {
   const id = useSelector((state) => state.auth.user.userid);
@@ -68,10 +69,7 @@ const Favourites = () => {
                   <div className="profile-widget">
                     <div className="doc-img">
                       <Link to="/coach-profile">
-                        <img
-                          className="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-01.jpg"
+                        <img className="img-fluid" alt="User Image" src="/assets/img/doctors/doctor-01.jpg"
                         />
                       </Link>
                       <a
