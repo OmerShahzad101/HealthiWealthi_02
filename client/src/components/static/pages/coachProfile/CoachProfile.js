@@ -25,11 +25,16 @@ const CoachProfile = (props) => {
 
   // API Function TO Add Favourit
   const favorite = () => {
+    if(userId) {
     const payload = {
       coachId: coachProfileData._id,
       clientId: userId,
     };
     postHttpRequest("/front/favourites/create", payload);
+  }
+  else{
+    alert("login karo bhai kaha ghus rahy ho")
+  }
   };
 
   return (
@@ -63,7 +68,7 @@ const CoachProfile = (props) => {
                     <li><i className="far fa-money-bill-alt"></i>&nbsp;{coachProfileData?.price}{"$"}&nbsp;</li>
                   </ul>
                 </div>
-                {userRole == 1 && (
+                {userRole !== 3 && (
                   <>
                     <div className="doctor-action">
                       <a className="btn btn-white fav-btn"><i  className="far fa-bookmark" onClick={() => favorite()}></i></a>

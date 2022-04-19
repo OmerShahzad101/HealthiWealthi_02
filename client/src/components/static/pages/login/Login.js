@@ -48,6 +48,7 @@ const Login = (props) => {
         });
         return;
       }
+      console.log("response", response);
       if (!response.data.success) {
         setIsLoading(false);
         Toast.fire({

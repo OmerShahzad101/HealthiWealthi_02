@@ -272,18 +272,19 @@ const ClientCalendar = (props) => {
   });
   return (
     <div>
-      <section className="account-wrapper section-pd pb-0">
+      <section className="account-wrapper wraper-calander section-pd pb-0">
         {/* <h3 className="page-title">
           <span className="title-align"> Book Your Video Consultation</span>
         </h3> */}
 
-        <div className="container booking">
-          <div className="row align-items-center mb-4">
+        <div className="container booking card">
+          <div className="row align-items-center mb-4 pt-4">
             <div className="col-md-6">
               <h3 className="booking-title m-0">{selectedHumanReadableDate}</h3>
-            </div>
-            <div className="col-md-6 text-right">
-              <div className="week-controls">
+            </div> 
+          </div>
+          <div className="booking-form pb-4">
+          <div className="week-controls custom-controls d-flex justify-content-between">
                 <button
                   title="Prev Week"
                   className="btn btn-arrow btn-sm"
@@ -302,9 +303,6 @@ const ClientCalendar = (props) => {
                   <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
               </div>
-            </div>
-          </div>
-          <div className="booking-form">
             <div className="gridDays">{gridSlots}</div>
           </div>
         </div>

@@ -9,9 +9,9 @@ export const authSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setInfoData(state, { payload: userData }) {
+    /*setInfoData(state, { payload: userData }) {
       state.avatar = userData;
-    },
+    },*/
     setSubscriptionPlan: (state, { payload: planDetails }) => {
       state.subscriptionPlan = planDetails;
     },
