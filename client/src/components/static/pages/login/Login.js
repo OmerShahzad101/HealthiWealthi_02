@@ -37,7 +37,7 @@ const Login = (props) => {
     }
     setIsLoading(true);
 
-    // __ __ __ __ //
+
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
     
@@ -60,16 +60,15 @@ const Login = (props) => {
       if (response.data.success) {
         setIsLoading(false);
         let res = await getHttpRequest(
-          `/front/coach/get/${response?.daloginDatata?.data?._id}`
+          `/front/coach/get/${response?.data.data?._id}`
         );
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
-      
+    
           dispatch(setUser(userData));
-
           dispatch(setAccessToken(response.data.data.accessToken));
 
           if (response?.data?.data?.type === 1) {
@@ -77,7 +76,8 @@ const Login = (props) => {
           } else if (response?.data?.data?.type === 3) {
             history.replace(COACH_PROFILE_SETTING);
           }
-        } else {
+        } 
+        else {
           Toast.fire({
             icon: "error",
             title: response.data.message,
