@@ -21,14 +21,16 @@ const CoachCalendar = ({ availabilityTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
+        debugger;
         console.log(response?.data?.data,"kahskjhasjkdhajksdhjkahsdjkahjksdhajkhsd")
         if (!response) {
           return;
         }
         if (response && response?.data?.success === true) {
           let newSelections = [];
-          if (response?.data?.ScheduleData) {
-            var response = response?.data?.ScheduleData?.selections.map(
+          console.log("response?.data?.scheduleData", response);
+          if (response?.data?.scheduleData) {
+            var response = response?.data?.scheduleData?.selections.map(
               function (val, key) {
                 var newobject = {};
                 newobject.start = moment(val.start).toDate();

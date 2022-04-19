@@ -48,6 +48,7 @@ const Login = (props) => {
         });
         return;
       }
+      console.log("response", response);
       if (!response.data.success) {
         setIsLoading(false);
         Toast.fire({
@@ -60,7 +61,7 @@ const Login = (props) => {
       if (response.data.success) {
         setIsLoading(false);
         let res = await getHttpRequest(
-          `/front/coach/get/${response?.daloginDatata?.data?._id}`
+          `/front/coach/get/${response?.data.data?._id}`
         );
         if (res) {
           const userData = {
