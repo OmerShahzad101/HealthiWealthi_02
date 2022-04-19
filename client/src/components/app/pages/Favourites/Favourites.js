@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
+import imagePath from "../../../../utils/url/imagePath";
 
 const Favourites = () => {
   const id = useSelector((state) => state.auth.user.userid);
