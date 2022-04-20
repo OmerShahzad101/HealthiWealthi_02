@@ -15,7 +15,7 @@ export const chatSlice = createSlice({
             state.recieverId = action.payload.id
             state.recieverName = action.payload.name
             state.conversationId = action.payload.conversationId
-            state.messages = action.payload.messages
+            state.messages = action.payload.messages === undefined ? [] : action.payload.messages
         },
     },
 })
