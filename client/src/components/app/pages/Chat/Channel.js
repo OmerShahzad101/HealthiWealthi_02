@@ -8,7 +8,6 @@ const Channel = ({user}) => {
 
     const dispatch = useDispatch()
 
-    const {recieverId} = useSelector((state) => state.chat)
     const {userid} = useSelector((state) => state.auth.user)
 
     const handleClick = async (id, name) => {

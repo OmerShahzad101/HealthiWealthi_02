@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import { useSelector } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
 const ClientSideBar = () => {
+  const location = useLocation();
 let data;
 const user = useSelector((state) => state.auth.user);
 const userImage = useSelector((state) => state.auth.user.fileName);
@@ -13,6 +14,10 @@ if (clientProfile.firstName || clientProfile.lastName) {
 } else {
   data = user;
 }
+
+  if (location.pathname == "/app/chat") {
+    return "";
+  }
 
   return (
     <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
