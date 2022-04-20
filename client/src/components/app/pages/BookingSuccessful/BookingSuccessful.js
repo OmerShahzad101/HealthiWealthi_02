@@ -11,10 +11,10 @@ const BookingSuccessful = () => {
             <h3>Appointment booked Successfully!</h3>
             <p>
               Appointment booked with <strong>Dr. Darren Elder</strong>
-              <br /> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong>
+              <br /> on <strong>13 Nov 2019 5:00PM to 6:00PM</strong>
             </p>
             <Link to="/invoice" className="btn btn-primary view-inv-btn">
-              View Invoice
+              View Invoice   
             </Link>
           </div>
         </div>

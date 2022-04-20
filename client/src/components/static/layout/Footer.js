@@ -1,6 +1,28 @@
 import { Link } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { getHttpRequest } from "../../../axios";
 export default function Footer() {
+  const [cmsPage, setCmsPage] = useState();
+
+  useEffect(() => {
+    getHttpRequest(`/admin/cms/list`)
+      .then((response) => {
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+        if (response?.data?.success === true) {
+          console.log(response?.data?.data?.cmsList);
+          setCmsPage(response?.data?.data?.cmsList);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
+  }, []);
+
   return (
     <footer className="footer">
       <div className="footer-top">
@@ -87,35 +109,17 @@ export default function Footer() {
 
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget footer-menu">
-                <h2 className="footer-title">For Coach</h2>
+                <h2 className="footer-title">Quick Links</h2>
                 <ul>
-                  {/* <li>
-                    <Link to="/appointments">
-                      <i className="fas fa-angle-double-right"></i>
-                      Appointments
-                    </Link>
-                  </li> */}
-                  {/* <li>
-                    <Link to="/chat">
-                      <i className="fas fa-angle-double-right"></i> Chat
-                    </Link>
-                  </li> */}
-                  <li>
-                    <Link to="/login">
-                      <i className="fas fa-angle-double-right"></i> Login
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/signup">
-                      <i className="fas fa-angle-double-right"></i> Register
-                    </Link>
-                  </li>
-                  {/* <li>
-                    <Link to="/coach-dashboard">
-                      <i className="fas fa-angle-double-right"></i> Coach
-                      Dashboard
-                    </Link>
-                  </li> */}
+                  {cmsPage &&
+                    cmsPage.map((page, key) => (
+                      <li key={key}>
+                        <Link to={`cmspage?${page._id}`}>
+                          <i className="fas fa-angle-double-right"></i>
+                          {page.name}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
