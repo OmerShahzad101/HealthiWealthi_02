@@ -5,7 +5,7 @@ import {postHttpRequest} from "../../../../axios";
 
 const ChatRoom = () => {
 
-    const {receiverName, receiverId, messages} = useSelector((state) => state.chat)
+    const {recieverName, messages, conversationId} = useSelector((state) => state.chat)
     const {userid} = useSelector((state) => state.auth.user)
 
     const [typedMessage, setTypedMessage] = useState('')
@@ -15,14 +15,8 @@ const ChatRoom = () => {
     }
 
     const sendMessage = async () => {
-        const formData = new FormData();
-        formData.append('message', typedMessage)
-        formData.append('senderId', userid)
-        formData.append('recieverId', receiverId)
-
-        const response = await postHttpRequest('/front/chat/create', {message: typedMessage, senderId: userid, receiverId})
-        console.log(response, 'respnse from backend')
-
+        const response = await postHttpRequest('/front/chat/sendMessage', {message: typedMessage, senderId: userid, conversationId})
+        console.log(response, 'respnse from backend of send message')
     }
 
     return (
@@ -46,7 +40,7 @@ const ChatRoom = () => {
                         </div>
                     </div>
                     <div className="media-body">
-                        <div className="user-name">{receiverName ?? 'nill'}</div>
+                        <div className="user-name">{recieverName ?? 'nill'}</div>
                         <div className="user-status">online</div>
                     </div>
                 </div>

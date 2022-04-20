@@ -2,13 +2,19 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setChatWindow} from "../../../../store/slices/chat/chatSlice";
 import image from '../../../../assets/img/defaultImg.jpg';
+import {postHttpRequest} from "../../../../axios";
 
 const Channel = ({user}) => {
-    let {senderId} = useSelector((state) => state.chat)
+
     const dispatch = useDispatch()
 
-    const handleClick = (id, name) => {
-        dispatch(setChatWindow({id, name}))
+    const {recieverId} = useSelector((state) => state.chat)
+    const {userid} = useSelector((state) => state.auth.user)
+
+    const handleClick = async (id, name) => {
+        const {data} = await postHttpRequest('/front/chat/create', {senderId: userid, recieverId})
+        dispatch(setChatWindow({id, name, conversationId:data.conversationId, messages: data.chatMessages}))
+        console.log(data, 'conversation response')
     }
 
     return (
