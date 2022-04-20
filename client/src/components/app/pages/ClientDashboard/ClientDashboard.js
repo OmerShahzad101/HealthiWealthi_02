@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 const ClientDashboard = (props) => {
   const clientId = useSelector((state) => state.auth.user.userid);
-
   const [myAppoinment, setMyAppoinment] = useState();
+  const mediaPath = process.env.REACT_APP_IMG;
+
   useEffect(() => {
     getHttpRequest(`/front/booking/getAppoinment/${clientId}`)
       .then((response) => {
@@ -35,16 +36,15 @@ const ClientDashboard = (props) => {
                         <thead>
                           <tr>
                             <th>Coach</th>
-                            <th>Appt Date</th>
+                            <th>Appt Time</th>
                             <th>Booking Date</th>
-                            <th>Amount</th>
-                            {/* <th>Follow Up</th> */}
+                            {/* <th>Amount</th> */}
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {myAppoinment ? (
+                          {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
                               return (
                                 <tr key={idx}>
@@ -56,55 +56,64 @@ const ClientDashboard = (props) => {
                                       >
                                         <img
                                           className="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
-                                          alt="User Image"
+                                          src={
+                                            item.coachData?.fileName
+                                              ? mediaPath +
+                                                item.coachData.fileName
+                                              : mediaPath + "avatar.jpg"
+                                          }
+                                          alt="User"
                                         />
                                       </Link>
-                                      <Link to="/coach-profile">
+                                      <Link to={"/coach-profile/" + item?.coachData?._id}>
+                                        &nbsp;
                                         {item?.coachData?.firstname +
-                                          item?.coachData?.lastname}{" "}
+                                          " " +
+                                          item?.coachData?.lastname}
                                         <span>
+                                          &nbsp;{" "}
                                           {item?.coachData?.specialization}
                                         </span>
                                       </Link>
                                     </h2>
                                   </td>
                                   <td>
-                                    {item?.bookingDate}
+                                    {/* {item?.bookingDate} */}
                                     <span className="d-block text-info">
                                       {item?.slots}
                                     </span>
                                   </td>
                                   <td>{item?.bookingDate}</td>
-                                  <td>${item?.price}</td>
+                                  {/* <td>${item?.price}</td> */}
                                   {/* <td>16 Feb 2022</td> */}
                                   <td>
                                     <span className="badge badge-pill bg-success-light">
                                       Confirm
                                     </span>
                                   </td>
-                                  <td className="text-right">
-                                    <div className="table-action">
-                                      <a
-                                        href="#"
-                                        className="btn btn-sm bg-primary-light"
-                                      >
-                                        <i className="fas fa-print"></i> Print
-                                      </a>
-                                      <a
-                                        href="#"
-                                        className="btn btn-sm bg-info-light"
-                                      >
-                                        <i className="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
+                                  {/* <td className="text-right"> */}
+                                  <div className="table-action pt-4 pb-4">
+                                    <a
+                                      href="#"
+                                      className="btn btn-sm bg-primary-light"
+                                    >
+                                      <i className="fas fa-print"></i> Print
+                                    </a>{" "}
+                                    &nbsp;
+                                    <a
+                                      href="#"
+                                      className="btn btn-sm bg-info-light"
+                                    >
+                                      <i className="far fa-eye"></i> View
+                                    </a>
+                                  </div>
+                                  {/* </td> */}
                                 </tr>
                               );
                             })
                           ) : (
-                            <tr className="no_data_found">
-                              <td>You don't book any coach</td>
+                            <tr className="no-appoinments">
+                              <td>You don't have any Appointments</td>
                             </tr>
                           )}
                         </tbody>
@@ -113,7 +122,7 @@ const ClientDashboard = (props) => {
                   </div>
                 </div>
               </Tab>
-              <Tab eventKey="pat_Plans" title="Plans">
+              {/* <Tab eventKey="pat_Plans" title="Plans">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -173,7 +182,7 @@ const ClientDashboard = (props) => {
                             })
                           ) : (
                             <tr className="no_data_found">
-                              <td>You don't book any coach</td>
+                              <td>You don't Book any Appointments</td>
                             </tr>
                           )}
                         </tbody>
@@ -181,8 +190,8 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </Tab>
-              <Tab eventKey="pat_medical_records" title="Records">
+              </Tab> */}
+              {/* <Tab eventKey="pat_medical_records" title="Records">
                 <div className="card card-table mb-0">
                   <div className="card-body">
                     <div className="table-responsive">
@@ -307,7 +316,7 @@ const ClientDashboard = (props) => {
                     </div>
                   </div>
                 </div>
-              </Tab>
+              </Tab> */}
             </Tabs>
           </div>
         </div>
