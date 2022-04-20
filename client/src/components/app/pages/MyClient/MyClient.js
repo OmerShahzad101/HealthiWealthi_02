@@ -41,7 +41,7 @@ const MyClient = () => {
                               alt="User"
                             />
                           <div className="profile-det-info">
-                            <h3>
+                            <h3>I
                               <div >
                                 {item?.clientData?.firstname +
                                   " " +
