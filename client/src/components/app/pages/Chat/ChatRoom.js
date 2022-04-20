@@ -20,7 +20,7 @@ const ChatRoom = () => {
         formData.append('senderId', userid)
         formData.append('recieverId', receiverId)
 
-        const response = await postHttpRequest('/front/chat/create', formData)
+        const response = await postHttpRequest('/front/chat/create', {message: typedMessage, senderId: userid, receiverId})
         console.log(response, 'respnse from backend')
 
     }
