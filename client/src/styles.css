@@ -2336,7 +2336,7 @@ html.menu-opened body {
   padding: 8px 12px;
 }
 .btn-google {
-  background-color: #DB4437 !important;
+  background-color: #db4437 !important;
   color: #fff !important;
   font-size: 14px !important;
   padding: 8px 12px;
@@ -2644,7 +2644,7 @@ html.menu-opened body {
   visibility: hidden;
   z-index: 99;
 }
-.not-fav-btn{
+.not-fav-btn {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -2669,18 +2669,18 @@ html.menu-opened body {
   visibility: hidden;
   z-index: 99;
 }
-.not-fav-btn{
+.not-fav-btn {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.not-fav-btn:hover
-{
+.not-fav-btn:hover {
   background-color: #f9f9f9;
   color: rgb(11, 11, 11);
 }
+
 .profile-widget:hover .fav-btn {
   opacity: 1;
   visibility: visible;
@@ -7409,13 +7409,13 @@ html.menu-opened body {
   line-height: 0;
   box-shadow: 0px 4px 16px rgba(175, 185, 222, 0.3);
   background-color: #fff;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .pImage:hover {
   background-color: #d32986;
   color: #fff;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .uploadButton {
   font-size: 1.2em;
@@ -7439,13 +7439,13 @@ html.menu-opened body {
   display: flex;
   justify-content: center;
 }
-.profile-img img{
+.profile-img img {
   width: 130px;
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
 }
-.wraper-calander{
+.wraper-calander {
   overflow: hidden;
 }
 .gridDays {
@@ -7485,7 +7485,7 @@ html.menu-opened body {
   font-size: 15px;
   text-transform: uppercase;
 }
-.gridSlot button:hover{
+.gridSlot button:hover {
   color: #fff !important;
   background-color: #d32986 !important;
   border: 1px solid #d32986;
@@ -7493,14 +7493,14 @@ html.menu-opened body {
 .today .gridDayHeaderToday {
   font-size: 8px;
   text-transform: uppercase;
-  font-weight: 500; 
+  font-weight: 500;
   color: #fff;
   position: absolute;
   top: 0px;
   right: -2px;
   border-radius: 4px;
   padding: 2px 4px;
-  background-color: #D32985 !important;
+  background-color: #d32985 !important;
   height: 13px;
   width: 36px;
   display: flex;
@@ -7562,9 +7562,21 @@ html.menu-opened body {
   margin: 0 auto;
   border-radius: 10px;
   margin-top: 20px;
-  color: #d44f86
+  color: #d44f86;
 }
 
+.no-Appoinents {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px dashed #d44f86 !important;
+  width: calc(100% - 30px);
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #d44f86;
+}
 
 button.btn.btn-google.btn-block {
   width: 100%;
@@ -7573,7 +7585,7 @@ button.btn.btn-google.btn-block {
   justify-content: space-between;
   padding: 2px !important;
 }
-button.btn.btn-google.btn-block span{
+button.btn.btn-google.btn-block span {
   flex: auto;
   font-weight: 600 !important;
 }
@@ -7597,7 +7609,7 @@ button.btn.btn-google.btn-block span{
   color: #fff;
   margin-bottom: 30px;
 }
-.entry-title>h3 {
+.entry-title > h3 {
   background: #20bada;
   font-size: 20px;
   padding: 5px 0;
@@ -7629,7 +7641,7 @@ button.btn.btn-google.btn-block span{
   font-weight: 400;
 }
 .entry-content {
-    color: #323232;
+  color: #323232;
 }
 .entry-content ul {
   margin: 0;
@@ -7650,8 +7662,6 @@ button.btn.btn-google.btn-block span{
   border: none;
 }
 
-
-
 .custom-controls button.btn.btn-arrow {
   background: none;
   border: none;
@@ -7661,4 +7671,29 @@ button.btn.btn-google.btn-block span{
   margin-right: 0;
   padding: 0;
   z-index: 9;
+}
+
+.search-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.fav-bookmark
+{
+  background-color: #d32986;
+}
+::-webkit-scrollbar-track {
+  border: 1px solid #fff;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #ffff;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #d32986;	
+  border-radius: 15px 0px 0px 15px;
 }

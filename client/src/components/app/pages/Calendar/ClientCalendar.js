@@ -134,7 +134,6 @@ const ClientCalendar = (props) => {
     // var endDate = moment(startDate).subtract(1, "days").format("MM/DD/YYYY");
     // startDate = moment(endDate).subtract(6, "days").format("MM/DD/YYYY");
 
-    debugger;
     setStartDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
     setDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
     setEndDate(moment(endDate).subtract(7, "days").format("MM/DD/YYYY"));

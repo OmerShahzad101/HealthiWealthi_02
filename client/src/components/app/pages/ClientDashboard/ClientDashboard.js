@@ -103,7 +103,7 @@ const ClientDashboard = (props) => {
                               );
                             })
                           ) : (
-                            <tr className="no_data">
+                            <tr className="no_data_found">
                               <td>You don't book any coach</td>
                             </tr>
                           )}
@@ -172,7 +172,7 @@ const ClientDashboard = (props) => {
                               );
                             })
                           ) : (
-                            <tr className="no_data">
+                            <tr className="no_data_found">
                               <td>You don't book any coach</td>
                             </tr>
                           )}
