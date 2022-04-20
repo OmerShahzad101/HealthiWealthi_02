@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    receiverId: null,
-    receiverName: null,
+    recieverId : null,
+    recieverName: null,
+    conversationId: null,
     messages: []
 }
 
@@ -11,8 +12,10 @@ export const chatSlice = createSlice({
     initialState,
     reducers: {
         setChatWindow: (state, action) => {
-            state.receiverId = action.payload.id
-            state.receiverName = action.payload.name
+            state.recieverId = action.payload.id
+            state.recieverName = action.payload.name
+            state.conversationId = action.payload.conversationId
+            state.messages = action.payload.messages
         },
     },
 })
