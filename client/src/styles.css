@@ -7682,6 +7682,13 @@ button.btn.btn-google.btn-block span {
 {
   background-color: #d32986;
 }
+.no-appoinments{
+  color: #d32985
+}
+.resize{
+  height: 100px;
+  width: 100px;
+}
 ::-webkit-scrollbar-track {
   border: 1px solid #fff;
   background-color: #fff;

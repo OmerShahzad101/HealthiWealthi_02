@@ -1,9 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import {useSelector} from "react-redux";
+import image from '../../../../assets/img/defaultImg.jpg';
+import {postHttpRequest} from "../../../../axios";
 
 const ChatRoom = () => {
 
-    const {receiverName} = useSelector((state) => state.chat)
+    const {receiverName, receiverId, messages} = useSelector((state) => state.chat)
+    const {userid} = useSelector((state) => state.auth.user)
+
+    const [typedMessage, setTypedMessage] = useState('')
+
+    const handleChange = (event) => {
+        setTypedMessage(event.target.value)
+    }
+
+    const sendMessage = async () => {
+        const formData = new FormData();
+        formData.append('message', typedMessage)
+        formData.append('senderId', userid)
+        formData.append('recieverId', receiverId)
+
+        const response = await postHttpRequest('/front/chat/create', {message: typedMessage, senderId: userid, receiverId})
+        console.log(response, 'respnse from backend')
+
+    }
 
     return (
         <div className="chat-cont-right">
@@ -19,7 +39,7 @@ const ChatRoom = () => {
                     <div className="media-img-wrap">
                         <div className="avatar avatar-online">
                             <img
-                                src="assets/img/patients/patient.jpg"
+                                src={image}
                                 alt="User Image"
                                 className="avatar-img rounded-circle"
                             />
@@ -50,6 +70,7 @@ const ChatRoom = () => {
                     </a>
                 </div>
             </div>
+
             <div className="chat-body">
                 <div className="chat-scroll">
                     <ul className="list-unstyled">
@@ -72,7 +93,7 @@ const ChatRoom = () => {
                         <li className="media received">
                             <div className="avatar">
                                 <img
-                                    src="assets/img/patients/patient.jpg"
+                                    src={image}
                                     alt="User Image"
                                     className="avatar-img rounded-circle"
                                 />
@@ -110,7 +131,7 @@ const ChatRoom = () => {
                                         <div className="chat-msg-attachments">
                                             <div className="chat-attachment">
                                                 <img
-                                                    src="assets/img/img-02.jpg"
+                                                    src={image}
                                                     alt="Attachment"
                                                 />
                                                 <div className="chat-attach-caption">
@@ -125,7 +146,7 @@ const ChatRoom = () => {
                                             </div>
                                             <div className="chat-attachment">
                                                 <img
-                                                    src="assets/img/img-03.jpg"
+                                                    src={image}
                                                     alt="Attachment"
                                                 />
                                                 <div className="chat-attach-caption">
@@ -184,7 +205,7 @@ const ChatRoom = () => {
                                         <div className="chat-msg-attachments">
                                             <div className="chat-attachment">
                                                 <img
-                                                    src="assets/img/img-04.jpg"
+                                                    src={image}
                                                     alt="Attachment"
                                                 />
                                                 <div className="chat-attach-caption">
@@ -212,7 +233,7 @@ const ChatRoom = () => {
                         <li className="media received">
                             <div className="avatar">
                                 <img
-                                    src="assets/img/patients/patient.jpg"
+                                    src={image}
                                     alt="User Image"
                                     className="avatar-img rounded-circle"
                                 />
@@ -238,7 +259,7 @@ const ChatRoom = () => {
                         <li className="media received">
                             <div className="avatar">
                                 <img
-                                    src="assets/img/patients/patient.jpg"
+                                    src={image}
                                     alt="User Image"
                                     className="avatar-img rounded-circle"
                                 />
@@ -301,7 +322,7 @@ const ChatRoom = () => {
                         <li className="media received">
                             <div className="avatar">
                                 <img
-                                    src="assets/img/patients/patient.jpg"
+                                    src={image}
                                     alt="User Image"
                                     className="avatar-img rounded-circle"
                                 />
@@ -333,9 +354,11 @@ const ChatRoom = () => {
                         type="text"
                         className="input-msg-send form-control"
                         placeholder="Type something"
+                        name="message"
+                        onChange={handleChange}
                     />
                     <div className="input-group-append">
-                        <button type="button" className="btn msg-send-btn">
+                        <button onClick={() => sendMessage()} type="button" className="btn msg-send-btn">
                             <i className="fab fa-telegram-plane"></i>
                         </button>
                     </div>

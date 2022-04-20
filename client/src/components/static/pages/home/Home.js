@@ -4,7 +4,7 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import Specialities from "./Specialities";
 
 import { useHistory } from "react-router-dom";
-import AvaliableFeature from "./AvaliableFeature";
+import AvaliableFeature from "./avaliableFeature";
 import CoachSlider from "./CoachSlider";
 
 export default function Home() {
