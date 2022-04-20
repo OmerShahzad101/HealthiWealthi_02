@@ -1,8 +1,8 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setChatWindow} from "../../../../store/slices/chat/chatSlice";
-import image from '../../../../assets/img/defaultImg.jpg';
 import {postHttpRequest} from "../../../../axios";
+import image from '../../../../assets/img/defaultImg.jpg';
+import {setChatWindow} from "../../../../store/slices/chat/chatSlice";
 
 const Channel = ({user}) => {
 
