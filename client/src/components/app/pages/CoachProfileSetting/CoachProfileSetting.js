@@ -8,7 +8,6 @@ import BasicInfo from "./BasicInfo";
 
 const CoachProfileSetting = () => {
   const [key, setKey] = useState("user-info");
-
   return (
     <>
       <div className="col-md-7 col-lg-8 col-xl-9">

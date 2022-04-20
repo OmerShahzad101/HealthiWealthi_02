@@ -115,6 +115,7 @@ const CoachDashboard = () => {
                             {myclient && myclient.length > 0 ? (
                               myclient.map((item, idx) => {
                                 return (
+                                  item?.clientData?.firstname &&
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">

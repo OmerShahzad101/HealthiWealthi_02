@@ -20,6 +20,7 @@ const ContactDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const userid = useSelector((state) => state.auth.user.userid);
+  console.log("userid==", userid);
   const [profileData, setprofileData] = useState({});
 
   const handleChangeInput = (e) => {
@@ -33,9 +34,8 @@ const ContactDetails = () => {
 
   function updateProfileHandler(event) {
     event.preventDefault();
-
+    
     const payload = profileData;
-
     const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
@@ -55,12 +55,14 @@ const ContactDetails = () => {
           return;
         }
         if (result.data.success === true) {
+          console.log("result.data.coach ==", result.data.coach);
           dispatch(setCoachProfile({ res: result.data.coach }));
           Toast.fire({
             icon: "success",
             title: result.data.message,
           });
-        } else {
+        } 
+        else {
           Toast.fire({
             icon: "error",
             title: result.data.message,

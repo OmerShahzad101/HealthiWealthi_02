@@ -30,24 +30,25 @@ const Pricing = () => {
                       <div className="entry-title">
                         <h3>{item.title}</h3>
                         <div className="price">
-                          £6<span>/{item.period} days</span>
+                          ${item.priceInUSD}<span>/{item.period} days</span>
                         </div>
                       </div>
                       <div className="entry-content">
+                      {/* <div className="p-3 text-center" dangerouslySetInnerHTML={{ __html: item?.description }} /> */}
                         <ul>
-                          <li><strong>level:</strong>&nbsp;{item.level}</li>
+                          <li><strong>Level:</strong>&nbsp;{item.level}</li>
                           <li><strong>Consultations:</strong>&nbsp;{item.consultations} </li>
                           <li><strong>Gorup Coaching:</strong>&nbsp;{item.groupCoaching}</li>
-                          <li><strong>Micro Habit Lifestyle:</strong>&nbsp;{item.microHabitLifestyle}</li>
-                          <li><strong>Personal CoachChat: </strong>&nbsp;{item.personalCoachChat} </li>
+                          <li><strong>Price in crypto:</strong>&nbsp;{item.priceInCrypto}</li>
+                          <li><strong>Personal Coach Chat: </strong>&nbsp;{item.personalCoachChat} </li>
+                          <li><strong>Micro Habit-lifestyle: </strong>&nbsp;{item.microHabitLifestyle} </li>
+                          <li><strong>Root-Cause Health Coaching: </strong>&nbsp;{item.rootCauseHealthCoaching} </li>
+                          <li><strong>Session extended price:</strong>&nbsp;${item.sessionExtendPrice}</li>
                           <li><strong>Root Cause HealthCoaching:</strong>&nbsp;{item.rootCauseHealthCoaching} </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="btnSpace"></div>
-                        <div className="freelink"> </div>
-                        <div className="btnSpace"></div>
-                        <div className="btnSpace"></div>
+                       
                       </div>
                     </div>
                   </div>
