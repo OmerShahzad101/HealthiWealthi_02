@@ -5,15 +5,11 @@ import {getHttpRequest} from "../../../../axios";
 
 const Chat = () => {
 
-    const [users, setUsers] = useState([
-        {id: 1, name: 'ahmed'},
-        {id: 2, name: 'rehan'},
-        {id: 3, name: 'umair'},
-    ])
+    const [users, setUsers] = useState([])
 
     const fetchUsers = async () => {
-        const resp = await getHttpRequest('/front/chat/get')
-        console.log(resp, 'these are channels')
+        const {data} = await getHttpRequest('/front/chat/list')
+        setUsers(data.client)
     }
 
     useEffect(() => {

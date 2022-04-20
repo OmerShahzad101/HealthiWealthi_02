@@ -12,7 +12,7 @@ const Channel = ({user}) => {
     }
 
     return (
-        <a onClick={() => handleClick(user.id, user.name)} href="javascript:void(0);" className="media">
+        <a onClick={() => handleClick(user._id, user.username)} href="javascript:void(0);" className="media">
             <div className="media-img-wrap">
                 <div className="avatar avatar-away">
                     <img
@@ -24,7 +24,7 @@ const Channel = ({user}) => {
             </div>
             <div className="media-body">
                 <div>
-                    <div className="user-name">{user.name} </div>
+                    <div className="user-name">{user.username} </div>
                     <div className="user-last-chat">
                         Give me a full explanation about our project
                     </div>

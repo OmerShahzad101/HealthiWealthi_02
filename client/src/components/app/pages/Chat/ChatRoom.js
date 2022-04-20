@@ -5,7 +5,7 @@ import {postHttpRequest} from "../../../../axios";
 
 const ChatRoom = () => {
 
-    const {receiverName, messages} = useSelector((state) => state.chat)
+    const {receiverName, receiverId, messages} = useSelector((state) => state.chat)
     const {userid} = useSelector((state) => state.auth.user)
 
     const [typedMessage, setTypedMessage] = useState('')
@@ -18,7 +18,7 @@ const ChatRoom = () => {
         const formData = new FormData();
         formData.append('message', typedMessage)
         formData.append('senderId', userid)
-        formData.append('recieverId', userid)
+        formData.append('recieverId', receiverId)
 
         const response = await postHttpRequest('/front/chat/create', formData)
         console.log(response, 'respnse from backend')
