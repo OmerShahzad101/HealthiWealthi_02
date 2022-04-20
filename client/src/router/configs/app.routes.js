@@ -55,6 +55,9 @@ const ClientProfileSettingWithSuspense = withSuspense(ClientProfileSetting);
 
 const ClientChangePassword = lazy(() =>import(/* webpackChunkName: "ClientChangePassword" */ "../../components/app/pages/ClientChangePassword/ClientChangePassword"));
 const ClientChangePasswordWithSuspense = withSuspense(ClientChangePassword);
+
+const Chat = lazy(() =>import(/* webpackChunkName: "Reviews" */ "../../components/app/pages/Chat/Chat"));
+const ChatsWithSuspense = withSuspense(Chat)
 // Route configurations for the app
 
 
@@ -161,6 +164,12 @@ function getRouteConfigs() {
       path: routes.CLIENT_CHANGE_PASSWORD,
       exact: true,
       element: <ClientChangePasswordWithSuspense />,
+    },
+    {
+      //Chat Route
+      path: routes.CHAT,
+      exact: true,
+      element: <ChatsWithSuspense />,
     },
     {
       // NOT FOUND ROUTE

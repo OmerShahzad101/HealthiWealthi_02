@@ -6,6 +6,7 @@ import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import authReducer from './slices/auth';
 import userReducer from './slices/user';
 import { USER_LOGOUT } from './actionTypes';
+import chatSlice from "./slices/chat/chatSlice";
 
 const persistConfig = {
     key: 'root',
@@ -16,6 +17,7 @@ const persistConfig = {
 const appReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
+    chat: chatSlice
 });
 
 const rootReducer = (state, action) => {

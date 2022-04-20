@@ -6,9 +6,9 @@ const AvaliableFeature = () => {
     dots: true,
     infinite: true,
     centerMode: true,
-    slidesToShow: 3,
+    slidesToShow: 1,
+    slidesToScroll:1,
     speed: 500,
-    variableWidth: true,
     arrows: false,
     autoplay: false,
     responsive: [
@@ -38,7 +38,7 @@ const AvaliableFeature = () => {
               the readable content of a page when looking at its layout.
             </p>
           </div>
-          <div className="features-slider slider">
+          <div className="">
             <Slider {...settingsAvaliableFeature}>
 
               <div className="feature-item text-center">

@@ -14,9 +14,9 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { setImage } from "../../../../store/slices/auth";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import Resizer from "react-image-file-resizer";
-
 const BasicInfo = () => {
   const userid = useSelector((state) => state.auth.user.userid);
+  console.log("userid BASIC info", userid);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -100,20 +100,20 @@ const BasicInfo = () => {
 
   //Image resize
   const resizeFile = (file) =>
-  new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      300,
-      300,
-      "JPEG",
-      100,
-      0,
-      (uri) => {
-        resolve(uri);
-      },
-      "blob"
-    );
-  });
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "blob"
+      );
+    });
   /***awards***/
 
   /*****Experience*****/
@@ -123,11 +123,13 @@ const BasicInfo = () => {
       ...experience,
       { companyName: "", dateFrom: "", dateTo: "", designation: "" },
     ]);
-    console.log("exp :", experience);
+    //console.log("exp :", experience);
     setprofileData({ ...profileData, experience });
   };
 
   const handleExperiencechange = (index, key, value) => {
+    //console.log("exp :", experience);
+
     if (key === "companyName") {
       experience[index] = { ...experience[index], companyName: value };
     } else if (key === "dateFrom") {
@@ -207,8 +209,7 @@ const BasicInfo = () => {
             console.log("Something went wrong with response...");
             return;
           }
-          console.log(response, "ressssssssssssssssss");
-          console.log("response", response);
+          //console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
 
@@ -253,7 +254,6 @@ const BasicInfo = () => {
 
     putHttpRequest("/front/coach/edit", payload)
       .then((result) => {
-        console.log("payload", payload);
         setIsLoading(false);
         if (!result) {
           console.log("Something went wrong with response...");
@@ -293,21 +293,21 @@ const BasicInfo = () => {
           console.log("Something went wrong with response...");
           return;
         }
+
         if (response.data.success === true) {
-          console.log("responseDon", response?.data?.coach);
-          setprofileData(response?.data?.coach);
-          if (response?.data?.coach?.qualifications.length > 0) {
+          if (response?.data?.coach?.qualifications?.length > 0) {
             setqualifications(response?.data?.coach?.qualifications);
           }
-          if (response?.data?.coach?.experience.length > 0) {
-            setExperience(response?.data?.coach?.experience);
-          }
-          if (response?.data?.coach?.awards.length > 0) {
+          if (response?.data?.coach?.awards?.length > 0) {
             setAwards(response?.data?.coach?.awards);
+          }
+          if (response?.data?.coach?.experience?.length > 0) {
+            setExperience(response?.data?.coach?.experience);
           }
         } else {
           console.log(response.data.message);
         }
+        setprofileData(response?.data?.coach);
       })
       .catch(() => {
         console.log("Something went wrong...");
@@ -327,7 +327,7 @@ const BasicInfo = () => {
             <div className="col-md-12">
               <div className="imageUploaderWrapper profile-img">
                 <div className="circle">
-                  { <img src={imagePath(userImage)} alt="user img" />}
+                  {<img src={imagePath(userImage)} alt="user img" />}
                 </div>
 
                 <label className="pImage">

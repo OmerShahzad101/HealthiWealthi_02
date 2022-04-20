@@ -11,6 +11,8 @@ import {
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useSelector, useDispatch } from "react-redux";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const ContactDetails = () => {
   const history = useHistory();
@@ -20,35 +22,20 @@ const ContactDetails = () => {
   const userid = useSelector((state) => state.auth.user.userid);
   const [profileData, setprofileData] = useState({});
 
-  const phoneRef = useRef();
-
-  const addressRef = useRef();
-  const postalCodeRef = useRef();
-
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const countryRef = useRef();
+  const handleChangeInput = (e) => {
+  console.log(e.target.value)
+    const { name, value } = e.target;
+    setprofileData({
+      ...profileData,
+      [name]: value,
+    });
+  };
 
   function updateProfileHandler(event) {
     event.preventDefault();
 
-    const phone = phoneRef.current.value;
+    const payload = profileData;
 
-    const address = addressRef.current.value;
-    const postalCode = postalCodeRef.current.value;
-    const city = cityRef.current.value;
-    const state = stateRef.current.value;
-    const country = countryRef.current.value;
-
-    const payload = {
-      phone,
-      address,
-      postalCode,
-      city,
-      state,
-      country,
-      _id: userid,
-    };
     const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
@@ -110,105 +97,113 @@ const ContactDetails = () => {
   }, []);
   return (
     <>
-       <div className="card contact-card">
-              <div className="card-body">
-                <h4 className="card-title">Contact Details</h4>
-                <div className="row form-row">
-                  <div className="col-md-12">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="address"
-                        name="address"
-                        ref={addressRef}
-                        className="form-control"
-                        placeholder="address"
-                        defaultValue={profileData?.address}
-                      />
-                      <label>Address</label>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="city"
-                        name="city"
-                        ref={cityRef}
-                        className="form-control"
-                        placeholder="city"
-                        defaultValue={profileData?.city}
-                      />
-                      <label>City</label>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="state"
-                        name="state"
-                        ref={stateRef}
-                        className="form-control"
-                        placeholder="state"
-                        defaultValue={profileData?.state}
-                      />
-                      <label>State</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="country"
-                        name="country"
-                        ref={countryRef}
-                        className="form-control"
-                        placeholder="country"
-                        defaultValue={profileData?.country}
-                      />
-                      <label>Country</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="postal"
-                        name="postal"
-                        ref={postalCodeRef}
-                        className="form-control"
-                        placeholder="postal"
-                        defaultValue={profileData?.postalCode}
-                      />
-                      <label>Postal Code</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="text"
-                        name="phonenumber"
-                        ref={phoneRef}
-                        className="form-control"
-                        placeholder="Phone"
-                        defaultValue={profileData?.phone}
-                      />
-                      <label>Phone Number</label>
-                    </div>
-                  </div>
-                </div>
+      <div className="card contact-card">
+        <div className="card-body">
+          <h4 className="card-title">Contact Details</h4>
+          <div className="row form-row">
+            <div className="col-md-12">
+              <div className="form-floating mb-4">
+                <input
+                  type="address"
+                  name="address"
+                  className="form-control"
+                  placeholder="address"
+                  value={profileData?.address}
+                  onChange={handleChangeInput}
+                />
+                <label>Address</label>
               </div>
             </div>
-            <div className="submit-section submit-btn-bottom">
-              <button
-                type="button"
-                onClick={updateProfileHandler}
-                className="btn btn-primary submit-btn"
-              >
-                Save Changes
-              </button>
+
+            <div className="col-md-6">
+              <div className="form-floating mb-4">
+                <input
+                  type="city"
+                  name="city"
+                  className="form-control"
+                  placeholder="city"
+                  value={profileData?.city}
+                  onChange={handleChangeInput}
+                />
+                <label>City</label>
+              </div>
             </div>
-       
-        
-      
+
+            <div className="col-md-6">
+              <div className="form-floating mb-4">
+                <input
+                  type="state"
+                  name="state"
+                  className="form-control"
+                  placeholder="state"
+                  value={profileData?.state}
+                  onChange={handleChangeInput}
+                />
+                <label>State</label>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-floating mb-4">
+                <input
+                  type="country"
+                  name="country"
+                  className="form-control"
+                  placeholder="country"
+                  value={profileData?.country}
+                  onChange={handleChangeInput}
+                />
+                <label>Country</label>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-floating mb-4">
+                <input
+                  type="postal"
+                  name="postalCode"
+                  className="form-control"
+                  placeholder="postal"
+                  value={profileData?.postalCode}
+                  onChange={handleChangeInput}
+                />
+                <label>Postal Code</label>
+              </div>
+            </div>
+            <div className="col-md-6">
+              {/* <div className="form-floating mb-4">
+                      <input
+                        type="text"
+                        name="phone"
+                        className="form-control"
+                        placeholder="Phone"
+                        value={profileData?.phone}
+                        onChange={handleChangeInput}
+                      />
+                      <label>Phone Number</label>
+                    </div> */}
+              <PhoneInput
+                defaultCountry={"gb"}
+                inputExtraProps={{
+                  name: "phone",
+                  required: true,
+                  autoFocus: true,
+                }}
+                value={profileData?.phone}
+                //  onChange={handleChangeInput}
+                onChange={phone => setprofileData( phone )}
+                />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="submit-section submit-btn-bottom">
+        <button
+          type="button"
+          onClick={updateProfileHandler}
+          className="btn btn-primary submit-btn"
+        >
+          Save Changes
+        </button>
+      </div>
     </>
   );
 };
