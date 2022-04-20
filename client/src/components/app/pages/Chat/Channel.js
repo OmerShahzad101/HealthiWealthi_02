@@ -12,7 +12,7 @@ const Channel = ({user}) => {
     const {userid} = useSelector((state) => state.auth.user)
 
     const handleClick = async (id, name) => {
-        const {data} = await postHttpRequest('/front/chat/create', {senderId: userid, recieverId})
+        const {data} = await postHttpRequest('/front/chat/create', {senderId: userid, recieverId:id})
         dispatch(setChatWindow({id, name, conversationId:data.conversationId, messages: data.chatMessages}))
         console.log(data, 'conversation response')
     }
