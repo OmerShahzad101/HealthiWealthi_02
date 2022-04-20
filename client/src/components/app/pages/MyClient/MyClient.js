@@ -25,14 +25,14 @@ const MyClient = () => {
           {myclient && myclient.length > 0 ? (
             myclient.map((item, idx) => {
               return (
-                <div className="col-md-6 col-lg-4 col-xl-3">
-                  <div className="card widget-profile pat-widget-profile">
-                    <div className="card-body">
-                      <div className="pro-widget-content">
-                        <div className="profile-info-widget">
-                          
+                item?.clientData?.firstname && (
+                  <div className="col-md-6 col-lg-4 col-xl-3">
+                    <div className="card widget-profile pat-widget-profile">
+                      <div className="card-body">
+                        <div className="pro-widget-content">
+                          <div className="profile-info-widget">
                             <img
-                            className="booking-doc-img resize"
+                              className="booking-doc-img resize"
                               src={
                                 item?.clientData?.fileName
                                   ? mediaPath + item.clientData?.fileName
@@ -40,46 +40,60 @@ const MyClient = () => {
                               }
                               alt="User"
                             />
-                          <div className="profile-det-info">
-                            <h3>I
-                              <div >
-                                {item?.clientData?.firstname +
-                                  " " +
-                                  item?.clientData?.lastname}{" "}
-                              </div>
-                            </h3>
+                            <div className="profile-det-info">
+                              <h3>
+                                I
+                                <div>
+                                  {item?.clientData?.firstname +
+                                    " " +
+                                    item?.clientData?.lastname}{" "}
+                                </div>
+                              </h3>
 
-                            <div className="patient-details">
-                              <h5>
-                                <b>Client ID :</b> {idx + 1}
-                              </h5>
-                              <h5 className="mb-0">
-                                <i className="fas fa-map-marker-alt"></i>{" "}
-                                {item?.clientData?.country +
-                                  ", " +
-                                  item?.clientData?.city}
-                              </h5>
+                              <div className="patient-details">
+                                <h5>
+                                  <b>Client ID :</b> {idx + 1}
+                                </h5>
+                                <h5 className="mb-0">
+                                  <i className="fas fa-map-marker-alt"></i>{" "}
+                                  {item?.clientData?.country +
+                                    ", " +
+                                    item?.clientData?.city}
+                                </h5>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="patient-info">
-                        <ul>
-                          <li>
-                            Phone <span>{item?.clientData?.phone}</span>
-                          </li>
-                          <li>
-                            Gender <span> {item.clientData?.gender}</span>
-                          </li>
-                          <li>
-                            Blood Group{" "}
-                            <span>{item?.clientData?.bloodgroup}</span>
-                          </li>
-                        </ul>
+                        <div className="patient-info">
+                          <ul>
+                            {item?.clientData?.phone ? (
+                              <li>
+                                Phone <span>{item?.clientData?.phone}</span>
+                              </li>
+                            ) : (
+                              ""
+                            )}
+                            {item?.clientData?.gender ? (
+                              <li>
+                                Gender <span> {item.clientData?.gender}</span>
+                              </li>
+                            ) : (
+                              ""
+                            )}
+                            {item?.clientData?.bloodgroup ? (
+                              <li>
+                                Blood Group{" "}
+                                <span>{item?.clientData?.bloodgroup}</span>
+                              </li>
+                            ) : (
+                              ""
+                            )}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )
               );
             })
           ) : (
