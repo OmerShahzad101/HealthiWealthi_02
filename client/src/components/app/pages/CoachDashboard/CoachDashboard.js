@@ -106,11 +106,10 @@ const CoachDashboard = () => {
                           <thead>
                             <tr>
                               <th>Client Name</th>
+                              <th>Client ID</th>
+                              <th>Appt Time</th>
                               <th>Appt Date</th>
-                              <th>Purpose</th>
-                              <th>Type</th>
-                              <th className="text-center">Paid Amount</th>
-                              <th></th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -139,23 +138,13 @@ const CoachDashboard = () => {
                                           {item?.clientData?.firstname +
                                             " " +
                                             item?.clientData?.lastname}{" "}
-                                          <span>
-                                            {"ID:  "}
-                                            {idx + 1}
-                                          </span>
                                         </div>
                                       </h2>
                                     </td>
-                                    <td>
-                                      11 Nov 2019{" "}
-                                      <span className="d-block text-info">
-                                        10.00 AM
-                                      </span>
-                                    </td>
-                                    <td>General</td>
-                                    <td>New Client</td>
-                                    <td className="text-center">$150</td>
-                                    <td className="text-right">
+                                    <td>{idx + 1}</td>
+                                    <td>{item.slots}</td>
+                                    <td>{item.bookingDate}</td>
+                                    <td className="">
                                       <div className="table-action">
                                         <a
                                           href="#"
