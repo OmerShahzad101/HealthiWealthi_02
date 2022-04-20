@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import Toast from "../../../common/toast/Toast";
 import { postHttpRequest } from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
-
 const Contact = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [isLoaing, setIsLoading] = useState(false);

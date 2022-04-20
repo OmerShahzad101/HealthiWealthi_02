@@ -7,6 +7,7 @@ const CoachSideBar = () => {
   const user = useSelector((state) => state.auth.user);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
+ 
   if (coachProfile.firstName || coachProfile.lastName) {
     data = coachProfile;
   }
