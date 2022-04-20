@@ -329,7 +329,6 @@ const BasicInfo = () => {
                 <div className="circle">
                   {<img src={imagePath(userImage)} alt="user img" />}
                 </div>
-
                 <label className="pImage">
                   <AiOutlineCamera className="uploadButton" />
                   <input
