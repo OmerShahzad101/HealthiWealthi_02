@@ -12,7 +12,7 @@ const CoachSideBar = () => {
   const user = useSelector((state) => state.auth.user);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
-
+ console.log("coachProfile", coachProfile);
   if (coachProfile.firstName || coachProfile.lastName) {
     data = coachProfile;
   } else {
@@ -36,7 +36,16 @@ const CoachSideBar = () => {
               </h3>
 
               <div className="patient-details">
-                <h5 className="mb-0">{data.specialization}</h5>
+                <h5 className="mb-0">
+                  {data.specialization}
+              
+                </h5>
+              </div>
+
+              <div className="patient-details">
+                <h5 className="mb-0">
+                  {data.city} {data.state}
+                </h5>
               </div>
             </div>
           </div>

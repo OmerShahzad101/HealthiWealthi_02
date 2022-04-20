@@ -1,22 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
-
 import Specialities from "./Specialities";
-
 import { useHistory } from "react-router-dom";
 import AvaliableFeature from "./avaliableFeature";
 import CoachSlider from "./CoachSlider";
-
 export default function Home() {
   const history = useHistory();
-
   const searchNameRef = useRef();
 
   let payload;
 
   const searchHandler = (e) => {
     e.preventDefault();
-    
+
     payload = {
       searchName: searchNameRef.current.value,
     };

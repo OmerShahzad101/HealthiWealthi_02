@@ -38,6 +38,18 @@ export default function validate(form) {
             errors.username = 'Name should be lesser than 50 characters.';
         }
     }
+    if ("name" in form) {
+      if (!form.name) {
+        errors.name = "Name is required";
+      } else if (!NAME_PATTERN.test(form.name)) {
+        errors.name =
+          "Name seems to be invalid. Only English alphabets are allowed in name.";
+      } else if (form.name.trim().length < 2) {
+        errors.name = "Name should have at least 2 characters.";
+      } else if (form.name.trim().length > 50) {
+        errors.name = "Name should be lesser than 50 characters.";
+      }
+    }
 
     if ('firstname' in form) {
         if (!form.firstname) {
