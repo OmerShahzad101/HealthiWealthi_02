@@ -2,8 +2,8 @@ import TopBarProgressIndicator from 'react-topbar-progress-indicator';
 
 TopBarProgressIndicator.config({
     barColors: {
-        '0': '#002737',
-        '1.0': '#002737',
+        '0': '#d32986',
+        '1.0': '#d32986',
     },
 });
 
