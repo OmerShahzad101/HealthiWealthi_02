@@ -35,15 +35,12 @@ const CoachSideBar = () => {
               </h3>
 
               <div className="patient-details">
-                <h5 className="mb-0">
-                  {data.specialization}
-              
-                </h5>
+                <h5 className="mb-0">{data.specialization}</h5>
               </div>
 
               <div className="patient-details">
                 <h5 className="mb-0">
-                  {data.city} {data.state}
+                  {data.city} {data.country}
                 </h5>
               </div>
             </div>

@@ -125,7 +125,7 @@ export const authSlice = createSlice({
           // about: res.about,
           city: res.city,
           state: res.state,
-          // country: res.country,
+          country: res.country,
           // postalCode: res.postalCode,
         },
       };
