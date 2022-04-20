@@ -366,7 +366,7 @@ const ClientProfileSetting = () => {
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
-                      type="phone"
+                      type="number"
                       name="phone"
                       ref={phoneRef}
                       className="form-control"

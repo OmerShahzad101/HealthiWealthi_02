@@ -501,6 +501,7 @@ const BasicInfo = () => {
                         <div className="form-group col-12 col-md-6 col-lg-4">
                           <label>Year of Completion</label>
                           <input
+                            type="number"
                             className="form-control"
                             name="year"
                             defaultValue={edu.year}
@@ -569,6 +570,7 @@ const BasicInfo = () => {
                         <input
                           className="form-control"
                           name="year"
+                          type="number"
                           defaultValue={edu.year}
                           onChange={(e) =>
                             handleAwardchange(i, "year", e.target.value)
@@ -636,6 +638,7 @@ const BasicInfo = () => {
                         <label>From </label>
                         <input
                           name="dateFrom"
+                          type="number"
                           className="form-control"
                           defaultValue={exp.dateFrom}
                           onChange={(e) =>
@@ -651,6 +654,7 @@ const BasicInfo = () => {
                         <label>To</label>
                         <input
                           name="dateTo"
+                          type="number"
                           className="form-control"
                           defaultValue={exp.dateTo}
                           onChange={(e) =>

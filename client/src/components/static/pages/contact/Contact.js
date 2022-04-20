@@ -78,7 +78,7 @@ const Contact = () => {
                   ref={nameRef}
                 />
                 <p className="contact-form-errors">
-                  {validationErrors.username}
+                  {validationErrors.name}
                 </p>
               </div>
 
@@ -90,7 +90,6 @@ const Contact = () => {
                   type="email"
                   className="form-control"
                   ref={emailRef}
-
                 />
                 <p className="contact-form-errors">{validationErrors.email}</p>
               </div>
