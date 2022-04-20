@@ -329,7 +329,6 @@ const BasicInfo = () => {
                 <div className="circle">
                   {<img src={imagePath(userImage)} alt="user img" />}
                 </div>
-
                 <label className="pImage">
                   <AiOutlineCamera className="uploadButton" />
                   <input
@@ -501,8 +500,10 @@ const BasicInfo = () => {
                         <div className="form-group col-12 col-md-6 col-lg-4">
                           <label>Year of Completion</label>
                           <input
+                            type="number"
                             className="form-control"
                             name="year"
+                            maxLength={5}
                             defaultValue={edu.year}
                             onChange={(e) =>
                               handleChange(i, "year", e.target.value)
@@ -569,6 +570,8 @@ const BasicInfo = () => {
                         <input
                           className="form-control"
                           name="year"
+                          type="number"
+                          maxlength="4"
                           defaultValue={edu.year}
                           onChange={(e) =>
                             handleAwardchange(i, "year", e.target.value)
@@ -636,6 +639,7 @@ const BasicInfo = () => {
                         <label>From </label>
                         <input
                           name="dateFrom"
+                          type="number"
                           className="form-control"
                           defaultValue={exp.dateFrom}
                           onChange={(e) =>
@@ -651,6 +655,7 @@ const BasicInfo = () => {
                         <label>To</label>
                         <input
                           name="dateTo"
+                          type="number"
                           className="form-control"
                           defaultValue={exp.dateTo}
                           onChange={(e) =>

@@ -4,16 +4,17 @@ import { useSelector } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
 const ClientSideBar = () => {
   const location = useLocation();
-let data;
-const user = useSelector((state) => state.auth.user);
-const userImage = useSelector((state) => state.auth.user.fileName);
-const clientProfile = useSelector((state) => state.auth.clientProfile);
-console.log("clientProfile", clientProfile);
-if (clientProfile.firstName || clientProfile.lastName) {
-  data = clientProfile;
-} else {
-  data = user;
-}
+  let data;
+  const user = useSelector((state) => state.auth.user);
+  console.log("userclient=", user);
+  const userImage = useSelector((state) => state.auth.user.fileName);
+  const clientProfile = useSelector((state) => state.auth.clientProfile);
+  console.log("clientProfile", clientProfile);
+  if (clientProfile.firstName || clientProfile.lastName) {
+    data = clientProfile;
+  } else {
+    data = user;
+  }
 
   if (location.pathname == "/app/chat") {
     return "";
@@ -33,7 +34,10 @@ if (clientProfile.firstName || clientProfile.lastName) {
               </h3>
               <div className="patient-details">
                 <h5 className="mb-0">
-                  <i className="fas fa-map-marker-alt"></i> {data?.country || data?.city ? data?.country+' '+data?.city: "No Location Setup" }
+                  <i className="fas fa-map-marker-alt"></i>{" "}
+                  {data?.country || data?.city
+                    ? data?.country + " " + data?.city
+                    : "No Location Setup"}
                 </h5>
               </div>
             </div>
@@ -48,11 +52,19 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Dashboard</span>
                 </NavLink>
               </li>
-            
+
               <li>
                 <NavLink to="/app/client-profile-setting">
                   <i className="fas fa-user-cog"></i>
                   <span>Profile Settings</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/app/chat">
+                  <i className="fas fa-comments"></i>
+                  <span>Chat</span>
+                  {/* <small className="unread-msg">23</small> */}
                 </NavLink>
               </li>
               <li>
@@ -61,7 +73,6 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Booking</span>
                 </NavLink>
               </li>
-
               <li>
                 <NavLink to="/app/favourites">
                   <i className="fas fa-bookmark"></i>
@@ -87,7 +98,7 @@ if (clientProfile.firstName || clientProfile.lastName) {
                   <span>Voice Call</span>
                 </NavLink>
               </li> */}
-           
+
               <li>
                 <NavLink to="/app/client-change-password">
                   <i className="fas fa-lock"></i>

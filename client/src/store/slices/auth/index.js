@@ -123,9 +123,9 @@ export const authSlice = createSlice({
           // bloodGroup: res.bloodgroup,
           // phoneNumber: res.phone,
           // about: res.about,
-          // city: res.city,
-          // state: res.state,
-          // country: res.country,
+          city: res.city,
+          state: res.state,
+          country: res.country,
           // postalCode: res.postalCode,
         },
       };

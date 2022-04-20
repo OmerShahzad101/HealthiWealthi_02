@@ -11,7 +11,7 @@ const CoachSideBar = () => {
   const user = useSelector((state) => state.auth.user);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
-
+ console.log("coachProfile", coachProfile);
   if (coachProfile.firstName || coachProfile.lastName) {
     data = coachProfile;
   } else {
@@ -37,6 +37,12 @@ const CoachSideBar = () => {
               <div className="patient-details">
                 <h5 className="mb-0">{data.specialization}</h5>
               </div>
+
+              <div className="patient-details">
+                <h5 className="mb-0">
+                  {data.city} {data.country}
+                </h5>
+              </div>
             </div>
           </div>
         </div>
@@ -55,12 +61,12 @@ const CoachSideBar = () => {
                   <span>Profile Settings</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/app/appointments">
                   <i className="fas fa-calendar-check"></i>
                   <span>Appointments</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/app/my-clients">
                   <i className="fas fa-user-injured"></i>
@@ -82,8 +88,8 @@ const CoachSideBar = () => {
               <li>
                 <NavLink to="/app/chat">
                   <i className="fas fa-comments"></i>
-                  <span>Message</span>
-                  <small className="unread-msg">23</small>
+                  <span>Chat</span>
+                  {/* <small className="unread-msg">23</small> */}
                 </NavLink>
               </li>
               {/* <li>

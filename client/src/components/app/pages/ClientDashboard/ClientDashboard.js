@@ -47,6 +47,7 @@ const ClientDashboard = (props) => {
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
                               return (
+                                item?.clientData?.firstname &&
                                 <tr key={idx}>
                                   <td>
                                     <h2 className="table-avatar">

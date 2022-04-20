@@ -7601,26 +7601,44 @@ button.btn.btn-google.btn-block span {
   max-width: 100%;
   position: relative;
 }
+
 .entry-title {
-  background: #53cfe9;
   height: 140px;
   position: relative;
   text-align: center;
   color: #fff;
   margin-bottom: 30px;
 }
+.plan-0 .entry-title {
+  background: #53cfe9;
+}
+.plan-1 .entry-title {
+  background: #4484c1;
+}
+.plan-2 .entry-title {
+  background: #f75c70;
+}
 .entry-title > h3 {
-  background: #20bada;
   font-size: 20px;
   padding: 5px 0;
   text-transform: uppercase;
   font-weight: 700;
   margin: 0;
+  color: #fff;
+}
+
+.plan-0 .entry-title > h3 {
+  background: #20bada;
+}
+.plan-1 .entry-title > h3 {
+  background: #3772aa;
+}
+.plan-2 .entry-title > h3 {
+  background: #dd4b5e;
 }
 .entry-title .price {
   position: absolute;
   bottom: -25px;
-  background: #20bada;
   height: 95px;
   width: 95px;
   margin: 0 auto;
@@ -7633,11 +7651,21 @@ button.btn.btn-google.btn-block span {
   font-size: 24px;
   font-weight: 700;
 }
+.plan-0 .entry-title .price {
+  background: #20bada;
+}
+.plan-1 .entry-title .price {
+  background: #3772aa;
+}
+.plan-2 .entry-title .price {
+  background: #dd4b5e;
+}
+
 .price span {
   position: absolute;
   font-size: 9px;
-  bottom: -10px;
-  left: 30px;
+  bottom: -15px;
+  left: 22px;
   font-weight: 400;
 }
 .entry-content {
@@ -7660,6 +7688,22 @@ button.btn.btn-google.btn-block span {
 }
 .entry-content li:last-child {
   border: none;
+}
+.plan-inner .btnSpace {
+  padding: 30px 0;
+  text-align: center;
+}
+.btn-b {
+  color: #fff!important;
+  font-weight: 700;
+  background-color: #000;
+  border-radius: 50px;
+  padding: 12px 30px;
+  border: 3px solid #f6f7fa;
+  box-shadow: 0 0 0 1px #ccc;
+  cursor: pointer;
+  outline: 0!important;
+  transition: all .5s;
 }
 
 .custom-controls button.btn.btn-arrow {
@@ -7703,4 +7747,14 @@ button.btn.btn-google.btn-block span {
 {
 	background-color: #d32986;	
   border-radius: 15px 0px 0px 15px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

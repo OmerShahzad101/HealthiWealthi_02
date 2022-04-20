@@ -109,7 +109,66 @@ const CoachDashboard = () => {
                               <th>Client ID</th>
                               <th>Appt Time</th>
                               <th>Appt Date</th>
-                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {myclient && myclient.length > 0 ? (
+                              myclient.map((item, idx) => {
+                                return (
+                                  item?.clientData?.firstname &&
+                                  <tr>
+                                    <td>
+                                      <h2 className="table-avatar">
+                                        <a
+                                          to="/client-profile"
+                                          className="avatar avatar-sm mr-2"
+                                        >
+                                          <img
+                                            className="avatar-img rounded-circle"
+                                            src={
+                                              item?.clientData?.fileName
+                                                ? mediaPath +
+                                                  item.clientData?.fileName
+                                                : mediaPath + "avatar.jpg"
+                                            }
+                                            alt="User"
+                                          />
+                                        </a>
+                                        <div>
+                                          {item?.clientData?.firstname +
+                                            " " +
+                                            item?.clientData?.lastname}{" "}
+                                        </div>
+                                      </h2>
+                                    </td>
+                                    <td>{idx + 1}</td>
+                                    <td>{item.slots}</td>
+                                    <td>{item.bookingDate}</td>
+                                  </tr>
+                                );
+                              })
+                            ) : (
+                              <tr className="no-appoinments">
+                                <td>You don't have any Appointments</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </Tab>
+                <Tab eventKey="today-appointments" title="Today">
+                  <div className="card card-table mb-0">
+                    <div className="card-body">
+                      <div className="table-responsive">
+                        <table className="table table-hover table-center mb-0">
+                          <thead>
+                            <tr>
+                              <th>Client Name</th>
+                              <th>Client ID</th>
+                              <th>Appt Time</th>
+                              <th>Appt Date</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -144,112 +203,14 @@ const CoachDashboard = () => {
                                     <td>{idx + 1}</td>
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
-                                    <td className="">
-                                      <div className="table-action">
-                                        <a
-                                          href="#"
-                                          className="btn btn-sm bg-info-light"
-                                        >
-                                          <i className="far fa-eye"></i> View
-                                        </a>
-
-                                        <a
-                                          href="#"
-                                          className="btn btn-sm bg-success-light"
-                                        >
-                                          <i className="fas fa-check"></i>{" "}
-                                          Accept
-                                        </a>
-                                        <a
-                                          href="#"
-                                          className="btn btn-sm bg-danger-light"
-                                        >
-                                          <i className="fas fa-times"></i>{" "}
-                                          Cancel
-                                        </a>
-                                      </div>
-                                    </td>
                                   </tr>
                                 );
                               })
                             ) : (
-                              <div className="no-Appoinents">
-                                <span>You Don't Have any Appoinments</span>
-                              </div>
+                              <tr className="no-appoinments">
+                                <td>You don't have any Appointments</td>
+                              </tr>
                             )}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </Tab>
-                <Tab eventKey="today-appointments" title="Today">
-                  <div className="card card-table mb-0">
-                    <div className="card-body">
-                      <div className="table-responsive">
-                        <table className="table table-hover table-center mb-0">
-                          <thead>
-                            <tr>
-                              <th>Client Name</th>
-                              <th>Appt Date</th>
-                              <th>Purpose</th>
-                              <th>Type</th>
-                              <th className="text-center">Paid Amount</th>
-                              <th></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <h2 className="table-avatar">
-                                  <a
-                                    to="/client-profile"
-                                    className="avatar avatar-sm mr-2"
-                                  >
-                                    <img
-                                      className="avatar-img rounded-circle"
-                                      src="assets/img/patients/patient6.jpg"
-                                      alt="User Image"
-                                    />
-                                  </a>
-                                  <Link to="/client-profile">
-                                    Elsie Gilley <span>#PT0006</span>
-                                  </Link>
-                                </h2>
-                              </td>
-                              <td>
-                                14 Nov 2019{" "}
-                                <span className="d-block text-info">
-                                  6.00 PM
-                                </span>
-                              </td>
-                              <td>Fever</td>
-                              <td>Old Client</td>
-                              <td className="text-center">$300</td>
-                              <td className="text-right">
-                                <div className="table-action">
-                                  <a
-                                    href="#"
-                                    className="btn btn-sm bg-info-light"
-                                  >
-                                    <i className="far fa-eye"></i> View
-                                  </a>
-
-                                  <a
-                                    href="#"
-                                    className="btn btn-sm bg-success-light"
-                                  >
-                                    <i className="fas fa-check"></i> Accept
-                                  </a>
-                                  <a
-                                    href="#"
-                                    className="btn btn-sm bg-danger-light"
-                                  >
-                                    <i className="fas fa-times"></i> Cancel
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
