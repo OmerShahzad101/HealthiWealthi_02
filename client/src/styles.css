@@ -7636,8 +7636,8 @@ button.btn.btn-google.btn-block span {
 .price span {
   position: absolute;
   font-size: 9px;
-  bottom: -10px;
-  left: 30px;
+  bottom: -15px;
+  left: 22px;
   font-weight: 400;
 }
 .entry-content {
