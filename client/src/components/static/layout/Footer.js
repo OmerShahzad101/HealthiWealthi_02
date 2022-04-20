@@ -66,11 +66,11 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/register">
+                    <Link to="/signup">
                       <i className="fas fa-angle-double-right"></i> Register
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/book-appointment">
                       <i className="fas fa-angle-double-right"></i> Booking
                     </Link>
@@ -80,7 +80,7 @@ export default function Footer() {
                       <i className="fas fa-angle-double-right"></i> Client
                       Dashboard
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -89,33 +89,33 @@ export default function Footer() {
               <div className="footer-widget footer-menu">
                 <h2 className="footer-title">For Coach</h2>
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to="/appointments">
                       <i className="fas fa-angle-double-right"></i>
                       Appointments
                     </Link>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Link to="/chat">
                       <i className="fas fa-angle-double-right"></i> Chat
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link to="/login">
                       <i className="fas fa-angle-double-right"></i> Login
                     </Link>
                   </li>
                   <li>
-                    <Link to="/register">
+                    <Link to="/signup">
                       <i className="fas fa-angle-double-right"></i> Register
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/coach-dashboard">
                       <i className="fas fa-angle-double-right"></i> Coach
                       Dashboard
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function Footer() {
                   </p>
                   <p className="mb-0">
                     <i className="fas fa-envelope"></i>
-                    healthiwealthi@example.com
+                    healthiwealthi4@example.com
                   </p>
                 </div>
               </div>

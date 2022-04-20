@@ -48,6 +48,8 @@ export const MY_CLIENTS = `${APP}/my-clients`;
 export const REVIEWS = `${APP}/reviews`;
 export const CLIENT_PROFILE_SETTING = `${APP}/client-profile-setting`
 export const CLIENT_CHANGE_PASSWORD= `${APP}/client-change-password`
+export const CHAT= `${APP}/chat`
+
 
 
 
