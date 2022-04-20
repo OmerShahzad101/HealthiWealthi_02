@@ -27,7 +27,7 @@ const Channels = ({channels}) => {
                     {
                         channels.map((user) => {
                             return (
-                                <Channel key={user.id} user={user} />
+                                <Channel key={user._id} user={user} />
                             )
                         })
                     }

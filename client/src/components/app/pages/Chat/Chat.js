@@ -1,14 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Channels from "./Channels";
 import ChatRoom from "./ChatRoom";
+import {getHttpRequest} from "../../../../axios";
 
 const Chat = () => {
 
-    const [users, setUsers] = useState([
-        {id: 1, name: 'ahmed'},
-        {id: 2, name: 'rehan'},
-        {id: 3, name: 'umair'},
-    ])
+    const [users, setUsers] = useState([])
+
+    const fetchUsers = async () => {
+        const {data} = await getHttpRequest('/front/chat/list')
+        setUsers(data.client)
+    }
+
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
     return (
         <div className="chat-page">

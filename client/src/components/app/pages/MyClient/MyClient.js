@@ -32,12 +32,13 @@ const MyClient = () => {
                         <div className="profile-info-widget">
                           
                             <img
+                            className="booking-doc-img resize"
                               src={
-                                item?.fileName
-                                  ? mediaPath + item.fileName
+                                item?.clientData?.fileName
+                                  ? mediaPath + item.clientData?.fileName
                                   : mediaPath + "avatar.jpg"
                               }
-                              alt="User Image"
+                              alt="User"
                             />
                           <div className="profile-det-info">
                             <h3>

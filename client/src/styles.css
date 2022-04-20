@@ -7296,7 +7296,7 @@ html.menu-opened body {
   background: url("assets/img/banner.jpg");
   background-size: cover;
   background-position: center;
-  padding: 130px 0;
+  padding: 165px 0;
 }
 .website-banner .banner-heading {
   margin: 0;
@@ -7681,6 +7681,13 @@ button.btn.btn-google.btn-block span {
 .fav-bookmark
 {
   background-color: #d32986;
+}
+.no-appoinments{
+  color: #d32985
+}
+.resize{
+  height: 100px;
+  width: 100px;
 }
 ::-webkit-scrollbar-track {
   border: 1px solid #fff;
