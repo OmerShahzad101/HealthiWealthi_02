@@ -8,12 +8,10 @@ import { setClientProfile } from "../../../../store/slices/auth";
 import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { setImage } from "../../../../store/slices/auth";
-
 import { AiOutlineCamera } from "react-icons/ai";
 const ClientProfileSetting = () => {
   const mediaPath = process.env.REACT_APP_IMG;
   const userImage = useSelector((state) => state.auth.user.fileName);
-
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -220,28 +218,23 @@ const ClientProfileSetting = () => {
           <div className="card-body">
             <form noValidate onSubmit={updateProfileHandler}>
               <div className="row form-row">
-              <div className="col-md-12">
-                        <div className="imageUploaderWrapper profile-img">
-                          <div className="circle">
-                            {(
-                              <img
-                                src={imagePath(userImage)}
-                                alt="user img"
-                              />
-                            )}
-                          </div>
+                <div className="col-md-12">
+                  <div className="imageUploaderWrapper profile-img">
+                    <div className="circle">
+                      {<img src={imagePath(userImage)} alt="user img" />}
+                    </div>
 
-                          <label className="pImage">
-                            <AiOutlineCamera className="uploadButton" />
-                            <input
-                              className="fileUpload"
-                              type="file"
-                              accept="image/png, image/jpeg"
-                              onChange={onChangeImage}
-                            />
-                          </label>
-                        </div>
-                      </div>
+                    <label className="pImage">
+                      <AiOutlineCamera className="uploadButton" />
+                      <input
+                        className="fileUpload"
+                        type="file"
+                        accept="image/png, image/jpeg"
+                        onChange={onChangeImage}
+                      />
+                    </label>
+                  </div>
+                </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <input
@@ -368,6 +361,8 @@ const ClientProfileSetting = () => {
                     <input
                       type="number"
                       name="phone"
+                      maxlength="4"
+                      moz-appearance="none"
                       ref={phoneRef}
                       className="form-control"
                       placeholder="Phone Number"

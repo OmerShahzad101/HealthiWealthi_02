@@ -504,6 +504,7 @@ const BasicInfo = () => {
                             type="number"
                             className="form-control"
                             name="year"
+                            maxLength={5}
                             defaultValue={edu.year}
                             onChange={(e) =>
                               handleChange(i, "year", e.target.value)
@@ -571,6 +572,7 @@ const BasicInfo = () => {
                           className="form-control"
                           name="year"
                           type="number"
+                          maxlength="4"
                           defaultValue={edu.year}
                           onChange={(e) =>
                             handleAwardchange(i, "year", e.target.value)
