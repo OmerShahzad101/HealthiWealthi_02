@@ -25,7 +25,7 @@ const Pricing = () => {
             return (
               <>
                 <div className="col-md-4">
-                  <div className="plan  ">
+                  <div className={`plan-${idx}`}>
                     <div className="plan-inner">
                       <div className="entry-title">
                         <h3>{item.title}</h3>
@@ -47,6 +47,7 @@ const Pricing = () => {
                           <li><strong>Root Cause HealthCoaching:</strong>&nbsp;{item.rootCauseHealthCoaching} </li>
                         </ul>
                       </div>
+                      <div class="btnSpace"><a class="btn-b">Get Started</a></div>
                       <div>
                        
                       </div>
