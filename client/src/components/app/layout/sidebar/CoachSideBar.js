@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom'
 
 const CoachSideBar = () => {
   const location = useLocation()
-  console.log(location, 'yesssssssssssss')
   
   let data;
   const user = useSelector((state) => state.auth.user);

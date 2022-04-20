@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Channels from "./Channels";
 import ChatRoom from "./ChatRoom";
+import {getHttpRequest} from "../../../../axios";
 
 const Chat = () => {
 
@@ -9,6 +10,15 @@ const Chat = () => {
         {id: 2, name: 'rehan'},
         {id: 3, name: 'umair'},
     ])
+
+    const fetchUsers = async () => {
+        const resp = await getHttpRequest('/front/chat/get')
+        console.log(resp, 'these are channels')
+    }
+
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
     return (
         <div className="chat-page">

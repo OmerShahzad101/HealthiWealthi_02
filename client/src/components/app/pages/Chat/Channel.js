@@ -1,11 +1,11 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setChatWindow} from "../../../../store/slices/chat/chatSlice";
+import image from '../../../../assets/img/defaultImg.jpg';
 
 const Channel = ({user}) => {
     let {senderId} = useSelector((state) => state.chat)
     const dispatch = useDispatch()
-    console.log(senderId, 'chatttttttttt')
 
     const handleClick = (id, name) => {
         dispatch(setChatWindow({id, name}))
@@ -16,7 +16,7 @@ const Channel = ({user}) => {
             <div className="media-img-wrap">
                 <div className="avatar avatar-away">
                     <img
-                        src="assets/img/patients/patient2.jpg"
+                        src={image}
                         alt="User Image"
                         className="avatar-img rounded-circle"
                     />
