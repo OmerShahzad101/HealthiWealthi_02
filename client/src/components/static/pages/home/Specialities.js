@@ -6,8 +6,9 @@ const Specialities = () => {
     dots: true,
     autoplay:false,
     infinite: true,
-    variableWidth: true,
     arrows: false,
+    slidesToShow: 5,
+    slidesToScroll:1
   };
   
   return (
@@ -21,7 +22,7 @@ const Specialities = () => {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-9">
-          <div className="specialities-slider slider">
+          <div className="">
             <Slider {...settingsSpecialities}>
               <div className="speicality-item text-center">
                 <div className="speicality-img">
@@ -87,6 +88,58 @@ const Specialities = () => {
                   </span>
                 </div>
                 <p>Cardio Care</p>
+              </div>
+              <div className="speicality-item text-center">
+                <div className="speicality-img">
+                  <img
+                    src="assets/img/specialities/lunges.png"
+                    className="img-fluid"
+                    alt="Speciality"
+                  />
+                  <span>
+                    <i className="fa fa-circle" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <p>Streching</p>
+              </div>
+              <div className="speicality-item text-center">
+                <div className="speicality-img">
+                  <img
+                    src="assets/img/specialities/runner.png"
+                    className="img-fluid"
+                    alt="Speciality"
+                  />
+                  <span>
+                    <i className="fa fa-circle" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <p>Lifestyle</p>
+              </div>
+              <div className="speicality-item text-center">
+                <div className="speicality-img">
+                  <img
+                    src="assets/img/specialities/fitness.png"
+                    className="img-fluid"
+                    alt="Speciality"
+                  />
+                  <span>
+                    <i className="fa fa-circle" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <p>Weight Training</p>
+              </div>
+              <div className="speicality-item text-center">
+                <div className="speicality-img">
+                  <img
+                    src="assets/img/specialities/weightlifting.png"
+                    className="img-fluid"
+                    alt="Speciality"
+                  />
+                  <span>
+                    <i className="fa fa-circle" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <p>Crossfit</p>
               </div>
             </Slider>
           </div>

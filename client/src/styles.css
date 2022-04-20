@@ -2451,11 +2451,11 @@ html.menu-opened body {
 }
 .slick-dots {
   position: absolute;
-  bottom: -25px;
+  bottom: -45px;
   display: block;
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0px;
   list-style: none;
   text-align: center;
 }
@@ -2534,6 +2534,7 @@ html.menu-opened body {
   border-radius: 100%;
   width: 150px;
   background: #fff;
+  margin: auto;
 }
 .speicality-img img {
   position: absolute;
@@ -2843,6 +2844,7 @@ html.menu-opened body {
   height: 115px;
   object-fit: scale-down;
   width: 115px;
+  margin: auto;
 }
 .feature-item p {
   font-weight: 500;
