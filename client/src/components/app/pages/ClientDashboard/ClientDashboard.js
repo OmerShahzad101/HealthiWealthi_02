@@ -57,22 +57,22 @@ const ClientDashboard = (props) => {
                                         <img
                                           className="avatar-img rounded-circle"
                                           src={
-                                            item.coachData?.fileName
+                                            item.coach?.fileName
                                               ? mediaPath +
-                                                item.coachData.fileName
+                                                item.coach.fileName
                                               : mediaPath + "avatar.jpg"
                                           }
                                           alt="User"
                                         />
                                       </Link>
-                                      <Link to={"/coach-profile/" + item?.coachData?._id}>
+                                      <Link to={"/coach-profile/" + item?.coach?._id}>
                                         &nbsp;
-                                        {item?.coachData?.firstname +
+                                        {item?.coach?.firstname +
                                           " " +
-                                          item?.coachData?.lastname}
+                                          item?.coach?.lastname}
                                         <span>
                                           &nbsp;{" "}
-                                          {item?.coachData?.specialization}
+                                          {item?.coach?.specialization}
                                         </span>
                                       </Link>
                                     </h2>
@@ -139,8 +139,8 @@ const ClientDashboard = (props) => {
                                         />
                                       </Link>
                                       <Link to="/coach-profile">
-                                        {item?.coachData?.firstname +
-                                          item?.coachData?.lastname}{" "}
+                                        {item?.coach?.firstname +
+                                          item?.coach?.lastname}{" "}
                                         <td>Nutritionists</td>
                                       </Link>
                                     </h2>

@@ -40,8 +40,8 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Total Clients</h6>
-                        <h3>1500</h3>
-                        <p className="text-muted">Till Today</p>
+                        <h3></h3>
+                        <p className="text-muted"></p>
                       </div>
                     </div>
                   </div>
@@ -59,8 +59,8 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Today Clients</h6>
-                        <h3>160</h3>
-                        <p className="text-muted">06, Nov 2019</p>
+                        <h3></h3>
+                        <p className="text-muted"></p>
                       </div>
                     </div>
                   </div>
@@ -78,8 +78,8 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Appoinments</h6>
-                        <h3>85</h3>
-                        <p className="text-muted">06, Apr 2019</p>
+                        <h3></h3>
+                        <p className="text-muted"></p>
                       </div>
                     </div>
                   </div>
@@ -115,7 +115,7 @@ const CoachDashboard = () => {
                             {myclient && myclient.length > 0 ? (
                               myclient.map((item, idx) => {
                                 return (
-                                  item?.clientData?.firstname &&
+                                  item?.client?.firstname &&
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -126,18 +126,18 @@ const CoachDashboard = () => {
                                           <img
                                             className="avatar-img rounded-circle"
                                             src={
-                                              item?.clientData?.fileName
+                                              item?.client?.fileName
                                                 ? mediaPath +
-                                                  item.clientData?.fileName
+                                                  item.client?.fileName
                                                 : mediaPath + "avatar.jpg"
                                             }
                                             alt="User"
                                           />
                                         </a>
-                                        <div>
-                                          {item?.clientData?.firstname +
+                                        <div>&nbsp;
+                                          {item?.client?.firstname +
                                             " " +
-                                            item?.clientData?.lastname}{" "}
+                                            item?.client?.lastname}{" "}
                                         </div>
                                       </h2>
                                     </td>
@@ -185,18 +185,18 @@ const CoachDashboard = () => {
                                           <img
                                             className="avatar-img rounded-circle"
                                             src={
-                                              item?.clientData?.fileName
+                                              item?.client?.fileName
                                                 ? mediaPath +
-                                                  item.clientData?.fileName
+                                                  item.client?.fileName
                                                 : mediaPath + "avatar.jpg"
                                             }
                                             alt="User"
                                           />
                                         </a>
                                         <div>
-                                          {item?.clientData?.firstname +
+                                          {item?.client?.firstname +
                                             " " +
-                                            item?.clientData?.lastname}{" "}
+                                            item?.client?.lastname}{" "}
                                         </div>
                                       </h2>
                                     </td>

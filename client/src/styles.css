@@ -7730,8 +7730,8 @@ button.btn.btn-google.btn-block span {
   color: #d32985
 }
 .resize{
-  height: 100px;
-  width: 100px;
+  height: 100px !important;
+  width: 100px !important;
 }
 ::-webkit-scrollbar-track {
   border: 1px solid #fff;
