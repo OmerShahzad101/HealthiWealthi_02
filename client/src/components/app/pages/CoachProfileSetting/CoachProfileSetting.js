@@ -5,6 +5,7 @@ import CoachCalendar from "../Calendar/CoachCalendar";
 import ClientCalendar from "../Calendar/ClientCalendar";
 import ContactDetails from "./ContactDetails";
 import BasicInfo from "./BasicInfo";
+import ReferenceLink from "./ReferenceLink";
 
 const CoachProfileSetting = () => {
   const [key, setKey] = useState("user-info");
@@ -33,16 +34,9 @@ const CoachProfileSetting = () => {
                   </div>
                 </div>
               </Tab>
-              {/* <Tab eventKey="calendar" title="Calendar">
-                <div className="card">
-                  <div className="card-body">
-                    <h4 className="card-title">Calendar</h4>
-                    <div className="row form-row">
-                      <ClientCalendar />
-                    </div>
-                  </div>
-                </div>
-              </Tab> */}
+              <Tab eventKey="refLink" title="Reference Link">
+                <ReferenceLink copyText={"www.google.com"} />
+              </Tab>
               <Tab eventKey="contact" title="Contact Details">
                 <ContactDetails />
               </Tab>

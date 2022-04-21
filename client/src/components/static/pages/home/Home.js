@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import Specialities from "./Specialities";
 import { useHistory } from "react-router-dom";
-import AvaliableFeature from "./avaliableFeature";
+import AvaliableFeature from "./AvaliableFeature";
 import CoachSlider from "./CoachSlider";
 export default function Home() {
   const history = useHistory();
