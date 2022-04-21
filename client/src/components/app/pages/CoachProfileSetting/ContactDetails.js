@@ -20,17 +20,24 @@ const ContactDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const userid = useSelector((state) => state.auth.user.userid);
-  console.log("userid==", userid);
   const [profileData, setprofileData] = useState({});
 
   const handleChangeInput = (e) => {
-  console.log(e.target.value)
     const { name, value } = e.target;
     setprofileData({
       ...profileData,
       [name]: value,
     });
   };
+
+  const handleChangePhone = (e) => {
+
+      console.log(e)
+      setprofileData({
+        ...profileData,
+        phone: e,
+      });
+    };
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -171,17 +178,7 @@ const ContactDetails = () => {
               </div>
             </div>
             <div className="col-md-6">
-              {/* <div className="form-floating mb-4">
-                      <input
-                        type="text"
-                        name="phone"
-                        className="form-control"
-                        placeholder="Phone"
-                        value={profileData?.phone}
-                        onChange={handleChangeInput}
-                      />
-                      <label>Phone Number</label>
-                    </div> */}
+             
               <PhoneInput
                 defaultCountry={"gb"}
                 inputExtraProps={{
@@ -190,8 +187,8 @@ const ContactDetails = () => {
                   autoFocus: true,
                 }}
                 value={profileData?.phone}
-                //  onChange={handleChangeInput}
-                onChange={phone => setprofileData( phone )}
+                onChange={handleChangePhone}
+                
                 />
             </div>
           </div>
