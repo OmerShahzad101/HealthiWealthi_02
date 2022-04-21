@@ -40,13 +40,13 @@ const ClientDashboard = (props) => {
                             <th>Booking Date</th>
                             {/* <th>Amount</th> */}
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
                               return (
+                                item?.clientData?.firstname &&
                                 <tr key={idx}>
                                   <td>
                                     <h2 className="table-avatar">
@@ -91,23 +91,7 @@ const ClientDashboard = (props) => {
                                       Confirm
                                     </span>
                                   </td>
-                                  {/* <td className="text-right"> */}
-                                  <div className="table-action pt-4 pb-4">
-                                    <a
-                                      href="#"
-                                      className="btn btn-sm bg-primary-light"
-                                    >
-                                      <i className="fas fa-print"></i> Print
-                                    </a>{" "}
-                                    &nbsp;
-                                    <a
-                                      href="#"
-                                      className="btn btn-sm bg-info-light"
-                                    >
-                                      <i className="far fa-eye"></i> View
-                                    </a>
-                                  </div>
-                                  {/* </td> */}
+                                  
                                 </tr>
                               );
                             })

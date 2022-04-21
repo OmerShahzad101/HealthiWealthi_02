@@ -90,7 +90,7 @@ const SearchCoach = () => {
                 </ol>
               </nav>
               <h2 className="breadcrumb-title">
-                100+ matches found for : Coach In USA
+                Search Coach
               </h2>
             </div>
             <div className="col-md-4 col-12 d-md-block d-none">
