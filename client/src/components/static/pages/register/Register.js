@@ -29,13 +29,14 @@ const Register = () => {
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
     const type = typeRef.current.value;
-
+    const accociatedCoach = localStorage.getItem("accociatedCoach");
     const inputData = {
       username,
       email,
       password,
       confirmPassword,
       type,
+      accociatedCoach,
     };
 
     const errors = validate(inputData);
@@ -74,6 +75,7 @@ const Register = () => {
           confirmButtonText: `OK`,
           text: `${response.data.message}`,
         }).then(() => {
+          localStorage.removeItem("accociatedCoach");
           history.push(LOGIN);
         });
       } else {
@@ -207,8 +209,7 @@ const Register = () => {
                   </div>
                   <div className="row form-row social-login">
                     <div className="col-12">
-                      <LoginWithGoogle/>
-                    
+                      <LoginWithGoogle />
                     </div>
                   </div>
                 </form>
