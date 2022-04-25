@@ -40,7 +40,6 @@ const ClientDashboard = (props) => {
                             <th>Booking Date</th>
                             {/* <th>Amount</th> */}
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -58,22 +57,22 @@ const ClientDashboard = (props) => {
                                         <img
                                           className="avatar-img rounded-circle"
                                           src={
-                                            item.coachData?.fileName
+                                            item.coach?.fileName
                                               ? mediaPath +
-                                                item.coachData.fileName
+                                                item.coach.fileName
                                               : mediaPath + "avatar.jpg"
                                           }
                                           alt="User"
                                         />
                                       </Link>
-                                      <Link to={"/coach-profile/" + item?.coachData?._id}>
+                                      <Link to={"/coach-profile/" + item?.coach?._id}>
                                         &nbsp;
-                                        {item?.coachData?.firstname +
+                                        {item?.coach?.firstname +
                                           " " +
-                                          item?.coachData?.lastname}
+                                          item?.coach?.lastname}
                                         <span>
                                           &nbsp;{" "}
-                                          {item?.coachData?.specialization}
+                                          {item?.coach?.specialization}
                                         </span>
                                       </Link>
                                     </h2>
@@ -92,23 +91,7 @@ const ClientDashboard = (props) => {
                                       Confirm
                                     </span>
                                   </td>
-                                  {/* <td className="text-right"> */}
-                                  <div className="table-action pt-4 pb-4">
-                                    <a
-                                      href="#"
-                                      className="btn btn-sm bg-primary-light"
-                                    >
-                                      <i className="fas fa-print"></i> Print
-                                    </a>{" "}
-                                    &nbsp;
-                                    <a
-                                      href="#"
-                                      className="btn btn-sm bg-info-light"
-                                    >
-                                      <i className="far fa-eye"></i> View
-                                    </a>
-                                  </div>
-                                  {/* </td> */}
+                                  
                                 </tr>
                               );
                             })
@@ -156,8 +139,8 @@ const ClientDashboard = (props) => {
                                         />
                                       </Link>
                                       <Link to="/coach-profile">
-                                        {item?.coachData?.firstname +
-                                          item?.coachData?.lastname}{" "}
+                                        {item?.coach?.firstname +
+                                          item?.coach?.lastname}{" "}
                                         <td>Nutritionists</td>
                                       </Link>
                                     </h2>

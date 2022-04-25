@@ -21,7 +21,6 @@ const CoachCalendar = ({ availabilityTab }) => {
   useEffect(() => {
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
-        console.log(response?.data?.data,"kahskjhasjkdhajksdhjkahsdjkahjksdhajkhsd")
         if (!response) {
           return;
         }
@@ -39,6 +38,7 @@ const CoachCalendar = ({ availabilityTab }) => {
             );
           }
           setSelections(newSelections);
+          console.log(newSelections,"newwwwwwwwwwwwwwww")
           setLoadcalender(true);
         } 
         else {

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
+import { LOGIN } from "../../../../router/constants/ROUTES";
+import Toast from "../../../common/toast/Toast";
 const SearchCoach = () => {
 
   const {coachList} = useSelector((state) => state.filters)
@@ -9,6 +11,9 @@ const SearchCoach = () => {
 
   const mediaPath = process.env.REACT_APP_IMG;
   const role = useSelector((state) => state.auth.user.userRole);
+  const userId = useSelector((state) => state.auth.user.userid);
+  const history = useHistory();
+  
   const SearchFilter = useRef();
   const maleCoach = useRef();
   const femaleCoach = useRef();
@@ -48,6 +53,17 @@ const SearchCoach = () => {
 
     }
 
+  const unAuth = (err , id) => {
+    err.preventDefault();
+    Toast.fire({
+      icon: "error",
+      title: "Login to Book Coach",
+    }).then(() => {
+      history.push(LOGIN);
+      localStorage.setItem("accociatedCoach", id);
+    });
+  };
+
   return (
     <>
       <div className="breadcrumb-bar">
@@ -64,9 +80,7 @@ const SearchCoach = () => {
                   </li>
                 </ol>
               </nav>
-              <h2 className="breadcrumb-title">
-                100+ matches found for : Coach In USA
-              </h2>
+              <h2 className="breadcrumb-title">Search Coach</h2>
             </div>
             <div className="col-md-4 col-12 d-md-block d-none">
               <div className="sort-by">
@@ -262,7 +276,6 @@ const SearchCoach = () => {
                                     className="img-fluid search-image"
                                     alt="User"
                                   />
-                                  
                                 </div>
                                 <div className="doc-info-cont">
                                   <h4 className="doc-name">
@@ -274,11 +287,6 @@ const SearchCoach = () => {
 
                                   {item.specialization && (
                                     <h5 className="doc-department">
-                                      {/* <img
-                                    src="assets/img/specialities/specialities-05.png"
-                                    className="img-fluid"
-                                    alt="Speciality"
-                                  /> */}
                                       {item.specialization}
                                     </h5>
                                   )}
@@ -336,18 +344,30 @@ const SearchCoach = () => {
                                     View Profile
                                   </Link>
                                 </div>
-                                {role == 1 ? (
+                                {role != 3 ? (
                                   <div className="clinic-booking">
-                                    <Link
-                                      className="apt-btn"
-                                      to={"/app/book-appointment/" + item?._id}
-                                    >
-                                      Book Appointment
-                                    </Link>
+                                    {userId ? (
+                                      <Link
+                                        className="apt-btn"
+                                        to={
+                                          "/app/book-appointment/" + item?._id
+                                        }
+                                      >
+                                        Book Appointment
+                                      </Link>
+                                    ) : (
+                                      <Link
+                                        className="apt-btn"
+                                        onClick={(err) => unAuth(err , item?._id)}
+                                      >
+                                        Book Appointment
+                                      </Link>
+                                    )}
                                   </div>
                                 ) : (
                                   ""
                                 )}
+
                                 {/* {role === 3 ? (
                                   <div className="clinic-disable">
                                     <button
