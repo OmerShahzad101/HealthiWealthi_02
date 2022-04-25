@@ -16,7 +16,6 @@ import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import Resizer from "react-image-file-resizer";
 const BasicInfo = () => {
   const userid = useSelector((state) => state.auth.user.userid);
-  console.log("userid BASIC info", userid);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -312,11 +311,33 @@ const BasicInfo = () => {
       .catch(() => {
         console.log("Something went wrong...");
       });
+
+    getservicesList();
   }, []);
 
   useEffect(() => {
     payload = { ...profileData };
   }, [profileData, experience, awards, qualifications]);
+
+  const getservicesList = () => {
+    getHttpRequest(`/admin/services/list/`)
+      .then((response) => {
+        console.log(response);
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+
+        if (response?.data?.success === true) {
+          setServices(response?.data?.services);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
+  };
 
   return (
     <div>

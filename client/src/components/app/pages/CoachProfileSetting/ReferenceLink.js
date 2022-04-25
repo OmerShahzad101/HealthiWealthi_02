@@ -1,7 +1,19 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { AiFillCopy } from "react-icons/ai";
-const ReferenceLink = ({ copyText }) => {
+
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  EmailIcon,
+  FacebookIcon,
+} from "react-share";
+
+const ReferenceLink = () => {
+  const userid = useSelector((state) => state.auth.user.userid);
   const [isCopied, setIsCopied] = useState(false);
+
+  const profileUrl = `https://healthiwealthi.arhamsoft.org/coach-profile/${userid}`;
 
   async function copyTextToClipboard(text) {
     if ("clipboard" in navigator) {
@@ -12,7 +24,7 @@ const ReferenceLink = ({ copyText }) => {
   }
 
   const handleCopyClick = () => {
-    copyTextToClipboard(copyText)
+    copyTextToClipboard(profileUrl)
       .then(() => {
         setIsCopied(true);
         setTimeout(() => {
@@ -23,6 +35,7 @@ const ReferenceLink = ({ copyText }) => {
         console.log(err);
       });
   };
+
   return (
     <>
       <div className="card contact-card">
@@ -33,12 +46,12 @@ const ReferenceLink = ({ copyText }) => {
             your services
           </h5>
           <div className="row form-row my-4">
-            <div className="col-md-6 position-relative">
+            <div className="col-md-8 position-relative">
               <div className="form-floating">
                 <input
                   type="text"
                   className="form-control"
-                  value={copyText}
+                  value={profileUrl}
                   readOnly
                 />
                 <label>Profile URL</label>
@@ -51,6 +64,17 @@ const ReferenceLink = ({ copyText }) => {
                 {<AiFillCopy size={28} />}
                 <span>{isCopied ? "Copied!" : ""}</span>
               </button>
+            </div>
+            <div className="col-md-12">
+              <h5 className="text-muted mt-4 mb-3">
+                Share your profile on your social handles
+              </h5>
+              <FacebookShareButton url={profileUrl} className="me-2">
+                <FacebookIcon size={36} round />
+              </FacebookShareButton>
+              <EmailShareButton url={profileUrl} className="me-2">
+                <EmailIcon size={36} round />
+              </EmailShareButton>
             </div>
           </div>
         </div>
