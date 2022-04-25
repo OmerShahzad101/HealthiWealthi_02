@@ -15,7 +15,7 @@ const Login = (props) => {
   const passwordRef = useRef();
   const [validationErrors, setValidationErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const accociatedCoach = localStorage.getItem("accociatedCoach");
   const loginHandler = async (event) => {
     event.preventDefault();
 
@@ -25,6 +25,7 @@ const Login = (props) => {
     const loginData = {
       email,
       password,
+      accociatedCoach
     };
 
     const errors = validate(loginData);

@@ -1,4 +1,4 @@
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
@@ -7,8 +7,6 @@ import { useHistory } from "react-router-dom";
 import {
   CLIENT_PROFILE_SETTING,
   COACH_PROFILE_SETTING,
-  CLIENT_DASHBOARD,
-  COACH_DASHBOARD,
 } from "../../../../router/constants/ROUTES";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import {
@@ -16,10 +14,7 @@ import {
   postHttpRequest,
   putHttpRequest,
 } from "../../../../axios";
-import {
-  setUser,
-  setAccessToken,
-} from "../../../../store/slices/auth";
+import { setUser, setAccessToken } from "../../../../store/slices/auth";
 import GoogleLogin from "react-google-login";
 
 const LoginWithGoogle = () => {
@@ -31,17 +26,15 @@ const LoginWithGoogle = () => {
   const [_id, setId] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const handleLogin = async (response) => {
-    console.log(response);
+  const accociatedCoach = localStorage.getItem("accociatedCoach");
 
+  const handleLogin = async (response) => {
     try {
       postHttpRequest("/front/auth/googleLogin", {
         tokenId: response.tokenId,
+        accociatedCoach
       }).then((response) => {
-   
         if (response.status === 200) {
-          console.log("alert", response.data.user._id);
-
           if (response?.data?.user?.type === 0) {
             dispatch(setAccessToken(response.data.accessToken));
             setId(response.data.user._id);
@@ -55,12 +48,12 @@ const LoginWithGoogle = () => {
                   response: response.data.user,
                   res: res?.data.coach,
                 };
-               
+
                 dispatch(setUser(userData));
                 dispatch(setAccessToken(response.data.accessToken));
-                if (response?.data?.user?.type == 1) {
+                if (response?.data?.user?.type === 1) {
                   history.replace(CLIENT_PROFILE_SETTING);
-                } else if (response?.data?.user?.type == 3) {
+                } else if (response?.data?.user?.type === 3) {
                   history.replace(COACH_PROFILE_SETTING);
                 }
               } else {
@@ -87,12 +80,13 @@ const LoginWithGoogle = () => {
   };
   const loginGmailHanlder = async (event) => {
     event.preventDefault();
-
+    debugger;
     const type = typeRef.current.value;
 
     const payload = {
       _id,
       type,
+      accociatedCoach,
     };
 
     const errors = validate(payload);
@@ -117,11 +111,11 @@ const LoginWithGoogle = () => {
       }
 
       if (response.data.coach.isEmailVerified === true) {
+        debugger;
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.coach?._id}`
         );
-        console.log("/front/coach/get/", res);
         if (res) {
           const userData = {
             response: response.data.coach,
@@ -129,10 +123,10 @@ const LoginWithGoogle = () => {
           };
           dispatch(setUser(userData));
 
-          if (response?.data?.coach?.type == 1) {
-            history.replace(CLIENT_DASHBOARD);
-          } else if (response?.data?.coach?.type == 3) {
-            history.replace(COACH_DASHBOARD);
+          if (response?.data?.coach?.type === 1) {
+            history.replace(CLIENT_PROFILE_SETTING);
+          } else if (response?.data?.coach?.type === 3) {
+            history.replace(COACH_PROFILE_SETTING);
           }
         } else {
           Toast.fire({

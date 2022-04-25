@@ -25,7 +25,7 @@ const MyClient = () => {
           {myclient && myclient.length > 0 ? (
             myclient.map((item, idx) => {
               return (
-                item?.clientData?.firstname && (
+                item?.client?.firstname && (
                   <div className="col-md-6 col-lg-4 col-xl-3">
                     <div className="card widget-profile pat-widget-profile">
                       <div className="card-body">
@@ -34,19 +34,19 @@ const MyClient = () => {
                             <img
                               className="booking-doc-img resize"
                               src={
-                                item?.clientData?.fileName
-                                  ? mediaPath + item.clientData?.fileName
+                                item?.client?.fileName
+                                  ? mediaPath + item.client?.fileName
                                   : mediaPath + "avatar.jpg"
                               }
                               alt="User"
                             />
                             <div className="profile-det-info">
                               <h3>
-                                I
+                                
                                 <div>
-                                  {item?.clientData?.firstname +
+                                  {item?.client?.firstname +
                                     " " +
-                                    item?.clientData?.lastname}{" "}
+                                    item?.client?.lastname}{" "}
                                 </div>
                               </h3>
 
@@ -56,9 +56,9 @@ const MyClient = () => {
                                 </h5>
                                 <h5 className="mb-0">
                                   <i className="fas fa-map-marker-alt"></i>{" "}
-                                  {item?.clientData?.country +
+                                  {item?.client?.country +
                                     ", " +
-                                    item?.clientData?.city}
+                                    item?.client?.city}
                                 </h5>
                               </div>
                             </div>
@@ -66,24 +66,24 @@ const MyClient = () => {
                         </div>
                         <div className="patient-info">
                           <ul>
-                            {item?.clientData?.phone ? (
+                            {item?.client?.phone ? (
                               <li>
-                                Phone <span>{item?.clientData?.phone}</span>
+                                Phone <span>{item?.client?.phone}</span>
                               </li>
                             ) : (
                               ""
                             )}
-                            {item?.clientData?.gender ? (
+                            {item?.client?.gender ? (
                               <li>
-                                Gender <span> {item.clientData?.gender}</span>
+                                Gender <span> {item.client?.gender}</span>
                               </li>
                             ) : (
                               ""
                             )}
-                            {item?.clientData?.bloodgroup ? (
+                            {item?.client?.bloodgroup ? (
                               <li>
                                 Blood Group{" "}
-                                <span>{item?.clientData?.bloodgroup}</span>
+                                <span>{item?.client?.bloodgroup}</span>
                               </li>
                             ) : (
                               ""

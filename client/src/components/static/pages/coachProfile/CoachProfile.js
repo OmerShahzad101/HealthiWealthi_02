@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import $ from "jquery";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { Tabs, Tab } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
+import { LOGIN } from "../../../../router/constants/ROUTES";
 
 const CoachProfile = (props) => {
   const mediaPath = process.env.REACT_APP_IMG;
@@ -15,6 +16,7 @@ const CoachProfile = (props) => {
   const url = window.location.pathname;
   const id = url.split("/").pop();
   const [coachList, setCoachList] = useState([]);
+  const history = useHistory();
 
   useEffect(async () => {
     $("html,body").animate({ scrollTop: 0 }, "slow");
@@ -27,9 +29,9 @@ const CoachProfile = (props) => {
 
   // API Function TO Add Favourit
   const favorite = (id, err) => {
-    console.log("dddd")
+    console.log("dddd");
     if (userId) {
-      console.log(userId, "userId")
+      console.log(userId, "userId");
       const payload = {
         coachId: id,
         clientId: userId,
@@ -61,11 +63,14 @@ const CoachProfile = (props) => {
     }
   };
 
-  const unAuth = (err) => {
+  const unAuth = (err, id) => {
     err.preventDefault();
     Toast.fire({
       icon: "error",
-      title: "Login Required",
+      title: "Login to Book Coach",
+    }).then(() => {
+      history.push(LOGIN);
+      localStorage.setItem("accociatedCoach", id);
     });
   };
 
@@ -178,7 +183,7 @@ const CoachProfile = (props) => {
                       ) : (
                         <Link
                           className="apt-btn"
-                          onClick={(err) => unAuth(err)}
+                          onClick={(err) => unAuth(err, id)}
                         >
                           Book Appointment
                         </Link>
