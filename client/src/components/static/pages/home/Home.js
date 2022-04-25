@@ -1,92 +1,94 @@
-import { useEffect, useState, useRef } from "react";
-import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import {useState} from "react";
+import {getHttpRequest, postHttpRequest} from "../../../../axios";
 import Specialities from "./Specialities";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import AvaliableFeature from "./avaliableFeature";
 import CoachSlider from "./CoachSlider";
+import {useDispatch} from "react-redux";
+import {setCoachesList} from "../../../../store/slices/search/coachFiltersSlice";
+
 export default function Home() {
-  const history = useHistory();
-  const searchNameRef = useRef();
 
-  let payload;
+    let history = useHistory()
 
-  const searchHandler = (e) => {
-    e.preventDefault();
+    const dispatch = useDispatch()
 
-    payload = {
-      searchName: searchNameRef.current.value,
-    };
-    postHttpRequest("/front/search", payload)
-      .then((response) => {
-        if (response.data) {
-          history.push({
-            pathname: "/search-coach",
-            state: { name: { payload } },
-          });
+    const [values, setValues] = useState({location: '', coach: '', gender: []})
+
+    const handleChange = (event) => {
+        setValues({...values, [event.target.name]: event.target.value})
+    }
+
+
+    const handleSearch = async () => {
+        const {data} = await postHttpRequest("front/search/get", values)
+        if (data.success === true) {
+            dispatch(setCoachesList(data.data))
+            history.push("/search-coach")
         }
-      })
-      .catch((response) => {
-        console.log("Error");
-      });
-    console.log(payload);
-  };
+        console.log(data, 'response from search api')
+    };
 
-  return (
-    <>
-      <section className="section section-search">
-        <div className="container-fluid">
-          <div className="banner-wrapper">
-            <div className="banner-header text-center">
-              <h1>Search Coach, Make an Appointment</h1>
-              <p>Discover the best Couch nearest to you.</p>
-            </div>
+    return (
+        <>
+            <section className="section section-search">
+                <div className="container-fluid">
+                    <div className="banner-wrapper">
+                        <div className="banner-header text-center">
+                            <h1>Search Coach, Make an Appointment</h1>
+                            <p>Discover the best Couch nearest to you.</p>
+                        </div>
 
-            {/* <!-- Search --> */}
-            <div className="search-box">
-              <form action="#">
-                <div className="form-group search-location">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Location"
-                  />
-                  <span className="form-text">Based on your Location</span>
-                </div>
-                <div className="form-group search-info">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Coach"
-                  />
-                  <span className="form-text">
+                        {/* <!-- Search --> */}
+                        <div className="search-box">
+                            <form action="#">
+                                <div className="form-group search-location">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Search Location"
+                                        name="location"
+                                        onChange={handleChange}
+                                    />
+                                    <span className="form-text">Based on your Location</span>
+                                </div>
+                                <div className="form-group search-info">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Search Coach"
+                                        name="coach"
+                                        onChange={handleChange}
+                                    />
+                                    <span className="form-text">
                     Ex : Nutritionists or Yoga Expert etc
                   </span>
+                                </div>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary search-btn"
+                                    onClick={handleSearch}
+                                >
+                                    <i className="fas fa-search"></i> <span>Search</span>
+                                </button>
+                            </form>
+                        </div>
+                        {/* <!-- /Search --> */}
+                    </div>
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary search-btn"
-                  onClick={searchHandler}
-                >
-                  <i className="fas fa-search"></i> <span>Search</span>
-                </button>
-              </form>
-            </div>
-            {/* <!-- /Search --> */}
-          </div>
-        </div>
-      </section>
+            </section>
 
-      <section className="section section-specialities">
-        <Specialities />
-      </section>
+            <section className="section section-specialities">
+                <Specialities/>
+            </section>
 
-      <section className="section section-doctor">
-        <CoachSlider />
-      </section>
+            <section className="section section-doctor">
+                <CoachSlider/>
+            </section>
 
-      <section className="section section-features">
-        <AvaliableFeature />
-      </section>
-    </>
-  );
+            <section className="section section-features">
+                <AvaliableFeature/>
+            </section>
+        </>
+    );
 }

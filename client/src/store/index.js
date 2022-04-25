@@ -7,6 +7,7 @@ import authReducer from './slices/auth';
 import userReducer from './slices/user';
 import { USER_LOGOUT } from './actionTypes';
 import chatSlice from "./slices/chat/chatSlice";
+import coachFiltersSlice from "./slices/search/coachFiltersSlice";
 
 const persistConfig = {
     key: 'root',
@@ -17,7 +18,8 @@ const persistConfig = {
 const appReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
-    chat: chatSlice
+    chat: chatSlice,
+    filters: coachFiltersSlice
 });
 
 const rootReducer = (state, action) => {
@@ -28,10 +30,10 @@ const rootReducer = (state, action) => {
     return appReducer(state, action);
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {

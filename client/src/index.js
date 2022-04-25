@@ -16,13 +16,11 @@ import './styles.css';
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
                 <Router history={history}>
                     <ErrorBoundary>
                         <App />
                     </ErrorBoundary>
                 </Router>
-            </PersistGate>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

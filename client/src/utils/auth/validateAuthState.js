@@ -7,7 +7,7 @@ export default function validateAuthState() {
 
     // Get access token from Redux store and parse it
     const state = store.getState();
-    const token = state.auth.accessToken;
+    const token = state.auth.user.accessToken;
     const parsedToken = parseJwt(token);
 
     // If no access token is found in store, then return false

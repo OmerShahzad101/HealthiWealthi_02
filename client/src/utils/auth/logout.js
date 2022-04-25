@@ -8,6 +8,7 @@ export default function logout() {
     // Remove all keys defined in persistConfig(s) of `redux-persist` (to make sure `store` does not get rehydrated after page refresh)
     storage.removeItem('persist:root');
     localStorage.removeItem('onBoardingClose');
+    localStorage.clear()
         
     // Reset Redux store to its initial state
     store.dispatch(logoutUser());

@@ -12,7 +12,7 @@ export default function Header() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
-  const loginToken = useSelector((state) => state.auth.accessToken);
+  const loginToken = useSelector((state) => state.auth.user.accessToken);
   const userRole = useSelector((state) => state.auth.user.userRole);
 
   useEffect(() => {
