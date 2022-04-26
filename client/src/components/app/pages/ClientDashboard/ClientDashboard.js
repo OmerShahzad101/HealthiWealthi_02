@@ -46,7 +46,7 @@ const ClientDashboard = (props) => {
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
                               return (
-                                item?.clientData?.firstname &&
+                                item?.client?.firstname &&
                                 <tr key={idx}>
                                   <td>
                                     <h2 className="table-avatar">
@@ -87,6 +87,12 @@ const ClientDashboard = (props) => {
                                   {/* <td>${item?.price}</td> */}
                                   {/* <td>16 Feb 2022</td> */}
                                   <td>
+                                    <span className="badge badge-pill bg-success-light">
+                                      Confirm
+                                    </span>
+                                    <span className="badge badge-pill bg-success-light">
+                                      Confirm
+                                    </span>
                                     <span className="badge badge-pill bg-success-light">
                                       Confirm
                                     </span>

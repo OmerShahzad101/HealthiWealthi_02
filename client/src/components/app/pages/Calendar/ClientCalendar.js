@@ -27,7 +27,7 @@ const ClientCalendar = (props) => {
   const [endDate, setEndDate] = useState(
     moment().add(6, "days").format("MM/DD/YYYY")
   );
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     setLoading(true);
@@ -41,9 +41,8 @@ const ClientCalendar = (props) => {
           alert("Something went wrong with response...");
           return;
         }
-
         if (response && response?.data?.success === true) {
-          let selections = response?.data?.ScheduleData?.selections;
+          let selections = response?.data?.scheduleData?.selections;
           for (var i = 0; i < selections.length; i++) {
             let _start = selections[i]?.start;
             let _end = selections[i]?.end;
@@ -61,7 +60,6 @@ const ClientCalendar = (props) => {
                 { start: _formatedStartTime, end: _formatedEndTime },
               ];
           }
-          console.log(slotsByEachDate);
         } else {
           console.log(response.data.message);
         }
@@ -72,7 +70,7 @@ const ClientCalendar = (props) => {
   }, []);
 
   const generateWeekDates = () => {
-    // debugger;
+
     setTimeout(() => {
       if (startDate > today) {
         setDisabledPrevButton(false);
@@ -112,17 +110,22 @@ const ClientCalendar = (props) => {
   const handleOnClickGridSlot = (event, time, date) => {
     event.preventDefault();
     Toast.fire("TimeSlot!", "Date: " + date + ", Time: " + time, "success");
+
+    getHttpRequest(`/auth/google`)
+      .then((response) => {
+        if (!response) {
+          alert("Something went wrong with response...");
+          return;
+        }
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log("Something went wrongggg...");
+      });
   };
 
   const handleOnClickNextButton = () => {
-    //   debugger;
-
-    //  var endDate = endDate;
-    // console.log(endDate,"end date message");
-
-    // var startDate = moment(endDate).add(1, "days").format("MM/DD/YYYY");
-    // endDate = moment(startDate).add(6, "days").format("MM/DD/YYYY");
-
+  
     setStartDate(moment(endDate).add(1, "days").format("MM/DD/YYYY"));
     setDate(moment(endDate).add(1, "days").format("MM/DD/YYYY"));
     setEndDate(moment(endDate).add(7, "days").format("MM/DD/YYYY"));
@@ -132,10 +135,6 @@ const ClientCalendar = (props) => {
   };
 
   const handleOnClickPrevButton = () => {
-    // var startDate = startDate;
-    // var endDate = moment(startDate).subtract(1, "days").format("MM/DD/YYYY");
-    // startDate = moment(endDate).subtract(6, "days").format("MM/DD/YYYY");
-
     setStartDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
     setDate(moment(startDate).subtract(7, "days").format("MM/DD/YYYY"));
     setEndDate(moment(endDate).subtract(7, "days").format("MM/DD/YYYY"));
@@ -160,8 +159,8 @@ const ClientCalendar = (props) => {
 
   const bookHandler = () => {
     const payload = {
-      clientId: userid,
-      coachId: props.id,
+      client: userid,
+      coach: props.id,
       slots: "10:00 AM",
       bookingDate: "20-April-2022",
       status: true,
@@ -174,7 +173,7 @@ const ClientCalendar = (props) => {
           icon: "success",
           title: response.data.message,
         });
-        history.push("/app/client-dashboard")
+        history.push("/app/client-dashboard");
       }
     });
   };
@@ -200,7 +199,6 @@ const ClientCalendar = (props) => {
 
     return (
       <div className={`gridDay ${gridClass}`} key={date}>
-        {/* {console.log("date", date)} */}
         <div className="gridDayHeader">
           <h3>
             <span
@@ -223,29 +221,20 @@ const ClientCalendar = (props) => {
           </h3>
         </div>
         <div className="gridSlots">
-          {/* {console.log("stops", timeStops)}
-          {console.log("mytime", slotsByEachDate)} */}
-
           {timeStops.map((timeStop) => {
             let disabled = true;
             for (const filterCurrentDate in slotsByEachDate) {
               if (filterCurrentDate == date) {
-                // console.log("matched", filterCurrentDate, date);
-                // console.log("asjkhdajkhda", slotsByEachDate[filterCurrentDate]);
                 allActiveSlots = [];
                 activeSlot = [];
 
                 allActiveSlots = slotsByEachDate[filterCurrentDate].map(
                   (data) => {
-                    //console.log(data.start);
                     return data.start;
                   }
                 );
-                //console.log(allActiveSlots);
                 activeSlot = allActiveSlots.filter((val) => timeStop == val);
-                //console.log(activeSlot);
                 if (activeSlot.length) {
-                  // console.log(disabled);
                   disabled = false;
                 }
               }

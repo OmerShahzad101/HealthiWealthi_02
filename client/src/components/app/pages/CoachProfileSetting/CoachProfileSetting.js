@@ -35,7 +35,7 @@ const CoachProfileSetting = () => {
                 </div>
               </Tab>
               <Tab eventKey="refLink" title="Reference Link">
-                <ReferenceLink copyText={"www.google.com"} />
+                <ReferenceLink />
               </Tab>
               <Tab eventKey="contact" title="Contact Details">
                 <ContactDetails />

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
@@ -11,8 +9,8 @@ import {
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useSelector, useDispatch } from "react-redux";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const ContactDetails = () => {
   const history = useHistory();
@@ -31,17 +29,15 @@ const ContactDetails = () => {
   };
 
   const handleChangePhone = (e) => {
-
-      console.log(e)
-      setprofileData({
-        ...profileData,
-        phone: e,
-      });
-    };
+    setprofileData({
+      ...profileData,
+      phone: e,
+    });
+  };
 
   function updateProfileHandler(event) {
     event.preventDefault();
-    
+
     const payload = profileData;
     const errors = validate(payload);
 
@@ -53,7 +49,7 @@ const ContactDetails = () => {
     }
 
     setIsLoading(true);
-    console.log("payload", payload);
+
     putHttpRequest("/front/coach/edit", payload)
       .then((result) => {
         setIsLoading(false);
@@ -62,14 +58,12 @@ const ContactDetails = () => {
           return;
         }
         if (result.data.success === true) {
-          console.log("result.data.coach ==", result.data.coach);
           dispatch(setCoachProfile({ res: result.data.coach }));
           Toast.fire({
             icon: "success",
             title: result.data.message,
           });
-        } 
-        else {
+        } else {
           Toast.fire({
             icon: "error",
             title: result.data.message,
@@ -94,7 +88,6 @@ const ContactDetails = () => {
           return;
         }
         if (response.data.success === true) {
-          console.log("responseDon", response?.data?.coach);
           setprofileData(response?.data?.coach);
         } else {
           console.log(response.data.message);
@@ -178,18 +171,16 @@ const ContactDetails = () => {
               </div>
             </div>
             <div className="col-md-6">
-             
               <PhoneInput
                 defaultCountry={"gb"}
-                inputExtraProps={{
-                  name: "phone",
-                  required: true,
-                  autoFocus: true,
-                }}
+                // inputExtraProps={{
+                //   name: "phone",
+                //   required: true,
+                //   autoFocus: true,
+                // }}
                 value={profileData?.phone}
                 onChange={handleChangePhone}
-                
-                />
+              />
             </div>
           </div>
         </div>
