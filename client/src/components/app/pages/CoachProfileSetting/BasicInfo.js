@@ -22,6 +22,7 @@ const BasicInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [profileData, setprofileData] = useState({});
+  const [services, setServices] = useState("");
   let payload = { ...profileData };
 
   const [qualifications, setqualifications] = useState([
@@ -288,6 +289,7 @@ const BasicInfo = () => {
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
+        console.log(response,"coach response")
         if (!response) {
           console.log("Something went wrong with response...");
           return;
@@ -312,32 +314,31 @@ const BasicInfo = () => {
         console.log("Something went wrong...");
       });
 
-    //getservicesList();
+    getservicesList();
   }, []);
 
   useEffect(() => {
     payload = { ...profileData };
   }, [profileData, experience, awards, qualifications]);
 
-  // const getservicesList = () => {
-  //   getHttpRequest(`/admin/services/list/`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       if (!response) {
-  //         console.log("Something went wrong with response...");
-  //         return;
-  //       }
-
-  //       if (response?.data?.success === true) {
-  //         setServices(response?.data?.services);
-  //       } else {
-  //         console.log(response.data.message);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       console.log("Something went wrong...");
-  //     });
-  // };
+  const getservicesList = () => {
+    getHttpRequest(`/admin/services/list/`)
+      .then((response) => {
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+        if (response?.data?.success === true) {
+          setServices(response?.data?.data.services);
+          console.log(response?.data?.data.services);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
+  };
 
   return (
     <div>
@@ -458,6 +459,27 @@ const BasicInfo = () => {
                   </option>
                 </select>
                 <label>Gender</label>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-floating mb-4">
+                <select
+                  className="form-select"
+                  name="services"
+                  value={profileData?.gender}
+                  onChange={handleChangeInput}
+                >
+                  <option value="" disabled>
+                    Open this select menu
+                  </option>
+                  <option name="male" value="male">
+                    Male
+                  </option>
+                  <option name="female" value="female">
+                    Female
+                  </option>
+                </select>
+                <label>Services</label>
               </div>
             </div>
           </div>
