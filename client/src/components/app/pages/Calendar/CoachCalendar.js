@@ -26,7 +26,7 @@ const CoachCalendar = ({ availabilityTab }) => {
         }
         if (response && response?.data?.success === true) {
           let newSelections = [];
-          console.log("response?.data?.scheduleData", response);
+          // console.log("response?.data?.scheduleData", response);
           if (response?.data?.scheduleData) {
             var response = response?.data?.scheduleData?.selections.map(
               function (val, key) {
@@ -38,7 +38,7 @@ const CoachCalendar = ({ availabilityTab }) => {
             );
           }
           setSelections(newSelections);
-          console.log(newSelections,"newwwwwwwwwwwwwwww")
+          // console.log(newSelections,"newwwwwwwwwwwwwwww")
           setLoadcalender(true);
         } 
         else {
