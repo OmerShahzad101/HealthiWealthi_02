@@ -25,7 +25,7 @@ const MyClient = () => {
           {myclient && myclient.length > 0 ? (
             myclient.map((item, idx) => {
               return (
-                item?.client?.firstname && (
+                item?.client?.firstname && item.status == "Approved" ? (
                   <div className="col-md-6 col-lg-4 col-xl-3">
                     <div className="card widget-profile pat-widget-profile">
                       <div className="card-body">
@@ -93,7 +93,7 @@ const MyClient = () => {
                       </div>
                     </div>
                   </div>
-                )
+                ) : " "
               );
             })
           ) : (
