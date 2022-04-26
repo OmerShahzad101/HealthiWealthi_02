@@ -2,7 +2,7 @@ import {useState} from "react";
 import {getHttpRequest, postHttpRequest} from "../../../../axios";
 import Specialities from "./Specialities";
 import {useHistory} from "react-router-dom";
-import AvaliableFeature from "./avaliableFeature";
+import AvaliableFeature from "./AvaliableFeature";
 import CoachSlider from "./CoachSlider";
 import {useDispatch} from "react-redux";
 import {setCoachesList} from "../../../../store/slices/search/coachFiltersSlice";
