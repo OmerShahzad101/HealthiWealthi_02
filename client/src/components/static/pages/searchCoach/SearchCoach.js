@@ -5,6 +5,10 @@ import { useSelector } from "react-redux";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
 const SearchCoach = () => {
+
+  const {coachList} = useSelector((state) => state.filters)
+  console.log(coachList, 'list form store rr')
+
   const mediaPath = process.env.REACT_APP_IMG;
   const role = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
@@ -23,60 +27,31 @@ const SearchCoach = () => {
   const kickBoxing = useRef();
   const userName = useRef();
 
-  // let coachGender = {};
-  // let Services = {};
-  // let healthCourse = {};
 
-  let coachGender = {
-    femaleCoach: femaleCoach.current?.checked,
-    maleCoach: maleCoach.current?.checked,
-  };
-  let Services = {
-    kickBoxing: kickBoxing.current?.checked, //false
-    Yoga: Yoga.current?.checked,
-    Nutritionists: Nutritionists.current?.checked,
-    HolisticHealth: HolisticHealth.current?.checked,
-    PaleoHealth: PaleoHealth.current?.checked,
-  };
-  let healthCourse = {
-    Certified_Phlebotomy: Certified_Phlebotomy.current?.checked,
-    ProfessionalCoder: ProfessionalCoder.current?.checked,
-  };
-  // const Services = {
-  //   kickBoxing: kickBoxing.current,
-  //   Yoga: Yoga.current,
-  //   Nutritionists: Nutritionists.current,
-  //   HolisticHealth: HolisticHealth.current,
-  //   PaleoHealth: PaleoHealth.current,
-  // };
+  function handleChange() {
+    let gender = [];
+     const male = maleCoach.current.checked === true ? gender.push(maleCoach.current.value) : ''
+    const female = femaleCoach.current.checked === true ? gender.push(femaleCoach.current.value) : ''
 
-  // const healthCourse = {
-  //   Certified_Phlebotomy: Certified_Phlebotomy.current,
-  //   ProfessionalCoder: ProfessionalCoder.current,
-  // };
-  const [coachList, setCoachList] = useState([]);
-  useEffect(() => {
-    getHttpRequest("/front/coach/list")
-      .then((response) => {
-        console.log(response);
-        setCoachList(response.data.data.coaches);
-      })
-      .catch(() => {
-        console.log("error");
-      });
-  }, []);
+    const services = [];
 
-  function handleChange(event) {
-    // let coachGender = {
-    //   femaleCoach: femaleCoach.current?.checked,
-    //   maleCoach: maleCoach.current?.checked,
-    // };
-    //setTimeout(function () {
-    console.log("Services", Services);
-    console.log("healthCourse", healthCourse);
-    console.log("coachGender", maleCoach);
-    //}, 2000);
-  }
+    const kick = kickBoxing.current.checked === true ? services.push(kickBoxing.current.value) : ''
+    const yoga = Yoga.current.checked === true ? services.push(Yoga.current.value) : ''
+    const nutritions = Nutritionists.current.checked === true ? services.push(Nutritionists.current.value) : ''
+    const holiHealth = HolisticHealth.current.checked === true ? services.push(HolisticHealth.current.value) : ''
+    const wellness = WellnessHealth.current.checked === true ? services.push(WellnessHealth.current.value) : ''
+    const paleHealth = PaleoHealth.current.checked === true ? services.push(PaleoHealth.current.value) : ''
+
+    const courses = [];
+
+    const Certified_Phlebotom = Certified_Phlebotomy.current.checked === true ? courses.push(Certified_Phlebotomy.current.value) : ''
+    const ProfessionalCode = ProfessionalCoder.current.checked === true ? courses.push(ProfessionalCoder.current.value) : ''
+
+    console.log(services, 'wins on click services')
+    console.log(gender, 'wins on click gender')
+    console.log(courses, 'wins on click courses')
+
+    }
 
   const unAuth = (err , id) => {
     err.preventDefault();
@@ -178,7 +153,7 @@ const SearchCoach = () => {
                           type="checkbox"
                           name="select_specialist"
                           ref={kickBoxing}
-                          value={!kickBoxing}
+                          value="kickBoxing"
                         />
                         <span className="checkmark"></span> Kick Boxing
                       </label>
@@ -188,7 +163,7 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          value={Yoga}
+                          value="Yoga"
                           ref={Yoga}
                         />
                         <span className="checkmark"></span> Yoga
@@ -199,7 +174,7 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          value={true}
+                          value="nutritionists"
                           ref={Nutritionists}
                         />
                         <span className="checkmark"></span> Nutritionists
@@ -209,7 +184,7 @@ const SearchCoach = () => {
                       <label className="custom_check">
                         <input
                           type="checkbox"
-                          value={true}
+                          value="holisticHealth"
                           name="select_specialist"
                           ref={HolisticHealth}
                         />
@@ -220,7 +195,7 @@ const SearchCoach = () => {
                       <label className="custom_check">
                         <input
                           type="checkbox"
-                          value={true}
+                          value="wellnessHealth"
                           name="select_specialist"
                           ref={WellnessHealth}
                         />
@@ -233,7 +208,7 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          value={true}
+                          value="paleoHealth"
                           ref={PaleoHealth}
                         />
                         <span className="checkmark"></span> Paleo Health
@@ -247,7 +222,7 @@ const SearchCoach = () => {
                         <input
                           type="checkbox"
                           name="select_specialist"
-                          value={true}
+                          value="certified_phlebotomy"
                           ref={Certified_Phlebotomy}
                         />
                         <span className="checkmark"></span>Certified Phlebotomy
@@ -260,7 +235,7 @@ const SearchCoach = () => {
                           type="checkbox"
                           name="select_specialist"
                           // onChange={handleChange}
-                          value={true}
+                          value="ProfessionalCoder"
                           ref={ProfessionalCoder}
                         />
                         <span className="checkmark"></span> Professional Coder
@@ -282,7 +257,7 @@ const SearchCoach = () => {
             </div>
 
             <div className="col-md-12 col-lg-8 col-xl-9">
-              {coachList ? (
+              {coachList.length > 1 ? (
                 coachList.map((item, idx) => {
                   return (
                     <>

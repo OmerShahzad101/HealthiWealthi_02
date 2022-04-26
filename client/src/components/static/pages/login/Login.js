@@ -71,6 +71,8 @@ const Login = (props) => {
           };
     
           dispatch(setUser(userData));
+          localStorage.setItem('accessToken', response.data.data.accessToken)
+          localStorage.setItem('user', JSON.stringify(response.data.data))
           dispatch(setAccessToken(response.data.data.accessToken));
 
           if (response?.data?.data?.type === 1) {
