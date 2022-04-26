@@ -312,32 +312,32 @@ const BasicInfo = () => {
         console.log("Something went wrong...");
       });
 
-    getservicesList();
+    //getservicesList();
   }, []);
 
   useEffect(() => {
     payload = { ...profileData };
   }, [profileData, experience, awards, qualifications]);
 
-  const getservicesList = () => {
-    getHttpRequest(`/admin/services/list/`)
-      .then((response) => {
-        console.log(response);
-        if (!response) {
-          console.log("Something went wrong with response...");
-          return;
-        }
+  // const getservicesList = () => {
+  //   getHttpRequest(`/admin/services/list/`)
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (!response) {
+  //         console.log("Something went wrong with response...");
+  //         return;
+  //       }
 
-        if (response?.data?.success === true) {
-          setServices(response?.data?.services);
-        } else {
-          console.log(response.data.message);
-        }
-      })
-      .catch(() => {
-        console.log("Something went wrong...");
-      });
-  };
+  //       if (response?.data?.success === true) {
+  //         setServices(response?.data?.services);
+  //       } else {
+  //         console.log(response.data.message);
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("Something went wrong...");
+  //     });
+  // };
 
   return (
     <div>
