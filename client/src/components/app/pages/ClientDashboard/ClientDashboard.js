@@ -46,59 +46,62 @@ const ClientDashboard = (props) => {
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
                               return (
-                                item?.client?.firstname &&
-                                <tr key={idx}>
-                                  <td>
-                                    <h2 className="table-avatar">
-                                      <Link
-                                        to="/coach-profile"
-                                        className="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          className="avatar-img rounded-circle"
-                                          src={
-                                            item.coach?.fileName
-                                              ? mediaPath +
-                                                item.coach.fileName
-                                              : mediaPath + "avatar.jpg"
+                                item?.client?.firstname && (
+                                  <tr key={idx}>
+                                    <td>
+                                      <h2 className="table-avatar">
+                                        <Link
+                                          to="/coach-profile"
+                                          className="avatar avatar-sm mr-2"
+                                        >
+                                          <img
+                                            className="avatar-img rounded-circle"
+                                            src={
+                                              item.coach?.fileName
+                                                ? mediaPath +
+                                                  item.coach.fileName
+                                                : mediaPath + "avatar.jpg"
+                                            }
+                                            alt="User"
+                                          />
+                                        </Link>
+                                        <Link
+                                          to={
+                                            "/coach-profile/" + item?.coach?._id
                                           }
-                                          alt="User"
-                                        />
-                                      </Link>
-                                      <Link to={"/coach-profile/" + item?.coach?._id}>
-                                        &nbsp;
-                                        {item?.coach?.firstname +
-                                          " " +
-                                          item?.coach?.lastname}
-                                        <span>
-                                          &nbsp;{" "}
-                                          {item?.coach?.specialization}
-                                        </span>
-                                      </Link>
-                                    </h2>
-                                  </td>
-                                  <td>
-                                    {/* {item?.bookingDate} */}
-                                    <span className="d-block text-info">
-                                      {item?.slots}
-                                    </span>
-                                  </td>
-                                  <td>{item?.bookingDate}</td>
-                                  {/* <td>${item?.price}</td> */}
-                                  {/* <td>16 Feb 2022</td> */}
-                                  <td>
-                                    <span className="badge badge-pill bg-success-light">
-                                      Confirm
-                                    </span>
-                                    <span className="badge badge-pill bg-success-light">
-                                      Confirm
-                                    </span>
-                                    <span className="badge badge-pill bg-success-light">
-                                      Confirm
-                                    </span>
-                                  </td>
-                                  
-                                </tr>
+                                        >
+                                          &nbsp;
+                                          {item?.coach?.firstname +
+                                            " " +
+                                            item?.coach?.lastname}
+                                          <span>
+                                            &nbsp; {item?.coach?.specialization}
+                                          </span>
+                                        </Link>
+                                      </h2>
+                                    </td>
+                                    <td>
+                                      {/* {item?.bookingDate} */}
+                                      <span className="d-block text-info">
+                                        {item?.slots}
+                                      </span>
+                                    </td>
+                                    <td>{item?.bookingDate}</td>
+                                    {/* <td>${item?.price}</td> */}
+                                    {/* <td>16 Feb 2022</td> */}
+                                    <td>
+                                      <span className="badge badge-pill bg-success-light">
+                                        Confirm
+                                      </span>
+                                      <span className="badge badge-pill bg-danger-light">
+                                        Cancelled
+                                      </span>
+                                      <span className="badge badge-pill bg-warning-light">
+                                        Pending
+                                      </span>
+                                    </td>
+                                  </tr>
+                                )
                               );
                             })
                           ) : (

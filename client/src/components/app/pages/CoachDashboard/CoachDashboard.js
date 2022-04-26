@@ -114,8 +114,8 @@ const CoachDashboard = () => {
                           <tbody>
                             {myclient && myclient.length > 0 ? (
                               myclient.map((item, idx) => {
-                                return (
-                                  item?.client?.firstname &&
+                                return item?.client?.firstname &&
+                                  item.status == "Approved" ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -134,7 +134,8 @@ const CoachDashboard = () => {
                                             alt="User"
                                           />
                                         </a>
-                                        <div>&nbsp;
+                                        <div>
+                                          &nbsp;
                                           {item?.client?.firstname +
                                             " " +
                                             item?.client?.lastname}{" "}
@@ -145,6 +146,8 @@ const CoachDashboard = () => {
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
                                   </tr>
+                                ) : (
+                                  " "
                                 );
                               })
                             ) : (
@@ -174,7 +177,8 @@ const CoachDashboard = () => {
                           <tbody>
                             {myclient && myclient.length > 0 ? (
                               myclient.map((item, idx) => {
-                                return (
+                                return item?.client?.firstname &&
+                                  item.status == "Approved" ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -193,7 +197,7 @@ const CoachDashboard = () => {
                                             alt="User"
                                           />
                                         </a>
-                                        <div>
+                                        <div>&nbsp;&nbsp;
                                           {item?.client?.firstname +
                                             " " +
                                             item?.client?.lastname}{" "}
@@ -204,6 +208,8 @@ const CoachDashboard = () => {
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
                                   </tr>
+                                ) : (
+                                  ""
                                 );
                               })
                             ) : (

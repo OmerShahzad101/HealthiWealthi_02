@@ -3,9 +3,12 @@ import logout from "./../../../../utils/auth/logout";
 import imagePath from "../../../../utils/url/imagePath";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import {getHttpRequest} from "../../../../axios";
 
 const CoachSideBar = () => {
   const location = useLocation();
+
+  getHttpRequest('front/coach/getImage').then((resp) => console.log(resp.data, '111111111'))
 
   let data;
   const user = useSelector((state) => state.auth.user);
@@ -61,12 +64,12 @@ const CoachSideBar = () => {
                   <span>Profile Settings</span>
                 </NavLink>
               </li>
-              {/* <li>
+              <li>
                 <NavLink to="/app/appointments">
                   <i className="fas fa-calendar-check"></i>
                   <span>Appointments</span>
                 </NavLink>
-              </li> */}
+              </li>
               <li>
                 <NavLink to="/app/my-clients">
                   <i className="fas fa-user-injured"></i>
