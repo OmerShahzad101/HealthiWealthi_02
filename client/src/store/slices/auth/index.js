@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let usr = localStorage.getItem('user')
 usr = usr ? JSON.parse(usr) : null
-// let {res, response} = usr;
 
 const initialState = {
   user: {
@@ -140,7 +139,7 @@ export const authSlice = createSlice({
       state.permissions = permissions;
     },
     setAccessToken(state, { payload: accessToken }) {
-      state.accessToken = accessToken;
+      state.user.accessToken = accessToken;
     },
     setImage(state, { payload: fileName }) {
       state.user.fileName = fileName;

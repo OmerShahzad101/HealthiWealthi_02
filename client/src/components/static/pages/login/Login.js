@@ -69,13 +69,11 @@ const Login = (props) => {
             response: response.data.data,
             res: res?.data.coach,
           };
-          console.log(userData, 'iiiiiiiiiiiiiiiiiiiii')
     
           dispatch(setUser(userData));
           localStorage.setItem('accessToken', response.data.data.accessToken)
-          // localStorage.setItem('user', JSON.stringify(response.data.data))
           localStorage.setItem('user', JSON.stringify(userData))
-          dispatch(setAccessToken(response.data.data.accessToken));
+          dispatch(setAccessToken(userData.response.accessToken));
 
           if (response?.data?.data?.type === 1) {
             history.replace(CLIENT_PROFILE_SETTING);
