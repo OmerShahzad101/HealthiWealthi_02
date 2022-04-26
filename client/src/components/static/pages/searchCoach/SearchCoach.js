@@ -242,7 +242,6 @@ const SearchCoach = () => {
                       </label>
                     </div>
                   </div>
-
                   <div className="btn-search">
                     <button
                       type="button"
