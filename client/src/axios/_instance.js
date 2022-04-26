@@ -20,7 +20,8 @@ instance.interceptors.request.use(
 
         // Get access token from Redux store and add it to request headers
         const appState = store.getState();
-        const accessToken = appState.auth.accessToken || null;
+        // const accessToken = appState.auth.accessToken || null;
+        const accessToken  = localStorage.getItem('accessToken')
 
         if (accessToken !== null) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
