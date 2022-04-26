@@ -61,12 +61,12 @@ const CoachSideBar = () => {
                   <span>Profile Settings</span>
                 </NavLink>
               </li>
-              {/* <li>
+              <li>
                 <NavLink to="/app/appointments">
                   <i className="fas fa-calendar-check"></i>
                   <span>Appointments</span>
                 </NavLink>
-              </li> */}
+              </li>
               <li>
                 <NavLink to="/app/my-clients">
                   <i className="fas fa-user-injured"></i>
