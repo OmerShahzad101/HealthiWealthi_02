@@ -29,9 +29,12 @@ const LoginWithGoogle = () => {
   const accociatedCoach = localStorage.getItem("accociatedCoach");
 
   const handleLogin = async (response) => {
+    console.log(response)
+
     try {
       postHttpRequest("/front/auth/googleLogin", {
         tokenId: response.tokenId,
+        googleAccessToken: response.accessToken,
         accociatedCoach
       }).then((response) => {
         if (response.status === 200) {

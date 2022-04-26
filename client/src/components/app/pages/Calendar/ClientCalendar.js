@@ -159,8 +159,8 @@ const ClientCalendar = (props) => {
 
   const bookHandler = () => {
     const payload = {
-      clientId: userid,
-      coachId: props.id,
+      client: userid,
+      coach: props.id,
       slots: "10:00 AM",
       bookingDate: "20-April-2022",
       status: true,
