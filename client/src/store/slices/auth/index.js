@@ -16,7 +16,7 @@ const initialState = {
     Userabout: null,
     firstName: usr ? usr.res?.firstname : null,
     lastName: usr ? usr.res?.lastname : null,
-    fileName: usr ? usr.res?.fileName : null,
+    fileName: null,
     specialization: null,
   },
   clientProfile: {
