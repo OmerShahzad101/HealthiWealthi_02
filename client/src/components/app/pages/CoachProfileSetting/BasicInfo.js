@@ -329,7 +329,7 @@ const BasicInfo = () => {
         }
 
         if (response?.data?.success === true) {
-          setServices(response?.data?.services);
+          // setServices(response?.data?.services);
         } else {
           console.log(response.data.message);
         }
