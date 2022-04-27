@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import { getHttpRequest } from "../../../../axios";
 
 const Specialities = () => {
+  const mediaPath = process.env.REACT_APP_IMG;
+
   const settingsSpecialities = {
     dots: true,
     autoplay: false,
@@ -15,10 +17,9 @@ const Specialities = () => {
 
   useEffect(() => {
     const res = getHttpRequest("admin/services/list").then((response) => {
-      console.log(response);
       setSpecialities(response.data.data.services);
     });
-  },[]);
+  }, []);
 
   return (
     <div className="container-fluid">
@@ -33,123 +34,23 @@ const Specialities = () => {
         <div className="col-md-9">
           <div className="">
             <Slider {...settingsSpecialities}>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/meditation.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Yoga Experts</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/nutrition.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Nutritionist</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/suncream.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Dermatologist</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/liposuction.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Gym Coaches</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/dumbbell.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Cardio Care</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/lunges.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Streching</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/runner.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Lifestyle</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/fitness.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Weight Training</p>
-              </div>
-              <div className="speicality-item text-center">
-                <div className="speicality-img">
-                  <img
-                    src="assets/img/specialities/weightlifting.png"
-                    className="img-fluid"
-                    alt="Speciality"
-                  />
-                  <span>
-                    <i className="fa fa-circle" aria-hidden="true"></i>
-                  </span>
-                </div>
-                <p>Crossfit</p>
-              </div>
+              {specialities && specialities.length > 0
+                ? specialities.map((item) => (
+                    <div className="speicality-item text-center">
+                      <div className="speicality-img">
+                        <img
+                          src={mediaPath + item.logo}
+                          className="img-fluid"
+                          alt="Speciality"
+                        />
+                        <span>
+                          <i className="fa fa-circle" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <p>{item.name}</p>
+                    </div>
+                  ))
+                : ""}
             </Slider>
           </div>
         </div>

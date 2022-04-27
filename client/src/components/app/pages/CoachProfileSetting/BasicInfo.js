@@ -249,12 +249,15 @@ const BasicInfo = () => {
     });
   };
   const handleChangeInput1 = (e) => {
-    const alteredServices = e.map(item => ({label : item.label , value: item.value}))
-    console.log(alteredServices)
+    const alteredServices = e.map((item) => ({
+      label: item.label,
+      value: item.value,
+    }));
+    console.log(alteredServices);
     setprofileData({
       ...profileData,
-      services : alteredServices
-    })
+      services: alteredServices,
+    });
   };
 
   function updateProfileHandler(event) {
@@ -351,7 +354,6 @@ const BasicInfo = () => {
               label: item.name,
             }))
           );
-
         } else {
           console.log(response.data.message);
         }
@@ -489,11 +491,13 @@ const BasicInfo = () => {
                   "services select2"
                 )} */}
                 <Select
+                  className="form-select2"
                   value={profileData?.services}
                   isMulti={true}
                   name="services"
                   onChange={handleChangeInput1}
                   options={services}
+                  placeholder="Services"
                 />
               </div>
             </div>

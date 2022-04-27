@@ -7709,3 +7709,16 @@ input[type=number] {
   right: 5px;
   font-size: 12px;
 }
+.form-select2  .css-1s2u09g-control{
+  min-height: calc(3.5rem + 2px);
+  line-height: 1.25;
+}
+.form-select2 .css-1pahdxg-control{
+  min-height: calc(3.5rem + 2px);
+  line-height: 1.25;
+}
+.form-select2 .css-12jo7m5{
+  font-size: 14px;
+  padding: 6px;
+  padding-left: 10px;
+}
