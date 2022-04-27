@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
@@ -19,6 +19,33 @@ const Login = (props) => {
   const [validationErrors, setValidationErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const accociatedCoach = localStorage.getItem("accociatedCoach");
+
+  useEffect(() => {
+    const url = window.location.href;
+    const aa = url.split("/").pop();
+    if (aa.length > 5) {
+      const googleAccessToken = url.split("=").pop();
+      console.log("googleAccessToken", googleAccessToken);
+      if (googleAccessToken) {
+        postHttpRequest("/front/auth/verify", googleAccessToken).then(
+          (response) => {
+            console.log(response.data.user);
+            dispatch(setUser({ response: response.data.user }));
+
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+            dispatch(setAccessToken(response.data.accessToken));
+            if (response?.data?.user?.type === 1) {
+              history.replace(CLIENT_PROFILE_SETTING);
+            } else if (response?.data?.useRef?.type === 3) {
+              history.replace(COACH_PROFILE_SETTING);
+            }
+          }
+        );
+      }
+    }
+  }, []);
+
   const loginHandler = async (event) => {
     event.preventDefault();
 
