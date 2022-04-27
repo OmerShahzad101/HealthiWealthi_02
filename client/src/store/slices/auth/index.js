@@ -51,7 +51,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { payload }) {
-      console.log("payloadokokokokokoko", payload);
+      console.log("payload", payload);
       const { res, response } = payload;
 
       if (res) {
