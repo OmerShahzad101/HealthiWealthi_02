@@ -9,6 +9,7 @@ const CoachDashboard = () => {
 
   const [myclient, setMyclient] = useState();
   useEffect(() => {
+    debugger;
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
         console.log(response);

@@ -2,13 +2,16 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
-import LoginWithGoogle from "./LoginWithGoogle";
 import { Link, useHistory } from "react-router-dom";
-import { getHttpRequest,postHttpRequest,} from "../../../../axios";
+import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { setUser, setAccessToken } from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { CLIENT_PROFILE_SETTING, COACH_PROFILE_SETTING,} from "../../../../router/constants/ROUTES";
+import {
+  CLIENT_PROFILE_SETTING,
+  COACH_PROFILE_SETTING,
+} from "../../../../router/constants/ROUTES";
 const Login = (props) => {
+  const GOOGLE_LOGIN = process.env.REACT_APP_GOOGLE_LOGIN;
   const history = useHistory();
   const dispatch = useDispatch();
   const emailRef = useRef();
@@ -25,7 +28,7 @@ const Login = (props) => {
     const loginData = {
       email,
       password,
-      accociatedCoach
+      accociatedCoach,
     };
 
     const errors = validate(loginData);
@@ -38,10 +41,9 @@ const Login = (props) => {
     }
     setIsLoading(true);
 
-
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
-    
+
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -69,10 +71,12 @@ const Login = (props) => {
             response: response.data.data,
             res: res?.data.coach,
           };
-    
+
+          
+
           dispatch(setUser(userData));
-          localStorage.setItem('accessToken', response.data.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(userData))
+          localStorage.setItem("accessToken", response.data.data.accessToken);
+          localStorage.setItem("user", JSON.stringify(userData));
           dispatch(setAccessToken(userData.response.accessToken));
 
           if (response?.data?.data?.type === 1) {
@@ -80,8 +84,7 @@ const Login = (props) => {
           } else if (response?.data?.data?.type === 3) {
             history.replace(COACH_PROFILE_SETTING);
           }
-        } 
-        else {
+        } else {
           Toast.fire({
             icon: "error",
             title: response.data.message,
@@ -96,6 +99,9 @@ const Login = (props) => {
         title: "Invalid username or password",
       });
     }
+  };
+  const googleLoginHandler = () => {
+    window.location.href = "http://localhost:8082/auth/google";
   };
   return (
     <div className="account-page">
@@ -157,17 +163,20 @@ const Login = (props) => {
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
                   </div>
-
-                  <div className="row form-row social-login">
-                    <div className="col-12">
-                      <LoginWithGoogle />
-                    </div>
-                  </div>
-
-                  <div className="text-center dont-have">
-                    Don’t have an account? <Link to="/signup">Register</Link>
-                  </div>
                 </form>
+
+                <div className="row form-row social-login">
+                  <div className="col-12">
+                    <button type="button" onClick={googleLoginHandler}>
+                      {" "}
+                      Continue With Google
+                    </button>
+                  </div>
+                </div>
+
+                <div className="text-center dont-have">
+                  Don’t have an account? <Link to="/signup">Register</Link>
+                </div>
               </div>
             </div>
           </div>
