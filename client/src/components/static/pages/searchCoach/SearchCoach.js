@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
 const SearchCoach = () => {
-
-  const {coachList} = useSelector((state) => state.filters)
-  console.log(coachList, 'list form store rr')
+  const { coachList } = useSelector((state) => state.filters);
+  console.log(coachList, "list form store rr");
 
   const mediaPath = process.env.REACT_APP_IMG;
   const role = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
   const history = useHistory();
-  
+  const [services, setServices] = useState([]);
+
   const SearchFilter = useRef();
   const maleCoach = useRef();
   const femaleCoach = useRef();
@@ -27,33 +27,59 @@ const SearchCoach = () => {
   const kickBoxing = useRef();
   const userName = useRef();
 
-
   function handleChange() {
     let gender = [];
-     const male = maleCoach.current.checked === true ? gender.push(maleCoach.current.value) : ''
-    const female = femaleCoach.current.checked === true ? gender.push(femaleCoach.current.value) : ''
+    const male =
+      maleCoach.current.checked === true
+        ? gender.push(maleCoach.current.value)
+        : "";
+    const female =
+      femaleCoach.current.checked === true
+        ? gender.push(femaleCoach.current.value)
+        : "";
 
     const services = [];
 
-    const kick = kickBoxing.current.checked === true ? services.push(kickBoxing.current.value) : ''
-    const yoga = Yoga.current.checked === true ? services.push(Yoga.current.value) : ''
-    const nutritions = Nutritionists.current.checked === true ? services.push(Nutritionists.current.value) : ''
-    const holiHealth = HolisticHealth.current.checked === true ? services.push(HolisticHealth.current.value) : ''
-    const wellness = WellnessHealth.current.checked === true ? services.push(WellnessHealth.current.value) : ''
-    const paleHealth = PaleoHealth.current.checked === true ? services.push(PaleoHealth.current.value) : ''
+    const kick =
+      kickBoxing.current.checked === true
+        ? services.push(kickBoxing.current.value)
+        : "";
+    const yoga =
+      Yoga.current.checked === true ? services.push(Yoga.current.value) : "";
+    const nutritions =
+      Nutritionists.current.checked === true
+        ? services.push(Nutritionists.current.value)
+        : "";
+    const holiHealth =
+      HolisticHealth.current.checked === true
+        ? services.push(HolisticHealth.current.value)
+        : "";
+    const wellness =
+      WellnessHealth.current.checked === true
+        ? services.push(WellnessHealth.current.value)
+        : "";
+    const paleHealth =
+      PaleoHealth.current.checked === true
+        ? services.push(PaleoHealth.current.value)
+        : "";
 
     const courses = [];
 
-    const Certified_Phlebotom = Certified_Phlebotomy.current.checked === true ? courses.push(Certified_Phlebotomy.current.value) : ''
-    const ProfessionalCode = ProfessionalCoder.current.checked === true ? courses.push(ProfessionalCoder.current.value) : ''
+    const Certified_Phlebotom =
+      Certified_Phlebotomy.current.checked === true
+        ? courses.push(Certified_Phlebotomy.current.value)
+        : "";
+    const ProfessionalCode =
+      ProfessionalCoder.current.checked === true
+        ? courses.push(ProfessionalCoder.current.value)
+        : "";
 
-    console.log(services, 'wins on click services')
-    console.log(gender, 'wins on click gender')
-    console.log(courses, 'wins on click courses')
+    console.log(services, "wins on click services");
+    console.log(gender, "wins on click gender");
+    console.log(courses, "wins on click courses");
+  }
 
-    }
-
-  const unAuth = (err , id) => {
+  const unAuth = (err, id) => {
     err.preventDefault();
     Toast.fire({
       icon: "error",
@@ -62,6 +88,28 @@ const SearchCoach = () => {
       history.push(LOGIN);
       localStorage.setItem("accociatedCoach", id);
     });
+  };
+
+  useEffect(() => {
+    getservicesList();
+  }, []);
+
+  const getservicesList = async () => {
+    getHttpRequest(`/admin/services/list/`)
+      .then((response) => {
+        if (!response) {
+          console.log("Something went wrong with response...");
+          return;
+        }
+        if (response?.data?.success === true) {
+          setServices(response?.data?.data?.services);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(() => {
+        console.log("Something went wrong...");
+      });
   };
 
   return (
@@ -147,73 +195,19 @@ const SearchCoach = () => {
                   </div>
                   <div className="filter-widget">
                     <h4>Select Services</h4>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          ref={kickBoxing}
-                          value="kickBoxing"
-                        />
-                        <span className="checkmark"></span> Kick Boxing
-                      </label>
-                    </div>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          value="Yoga"
-                          ref={Yoga}
-                        />
-                        <span className="checkmark"></span> Yoga
-                      </label>
-                    </div>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          value="nutritionists"
-                          ref={Nutritionists}
-                        />
-                        <span className="checkmark"></span> Nutritionists
-                      </label>
-                    </div>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          value="holisticHealth"
-                          name="select_specialist"
-                          ref={HolisticHealth}
-                        />
-                        <span className="checkmark"></span> Holistic Health
-                      </label>
-                    </div>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          value="wellnessHealth"
-                          name="select_specialist"
-                          ref={WellnessHealth}
-                        />
-                        <span className="checkmark"></span> Wellness Health
-                        Coach
-                      </label>
-                    </div>
-                    <div>
-                      <label className="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          value="paleoHealth"
-                          ref={PaleoHealth}
-                        />
-                        <span className="checkmark"></span> Paleo Health
-                      </label>
-                    </div>
+                    {services &&
+                      services.map((item) => (
+                        <div>
+                          <label className="custom_check">
+                            <input
+                              type="checkbox"
+                              name="select_specialist"
+                              value="kickBoxing"
+                            />
+                            <span className="checkmark"></span> {item.name}
+                          </label>
+                        </div>
+                      ))}
                   </div>
                   <div className="filter-widget">
                     <h4>Health courses</h4>
@@ -357,7 +351,9 @@ const SearchCoach = () => {
                                     ) : (
                                       <Link
                                         className="apt-btn"
-                                        onClick={(err) => unAuth(err , item?._id)}
+                                        onClick={(err) =>
+                                          unAuth(err, item?._id)
+                                        }
                                       >
                                         Book Appointment
                                       </Link>

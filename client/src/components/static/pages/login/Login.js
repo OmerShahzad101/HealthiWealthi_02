@@ -4,10 +4,13 @@ import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import LoginWithGoogle from "./LoginWithGoogle";
 import { Link, useHistory } from "react-router-dom";
-import { getHttpRequest,postHttpRequest,} from "../../../../axios";
+import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { setUser, setAccessToken } from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
-import { CLIENT_PROFILE_SETTING, COACH_PROFILE_SETTING,} from "../../../../router/constants/ROUTES";
+import {
+  CLIENT_PROFILE_SETTING,
+  COACH_PROFILE_SETTING,
+} from "../../../../router/constants/ROUTES";
 const Login = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -25,7 +28,7 @@ const Login = (props) => {
     const loginData = {
       email,
       password,
-      accociatedCoach
+      accociatedCoach,
     };
 
     const errors = validate(loginData);
@@ -38,10 +41,9 @@ const Login = (props) => {
     }
     setIsLoading(true);
 
-
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
-    
+
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -69,10 +71,10 @@ const Login = (props) => {
             response: response.data.data,
             res: res?.data.coach,
           };
-    
+
           dispatch(setUser(userData));
-          localStorage.setItem('accessToken', response.data.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(userData))
+          localStorage.setItem("accessToken", response.data.data.accessToken);
+          localStorage.setItem("user", JSON.stringify(userData));
           dispatch(setAccessToken(userData.response.accessToken));
 
           if (response?.data?.data?.type === 1) {
@@ -80,8 +82,7 @@ const Login = (props) => {
           } else if (response?.data?.data?.type === 3) {
             history.replace(COACH_PROFILE_SETTING);
           }
-        } 
-        else {
+        } else {
           Toast.fire({
             icon: "error",
             title: response.data.message,

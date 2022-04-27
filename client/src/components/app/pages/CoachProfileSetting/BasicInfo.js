@@ -18,12 +18,7 @@ import Resizer from "react-image-file-resizer";
 import Select from "react-select";
 
 const BasicInfo = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  
   const userid = useSelector((state) => state.auth.user.userid);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
