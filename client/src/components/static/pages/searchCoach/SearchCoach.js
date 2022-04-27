@@ -112,6 +112,12 @@ const SearchCoach = () => {
       });
   };
 
+  const handleChangeCheckbox = (e) => {
+    
+    const { name, value } = e.target
+    console.log()
+  }
+
   return (
     <>
       <div className="breadcrumb-bar">
@@ -201,8 +207,9 @@ const SearchCoach = () => {
                           <label className="custom_check">
                             <input
                               type="checkbox"
-                              name="select_specialist"
-                              value="kickBoxing"
+                              name={item.name}
+                              value={item.name}
+                              onChange={handleChangeCheckbox}
                             />
                             <span className="checkmark"></span> {item.name}
                           </label>
