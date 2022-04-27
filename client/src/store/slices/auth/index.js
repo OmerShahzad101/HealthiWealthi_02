@@ -12,6 +12,7 @@ const initialState = {
     userRoleId: null,
     permissions: [],
     accessToken: usr ? usr.response?.accessToken : null,
+    googleRefreshToken: usr ? usr.response?.googleRefreshToken : null,
     // acessPageDashboard: null,
     Userabout: null,
     firstName: usr ? usr.res?.firstname : null,

@@ -12,6 +12,8 @@ const ClientCalendar = (props) => {
   // const userid = useSelector((state) => state.auth.user.userid);
   const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
   const [slotsByEachDate, setslotsByEachDate] = useState({});
+  const {googleRefreshToken} = useSelector(state => state.auth.user)
+  console.log("googleRefreshToken :",googleRefreshToken)
 
   const settings = {
     dots: false,
@@ -62,17 +64,17 @@ const ClientCalendar = (props) => {
     event.preventDefault();
     Toast.fire("TimeSlot!", "Date: " + date + ", Time: " + time, "success");
 
-    // getHttpRequest(`/auth/google`)
-    //   .then((response) => {
-    //     if (!response) {
-    //       alert("Something went wrong with response...");
-    //       return;
-    //     }
-    //     console.log(response);
-    //   })
-    //   .catch((e) => {
-    //     console.log("Something went wrongggg...");
-    //   });
+    postHttpRequest(`/googleMeet/create` ,{date,time,googleRefreshToken} )
+      .then((response) => {
+        if (!response) {
+          alert("Something went wrong with response...");
+          return;
+        }
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log("Something went wrongggg...");
+      });
   };
 
   const appointmentSlots = Object.entries(slotsByEachDate).map(
