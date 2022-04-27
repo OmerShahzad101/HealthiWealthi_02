@@ -90,12 +90,20 @@ const ClientDashboard = (props) => {
                                     {/* <td>${item?.price}</td> */}
                                     {/* <td>16 Feb 2022</td> */}
                                     <td>
-                                      <span className="badge badge-pill bg-success-light">
-                                        Confirm
-                                      </span>
-                                      <span className="badge badge-pill bg-danger-light">
-                                        Cancelled
-                                      </span>
+                                      {item?.status == "Approved" ? (
+                                        <span className="badge badge-pill bg-success-light">
+                                          Confirm
+                                        </span>
+                                      ) : (
+                                        ""
+                                      )}
+                                      {item?.status == "Canclelled" ? (
+                                        <span className="badge badge-pill bg-danger-light">
+                                          Cancelled
+                                        </span>
+                                      ) : (
+                                        ""
+                                      )}
                                       <span className="badge badge-pill bg-warning-light">
                                         Pending
                                       </span>

@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { getHttpRequest } from "../../../../axios";
 
 const Specialities = () => {
   const settingsSpecialities = {
     dots: true,
-    autoplay:false,
+    autoplay: false,
     infinite: true,
     arrows: false,
     slidesToShow: 5,
-    slidesToScroll:1
+    slidesToScroll: 1,
   };
-  
+  const [specialities, setSpecialities] = useState();
+
+  useEffect(() => {
+    const res = getHttpRequest("admin/services/list").then((response) => {
+      console.log(response);
+      setSpecialities(response.data.data.services);
+    });
+  },[]);
+
   return (
     <div className="container-fluid">
       <div className="section-header text-center">
