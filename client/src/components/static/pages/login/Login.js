@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
-import LoginWithGoogle from "./LoginWithGoogle";
 import { Link, useHistory } from "react-router-dom";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { setUser, setAccessToken } from "../../../../store/slices/auth";
@@ -12,6 +11,7 @@ import {
   COACH_PROFILE_SETTING,
 } from "../../../../router/constants/ROUTES";
 const Login = (props) => {
+  const GOOGLE_LOGIN = process.env.REACT_APP_GOOGLE_LOGIN;
   const history = useHistory();
   const dispatch = useDispatch();
   const emailRef = useRef();
@@ -98,6 +98,9 @@ const Login = (props) => {
       });
     }
   };
+  const googleLoginHandler = () => {
+    window.location.href = "http://localhost:8082/auth/google";
+  };
   return (
     <div className="account-page">
       <div className="content">
@@ -158,17 +161,20 @@ const Login = (props) => {
                     <span className="or-line"></span>
                     <span className="span-or">or</span>
                   </div>
-
-                  <div className="row form-row social-login">
-                    <div className="col-12">
-                      <LoginWithGoogle />
-                    </div>
-                  </div>
-
-                  <div className="text-center dont-have">
-                    Don’t have an account? <Link to="/signup">Register</Link>
-                  </div>
                 </form>
+
+                <div className="row form-row social-login">
+                  <div className="col-12">
+                    <button type="button" onClick={googleLoginHandler}>
+                      {" "}
+                      Continue With Google
+                    </button>
+                  </div>
+                </div>
+
+                <div className="text-center dont-have">
+                  Don’t have an account? <Link to="/signup">Register</Link>
+                </div>
               </div>
             </div>
           </div>
