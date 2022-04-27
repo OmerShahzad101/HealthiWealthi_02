@@ -14,7 +14,16 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { setImage } from "../../../../store/slices/auth";
 import { setCoachProfile, setUser } from "../../../../store/slices/auth";
 import Resizer from "react-image-file-resizer";
+
+import Select from "react-select";
+
 const BasicInfo = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
   const userid = useSelector((state) => state.auth.user.userid);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
@@ -22,7 +31,7 @@ const BasicInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [profileData, setprofileData] = useState({});
-  const [services, setServices] = useState("");
+  const [services, setServices] = useState([]);
   let payload = { ...profileData };
 
   const [qualifications, setqualifications] = useState([
@@ -239,6 +248,14 @@ const BasicInfo = () => {
       [name]: value,
     });
   };
+  const handleChangeInput1 = (e) => {
+    const alteredServices = e.map(item => ({label : item.label , value: item.value}))
+    console.log(alteredServices)
+    setprofileData({
+      ...profileData,
+      services : alteredServices
+    })
+  };
 
   function updateProfileHandler(event) {
     event.preventDefault();
@@ -289,7 +306,6 @@ const BasicInfo = () => {
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
-        console.log(response,"coach response")
         if (!response) {
           console.log("Something went wrong with response...");
           return;
@@ -321,7 +337,7 @@ const BasicInfo = () => {
     payload = { ...profileData };
   }, [profileData, experience, awards, qualifications]);
 
-  const getservicesList = () => {
+  const getservicesList = async () => {
     getHttpRequest(`/admin/services/list/`)
       .then((response) => {
         if (!response) {
@@ -329,8 +345,13 @@ const BasicInfo = () => {
           return;
         }
         if (response?.data?.success === true) {
-          setServices(response?.data?.data.services);
-          console.log(response?.data?.data.services);
+          setServices(
+            response?.data?.data?.services.map((item) => ({
+              value: item._id,
+              label: item.name,
+            }))
+          );
+
         } else {
           console.log(response.data.message);
         }
@@ -463,23 +484,17 @@ const BasicInfo = () => {
             </div>
             <div className="col-md-6">
               <div className="form-floating mb-4">
-                <select
-                  className="form-select"
+                {/* {console.log(
+                  profileData?.services ? profileData?.services : "",
+                  "services select2"
+                )} */}
+                <Select
+                  value={profileData?.services}
+                  isMulti={true}
                   name="services"
-                  value={profileData?.gender}
-                  onChange={handleChangeInput}
-                >
-                  <option value="" disabled>
-                    Open this select menu
-                  </option>
-                  <option name="male" value="male">
-                    Male
-                  </option>
-                  <option name="female" value="female">
-                    Female
-                  </option>
-                </select>
-                <label>Services</label>
+                  onChange={handleChangeInput1}
+                  options={services}
+                />
               </div>
             </div>
           </div>

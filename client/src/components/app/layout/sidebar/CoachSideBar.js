@@ -1,14 +1,16 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import imagePath from "../../../../utils/url/imagePath";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useLocation } from "react-router-dom";
 import {getHttpRequest} from "../../../../axios";
+import {useEffect} from "react";
+import {setImage} from "../../../../store/slices/auth";
 
 const CoachSideBar = () => {
   const location = useLocation();
 
-  getHttpRequest('front/coach/getImage').then((resp) => console.log(resp.data, '111111111'))
+  const dispatch = useDispatch()
 
   let data;
   const user = useSelector((state) => state.auth.user);
@@ -20,6 +22,16 @@ const CoachSideBar = () => {
   } else {
     data = user;
   }
+
+  const getProfilePic = async () => {
+    const {data} = await getHttpRequest('front/coach/getImage')
+    dispatch(setImage(data.user.fileName))
+  }
+
+  useEffect(() => {
+    getProfilePic()
+  }, [])
+
   const imageUpload = () => {};
   if (location.pathname == "/app/chat") {
     return "";
