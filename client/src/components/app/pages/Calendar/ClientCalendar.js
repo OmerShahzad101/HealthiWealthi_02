@@ -12,8 +12,7 @@ const ClientCalendar = (props) => {
   // const userid = useSelector((state) => state.auth.user.userid);
   const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
   const [slotsByEachDate, setslotsByEachDate] = useState({});
-  const { googleRefreshToken } = useSelector((state) => state.auth.user);
-  console.log("googleRefreshToken :", googleRefreshToken);
+  const googleRefreshToken = localStorage.getItem("googleRefreshToken")
 
   const settings = {
     dots: false,
@@ -75,7 +74,7 @@ const ClientCalendar = (props) => {
     endTime = moment(endTime).format();
     let summary = "Coach Meeting";
     
-    postHttpRequest(`/googleMeet/create`, {
+    postHttpRequest(`front/googleMeet/create`, {
       startTime,
       endTime,
       googleRefreshToken,
@@ -95,7 +94,6 @@ const ClientCalendar = (props) => {
 
   const appointmentSlots = Object.entries(slotsByEachDate).map(
     ([availableDay, availableTime]) => {
-      debugger;
       let dayName = moment(availableDay).format("ddd");
       let humanReadableDate = moment(availableDay).format("DD MMM, YYYY");
       let gridClass = "";
