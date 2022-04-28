@@ -13,6 +13,7 @@ const SearchCoach = () => {
   const history = useHistory();
   const [servicesList, setServicesList] = useState([]);
   const [servicesFilter, setServicesFilter] = useState([]);
+  const [genderFilter, setGenderFilter] = useState([]);
 
   const SearchFilter = useRef();
   const maleCoach = useRef();
@@ -112,7 +113,7 @@ const SearchCoach = () => {
       });
   };
 
-  const handleChangeCheckbox = (e) => {
+  const handleChangeServices = (e) => {
     let updatedList = [...servicesFilter];
     if (e.target.checked) {
       updatedList = [...servicesFilter, e.target.value];
@@ -120,6 +121,23 @@ const SearchCoach = () => {
       updatedList.splice(servicesFilter.indexOf(e.target.value), 1);
     }
     setServicesFilter(updatedList);
+  }
+
+  const handleChangeGender = (e) => {
+    let updatedList = [...genderFilter];
+    if (e.target.checked) {
+      updatedList = [...genderFilter, e.target.value];
+    } else {
+      updatedList.splice(genderFilter.indexOf(e.target.value), 1);
+    }
+    setGenderFilter(updatedList);
+  }
+
+  const filterSubmit = () => {
+    // genderFilter
+    // servicesFilter
+    console.log(genderFilter)
+    console.log(servicesFilter)
   }
 
   return (
@@ -165,7 +183,6 @@ const SearchCoach = () => {
           </div>
         </div>
       </div>
-      {console.log(servicesFilter,"servicesFilter")}
       <div className="content">
         <div className="container-fluid">
           <div className="row">
@@ -189,16 +206,17 @@ const SearchCoach = () => {
                     <h4>Gender</h4>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" ref={maleCoach} value="male" />
+                        <input type="checkbox" name="male" value="male" onChange={handleChangeGender} />
                         <span className="checkmark"></span> Male Coach
                       </label>
                     </div>
                     <div>
                       <label className="custom_check">
                         <input
-                          ref={femaleCoach}
+                          name="female"
                           type="checkbox"
                           value="female"
+                          onChange={handleChangeGender}
                         />
                         <span className="checkmark"></span> Female Coach
                       </label>
@@ -214,7 +232,7 @@ const SearchCoach = () => {
                               type="checkbox"
                               name={item.name}
                               value={item.name}
-                              onChange={handleChangeCheckbox}
+                              onChange={handleChangeServices}
                             />
                             <span className="checkmark"></span> {item.name}
                           </label>
@@ -252,7 +270,7 @@ const SearchCoach = () => {
                     <button
                       type="button"
                       className="btn btn-block"
-                      onClick={handleChange}
+                      onClick={filterSubmit}
                     >
                       Search
                     </button>
