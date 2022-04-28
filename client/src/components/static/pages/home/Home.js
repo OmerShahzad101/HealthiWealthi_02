@@ -15,6 +15,8 @@ export default function Home() {
 
     const handleChange = (event) => {
         setValues({...values, [event.target.name]: event.target.value})
+        
+        // setValues((state)=>{console.log(state.coach); return state} )
     }
 
     const handleSearch = async () => {
@@ -65,6 +67,7 @@ export default function Home() {
                                     type="button"
                                     className="btn btn-primary search-btn"
                                     onClick={handleSearch}
+                                    disabled = {!values.coach && !values.location}
                                 >
                                     <i className="fas fa-search"></i> <span>Search</span>
                                 </button>
