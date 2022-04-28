@@ -73,11 +73,13 @@ const ClientCalendar = (props) => {
 
     startTime = moment(startTime).format();
     endTime = moment(endTime).format();
-
+    let summary = "Coach Meeting";
+    
     postHttpRequest(`/googleMeet/create`, {
       startTime,
       endTime,
       googleRefreshToken,
+      summary,
     })
       .then((response) => {
         if (!response) {
@@ -93,6 +95,7 @@ const ClientCalendar = (props) => {
 
   const appointmentSlots = Object.entries(slotsByEachDate).map(
     ([availableDay, availableTime]) => {
+      debugger;
       let dayName = moment(availableDay).format("ddd");
       let humanReadableDate = moment(availableDay).format("DD MMM, YYYY");
       let gridClass = "";
