@@ -12,8 +12,8 @@ const ClientCalendar = (props) => {
   // const userid = useSelector((state) => state.auth.user.userid);
   const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
   const [slotsByEachDate, setslotsByEachDate] = useState({});
-  const {googleRefreshToken} = useSelector(state => state.auth.user)
-  console.log("googleRefreshToken :",googleRefreshToken)
+  const { googleRefreshToken } = useSelector((state) => state.auth.user);
+  console.log("googleRefreshToken :", googleRefreshToken);
 
   const settings = {
     dots: false,
@@ -60,11 +60,27 @@ const ClientCalendar = (props) => {
       });
   }, []);
 
-  const handleOnClickGridSlot = (event, time, date) => {
+  const handleOnClickGridSlot = (event, timeStart, timeEnd, date) => {
     event.preventDefault();
-    Toast.fire("TimeSlot!", "Date: " + date + ", Time: " + time, "success");
+    Toast.fire(
+      "TimeSlot!",
+      "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
+      "success"
+    );
 
-    postHttpRequest(`/googleMeet/create` ,{date,time,googleRefreshToken} )
+    let startTime = moment(date + " " + timeStart);
+    let endTime = moment(date + " " + timeEnd);
+
+    startTime = moment(startTime).format();
+    endTime = moment(endTime).format();
+    let summary = "Coach Meeting";
+    
+    postHttpRequest(`/googleMeet/create`, {
+      startTime,
+      endTime,
+      googleRefreshToken,
+      summary,
+    })
       .then((response) => {
         if (!response) {
           alert("Something went wrong with response...");
@@ -79,6 +95,7 @@ const ClientCalendar = (props) => {
 
   const appointmentSlots = Object.entries(slotsByEachDate).map(
     ([availableDay, availableTime]) => {
+      debugger;
       let dayName = moment(availableDay).format("ddd");
       let humanReadableDate = moment(availableDay).format("DD MMM, YYYY");
       let gridClass = "";
@@ -104,10 +121,15 @@ const ClientCalendar = (props) => {
                 <button
                   to="#"
                   onClick={(event) =>
-                    handleOnClickGridSlot(event, time.start, humanReadableDate)
+                    handleOnClickGridSlot(
+                      event,
+                      time.start,
+                      time.end,
+                      humanReadableDate
+                    )
                   }
                 >
-                  {time.start}
+                  {time.start} -- {time.end}
                 </button>
               </div>
             ))}

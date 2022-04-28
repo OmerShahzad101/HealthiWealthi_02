@@ -165,6 +165,7 @@ const SearchCoach = () => {
           </div>
         </div>
       </div>
+      {console.log(servicesFilter,"servicesFilter")}
       <div className="content">
         <div className="container-fluid">
           <div className="row">

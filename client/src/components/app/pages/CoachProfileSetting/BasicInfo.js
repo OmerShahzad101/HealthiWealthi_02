@@ -243,7 +243,7 @@ const BasicInfo = () => {
       [name]: value,
     });
   };
-  const handleChangeInput1 = (e) => {
+  const handleChangeSelect2 = (e) => {
     const alteredServices = e.map((item) => ({
       label: item.label,
       value: item.value,
@@ -490,7 +490,7 @@ const BasicInfo = () => {
                   value={profileData?.services}
                   isMulti={true}
                   name="services"
-                  onChange={handleChangeInput1}
+                  onChange={handleChangeSelect2}
                   options={services}
                   placeholder="Services"
                 />

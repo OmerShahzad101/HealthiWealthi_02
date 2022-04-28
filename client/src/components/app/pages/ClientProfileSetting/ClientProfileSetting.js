@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Toast from "../../../common/toast/Toast";
-import { getHttpRequest, putHttpRequest ,postHttpRequest} from "../../../../axios";
+import {
+  getHttpRequest,
+  putHttpRequest,
+  postHttpRequest,
+} from "../../../../axios";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { setClientProfile } from "../../../../store/slices/auth";
@@ -9,6 +13,9 @@ import imagePath from "../../../../utils/url/imagePath";
 import imageExist from "../../../../utils/url/imageExist";
 import { setImage } from "../../../../store/slices/auth";
 import { AiOutlineCamera } from "react-icons/ai";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 const ClientProfileSetting = () => {
   const mediaPath = process.env.REACT_APP_IMG;
   const userImage = useSelector((state) => state.auth.user.fileName);
@@ -19,45 +26,25 @@ const ClientProfileSetting = () => {
   const [profileData, setprofileData] = useState({});
   const dispatch = useDispatch();
 
-  const firstnameRef = useRef();
-  const lastnameRef = useRef();
-  const phoneRef = useRef();
-  const genderRef = useRef();
-  const DobRef = useRef();
-  const aboutRef = useRef();
-  const addressRef = useRef();
-  const postalCodeRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const countryRef = useRef();
-  const bloodgroupRef = useRef();
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setprofileData({
+      ...profileData,
+      [name]: value,
+    });
+  };
+
+  const handleChangePhone = (e) => {
+    setprofileData({
+      ...profileData,
+      phone: e,
+    });
+  };
+
   function updateProfileHandler(event) {
     event.preventDefault();
-    const firstname = firstnameRef.current.value;
-    const lastname = lastnameRef.current.value;
-    const phone = phoneRef.current.value;
-    const gender = genderRef.current.value;
-    const about = aboutRef.current.value;
-    const address = addressRef.current.value;
-    const postalCode = postalCodeRef.current.value;
-    const city = cityRef.current.value;
-    const state = stateRef.current.value;
-    const country = countryRef.current.value;
-    const bloodgroup = bloodgroupRef.current.value;
-    const payload = {
-      firstname,
-      lastname,
-      phone,
-      bloodgroup,
-      gender,
-      about,
-      address,
-      postalCode,
-      city,
-      state,
-      country,
-      _id: userid,
-    };
+
+    const payload = profileData;
 
     const errors = validate(payload);
 
@@ -71,7 +58,6 @@ const ClientProfileSetting = () => {
     setIsLoading(true);
     putHttpRequest("/front/client/edit", payload)
       .then((res) => {
- 
         setIsLoading(false);
 
         if (!res) {
@@ -80,8 +66,7 @@ const ClientProfileSetting = () => {
           return;
         }
 
-        if (res) {
-       
+        if (res.data.success === true) {
           const userData = { res: res?.data.client };
           dispatch(setClientProfile(userData));
           Toast.fire({
@@ -102,20 +87,17 @@ const ClientProfileSetting = () => {
           title: "Something went wrong...",
         });
       });
-    
-      window.scrollTo(0, 0);
 
+    window.scrollTo(0, 0);
   }
 
   const Upgrade = () => {
     history.push("/coach-upgrade-profile");
- 
   };
 
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`)
       .then((response) => {
-      
         if (!response) {
           alert("Something went wrong with response...");
           console.log("Something went wrong with response...");
@@ -187,7 +169,7 @@ const ClientProfileSetting = () => {
             console.log("Something went wrong with response...");
             return;
           }
-          console.log(response, 'ressssssssssssssssss');
+          console.log(response, "ressssssssssssssssss");
           console.log("response", response);
           if (response.data.success === true) {
             setValidationErrors({});
@@ -242,7 +224,7 @@ const ClientProfileSetting = () => {
                       name="username"
                       className="form-control"
                       placeholder="username"
-                      value={profileData?.username || ""}
+                      value={profileData?.username}
                       disabled
                     />
                     <label>Username</label>
@@ -255,7 +237,7 @@ const ClientProfileSetting = () => {
                       name="email"
                       className="form-control"
                       placeholder="email"
-                      value={profileData?.email || ""}
+                      value={profileData?.email}
                       disabled
                     />
                     <label>Email</label>
@@ -266,17 +248,15 @@ const ClientProfileSetting = () => {
                     <input
                       type="firstname"
                       name="firstname"
-                      ref={firstnameRef}
                       className="form-control"
                       placeholder="first name"
-                      defaultValue={profileData?.firstname || ""}
+                      value={profileData?.firstname}
+                      onChange={handleChangeInput}
                     />
                     <label>
                       First Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">
-                      {validationErrors.firstname || ""}
-                    </span>
+                    <span className="errors">{validationErrors.firstname}</span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -284,25 +264,24 @@ const ClientProfileSetting = () => {
                     <input
                       type="lastname"
                       name="lastname"
-                      ref={lastnameRef}
                       className="form-control"
                       placeholder="last name"
-                      defaultValue={profileData?.lastname || ""}
+                      value={profileData?.lastname}
+                      onChange={handleChangeInput}
                     />
                     <label>
                       Last Name <span className="text-danger">*</span>
                     </label>
-                    <span className="errors">
-                      {validationErrors.lastname || ""}
-                    </span>
+                    <span className="errors">{validationErrors.lastname}</span>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
                     <select
                       className="form-select"
-                      ref={genderRef}
-                      defaultValue={profileData?.gender || ""}
+                      name="gender"
+                      value={profileData?.gender}
+                      onChange={handleChangeInput}
                     >
                       <option value="" disabled>
                         Open this select menu
@@ -321,8 +300,9 @@ const ClientProfileSetting = () => {
                   <div className="form-floating mb-4">
                     <select
                       className="form-select"
-                      ref={bloodgroupRef}
-                      defaultValue={profileData?.bloodgroup || ""}
+                      name="bloodgroup"
+                      value={profileData?.bloodgroup}
+                      onChange={handleChangeInput}
                     >
                       <option value="" disabled>
                         Open this select menu
@@ -358,29 +338,28 @@ const ClientProfileSetting = () => {
 
                 <div className="col-12 col-md-6">
                   <div className="form-floating mb-4">
-                    <input
-                      type="number"
-                      name="phone"
-                      maxlength="4"
-                      moz-appearance="none"
-                      ref={phoneRef}
-                      className="form-control"
-                      placeholder="Phone Number"
-                      defaultValue={profileData?.phone || ""}
+                    <PhoneInput
+                      defaultCountry={"gb"}
+                      inputExtraProps={{
+                        name: "phone",
+                        required: true,
+                        autoFocus: true,
+                      }}
+                      value={profileData?.phone}
+                      onChange={handleChangePhone}
                     />
-                    <label>Phone Number</label>
                   </div>
                 </div>
                 <div className="col-12">
                   <div className="form-floating mb-4">
                     <textarea
-                      type="about"
+                      type="text"
                       name="about"
-                      ref={aboutRef}
                       className="form-control"
                       placeholder="about"
-                      style={{ minHeight: "100px" }}
-                      defaultValue={profileData?.about || ""}
+                      style={{ minHeight: "150px" }}
+                      value={profileData?.about}
+                      onChange={handleChangeInput}
                     />
                     <label>Briefly describe about yourself</label>
                   </div>
@@ -388,10 +367,10 @@ const ClientProfileSetting = () => {
                     <input
                       type="address"
                       name="address"
-                      ref={addressRef}
+                      value={profileData?.address}
+                      onChange={handleChangeInput}
                       className="form-control"
                       placeholder="address"
-                      defaultValue={profileData?.address || ""}
                     />
                     <label>Address</label>
                   </div>
@@ -401,10 +380,10 @@ const ClientProfileSetting = () => {
                     <input
                       type="city"
                       name="city"
-                      ref={cityRef}
                       className="form-control"
                       placeholder="city"
-                      defaultValue={profileData?.city || ""}
+                      value={profileData?.city}
+                      onChange={handleChangeInput}
                     />
                     <label>City</label>
                   </div>
@@ -414,10 +393,10 @@ const ClientProfileSetting = () => {
                     <input
                       type="state"
                       name="state"
-                      ref={stateRef}
                       className="form-control"
                       placeholder="state"
-                      defaultValue={profileData?.state || ""}
+                      value={profileData?.state}
+                      onChange={handleChangeInput}
                     />
                     <label>State</label>
                   </div>
@@ -427,10 +406,10 @@ const ClientProfileSetting = () => {
                     <input
                       type="country"
                       name="country"
-                      ref={countryRef}
                       className="form-control"
                       placeholder="country"
-                      defaultValue={profileData?.country || ""}
+                      value={profileData?.country}
+                      onChange={handleChangeInput}
                     />
                     <label>Country</label>
                   </div>
@@ -440,10 +419,10 @@ const ClientProfileSetting = () => {
                     <input
                       type="postalCode"
                       name="postalCode"
-                      ref={postalCodeRef}
                       className="form-control"
                       placeholder="postalCode"
-                      defaultValue={profileData?.postalCode || ""}
+                      value={profileData?.postalCode}
+                      onChange={handleChangeInput}
                     />
                     <label>Postal Code</label>
                   </div>

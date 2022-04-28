@@ -15,7 +15,7 @@ const CoachCalendar = ({ availabilityTab }) => {
 
   function loadMoreEvents(calendarId, start, end) {
     //console.log("calendarId");
-    console.log("calendarId",calendarId, start, end);
+    console.log("calendarId", calendarId, start, end);
   }
 
   useEffect(() => {
@@ -40,8 +40,7 @@ const CoachCalendar = ({ availabilityTab }) => {
           setSelections(newSelections);
           // console.log(newSelections,"newwwwwwwwwwwwwwww")
           setLoadcalender(true);
-        } 
-        else {
+        } else {
           console.log(response.data.message);
         }
       })
@@ -84,7 +83,6 @@ const CoachCalendar = ({ availabilityTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
-                        
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);
@@ -99,15 +97,14 @@ const CoachCalendar = ({ availabilityTab }) => {
                         var response = await getHttpRequest(
                           `front/schedule/get/${userid}`
                         );
-                        console.log(response,"responseOnChnage")
+                        console.log(response, "responseOnChnage");
                         if (response) {
                           var result = await postHttpRequest(
                             "front/schedule/set",
                             formData
                           );
-                          console.log(result,"result")
+                          console.log(result, "result");
                           if (result.status === 200) {
-
                             Toast.fire({
                               icon: "success",
                               title: "Event registered successfully",
