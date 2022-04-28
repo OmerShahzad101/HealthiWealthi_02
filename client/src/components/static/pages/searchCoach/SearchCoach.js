@@ -6,13 +6,13 @@ import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
 const SearchCoach = () => {
   const { coachList } = useSelector((state) => state.filters);
-  console.log(coachList, "list form store rr");
-
+  
   const mediaPath = process.env.REACT_APP_IMG;
   const role = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
   const history = useHistory();
-  const [services, setServices] = useState([]);
+  const [servicesList, setServicesList] = useState([]);
+  const [servicesFilter, setServicesFilter] = useState([]);
 
   const SearchFilter = useRef();
   const maleCoach = useRef();
@@ -102,7 +102,7 @@ const SearchCoach = () => {
           return;
         }
         if (response?.data?.success === true) {
-          setServices(response?.data?.data?.services);
+          setServicesList(response?.data?.data?.services);
         } else {
           console.log(response.data.message);
         }
@@ -113,9 +113,13 @@ const SearchCoach = () => {
   };
 
   const handleChangeCheckbox = (e) => {
-    
-    const { name, value } = e.target
-    console.log()
+    let updatedList = [...servicesFilter];
+    if (e.target.checked) {
+      updatedList = [...servicesFilter, e.target.value];
+    } else {
+      updatedList.splice(servicesFilter.indexOf(e.target.value), 1);
+    }
+    setServicesFilter(updatedList);
   }
 
   return (
@@ -201,8 +205,8 @@ const SearchCoach = () => {
                   </div>
                   <div className="filter-widget">
                     <h4>Select Services</h4>
-                    {services &&
-                      services.map((item) => (
+                    {servicesList &&
+                      servicesList.map((item) => (
                         <div>
                           <label className="custom_check">
                             <input

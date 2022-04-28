@@ -12,7 +12,6 @@ export default function Footer() {
           return;
         }
         if (response?.data?.success === true) {
-          console.log(response?.data?.data?.cmsList);
           setCmsPage(response?.data?.data?.cmsList);
         } else {
           console.log(response.data.message);
