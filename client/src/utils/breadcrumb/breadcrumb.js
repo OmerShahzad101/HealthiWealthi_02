@@ -36,6 +36,10 @@ export default function breadCrumb(path) {
         associatedName: "Reviews",
       },
       {
+        path: "add-reviews",
+        associatedName: "Reviews",
+      },
+      {
         path: "coach-profile-setting",
         associatedName: "Profile Setting",
       },

@@ -26,12 +26,12 @@ const Appointments = () => {
     putHttpRequest("front/booking/status", statusDetail);
   };
   return (
-    <>
+    <div className="col-md-7 col-lg-8 col-xl-9">
       {appointments && appointments.length > 0 ? (
         appointments.map((item, idx) => {
           console.log(item.status);
           return item?.client?.firstname && item?.status == "pending" ? (
-            <div className="col-md-7 col-lg-8 col-xl-9">
+            <div >
               <div className="appointments">
                 <div className="appointment-list">
                   <div className="profile-info-widget">
@@ -104,7 +104,7 @@ const Appointments = () => {
           <span>You Don't Have any Appoinments</span>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

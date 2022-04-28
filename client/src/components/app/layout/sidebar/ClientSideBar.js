@@ -1,13 +1,13 @@
-import {NavLink, useLocation} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import imagePath from "../../../../utils/url/imagePath";
-import {useEffect} from "react";
-import {getHttpRequest} from "../../../../axios";
-import {setImage} from "../../../../store/slices/auth";
+import { useEffect } from "react";
+import { getHttpRequest } from "../../../../axios";
+import { setImage } from "../../../../store/slices/auth";
 const ClientSideBar = () => {
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let data;
   const user = useSelector((state) => state.auth.user);
   console.log("userclient=", user);
@@ -21,13 +21,13 @@ const ClientSideBar = () => {
   }
 
   const getProfilePic = async () => {
-    const {data} = await getHttpRequest('front/coach/getImage')
-    dispatch(setImage(data.user.fileName))
-  }
+    const { data } = await getHttpRequest("front/coach/getImage");
+    dispatch(setImage(data.user.fileName));
+  };
 
   useEffect(() => {
-    getProfilePic()
-  }, [])
+    getProfilePic();
+  }, []);
 
   if (location.pathname == "/app/chat") {
     return "";
@@ -92,26 +92,12 @@ const ClientSideBar = () => {
                   <span>Favourites</span>
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/app/chat">
-                  <i className="fas fa-comments"></i>
-                  <span>Message</span>
-                  <small className="unread-msg">23</small>
+              <li>
+                <NavLink to="/app/add-reviews">
+                  <i className="fas fa-star"></i>
+                  <span>Reviews</span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/app/videocall">
-                  <i className="fas fa-comments"></i>
-                  <span>Video Call</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/app/audiocall">
-                  <i className="fas fa-comments"></i>
-                  <span>Voice Call</span>
-                </NavLink>
-              </li> */}
-
               <li>
                 <NavLink to="/app/client-change-password">
                   <i className="fas fa-lock"></i>
