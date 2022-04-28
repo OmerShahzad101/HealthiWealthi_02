@@ -29,6 +29,10 @@ const Reviews = lazy(() =>import(/* webpackChunkName: "Reviews" */ "../../compon
 const ReviewsWithSuspense = withSuspense(Reviews);
 // --------------------------- Client Routes ----------------------------
 
+const AddReviews = lazy(() =>import(/* webpackChunkName: "AddReviews" */ "../../components/app/pages/AddReviews/AddReviews"));
+const AddReviewsWithSuspense = withSuspense(AddReviews);
+
+
 const BookAppointment = lazy(() =>import(/* webpackChunkName: "BookAppointment" */ "../../components/app/pages/BookAppointment/BookAppointment"));
 const BookAppointmentWithSuspense = withSuspense(BookAppointment);
 
@@ -170,6 +174,12 @@ function getRouteConfigs() {
       path: routes.CHAT,
       exact: true,
       element: <ChatsWithSuspense />,
+    },
+    {
+      //Chat Route
+      path: routes.ADD_REVIEWS,
+      exact: true,
+      element: <AddReviewsWithSuspense />,
     },
     {
       // NOT FOUND ROUTE

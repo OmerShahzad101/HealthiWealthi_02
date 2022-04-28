@@ -1,27 +1,25 @@
-export const ROOT = '/';
-export const APP = '/app';
+export const ROOT = "/";
+export const APP = "/app";
 
 /**
  * OPEN ROUTES
  */
 
 //Static Routes
- export const ABOUT = '/about';
- export const CONTACT = '/contact-us';
- export const SEARCH_COACH = '/search-coach';
- export const COACH_PROFILE = '/coach-profile/:coachId';
- export const PRICING = '/pricing';
- export const CMSPAGE = '/cmspage';
-
+export const ABOUT = "/about";
+export const CONTACT = "/contact-us";
+export const SEARCH_COACH = "/search-coach";
+export const COACH_PROFILE = "/coach-profile/:coachId";
+export const PRICING = "/pricing";
+export const CMSPAGE = "/cmspage";
 
 // Base Routes
-export const LOGIN = '/login';
-export const SIGNUP = '/signup';
-export const FORGOT_PASSWORD = '/forgot-password';
-export const RESET_PASSWORD = '/reset-password/:token';
-export const EMAIL_VERIFICATION = '/email-verified';
-export const SIGN_DOCUMENT = '/sign-document/:docId';
-
+export const LOGIN = "/login";
+export const SIGNUP = "/signup";
+export const FORGOT_PASSWORD = "/forgot-password";
+export const RESET_PASSWORD = "/reset-password/:token";
+export const EMAIL_VERIFICATION = "/email-verified";
+export const SIGN_DOCUMENT = "/sign-document/:docId";
 
 /**
  * GUARDED ROUTES
@@ -47,12 +45,10 @@ export const INVOICE = `${APP}/invoice`;
 export const INVOICE_VIEW = `${APP}/invoices-view`;
 export const MY_CLIENTS = `${APP}/my-clients`;
 export const REVIEWS = `${APP}/reviews`;
-export const CLIENT_PROFILE_SETTING = `${APP}/client-profile-setting`
-export const CLIENT_CHANGE_PASSWORD= `${APP}/client-change-password`
-export const CHAT= `${APP}/chat`
-
-
-
+export const CLIENT_PROFILE_SETTING = `${APP}/client-profile-setting`;
+export const CLIENT_CHANGE_PASSWORD = `${APP}/client-change-password`;
+export const CHAT = `${APP}/chat`;
+export const ADD_REVIEWS = `${APP}/add-reviews`;
 
 // DASHBOARD
 export const DASHBOARD = `${APP}/dashboard`;
@@ -65,14 +61,13 @@ export const EDIT_Template_ROUTE = `${EDIT_Template}/:companyId`;
 export const COMPANY_DETAILS = `${APP}/company/details`;
 export const COMPANY_DETAILS_ROUTE = `${COMPANY_DETAILS}/:companyId`;
 
-// Document  
+// Document
 export const DOCUMENT = `${APP}/document`;
 export const DOCUMENT_DETAILS = `${APP}/document/details`;
 export const DOCUMENT_DETAILS_ROUTE = `${DOCUMENT_DETAILS}/:portfolioId`;
 
 // NEWWORKFLOW
 export const NEW_WORK_FLOW = `${APP}/wrokflow`;
-
 
 // SETTINGS
 export const SETTINGS = `${APP}/settings`;
