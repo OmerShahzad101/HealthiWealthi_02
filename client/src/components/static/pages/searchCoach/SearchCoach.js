@@ -1,85 +1,28 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { getHttpRequest } from "../../../../axios";
-import { useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { getHttpRequest , postHttpRequest } from "../../../../axios";
+import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
+import { setCoachesList } from "../../../../store/slices/search/coachFiltersSlice";
+
 const SearchCoach = () => {
-  const { coachList } = useSelector((state) => state.filters);
-  
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const history = useHistory()
   const mediaPath = process.env.REACT_APP_IMG;
+  const { coachList } = useSelector((state) => state.filters);
   const role = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
-  const history = useHistory();
   const [servicesList, setServicesList] = useState([]);
   const [servicesFilter, setServicesFilter] = useState([]);
   const [genderFilter, setGenderFilter] = useState([]);
-
-  const SearchFilter = useRef();
-  const maleCoach = useRef();
-  const femaleCoach = useRef();
-  const Certified_Phlebotomy = useRef();
-  const ProfessionalCoder = useRef();
-  const Yoga = useRef();
-  const Nutritionists = useRef();
-  const HolisticHealth = useRef();
-  const WellnessHealth = useRef();
-  const PaleoHealth = useRef();
-  const kickBoxing = useRef();
-  const userName = useRef();
-
-  function handleChange() {
-    let gender = [];
-    const male =
-      maleCoach.current.checked === true
-        ? gender.push(maleCoach.current.value)
-        : "";
-    const female =
-      femaleCoach.current.checked === true
-        ? gender.push(femaleCoach.current.value)
-        : "";
-
-    const services = [];
-
-    const kick =
-      kickBoxing.current.checked === true
-        ? services.push(kickBoxing.current.value)
-        : "";
-    const yoga =
-      Yoga.current.checked === true ? services.push(Yoga.current.value) : "";
-    const nutritions =
-      Nutritionists.current.checked === true
-        ? services.push(Nutritionists.current.value)
-        : "";
-    const holiHealth =
-      HolisticHealth.current.checked === true
-        ? services.push(HolisticHealth.current.value)
-        : "";
-    const wellness =
-      WellnessHealth.current.checked === true
-        ? services.push(WellnessHealth.current.value)
-        : "";
-    const paleHealth =
-      PaleoHealth.current.checked === true
-        ? services.push(PaleoHealth.current.value)
-        : "";
-
-    const courses = [];
-
-    const Certified_Phlebotom =
-      Certified_Phlebotomy.current.checked === true
-        ? courses.push(Certified_Phlebotomy.current.value)
-        : "";
-    const ProfessionalCode =
-      ProfessionalCoder.current.checked === true
-        ? courses.push(ProfessionalCoder.current.value)
-        : "";
-
-    console.log(services, "wins on click services");
-    console.log(gender, "wins on click gender");
-    console.log(courses, "wins on click courses");
-  }
-
+  // const [values, setValues] = useState({ coach: "", gender: [], services: [] });
+let values = { coach: "", gender: [], services: [] }
+  const params = new Proxy(new URLSearchParams(location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+ console.log(params,"params")
   const unAuth = (err, id) => {
     err.preventDefault();
     Toast.fire({
@@ -90,9 +33,29 @@ const SearchCoach = () => {
       localStorage.setItem("accociatedCoach", id);
     });
   };
+  
+  useEffect(async() => {
+    // console.log(queryParams);
+    const { data } =  getHttpRequest(`/front/search/get`)
+    .then((response) => {
+      if (!response) {
+        alert("Something went wrong with response...");
+        return;
+      }
 
-  useEffect(() => {
+      if (data.success === true) {
+        console.log(data,"dayayayayayayayay")
+        dispatch(setCoachesList(data.data));
+      }
+      
+    })
+    .catch((e) => {
+      alert(e);
+      console.log("Something went wrongggg...");
+    });
     getservicesList();
+   
+   
   }, []);
 
   const getservicesList = async () => {
@@ -133,11 +96,21 @@ const SearchCoach = () => {
     setGenderFilter(updatedList);
   }
 
-  const filterSubmit = () => {
-    // genderFilter
-    // servicesFilter
-    console.log(genderFilter)
-    console.log(servicesFilter)
+
+  const filterSubmit =  () => {
+    
+    // setValues({coach: "helo", gender: genderFilter ,services : servicesFilter })
+    values = ({coach: "ibad", gender: genderFilter ,services : servicesFilter })
+    // setValues((state)=>{console.log(state); return state;})
+    const { data } = getHttpRequest(`front/search/get?name=${values.coach}?gender=${values.gender}?services=${values.services}`);
+    if (data?.success === true) {
+      dispatch(setCoachesList(data.data));
+    }
+
+    history.push({
+      pathname: '/search-coach',
+      search: `?name=${values.coach}?gender=${genderFilter}?services=${servicesFilter}`
+    })
   }
 
   return (
@@ -162,7 +135,7 @@ const SearchCoach = () => {
               <div className="sort-by">
                 <span className="sort-title">Sort by</span>
                 <span className="sortby-fliter">
-                  <select className="select" ref={SearchFilter}>
+                  <select className="select">
                     <option>Select</option>
                     <option className="sorting" value="rating">
                       Rating
@@ -198,7 +171,7 @@ const SearchCoach = () => {
                         type="text"
                         className="form-control datetimepicker"
                         placeholder="Select Date"
-                        ref={userName}
+                        // ref={userName}
                       />
                     </div>
                   </div>
@@ -225,13 +198,13 @@ const SearchCoach = () => {
                   <div className="filter-widget">
                     <h4>Select Services</h4>
                     {servicesList &&
-                      servicesList.map((item) => (
+                      servicesList?.map((item) => (
                         <div>
                           <label className="custom_check">
                             <input
                               type="checkbox"
                               name={item.name}
-                              value={item.name}
+                              value={item._id}
                               onChange={handleChangeServices}
                             />
                             <span className="checkmark"></span> {item.name}
@@ -247,7 +220,7 @@ const SearchCoach = () => {
                           type="checkbox"
                           name="select_specialist"
                           value="certified_phlebotomy"
-                          ref={Certified_Phlebotomy}
+                          // ref={Certified_Phlebotomy}
                         />
                         <span className="checkmark"></span>Certified Phlebotomy
                         Technician (CPT) Training time
@@ -260,7 +233,7 @@ const SearchCoach = () => {
                           name="select_specialist"
                           // onChange={handleChange}
                           value="ProfessionalCoder"
-                          ref={ProfessionalCoder}
+                          // ref={ProfessionalCoder}
                         />
                         <span className="checkmark"></span> Professional Coder
                       </label>
