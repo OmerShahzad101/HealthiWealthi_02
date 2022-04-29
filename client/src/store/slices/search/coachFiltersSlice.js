@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    coachList: []
+    coachList: [],
 }
 
 export const coachFiltersSlice = createSlice({
