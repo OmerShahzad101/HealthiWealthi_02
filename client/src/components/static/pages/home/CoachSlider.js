@@ -37,6 +37,10 @@ const CoachSlider = () => {
 
     postHttpRequest("/front/favourites/create", payload)
       .then((response) => {
+        Toast.fire({
+          icon: "success",
+          title: response.data.message,
+        });
         if (response) {
           getHttpRequest("/front/coach/list").then((response) => {
             setCoachList(response.data.data.coaches);

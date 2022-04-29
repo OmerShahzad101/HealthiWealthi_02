@@ -1,22 +1,22 @@
 import { NavLink } from "react-router-dom";
 import logout from "./../../../../utils/auth/logout";
 import imagePath from "../../../../utils/url/imagePath";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import {getHttpRequest} from "../../../../axios";
-import {useEffect} from "react";
-import {setImage} from "../../../../store/slices/auth";
+import { getHttpRequest } from "../../../../axios";
+import { useEffect } from "react";
+import { setImage } from "../../../../store/slices/auth";
 
 const CoachSideBar = () => {
   const location = useLocation();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let data;
   const user = useSelector((state) => state.auth.user);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const coachProfile = useSelector((state) => state.auth.coachProfile);
- console.log("coachProfile", coachProfile);
+  console.log("coachProfile", coachProfile);
   if (coachProfile.firstName || coachProfile.lastName) {
     data = coachProfile;
   } else {
@@ -24,13 +24,13 @@ const CoachSideBar = () => {
   }
 
   const getProfilePic = async () => {
-    const {data} = await getHttpRequest('front/coach/getImage')
-    dispatch(setImage(data.user.fileName))
-  }
+    const { data } = await getHttpRequest("front/coach/getImage");
+    dispatch(setImage(data.user.fileName));
+  };
 
   useEffect(() => {
-    getProfilePic()
-  }, [])
+    getProfilePic();
+  }, []);
 
   const imageUpload = () => {};
   if (location.pathname == "/app/chat") {
@@ -50,12 +50,15 @@ const CoachSideBar = () => {
               </h3>
 
               <div className="patient-details">
-                <h5 className="mb-0">{data.specialization}</h5>
+                {/* <h5 className="mb-0">{data.specialization}</h5> */}
               </div>
 
               <div className="patient-details">
                 <h5 className="mb-0">
-                  {data.city} {data.country}
+                <i className="fas fa-map-marker-alt"></i>{" "}
+                  {data?.country || data?.city
+                    ? data?.country + ", " + data?.city
+                    : "No Location Setup"}
                 </h5>
               </div>
             </div>

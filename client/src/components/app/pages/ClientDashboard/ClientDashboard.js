@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
+import { BsFillArrowUpRightSquareFill } from "react-icons/bs";
+
 const ClientDashboard = (props) => {
   const clientId = useSelector((state) => state.auth.user.userid);
   const [myAppoinment, setMyAppoinment] = useState();
@@ -38,13 +40,14 @@ const ClientDashboard = (props) => {
                             <th>Coach</th>
                             <th>Appt Time</th>
                             <th>Booking Date</th>
-                            {/* <th>Amount</th> */}
                             <th>Status</th>
+                            <th>Meeting Link</th>
                           </tr>
                         </thead>
                         <tbody>
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
+                              debugger;
                               return (
                                 item?.client?.firstname && (
                                   <tr key={idx}>
@@ -88,7 +91,6 @@ const ClientDashboard = (props) => {
                                     </td>
                                     <td>{item?.bookingDate}</td>
                                     {/* <td>${item?.price}</td> */}
-                                    {/* <td>16 Feb 2022</td> */}
                                     <td>
                                       {item?.status == "Approved" ? (
                                         <span className="badge badge-pill bg-success-light">
@@ -97,16 +99,35 @@ const ClientDashboard = (props) => {
                                       ) : (
                                         ""
                                       )}
-                                      {item?.status == "Canclelled" ? (
+                                      {item?.status == "Cancelled" ? (
                                         <span className="badge badge-pill bg-danger-light">
                                           Cancelled
                                         </span>
                                       ) : (
                                         ""
+                                      )}{" "}
+                                      {item?.status == "pending" ? (
+                                        <span className="badge badge-pill bg-warning-light">
+                                          Pending
+                                        </span>
+                                      ) : (
+                                        ""
                                       )}
-                                      <span className="badge badge-pill bg-warning-light">
-                                        Pending
-                                      </span>
+                                    </td>
+
+                                    <td>
+                                      {item?.status == "Cancelled" ? (
+                                        <BsFillArrowUpRightSquareFill
+                                          size={28}
+                                        />
+                                      ) : (
+                                        <a href={item.meetingLink}>
+                                          <BsFillArrowUpRightSquareFill
+                                            size={28}
+                                            className="meet-icon"
+                                          />
+                                        </a>
+                                      )}
                                     </td>
                                   </tr>
                                 )

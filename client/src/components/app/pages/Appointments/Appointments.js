@@ -11,13 +11,14 @@ const Appointments = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        console.log(response);
-        setAppointments(response?.data?.BookingData);
+        console.log("booking:" ,response);
+        const newArr = response?.data?.BookingData.filter(item => item.status == "pending")
+        setAppointments(newArr);
       })
       .catch((e) => {
         console.log("error", e);
       });
-  }, []);
+  }, [appointments]);
   const updateBooking = (value, _id) => {
     const statusDetail = {
       bookingStatus: value,
@@ -29,8 +30,7 @@ const Appointments = () => {
     <div className="col-md-7 col-lg-8 col-xl-9">
       {appointments && appointments.length > 0 ? (
         appointments.map((item, idx) => {
-          console.log(item.status);
-          return item?.client?.firstname && item?.status == "pending" ? (
+          return item?.client?.firstname && item?.status == "pending" && (
             <div >
               <div className="appointments">
                 <div className="appointment-list">
@@ -93,11 +93,7 @@ const Appointments = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="no-Appoinents">
-              <span>You Don't Have any Appoinments</span>
-            </div>
-          );
+          )
         })
       ) : (
         <div className="no-Appoinents">

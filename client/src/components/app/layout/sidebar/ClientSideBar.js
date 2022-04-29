@@ -39,6 +39,7 @@ const ClientSideBar = () => {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
+              
               <img src={imagePath(userImage)} alt="User Image" />
             </a>
             <div className="profile-det-info">
