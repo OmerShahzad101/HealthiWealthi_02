@@ -36,25 +36,13 @@ let values = { coach: "", gender: [], services: [] }
   
   useEffect(async() => {
     // console.log(queryParams);
-    const { data } =  getHttpRequest(`/front/search/get`)
-    .then((response) => {
-      if (!response) {
-        alert("Something went wrong with response...");
-        return;
-      }
-
-      if (data.success === true) {
-        console.log(data,"dayayayayayayayay")
-        dispatch(setCoachesList(data.data));
-      }
-      
-    })
-    .catch((e) => {
-      alert(e);
-      console.log("Something went wrongggg...");
-    });
-    getservicesList();
    
+    const { data } = await getHttpRequest(`front/search/get`);
+    if (data.success === true) {
+      console.log(data)
+      dispatch(setCoachesList(data.data));
+    }
+    getservicesList();
    
   }, []);
 
