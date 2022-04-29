@@ -18,11 +18,14 @@ const SearchCoach = () => {
   const [servicesFilter, setServicesFilter] = useState([]);
   const [genderFilter, setGenderFilter] = useState([]);
   // const [values, setValues] = useState({ coach: "", gender: [], services: [] });
-let values = { coach: "", gender: [], services: [] }
+
   const params = new Proxy(new URLSearchParams(location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
- console.log(params,"params")
+
+  let values = { name: params.name ? params.name : "" , gender: [], services: [] } 
+  
+//  console.log(params.name,"params")
   const unAuth = (err, id) => {
     err.preventDefault();
     Toast.fire({
@@ -35,19 +38,16 @@ let values = { coach: "", gender: [], services: [] }
   };
   
   useEffect(async() => {
-    // console.log(queryParams);
-   
-    const { data } = await getHttpRequest(`front/search/get`);
-    if (data.success === true) {
+    const { data } =  values.name === "" ? await getHttpRequest(`front/search/get`) :  await getHttpRequest(`front/search/get?name=${values.name}`);
+    if (data?.success === true) {
       console.log(data)
       dispatch(setCoachesList(data.data));
     }
     getservicesList();
-   
   }, []);
 
   const getservicesList = async () => {
-    getHttpRequest(`/admin/services/list/`)
+    getHttpRequest(`/admin/services/list`)
       .then((response) => {
         if (!response) {
           console.log("Something went wrong with response...");
@@ -88,16 +88,17 @@ let values = { coach: "", gender: [], services: [] }
   const filterSubmit =  () => {
     
     // setValues({coach: "helo", gender: genderFilter ,services : servicesFilter })
-    values = ({coach: "ibad", gender: genderFilter ,services : servicesFilter })
+    values = ({name: values.name , gender: genderFilter ,services : servicesFilter })
     // setValues((state)=>{console.log(state); return state;})
-    const { data } = getHttpRequest(`front/search/get?name=${values.coach}?gender=${values.gender}?services=${values.services}`);
+    const { data } = 
+    (values.name != "" && values.gender.length > 0 && values.services.length > 0) ? getHttpRequest(`front/search/get?name=${values.name}?gender=${values.gender}?services=${values.services}`) : console.log("failed");
     if (data?.success === true) {
       dispatch(setCoachesList(data.data));
     }
 
     history.push({
       pathname: '/search-coach',
-      search: `?name=${values.coach}?gender=${genderFilter}?services=${servicesFilter}`
+      search: `?name=${values.name}?gender=${genderFilter}?services=${servicesFilter}`
     })
   }
 
@@ -241,7 +242,7 @@ let values = { coach: "", gender: [], services: [] }
             </div>
 
             <div className="col-md-12 col-lg-8 col-xl-9">
-              {coachList.length > 1 ? (
+              {coachList.length > 0 ? (
                 coachList.map((item, idx) => {
                   return (
                     <>

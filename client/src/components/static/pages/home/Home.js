@@ -10,7 +10,7 @@ import { setCoachesList } from "../../../../store/slices/search/coachFiltersSlic
 export default function Home() {
   let history = useHistory();
   const dispatch = useDispatch();
-  const [values, setValues] = useState({ location: "", coach: "", gender: [] });
+  const [values, setValues] = useState({ location: "", name: "", gender: [] });
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
