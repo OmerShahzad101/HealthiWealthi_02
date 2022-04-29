@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { postHttpRequest } from "../../../../axios";
+import Toast from "../../../common/toast/Toast";
 
 const AddReviews = () => {
-    const initialvalues={
-      rating: "",
-      title: "",
-      description: ""
-    }
+  const id = useSelector((state) => state.auth.user.userid);
+  const initialvalues = {
+    score: "",
+    title: "",
+    comment: "",
+    reviewBy: id,
+    reviewTo: id,
+  };
   const [review, setReview] = useState(initialvalues);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,13 +19,17 @@ const AddReviews = () => {
       ...review,
       [name]: value,
     });
-    console.log(review)
   };
 
-  const addReview =() => {
-    console.log(review)
-    postHttpRequest("front/client/add-review" , review)
-  }
+  const addReview = () => {
+    console.log(review);
+    postHttpRequest("front/review/add-review", review).then((response) => {
+      Toast.fire({
+        icon: "success",
+        title: response.data.message,
+      });
+    });
+  };
   return (
     <div className="write-review col-md-7 col-lg-8 col-xl-9">
       <h4>
@@ -28,13 +37,13 @@ const AddReviews = () => {
       </h4>
 
       {/* <!-- Write Review Form --> */}
-      <form onSubmit={addReview}>
+      <form>
         <div className="form-group">
           <div className="star-rating">
             <input
               id="star-5"
               type="radio"
-              name="rating"
+              name="score"
               value="5"
               onChange={handleChange}
             />
@@ -44,7 +53,7 @@ const AddReviews = () => {
             <input
               id="star-4"
               type="radio"
-              name="rating"
+              name="score"
               value="4"
               onChange={handleChange}
             />
@@ -54,7 +63,7 @@ const AddReviews = () => {
             <input
               id="star-3"
               type="radio"
-              name="rating"
+              name="score"
               value="3"
               onChange={handleChange}
             />
@@ -64,7 +73,7 @@ const AddReviews = () => {
             <input
               id="star-2"
               type="radio"
-              name="rating"
+              name="score"
               value="2"
               onChange={handleChange}
             />
@@ -74,7 +83,7 @@ const AddReviews = () => {
             <input
               id="star-1"
               type="radio"
-              name="rating"
+              name="score"
               value="1"
               onChange={handleChange}
             />
@@ -94,13 +103,13 @@ const AddReviews = () => {
             placeholder="If you could say it in one sentence, what would you say?"
           />
         </div>
-        
+
         <div className="form-group">
           <label>Your review</label>
           <textarea
             onChange={handleChange}
-            name="description"
-            value={review.description}
+            name="comment"
+            value={review.comment}
             id="review_desc"
             maxLength="100"
             className="form-control"
@@ -118,7 +127,11 @@ const AddReviews = () => {
           </div>
         </div>
         <div className="submit-section">
-          <button type="submit" className="btn btn-primary submit-btn">
+          <button
+            type="button"
+            onClick={addReview}
+            className="btn btn-primary submit-btn"
+          >
             Add Review
           </button>
         </div>

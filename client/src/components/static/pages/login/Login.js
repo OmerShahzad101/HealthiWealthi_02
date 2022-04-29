@@ -25,16 +25,20 @@ const Login = (props) => {
     const aa = url.split("/").pop();
     if (aa.length > 5) {
       const googleAccessToken = url.split("=").pop();
-      console.log("googleAccessToken", googleAccessToken);
       if (googleAccessToken) {
         postHttpRequest("/front/auth/verify", googleAccessToken).then(
           (response) => {
-            console.log(response.data.user);
-            dispatch(setUser({ response: response.data.user }));
+            debugger;
 
-            localStorage.setItem("accessToken", response.data.accessToken);
-            localStorage.setItem("user", JSON.stringify(response.data.user));
+            dispatch(setUser({ response: response.data.user }));
             dispatch(setAccessToken(response.data.accessToken));
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem(
+              "googleRefreshToken",
+              response.data.user.googleRefreshToken
+            );
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+
             if (response?.data?.user?.type === 1) {
               history.replace(CLIENT_PROFILE_SETTING);
             } else if (response?.data?.useRef?.type === 3) {
