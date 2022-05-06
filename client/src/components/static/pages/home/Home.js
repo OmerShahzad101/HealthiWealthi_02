@@ -20,7 +20,7 @@ export default function Home() {
   const handleSearch = async () => {
     
     debugger;
-    let queryParams = `?name=${values.coach}`
+    let queryParams = `?name=${values.name}`
     // const { data } = await postHttpRequest("front/search/get", values);
     // if (data.success === true) {
     //   dispatch(setCoachesList(data.data));
@@ -58,7 +58,7 @@ export default function Home() {
                     type="text"
                     className="form-control"
                     placeholder="Search Coach"
-                    name="coach"
+                    name="name"
                     onChange={handleChange}
                   />
                   <span className="form-text">
@@ -69,7 +69,7 @@ export default function Home() {
                   type="button"
                   className="btn btn-primary search-btn"
                   onClick={handleSearch}
-                  disabled={!values.coach && !values.location}
+                  disabled={!values.name && !values.location}
                 >
                   <i className="fas fa-search"></i> <span>Search</span>
                 </button>

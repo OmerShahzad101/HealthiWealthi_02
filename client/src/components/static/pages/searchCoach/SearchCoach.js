@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
 import { setCoachesList } from "../../../../store/slices/search/coachFiltersSlice";
+import debug from "debug";
 
 const SearchCoach = () => {
   const dispatch = useDispatch()
@@ -17,15 +18,18 @@ const SearchCoach = () => {
   const [servicesList, setServicesList] = useState([]);
   const [servicesFilter, setServicesFilter] = useState([]);
   const [genderFilter, setGenderFilter] = useState([]);
-  // const [values, setValues] = useState({ coach: "", gender: [], services: [] });
+
 
   const params = new Proxy(new URLSearchParams(location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
-
-  let values = { name: params.name ? params.name : "" , gender: [], services: [] } 
+  const paramsGender = params.gender && params.gender.split(",")
+  const paramsServices = params.services && params.services.split(",")
+//  console.log(paramsGender)
   
-//  console.log(params.name,"params")
+  const [values, setValues] = useState({ name: params.name  ? params.name : "" , gender: params.gender ? paramsGender :  [], services: params.services ? paramsServices :  [] });
+  // let values = { name: params.name ? params.name : "" , gender: [], services: [] } 
+  
   const unAuth = (err, id) => {
     err.preventDefault();
     Toast.fire({
@@ -38,7 +42,9 @@ const SearchCoach = () => {
   };
   
   useEffect(async() => {
-    const { data } =  values.name === "" ? await getHttpRequest(`front/search/get`) :  await getHttpRequest(`front/search/get?name=${values.name}`);
+    // const { data } =  values.name === "" ? await getHttpRequest(`front/search/get`) :  await getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`);
+    debugger
+    const { data } =  await getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`);
     if (data?.success === true) {
       console.log(data)
       dispatch(setCoachesList(data.data));
@@ -63,45 +69,53 @@ const SearchCoach = () => {
         console.log("Something went wrong...");
       });
   };
+// var updatedList = [];
+// var updatedList1 = [];
 
   const handleChangeServices = (e) => {
-    let updatedList = [...servicesFilter];
+    // debugger
+    let updatedList = [...values.services];
     if (e.target.checked) {
-      updatedList = [...servicesFilter, e.target.value];
+      updatedList = [...values.services, e.target.value];
     } else {
-      updatedList.splice(servicesFilter.indexOf(e.target.value), 1);
+      updatedList.splice(values.services.indexOf(e.target.value), 1);
     }
-    setServicesFilter(updatedList);
-  }
+    setValues({name: values.name, gender: values.gender ,services: updatedList}); 
+   }
 
   const handleChangeGender = (e) => {
-    let updatedList = [...genderFilter];
+    let updatedList = [...values.gender];
     if (e.target.checked) {
-      updatedList = [...genderFilter, e.target.value];
+      updatedList = [...values.gender, e.target.value];
     } else {
-      updatedList.splice(genderFilter.indexOf(e.target.value), 1);
+      updatedList.splice(values.gender.indexOf(e.target.value), 1);
     }
-    setGenderFilter(updatedList);
+    setValues({name: values.name, gender: updatedList ,services: values.services});
   }
 
 
-  const filterSubmit =  () => {
+  const filterSubmit = async () => {
     
-    // setValues({coach: "helo", gender: genderFilter ,services : servicesFilter })
-    values = ({name: values.name , gender: genderFilter ,services : servicesFilter })
-    // setValues((state)=>{console.log(state); return state;})
-    const { data } = 
-    (values.name != "" && values.gender.length > 0 && values.services.length > 0) ? getHttpRequest(`front/search/get?name=${values.name}?gender=${values.gender}?services=${values.services}`) : console.log("failed");
+    //  setValues({name: values.name, gender: updatedList1 ,services : updatedList })
+    //  setValues({name: values.name })
+    // values = ({name: values.name , gender: genderFilter ,services : servicesFilter })
+
+    setValues((state)=>{console.log(state); return state;})
+    debugger
+    // let uniqueNamesGender = values.gender.filter((val,id,array) => array.indexOf(val) == id)
+    // let uniqueNamesServices = values.services.filter((val,id,array) => array.indexOf(val) == id)
+    
+    const { data } = await
+      getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`) ;
     if (data?.success === true) {
       dispatch(setCoachesList(data.data));
     }
 
-    history.push({
+    history.replace({
       pathname: '/search-coach',
-      search: `?name=${values.name}?gender=${genderFilter}?services=${servicesFilter}`
+      search: `?name=${values.name}&gender=${values.gender}&services=${values.services}`
     })
   }
-
   return (
     <>
       <div className="breadcrumb-bar">
@@ -168,7 +182,7 @@ const SearchCoach = () => {
                     <h4>Gender</h4>
                     <div>
                       <label className="custom_check">
-                        <input type="checkbox" name="male" value="male" onChange={handleChangeGender} />
+                        <input type="checkbox" name="male" value="male" checked = {values.gender.includes("male")} onChange={handleChangeGender} />
                         <span className="checkmark"></span> Male Coach
                       </label>
                     </div>
@@ -178,6 +192,7 @@ const SearchCoach = () => {
                           name="female"
                           type="checkbox"
                           value="female"
+                          checked = {values.gender.includes("female")}
                           onChange={handleChangeGender}
                         />
                         <span className="checkmark"></span> Female Coach
@@ -186,14 +201,17 @@ const SearchCoach = () => {
                   </div>
                   <div className="filter-widget">
                     <h4>Select Services</h4>
+                    
                     {servicesList &&
                       servicesList?.map((item) => (
+                        
                         <div>
                           <label className="custom_check">
                             <input
                               type="checkbox"
                               name={item.name}
                               value={item._id}
+                              checked = {values.services.includes(item._id)}
                               onChange={handleChangeServices}
                             />
                             <span className="checkmark"></span> {item.name}

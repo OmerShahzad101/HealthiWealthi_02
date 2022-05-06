@@ -51,6 +51,7 @@ const CoachCalendar = ({ availabilityTab }) => {
 
   return (
     availabilityTab === "availability" && (
+      
       <div className="dashboard-content">
         <div className="row">
           <div className="col-lg-12">
