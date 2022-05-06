@@ -36,7 +36,6 @@ const Login = (props) => {
             response: response.data.user,
             res: response.data.user,
           };
-          console.log(response.data.user);
           dispatch(setUser(userData));
 
           localStorage.setItem("accessToken", response.data.accessToken);
