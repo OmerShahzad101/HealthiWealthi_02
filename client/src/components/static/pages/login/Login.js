@@ -25,27 +25,33 @@ const Login = (props) => {
     const aa = url.split("/").pop();
     if (aa.length > 5) {
       const googleAccessToken = url.split("=").pop();
+      console.log("googleAccessToken", googleAccessToken);
       if (googleAccessToken) {
-        postHttpRequest("/front/auth/verify", googleAccessToken).then(
-          (response) => {
-            debugger;
+        console.log("googleAccessTokendcd", googleAccessToken);
 
-            dispatch(setUser({ response: response.data.user }));
-            dispatch(setAccessToken(response.data.accessToken));
-            localStorage.setItem("accessToken", response.data.accessToken);
-            localStorage.setItem(
-              "googleRefreshToken",
-              response.data.user.googleRefreshToken
-            );
-            localStorage.setItem("user", JSON.stringify(response.data.user));
+        postHttpRequest("/front/auth/verify", {
+          googleAccessToken: googleAccessToken,
+        }).then((response) => {
+          const userData = {
+            response: response.data.user,
+            res: response.data.user,
+          };
+          dispatch(setUser(userData));
 
-            if (response?.data?.user?.type === 1) {
-              history.replace(CLIENT_PROFILE_SETTING);
-            } else if (response?.data?.useRef?.type === 3) {
-              history.replace(COACH_PROFILE_SETTING);
-            }
+          localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("user", JSON.stringify(userData));
+          localStorage.setItem(
+            "googleRefreshToken",
+            response.data.user.googleRefreshToken
+          );
+
+          dispatch(setAccessToken(response.data.accessToken));
+          if (response?.data?.user?.type === 1) {
+            history.replace(CLIENT_PROFILE_SETTING);
+          } else if (response?.data?.user?.type === 3) {
+            history.replace(COACH_PROFILE_SETTING);
           }
-        );
+        });
       }
     }
   }, []);
@@ -125,7 +131,7 @@ const Login = (props) => {
       setIsLoading(false);
       Toast.fire({
         icon: "error",
-        title: "Invalid username or password",
+        title: "Invalid Email or Password",
       });
     }
   };
@@ -196,7 +202,11 @@ const Login = (props) => {
 
                 <div className="row form-row social-login">
                   <div className="col-12">
-                    <button type="button" onClick={googleLoginHandler}>
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-block btn-lg login-btn"
+                      onClick={googleLoginHandler}
+                    >
                       {" "}
                       Continue With Google
                     </button>

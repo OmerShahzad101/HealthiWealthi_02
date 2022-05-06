@@ -7,12 +7,16 @@ import moment from "moment";
 import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
+import { CLIENT_DASHBOARD } from "../../../../router/constants/ROUTES";
+import { useHistory } from "react-router-dom";
 
 const ClientCalendar = (props) => {
-  // const userid = useSelector((state) => state.auth.user.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
   const [today, setToday] = useState(moment().format("MM/DD/YYYY"));
   const [slotsByEachDate, setslotsByEachDate] = useState({});
-  const googleRefreshToken = localStorage.getItem("googleRefreshToken")
+  const googleRefreshToken = localStorage.getItem("googleRefreshToken");
+  const history = useHistory();
+  let bookingDate;
 
   const settings = {
     dots: false,
@@ -58,14 +62,16 @@ const ClientCalendar = (props) => {
         console.log("Something went wrongggg...");
       });
   }, []);
-
   const handleOnClickGridSlot = (event, timeStart, timeEnd, date) => {
+    bookingDate = date;
     event.preventDefault();
-    Toast.fire(
-      "TimeSlot!",
-      "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
-      "success"
-    );
+    // Toast.fire(
+    //   "Your Appoinment is Booked on ",
+    //   "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
+    //   "success"
+    // ).then(() => {
+    //   history.push(CLIENT_DASHBOARD);
+    // });
 
     let startTime = moment(date + " " + timeStart);
     let endTime = moment(date + " " + timeEnd);
@@ -73,7 +79,7 @@ const ClientCalendar = (props) => {
     startTime = moment(startTime).format();
     endTime = moment(endTime).format();
     let summary = "Coach Meeting";
-    
+
     postHttpRequest(`front/googleMeet/create`, {
       startTime,
       endTime,
@@ -85,7 +91,24 @@ const ClientCalendar = (props) => {
           alert("Something went wrong with response...");
           return;
         }
-        console.log(response);
+        if (response.data.meetLink) {
+          postHttpRequest(`front/booking/create`, {
+            slots: timeStart + "-" + timeEnd,
+            client: userid,
+            coach: props.id,
+            bookingDate,
+            meetingLink: response.data.meetLink,
+          }).then((res) => {
+            console.log(res);
+            Toast.fire(
+              "Your Appoinment is Booked on ",
+              "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
+              "success"
+            ).then(() => {
+              history.push(CLIENT_DASHBOARD);
+            });
+          });
+        }
       })
       .catch((e) => {
         console.log("Something went wrongggg...");
