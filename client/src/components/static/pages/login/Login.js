@@ -34,6 +34,7 @@ const Login = (props) => {
         }).then((response) => {
           const userData = {
             response: response.data.user,
+            res: response.data.user,
           };
           console.log(response.data.user);
           dispatch(setUser(userData));
@@ -136,7 +137,7 @@ const Login = (props) => {
     }
   };
   const googleLoginHandler = () => {
-    window.location.href = "http://localhost:8082/auth/google";
+    window.location.href = "https://healthiwealthi.arhamsoft.org/auth/google";
   };
   return (
     <div className="account-page">
