@@ -10,11 +10,14 @@ const CoachDashboard = () => {
   const mediaPath = process.env.REACT_APP_IMG;
   const [pastAppoinment, setPastAppoinment] = useState();
   const [todayAppoinment, setTodayAppoinment] = useState();
-  const [upcomingAppointment, setUpcomingAppoinment] = useState([]);
+  const [upcomingAppointment, setUpcomingAppoinment] = useState();
+  let [totalCount, setTotalCount] = useState(0);
+  let [todayCount, setTodayCount] = useState(0);
+  let [appoinments, setAppoinments] = useState(0);
+
   let upcoming = [];
   let today = [];
   let past = [];
-
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
@@ -32,16 +35,25 @@ const CoachDashboard = () => {
       let itemDate = moment(item.bookingDate).format("DD-MM-YY");
       if (currentDate < itemDate) {
         upcoming.push(item);
+        totalCount = totalCount + 1;
+        appoinments = appoinments + 1;
       } else if (currentDate == itemDate) {
         today.push(item);
+        totalCount = totalCount + 1;
+        todayCount = todayCount + 1;
+        appoinments = appoinments + 1;
       } else {
         past.push(item);
+        totalCount = totalCount + 1;
       }
     });
 
     setUpcomingAppoinment(upcoming);
     setTodayAppoinment(today);
     setPastAppoinment(past);
+    setTotalCount(totalCount);
+    setTodayCount(todayCount);
+    setAppoinments(todayCount);
   };
 
   return (
@@ -65,7 +77,7 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Total Clients</h6>
-                        <h3></h3>
+                        <h3>{totalCount}</h3>
                         <p className="text-muted"></p>
                       </div>
                     </div>
@@ -83,7 +95,7 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Today Clients</h6>
-                        <h3></h3>
+                        <h3>{todayCount}</h3>
                         <p className="text-muted"></p>
                       </div>
                     </div>
@@ -101,7 +113,7 @@ const CoachDashboard = () => {
                       </div>
                       <div className="dash-widget-info">
                         <h6>Appoinments</h6>
-                        <h3></h3>
+                        <h3>{appoinments}</h3>
                         <p className="text-muted"></p>
                       </div>
                     </div>
