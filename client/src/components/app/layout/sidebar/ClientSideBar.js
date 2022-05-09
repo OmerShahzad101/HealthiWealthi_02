@@ -84,7 +84,7 @@ const ClientSideBar = () => {
               <li>
                 <NavLink to="/search-coach">
                   <i className="fas fa-search"></i>
-                  <span>Booking</span>
+                  <span>Search Coach</span>
                 </NavLink>
               </li>
               <li>

@@ -3,22 +3,42 @@ import { Link } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
+import moment from "moment";
+
 const CoachDashboard = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
   const mediaPath = process.env.REACT_APP_IMG;
+  const [pastAppoinment, setpastAppoinment] = useState();
+  let upcoming = [];
+  let today = [];
+  let past = [];
 
-  const [myclient, setMyclient] = useState();
   useEffect(() => {
-    debugger;
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        console.log("booking" , response);
-        setMyclient(response?.data?.BookingData);
+        tabs(response);
       })
       .catch((e) => {
         console.log("error", e);
       });
   }, []);
+
+  const tabs = (response) => {
+    debugger;
+    response?.data?.BookingData?.map((item, idx) => {
+      let currentDate = new Date();
+      currentDate = moment(currentDate).format("DD-MM-YY");
+      let itemDate = moment(item.bookingDate).format("DD-MM-YY");
+      if (currentDate > itemDate) {
+        upcoming.push(item);
+      } else if (currentDate == itemDate) {
+        today.push(item);  
+      } else {
+        past.push(item);
+        setpastAppoinment(past);
+      }
+    });
+  };
 
   return (
     <>
@@ -46,7 +66,6 @@ const CoachDashboard = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="col-md-12 col-lg-4">
                     <div className="dash-widget dct-border-rht">
                       <div className="circle-bar circle-bar2">
@@ -54,7 +73,7 @@ const CoachDashboard = () => {
                           <img
                             src="/assets/img/icon-02.png"
                             className="img-fluid"
-                            alt="Patient"
+                            alt="patient"
                           />
                         </div>
                       </div>
@@ -65,7 +84,6 @@ const CoachDashboard = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="col-md-12 col-lg-4">
                     <div className="dash-widget">
                       <div className="circle-bar circle-bar3">
@@ -73,7 +91,7 @@ const CoachDashboard = () => {
                           <img
                             src="/assets/img/icon-03.png"
                             className="img-fluid"
-                            alt="Patient"
+                            alt="patient"
                           />
                         </div>
                       </div>
@@ -89,7 +107,6 @@ const CoachDashboard = () => {
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-12">
             <h4 className="mb-4">Client Appoinment</h4>
@@ -113,8 +130,8 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {myclient && myclient.length > 0 ? (
-                              myclient.map((item, idx) => {
+                            {upcoming && upcoming.length > 0 ? (
+                              upcoming.map((item, idx) => {
                                 return item?.client?.firstname &&
                                   item.status == "Approved" ? (
                                   <tr>
@@ -176,8 +193,8 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {myclient && myclient.length > 0 ? (
-                              myclient.map((item, idx) => {
+                            {today && today.length > 0 ? (
+                              today.map((item, idx) => {
                                 return item?.client?.firstname &&
                                   item.status == "Approved" ? (
                                   <tr>
@@ -198,7 +215,71 @@ const CoachDashboard = () => {
                                             alt="User"
                                           />
                                         </a>
-                                        <div>&nbsp;&nbsp;
+                                        <div>
+                                          &nbsp;&nbsp;
+                                          {item?.client?.firstname +
+                                            " " +
+                                            item?.client?.lastname}{" "}
+                                        </div>
+                                      </h2>
+                                    </td>
+                                    <td>{idx + 1}</td>
+                                    <td>{item.slots}</td>
+                                    <td>{item.bookingDate}</td>
+                                  </tr>
+                                ) : (
+                                  ""
+                                );
+                              })
+                            ) : (
+                              <tr className="no-appoinments">
+                                <td>You don't have any Appointments</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </Tab>
+                <Tab eventKey="past-appointments" title="Past">
+                  <div className="card card-table mb-0">
+                    <div className="card-body">
+                      <div className="table-responsive">
+                        <table className="table table-hover table-center mb-0">
+                          <thead>
+                            <tr>
+                              <th>Client Name</th>
+                              <th>Client ID</th>
+                              <th>Appt Time</th>
+                              <th>Appt Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {pastAppoinment && pastAppoinment.length > 0 ? (
+                              pastAppoinment.map((item, idx) => {
+                                return item?.client?.firstname &&
+                                  item.status == "Approved" ? (
+                                  <tr>
+                                    <td>
+                                      <h2 className="table-avatar">
+                                        <a
+                                          to="/client-profile"
+                                          className="avatar avatar-sm mr-2"
+                                        >
+                                          <img
+                                            className="avatar-img rounded-circle"
+                                            src={
+                                              item?.client?.fileName
+                                                ? mediaPath +
+                                                  item.client?.fileName
+                                                : mediaPath + "avatar.jpg"
+                                            }
+                                            alt="User"
+                                          />
+                                        </a>
+                                        <div>
+                                          &nbsp;&nbsp;
                                           {item?.client?.firstname +
                                             " " +
                                             item?.client?.lastname}{" "}

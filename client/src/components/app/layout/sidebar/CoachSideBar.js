@@ -91,12 +91,12 @@ const CoachSideBar = () => {
                   <span>My Clients</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/app/invoices-view">
                   <i className="fas fa-file-invoice"></i>
                   <span>Invoices</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/app/reviews">
                   <i className="fas fa-star"></i>

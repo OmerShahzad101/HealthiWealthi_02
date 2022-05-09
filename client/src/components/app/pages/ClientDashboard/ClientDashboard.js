@@ -120,6 +120,10 @@ const ClientDashboard = (props) => {
                                         <BsFillArrowUpRightSquareFill
                                           size={28}
                                         />
+                                      ) : item?.status == "pending" ? (
+                                        <BsFillArrowUpRightSquareFill
+                                          size={28}
+                                        />
                                       ) : (
                                         <a href={item.meetingLink}>
                                           <BsFillArrowUpRightSquareFill
