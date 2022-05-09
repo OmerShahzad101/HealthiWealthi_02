@@ -62,7 +62,7 @@ const ClientCalendar = (props) => {
         console.log("Something went wrongggg...");
       });
   }, []);
-  
+
   const handleOnClickGridSlot = (event, timeStart, timeEnd, date) => {
     bookingDate = date;
     event.preventDefault();
@@ -117,7 +117,7 @@ const ClientCalendar = (props) => {
   };
 
 
-  const appointmentSlots = slotsByEachDate.length>0 ? Object.entries(slotsByEachDate).map(
+  const appointmentSlots =  Object.entries(slotsByEachDate).map(
     ([availableDay, availableTime]) => {
       let dayName = moment(availableDay).format("ddd");
       let humanReadableDate = moment(availableDay).format("DD MMM, YYYY");
@@ -161,8 +161,7 @@ const ClientCalendar = (props) => {
       );
     }
   )
-  :
-  "There's no available slot right now"
+  
 
   return (
     <>

@@ -6,6 +6,7 @@ import { getHttpRequest, putHttpRequest } from "../../../../axios";
 const Appointments = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
   const [appointments, setAppointments] = useState();
+  const [appointmentStatus, setAppointmentStatus] = useState(false);
   const mediaPath = process.env.REACT_APP_IMG;
 
   useEffect(() => {
@@ -18,14 +19,17 @@ const Appointments = () => {
       .catch((e) => {
         console.log("error", e);
       });
-  }, [appointments]);
-  const updateBooking = (value, _id) => {
+  },[appointmentStatus]);
+
+  const updateBooking = async (value, _id) => {
     const statusDetail = {
       bookingStatus: value,
       _id,
     };
-    putHttpRequest("front/booking/status", statusDetail);
+    await putHttpRequest("front/booking/status", statusDetail);
+    setAppointmentStatus(true)
   };
+  
   return (
     <div className="col-md-7 col-lg-8 col-xl-9">
       {appointments && appointments.length > 0 ? (

@@ -8,7 +8,9 @@ import moment from "moment";
 const CoachDashboard = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
   const mediaPath = process.env.REACT_APP_IMG;
-  const [pastAppoinment, setpastAppoinment] = useState();
+  const [pastAppoinment, setPastAppoinment] = useState();
+  const [todayAppoinment, setTodayAppoinment] = useState();
+  const [upcomingAppointment, setUpcomingAppoinment] = useState([]);
   let upcoming = [];
   let today = [];
   let past = [];
@@ -16,7 +18,6 @@ const CoachDashboard = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        console.log(response,"response dates")
         tabs(response);
       })
       .catch((e) => {
@@ -25,20 +26,22 @@ const CoachDashboard = () => {
   }, []);
 
   const tabs = (response) => {
-    // debugger;
     response?.data?.BookingData?.map((item, idx) => {
       let currentDate = new Date();
       currentDate = moment(currentDate).format("DD-MM-YY");
       let itemDate = moment(item.bookingDate).format("DD-MM-YY");
-      if (currentDate > itemDate) {
+      if (currentDate < itemDate) {
         upcoming.push(item);
       } else if (currentDate == itemDate) {
-        today.push(item);  
+        today.push(item);
       } else {
         past.push(item);
-        setpastAppoinment(past);
       }
     });
+
+    setUpcomingAppoinment(upcoming);
+    setTodayAppoinment(today);
+    setPastAppoinment(past);
   };
 
   return (
@@ -131,8 +134,9 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {upcoming && upcoming.length > 0 ? (
-                              upcoming.map((item, idx) => {
+                            {upcomingAppointment &&
+                            upcomingAppointment.length > 0 ? (
+                              upcomingAppointment.map((item, idx) => {
                                 return item?.client?.firstname &&
                                   item.status == "Approved" ? (
                                   <tr>
@@ -194,8 +198,12 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {today && today.length > 0 ? (
-                              today.map((item, idx) => {
+                            {todayAppoinment && todayAppoinment.length > 0 ? (
+                              todayAppoinment.map((item, idx) => {
+                                console.log(
+                                  todayAppoinment,
+                                  "toadayaausduihas"
+                                );
                                 return item?.client?.firstname &&
                                   item.status == "Approved" ? (
                                   <tr>
