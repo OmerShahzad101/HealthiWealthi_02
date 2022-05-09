@@ -170,6 +170,7 @@ const ClientCalendar = (props) => {
 
           <div className="container booking">
             <div className="booking-form">
+              
               <Slider {...settings}>{appointmentSlots}</Slider>
             </div>
           </div>
