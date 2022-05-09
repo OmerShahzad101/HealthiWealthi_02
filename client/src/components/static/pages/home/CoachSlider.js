@@ -9,7 +9,6 @@ const CoachSlider = () => {
   const mediaPath = process.env.REACT_APP_IMG;
   const userId = useSelector((state) => state.auth.user.userid);
   const role = useSelector((state) => state.auth.user.userRole);
-
   const [coachList, setCoachList] = useState([]);
 
   const settings = {
@@ -54,6 +53,7 @@ const CoachSlider = () => {
         });
       });
   };
+
   return (
     <div className="container-fluid">
       <div className="row">

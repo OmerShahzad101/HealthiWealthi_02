@@ -14,7 +14,6 @@ const CoachCalendar = ({ availabilityTab }) => {
   const [loadcalender, setLoadcalender] = useState(false);
 
   function loadMoreEvents(calendarId, start, end) {
-    //console.log("calendarId");
     console.log("calendarId", calendarId, start, end);
   }
 
@@ -87,9 +86,10 @@ const CoachCalendar = ({ availabilityTab }) => {
                         let dates = [];
                         selections.forEach(({ start, end }) => {
                           console.log("Start:", start, "End:", end);
+                          // console.log( start.diff(end),"timeduff")
                           dates.push(moment(start).format("MM/DD/YYYY"));
                         });
-
+          
                         var formData = {
                           userId: userid,
                           selections: JSON.stringify(selections),

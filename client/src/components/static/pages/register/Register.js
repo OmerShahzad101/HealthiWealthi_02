@@ -1,12 +1,16 @@
 import validate from "../../../../utils/form-validation/authFormValidation";
 import { postHttpRequest } from "../../../../axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
-import LoginWithGoogle from "../login/LoginWithGoogle";
-
+import { setUser, setAccessToken } from "../../../../store/slices/auth";
+import {
+  CLIENT_PROFILE_SETTING,
+  COACH_PROFILE_SETTING,
+} from "../../../../router/constants/ROUTES";
+import { useDispatch } from "react-redux";
 //import Swal from "sweetalert2";
 const Register = () => {
   const history = useHistory();
@@ -15,7 +19,7 @@ const Register = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const typeRef = useRef();
-
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -97,6 +101,46 @@ const Register = () => {
     //   setIsLoading(false);
     // });
   }
+  
+  useEffect(() => {
+    const url = window.location.href;
+    const aa = url.split("/").pop();
+    if (aa.length > 5) {
+      const googleAccessToken = url.split("=").pop();
+      console.log("googleAccessToken", googleAccessToken);
+      if (googleAccessToken) {
+        console.log("googleAccessTokendcd", googleAccessToken);
+
+        postHttpRequest("/front/auth/verify", {
+          googleAccessToken: googleAccessToken,
+        }).then((response) => {
+          const userData = {
+            response: response.data.user,
+            res: response.data.user,
+          };
+          dispatch(setUser(userData));
+
+          localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("user", JSON.stringify(userData));
+          localStorage.setItem(
+            "googleRefreshToken",
+            response.data.user.googleRefreshToken
+          );
+
+          dispatch(setAccessToken(response.data.accessToken));
+          if (response?.data?.user?.type === 1) {
+            history.replace(CLIENT_PROFILE_SETTING);
+          } else if (response?.data?.user?.type === 3) {
+            history.replace(COACH_PROFILE_SETTING);
+          }
+        });
+      }
+    }
+  }, []);
+  const googleLoginHandler = () => {
+    window.location.href = "http://localhost:8082/auth/google";
+    // window.location.href = "https://healthiwealthi.arhamsoft.org/auth/google";
+  };
 
   return (
     <div className="account-page">
@@ -208,10 +252,18 @@ const Register = () => {
                     <span className="span-or">or</span>
                   </div>
                   <div className="row form-row social-login">
-                    <div className="col-12">
-                      <LoginWithGoogle />
-                    </div>
+                  <div className="col-12">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-block btn-lg login-btn"
+                      onClick={googleLoginHandler}
+                    >
+                      {" "}
+                      Continue With Google
+                    </button>
                   </div>
+                </div>
+
                 </form>
               </div>
             </div>

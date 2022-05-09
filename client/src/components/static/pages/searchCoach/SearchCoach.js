@@ -6,8 +6,10 @@ import { LOGIN } from "../../../../router/constants/ROUTES";
 import Toast from "../../../common/toast/Toast";
 import { setCoachesList } from "../../../../store/slices/search/coachFiltersSlice";
 import debug from "debug";
+import TopProgressBar from "../../../common/top-progress-bar/TopProgressBar";
 
 const SearchCoach = () => {
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
@@ -16,19 +18,14 @@ const SearchCoach = () => {
   const role = useSelector((state) => state.auth.user.userRole);
   const userId = useSelector((state) => state.auth.user.userid);
   const [servicesList, setServicesList] = useState([]);
-  const [servicesFilter, setServicesFilter] = useState([]);
-  const [genderFilter, setGenderFilter] = useState([]);
-
-
+  
   const params = new Proxy(new URLSearchParams(location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
   const paramsGender = params.gender && params.gender.split(",")
   const paramsServices = params.services && params.services.split(",")
-//  console.log(paramsGender)
   
   const [values, setValues] = useState({ name: params.name  ? params.name : "" , gender: params.gender ? paramsGender :  [], services: params.services ? paramsServices :  [] });
-  // let values = { name: params.name ? params.name : "" , gender: [], services: [] } 
   
   const unAuth = (err, id) => {
     err.preventDefault();
@@ -42,17 +39,18 @@ const SearchCoach = () => {
   };
   
   useEffect(async() => {
-    // const { data } =  values.name === "" ? await getHttpRequest(`front/search/get`) :  await getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`);
-    debugger
+    getservicesList();
     const { data } =  await getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`);
     if (data?.success === true) {
       console.log(data)
       dispatch(setCoachesList(data.data));
     }
-    getservicesList();
+    setLoading(false)
   }, []);
+   
+  
 
-  const getservicesList = async () => {
+  const getservicesList = () => {
     getHttpRequest(`/admin/services/list`)
       .then((response) => {
         if (!response) {
@@ -69,11 +67,8 @@ const SearchCoach = () => {
         console.log("Something went wrong...");
       });
   };
-// var updatedList = [];
-// var updatedList1 = [];
 
   const handleChangeServices = (e) => {
-    // debugger
     let updatedList = [...values.services];
     if (e.target.checked) {
       updatedList = [...values.services, e.target.value];
@@ -95,16 +90,8 @@ const SearchCoach = () => {
 
 
   const filterSubmit = async () => {
-    
-    //  setValues({name: values.name, gender: updatedList1 ,services : updatedList })
-    //  setValues({name: values.name })
-    // values = ({name: values.name , gender: genderFilter ,services : servicesFilter })
 
     setValues((state)=>{console.log(state); return state;})
-    debugger
-    // let uniqueNamesGender = values.gender.filter((val,id,array) => array.indexOf(val) == id)
-    // let uniqueNamesServices = values.services.filter((val,id,array) => array.indexOf(val) == id)
-    
     const { data } = await
       getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`) ;
     if (data?.success === true) {
@@ -118,7 +105,9 @@ const SearchCoach = () => {
   }
   return (
     <>
-      <div className="breadcrumb-bar">
+   {loading ? <TopProgressBar/> :
+    <>
+    <div className="breadcrumb-bar">
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-md-8 col-12">
@@ -421,6 +410,8 @@ const SearchCoach = () => {
           </div>
         </div>
       </div>
+    </>
+    } 
     </>
   );
 };
