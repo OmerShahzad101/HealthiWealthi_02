@@ -16,6 +16,7 @@ const CoachDashboard = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
+        console.log(response,"response dates")
         tabs(response);
       })
       .catch((e) => {
@@ -24,7 +25,7 @@ const CoachDashboard = () => {
   }, []);
 
   const tabs = (response) => {
-    debugger;
+    // debugger;
     response?.data?.BookingData?.map((item, idx) => {
       let currentDate = new Date();
       currentDate = moment(currentDate).format("DD-MM-YY");

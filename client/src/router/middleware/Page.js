@@ -8,7 +8,7 @@ export default function Page({ route, abc }) {
   const location = useLocation();
 
   useEffect(() => {
-    debugger;
+    // debugger;
     // document.title = route?.meta?.title ? `${route.meta.title} - Digno` : 'Digno';
   }, [route?.meta?.title]);
 
