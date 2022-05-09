@@ -8,12 +8,12 @@ import moment from "moment";
 const CoachDashboard = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
   const mediaPath = process.env.REACT_APP_IMG;
-  const [pastAppoinment, setPastAppoinment] = useState();
-  const [todayAppoinment, setTodayAppoinment] = useState();
+  const [pastAppointment, setPastAppointment] = useState();
+  const [todayAppointment, setTodayAppointment] = useState();
   const [upcomingAppointment, setUpcomingAppoinment] = useState();
   let [totalCount, setTotalCount] = useState(0);
   let [todayCount, setTodayCount] = useState(0);
-  let [appoinments, setAppoinments] = useState(0);
+  let [appointments, setAppointments] = useState(0);
 
   let upcoming = [];
   let today = [];
@@ -36,12 +36,12 @@ const CoachDashboard = () => {
       if (currentDate < itemDate) {
         upcoming.push(item);
         totalCount = totalCount + 1;
-        appoinments = appoinments + 1;
+        appointments = appointments + 1;
       } else if (currentDate == itemDate) {
         today.push(item);
         totalCount = totalCount + 1;
         todayCount = todayCount + 1;
-        appoinments = appoinments + 1;
+        appointments = appointments + 1;
       } else {
         past.push(item);
         totalCount = totalCount + 1;
@@ -49,11 +49,11 @@ const CoachDashboard = () => {
     });
 
     setUpcomingAppoinment(upcoming);
-    setTodayAppoinment(today);
-    setPastAppoinment(past);
+    setTodayAppointment(today);
+    setPastAppointment(past);
     setTotalCount(totalCount);
     setTodayCount(todayCount);
-    setAppoinments(todayCount);
+    setAppointments(appointments);
   };
 
   return (
@@ -112,8 +112,8 @@ const CoachDashboard = () => {
                         </div>
                       </div>
                       <div className="dash-widget-info">
-                        <h6>Appoinments</h6>
-                        <h3>{appoinments}</h3>
+                        <h6>Appointments</h6>
+                        <h3>{appointments}</h3>
                         <p className="text-muted"></p>
                       </div>
                     </div>
@@ -210,10 +210,10 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {todayAppoinment && todayAppoinment.length > 0 ? (
-                              todayAppoinment.map((item, idx) => {
+                            {todayAppointment && todayAppointment.length > 0 ? (
+                              todayAppointment.map((item, idx) => {
                                 console.log(
-                                  todayAppoinment,
+                                  todayAppointment,
                                   "toadayaausduihas"
                                 );
                                 return item?.client?.firstname &&
@@ -277,8 +277,8 @@ const CoachDashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {pastAppoinment && pastAppoinment.length > 0 ? (
-                              pastAppoinment.map((item, idx) => {
+                            {pastAppointment && pastAppointment.length > 0 ? (
+                              pastAppointment.map((item, idx) => {
                                 return item?.client?.firstname &&
                                   item.status == "Approved" ? (
                                   <tr>
