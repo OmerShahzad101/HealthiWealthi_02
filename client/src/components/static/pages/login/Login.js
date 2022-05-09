@@ -136,7 +136,7 @@ const Login = (props) => {
     }
   };
   const googleLoginHandler = () => {
-    window.location.href = "http://localhost:8082/auth/google";
+    window.location.href = "https://healthiwealthi.arhamsoft.org/auth/google";
   };
   return (
     <div className="account-page">

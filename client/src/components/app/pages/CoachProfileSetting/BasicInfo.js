@@ -244,20 +244,28 @@ const BasicInfo = () => {
     });
   };
   const handleChangeSelect2 = (e) => {
+    debugger
     const alteredServices = e.map((item) => ({
       label: item.label,
       value: item.value,
     }));
     console.log(alteredServices);
+    console.log("hello tehre" ,JSON.stringify(alteredServices));
+    // let some = JSON.stringify(alteredServices)
     setprofileData({
       ...profileData,
       services: alteredServices,
     });
   };
-
+  console.log("payload",profileData.services)
   function updateProfileHandler(event) {
     event.preventDefault();
-
+    debugger
+    payload = 
+    ({
+      ...profileData,
+      services: JSON.stringify(profileData.services),
+    })
     const errors = validate(payload);
     if (Object.keys(errors).length > 0) {
       setValidationErrors({ ...errors });
