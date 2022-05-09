@@ -1,5 +1,5 @@
 import TopBarProgressIndicator from 'react-topbar-progress-indicator';
-import MyComponent from 'react-fullpage-custom-loader'
+
 TopBarProgressIndicator.config({
     barColors: {
         '0': '#d32986',
