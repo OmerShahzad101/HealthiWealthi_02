@@ -40,10 +40,7 @@ const Login = (props) => {
 
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("user", JSON.stringify(userData));
-          localStorage.setItem(
-            "googleRefreshToken",
-            response.data.user.googleRefreshToken
-          );
+          localStorage.setItem("googleRefreshToken",response.data.user.googleRefreshToken);
 
           dispatch(setAccessToken(response.data.accessToken));
           if (response?.data?.user?.type === 1) {
