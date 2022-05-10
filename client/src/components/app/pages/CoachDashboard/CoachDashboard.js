@@ -21,15 +21,16 @@ const CoachDashboard = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        tabs(response);
+        const newArr = response?.data?.BookingData.filter(item => item.status == "Approved")
+        tabs(newArr);
       })
       .catch((e) => {
         console.log("error", e);
       });
   }, []);
 
-  const tabs = (response) => {
-    response?.data?.BookingData?.map((item, idx) => {
+  const tabs = (newArr) => {
+      newArr.map((item, idx) => {
       let currentDate = new Date();
       currentDate = moment(currentDate).format("DD-MM-YY");
       let itemDate = moment(item.bookingDate).format("DD-MM-YY");
@@ -94,7 +95,7 @@ const CoachDashboard = () => {
                         </div>
                       </div>
                       <div className="dash-widget-info">
-                        <h6>Today Clients</h6>
+                        <h6>Today Appointment</h6>
                         <h3>{todayCount}</h3>
                         <p className="text-muted"></p>
                       </div>
@@ -112,7 +113,7 @@ const CoachDashboard = () => {
                         </div>
                       </div>
                       <div className="dash-widget-info">
-                        <h6>Appointments</h6>
+                        <h6>Total Appointments</h6>
                         <h3>{appointments}</h3>
                         <p className="text-muted"></p>
                       </div>
@@ -149,8 +150,8 @@ const CoachDashboard = () => {
                             {upcomingAppointment &&
                             upcomingAppointment.length > 0 ? (
                               upcomingAppointment.map((item, idx) => {
-                                return item?.client?.firstname &&
-                                  item.status == "Approved" ? (
+                                return item?.client?.firstname 
+                                   ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -212,12 +213,9 @@ const CoachDashboard = () => {
                           <tbody>
                             {todayAppointment && todayAppointment.length > 0 ? (
                               todayAppointment.map((item, idx) => {
-                                console.log(
-                                  todayAppointment,
-                                  "toadayaausduihas"
-                                );
-                                return item?.client?.firstname &&
-                                  item.status == "Approved" ? (
+                                
+                                return item?.client?.firstname 
+                                  ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -279,8 +277,8 @@ const CoachDashboard = () => {
                           <tbody>
                             {pastAppointment && pastAppointment.length > 0 ? (
                               pastAppointment.map((item, idx) => {
-                                return item?.client?.firstname &&
-                                  item.status == "Approved" ? (
+                                return item?.client?.firstname
+                                  ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">

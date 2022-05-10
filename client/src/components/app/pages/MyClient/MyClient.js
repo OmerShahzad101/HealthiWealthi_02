@@ -12,7 +12,8 @@ const MyClient = () => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
         console.log(response);
-        setMyclient(response?.data?.BookingData);
+        const newArr = response?.data?.BookingData.filter(item => item.status == "Approved")
+        setMyclient(newArr);
       })
       .catch((e) => {
         console.log("error", e);
@@ -25,7 +26,7 @@ const MyClient = () => {
           {myclient && myclient.length > 0 ? (
             myclient.map((item, idx) => {
               return (
-                item?.client?.firstname && item.status == "Approved" ? (
+                item?.client?.firstname  ? (
                   <div className="col-md-6 col-lg-4 col-xl-3">
                     <div className="card widget-profile pat-widget-profile">
                       <div className="card-body">
@@ -93,7 +94,7 @@ const MyClient = () => {
                       </div>
                     </div>
                   </div>
-                ) : " "
+                ) : ""
               );
             })
           ) : (
