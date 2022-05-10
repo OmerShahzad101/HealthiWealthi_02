@@ -81,43 +81,49 @@ const ClientCalendar = (props) => {
     endTime = moment(endTime).format();
     let summary = "Coach Meeting";
 
-    postHttpRequest(`front/googleMeet/create`, {
-      startTime,
-      endTime,
-      googleRefreshToken,
-      summary,
-    })
-      .then((response) => {
-        if (!response) {
-          alert("Something went wrong with response...");
-          return;
-        }
-        if (response.data.meetLink) {
-          postHttpRequest(`front/booking/create`, {
-            slots: timeStart + "-" + timeEnd,
-            client: userid,
-            coach: props.id,
-            bookingDate,
-            meetingLink: response.data.meetLink,
-          }).then((res) => {
-            console.log(res);
-            Toast.fire(
-              "Your Appoinment is Booked on ",
-              "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
-              "success"
-            ).then(() => {
-              history.push(CLIENT_DASHBOARD);
-            });
-          });
-        }
+    if (googleRefreshToken) {
+      postHttpRequest(`front/googleMeet/create`, {
+        startTime,
+        endTime,
+        googleRefreshToken,
+        summary,
       })
-      .catch((e) => {
-        console.log("Something went wrongggg...");
+        .then((response) => {
+          if (!response) {
+            alert("Something went wrong with response...");
+            return;
+          }
+          if (response.data.meetLink) {
+            postHttpRequest(`front/booking/create`, {
+              slots: timeStart + "-" + timeEnd,
+              client: userid,
+              coach: props.id,
+              bookingDate,
+              meetingLink: response.data.meetLink,
+            }).then((res) => {
+              console.log(res);
+              Toast.fire(
+                "Your Appoinment is Booked on ",
+                "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
+                "success"
+              ).then(() => {
+                history.push(CLIENT_DASHBOARD);
+              });
+            });
+          }
+        })
+        .catch((e) => {
+          console.log("Something went wrongggg...");
+        });
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "SignIn with Google is Required to Create Booking",
       });
+    }
   };
 
-
-  const appointmentSlots =  Object.entries(slotsByEachDate).map(
+  const appointmentSlots = Object.entries(slotsByEachDate).map(
     ([availableDay, availableTime]) => {
       let dayName = moment(availableDay).format("ddd");
       let humanReadableDate = moment(availableDay).format("DD MMM, YYYY");
@@ -160,8 +166,7 @@ const ClientCalendar = (props) => {
         </div>
       );
     }
-  )
-  
+  );
 
   return (
     <>
@@ -173,7 +178,6 @@ const ClientCalendar = (props) => {
 
           <div className="container booking">
             <div className="booking-form">
-              
               <Slider {...settings}>{appointmentSlots}</Slider>
             </div>
           </div>
