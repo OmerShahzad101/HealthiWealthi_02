@@ -39,7 +39,6 @@ const ClientSideBar = () => {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-              
               <img src={imagePath(userImage)} alt="User Image" />
             </a>
             <div className="profile-det-info">
@@ -60,6 +59,12 @@ const ClientSideBar = () => {
         <div className="dashboard-widget">
           <nav className="dashboard-menu">
             <ul>
+              <li>
+                <NavLink to="/app/notifications">
+                  <i className="fas fa-bell"></i>
+                  <span>Notifications</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/app/client-dashboard">
                   <i className="fas fa-columns"></i>

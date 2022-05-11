@@ -49,6 +49,8 @@ export const CLIENT_PROFILE_SETTING = `${APP}/client-profile-setting`;
 export const CLIENT_CHANGE_PASSWORD = `${APP}/client-change-password`;
 export const CHAT = `${APP}/chat`;
 export const ADD_REVIEWS = `${APP}/add-reviews`;
+export const NOTIFICATIONS = `${APP}/notifications`;
+
 
 // DASHBOARD
 export const DASHBOARD = `${APP}/dashboard`;

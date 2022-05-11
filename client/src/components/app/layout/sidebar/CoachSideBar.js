@@ -67,6 +67,12 @@ const CoachSideBar = () => {
         <div className="dashboard-widget">
           <nav className="dashboard-menu">
             <ul>
+            <li>
+                <NavLink to="/app/notifications">
+                  <i className="fas fa-bell"></i>
+                  <span>Notifications</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/app/coach-dashboard">
                   <i className="fas fa-columns"></i>
@@ -91,12 +97,7 @@ const CoachSideBar = () => {
                   <span>My Clients</span>
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/app/invoices-view">
-                  <i className="fas fa-file-invoice"></i>
-                  <span>Invoices</span>
-                </NavLink>
-              </li> */}
+             
               <li>
                 <NavLink to="/app/reviews">
                   <i className="fas fa-star"></i>

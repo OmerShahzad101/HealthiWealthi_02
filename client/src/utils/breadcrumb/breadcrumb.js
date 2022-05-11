@@ -67,6 +67,11 @@ export default function breadCrumb(path) {
         path: "chat",
         associatedName: "Chat",
       },
+      {
+        path: "notifications",
+        associatedName: "Notifications",
+      },
+      
     ];
     const result = schema.filter((schema) => schema.path === URI);
     const res = result.pop();

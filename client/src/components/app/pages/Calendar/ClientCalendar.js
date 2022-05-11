@@ -89,6 +89,10 @@ const ClientCalendar = (props) => {
         summary,
       })
         .then((response) => {
+          Toast.fire({
+            icon: "error",
+            title: response.data.message,
+          });
           if (!response) {
             alert("Something went wrong with response...");
             return;
@@ -101,7 +105,13 @@ const ClientCalendar = (props) => {
               bookingDate,
               meetingLink: response.data.meetLink,
             }).then((res) => {
-            
+              postHttpRequest("front/notification/create", {
+                from: userid,
+                to: props.id,
+                content: "Booked an appointment",
+                isRead: "false",
+                type: 1,
+              });
               console.log(res);
               Toast.fire(
                 "Your Appoinment is Booked on ",

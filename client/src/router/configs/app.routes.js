@@ -62,6 +62,9 @@ const ClientChangePasswordWithSuspense = withSuspense(ClientChangePassword);
 
 const Chat = lazy(() =>import(/* webpackChunkName: "Reviews" */ "../../components/app/pages/Chat/Chat"));
 const ChatsWithSuspense = withSuspense(Chat)
+
+const Notifications = lazy(() =>import(/* webpackChunkName: "Reviews" */ "../../components/app/pages/Notifications/Notifications"));
+const NotificationsWithSuspense = withSuspense(Notifications)
 // Route configurations for the app
 
 
@@ -180,6 +183,12 @@ function getRouteConfigs() {
       path: routes.ADD_REVIEWS,
       exact: true,
       element: <AddReviewsWithSuspense />,
+    },
+    {
+      //Chat Route
+      path: routes.NOTIFICATIONS,
+      exact: true,
+      element: <NotificationsWithSuspense />,
     },
     {
       // NOT FOUND ROUTE

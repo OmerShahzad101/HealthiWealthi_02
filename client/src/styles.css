@@ -7663,8 +7663,9 @@ button.btn.btn-google.btn-block span {
   color: #d32985
 }
 .resize{
-  height: 100px !important;
-  width: 100px !important;
+  height: 115px !important;
+  width: 115px !important;
+  object-fit: cover;
 }
 ::-webkit-scrollbar-track {
   border: 1px solid #fff;
@@ -7725,4 +7726,14 @@ input[type=number] {
 .meet-icon{
   color: #d32985;
   text-align: center;
+}
+.notification-img{
+  height: 50px !important;
+  width: 50px;
+  margin: 10px;
+  object-fit: cover;
+}
+.notifcation-bar{
+  background-color: #b7c5d1;
+  border-radius: 10px;
 }
