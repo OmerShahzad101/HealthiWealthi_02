@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdVideoCall } from "react-icons/md";
 import { useSelector } from "react-redux";
 import image from "../../../../assets/img/defaultImg.jpg";
 import { postHttpRequest } from "../../../../axios";
@@ -34,7 +36,7 @@ const ChatRoom = () => {
           href="javascript:void(0)"
           className="back-user-list"
         >
-          <i className="material-icons">chevron_left</i>
+          <i className="material-icons"></i>
         </a>
         <div className="media">
           <div className="media-img-wrap">
@@ -57,17 +59,17 @@ const ChatRoom = () => {
             data-toggle="modal"
             data-target="#voice_call"
           >
-            <i className="material-icons">local_phone</i>
+            <FiPhoneCall size={22}/>
           </a>
           <a
             href="javascript:void(0)"
             data-toggle="modal"
             data-target="#video_call"
           >
-            <i className="material-icons">videocam</i>
+            <MdVideoCall size={22}/>
           </a>
           <a href="javascript:void(0)">
-            <i className="material-icons">more_vert</i>
+            <i className="material-icons"></i>
           </a>
         </div>
       </div>
