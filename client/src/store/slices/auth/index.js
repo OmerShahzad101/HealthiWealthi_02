@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 let usr = localStorage.getItem("user");
 usr = usr ? JSON.parse(usr) : null;
 let accessToken = localStorage.getItem("accessToken");
-console.log(usr?.res?.city, 'my beautiful city');
 
 const initialState = {
   user: {
@@ -69,6 +68,8 @@ export const authSlice = createSlice({
             lastName: res.lastname,
             specialization: res?.specialization,
             fileName: res?.fileName,
+            city: res?.city,
+            country: res?.country,
           },
           clientProfile: { ...state.clientProfile },
           coachProfile: { ...state.coachProfile },
