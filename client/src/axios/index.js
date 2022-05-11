@@ -30,6 +30,15 @@ export async function putHttpRequest(url, data, config = {}) {
     return Axios.put(url, data, requestConfig);
 }
 
+export async function deleteHttpRequest(url, data, config = {}) {
+    const requestConfig = {
+        signal: abortController.signal,
+        ...config,
+    };
+
+    return Axios.delete(url, data, requestConfig);
+}
+
 export function cancelOngoingHttpRequest() {
     abortController.abort();
 

@@ -129,7 +129,7 @@ const CoachDashboard = () => {
             <h4 className="mb-4">Client Appoinment</h4>
             <div className="appointment-tab">
               <Tabs
-                defaultActiveKey="upcoming-appointments"
+                defaultActiveKey="today-appointments"
                 id="uncontrolled-tab-example"
                 className="nav-tabs-solid nav-tabs-rounded"
               >
