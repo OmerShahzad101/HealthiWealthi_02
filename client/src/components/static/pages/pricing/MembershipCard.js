@@ -38,8 +38,8 @@ const MembershipCard = ({type, membership}) => {
               );
             })
           ) : (
-            <div className="no_data_found">
-              <span>No Coaches found</span>
+            <div className="no_fav_found">
+              <span>No Menbership Available</span>
             </div>
           )
     );

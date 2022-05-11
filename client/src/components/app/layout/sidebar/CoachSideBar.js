@@ -42,7 +42,11 @@ const CoachSideBar = () => {
         <div className="widget-profile pro-widget-content">
           <div className="profile-info-widget">
             <a href="#" className="booking-doc-img">
-              {user && <img src={imagePath(userImage)} alt="user img" />}
+              {userImage?.length > 20 ? (
+                <img src={userImage} alt="User Image" />
+              ) : (
+                <img src={imagePath(userImage)} alt="User Image" />
+              )}{" "}
             </a>
             <div className="profile-det-info">
               <h3>
@@ -55,7 +59,7 @@ const CoachSideBar = () => {
 
               <div className="patient-details">
                 <h5 className="mb-0">
-                <i className="fas fa-map-marker-alt"></i>{" "}
+                  <i className="fas fa-map-marker-alt"></i>{" "}
                   {data?.country || data?.city
                     ? data?.country + ", " + data?.city
                     : "No Location Setup"}
@@ -67,7 +71,7 @@ const CoachSideBar = () => {
         <div className="dashboard-widget">
           <nav className="dashboard-menu">
             <ul>
-            <li>
+              <li>
                 <NavLink to="/app/notifications">
                   <i className="fas fa-bell"></i>
                   <span>Notifications</span>
@@ -97,7 +101,7 @@ const CoachSideBar = () => {
                   <span>My Clients</span>
                 </NavLink>
               </li>
-             
+
               <li>
                 <NavLink to="/app/reviews">
                   <i className="fas fa-star"></i>

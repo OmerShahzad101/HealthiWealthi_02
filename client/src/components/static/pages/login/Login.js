@@ -38,8 +38,8 @@ const Login = (props) => {
           };
           dispatch(setUser(userData));
 
-          localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("user", JSON.stringify(userData));
+          localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("googleRefreshToken",response.data.user.googleRefreshToken);
 
           dispatch(setAccessToken(response.data.accessToken));
@@ -97,15 +97,12 @@ const Login = (props) => {
 
       if (response.data.success) {
         setIsLoading(false);
-        let res = await getHttpRequest(
-          `/front/coach/get/${response?.data.data?._id}`
-        );
+        let res = await getHttpRequest(`/front/coach/get/${response?.data.data?._id}`);
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
-
           dispatch(setUser(userData));
           localStorage.setItem("accessToken", response.data.data.accessToken);
           localStorage.setItem("user", JSON.stringify(userData));

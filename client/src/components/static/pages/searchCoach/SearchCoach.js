@@ -397,11 +397,11 @@ const SearchCoach = () => {
                   );
                 })
               ) : (
-                <div className="no_data_found">
+                <div className="no_fav_data">
                   <span>No Coaches found</span>
                 </div>
               )}
-              <div className="load-more text-center">
+              <div className="load-more text-center mt-4">
                 <a className="btn btn-primary btn-sm" href="#;">
                   Load More
                 </a>

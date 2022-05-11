@@ -203,7 +203,11 @@ const ClientProfileSetting = () => {
                 <div className="col-md-12">
                   <div className="imageUploaderWrapper profile-img">
                     <div className="circle">
-                      {<img src={imagePath(userImage)} alt="user img" />}
+                      {userImage?.length > 20 ? (
+                        <img src={userImage} alt="User Image" />
+                      ) : (
+                        <img src={imagePath(userImage)} alt="User Image" />
+                      )}{" "}
                     </div>
 
                     <label className="pImage">

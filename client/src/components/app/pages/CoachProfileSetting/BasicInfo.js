@@ -18,7 +18,6 @@ import Resizer from "react-image-file-resizer";
 import Select from "react-select";
 
 const BasicInfo = () => {
-  
   const userid = useSelector((state) => state.auth.user.userid);
   const userImage = useSelector((state) => state.auth.user.fileName);
   const dispatch = useDispatch();
@@ -244,28 +243,27 @@ const BasicInfo = () => {
     });
   };
   const handleChangeSelect2 = (e) => {
-    debugger
+    debugger;
     const alteredServices = e.map((item) => ({
       label: item.label,
       value: item.value,
     }));
     console.log(alteredServices);
-    console.log("hello tehre" ,JSON.stringify(alteredServices));
+    console.log("hello tehre", JSON.stringify(alteredServices));
     // let some = JSON.stringify(alteredServices)
     setprofileData({
       ...profileData,
       services: alteredServices,
     });
   };
-  console.log("payload",profileData.services)
+  console.log("payload", profileData.services);
   function updateProfileHandler(event) {
     event.preventDefault();
-    debugger
-    payload = 
-    ({
+    debugger;
+    payload = {
       ...profileData,
       services: JSON.stringify(profileData.services),
-    })
+    };
     const errors = validate(payload);
     if (Object.keys(errors).length > 0) {
       setValidationErrors({ ...errors });
@@ -375,7 +373,11 @@ const BasicInfo = () => {
             <div className="col-md-12">
               <div className="imageUploaderWrapper profile-img">
                 <div className="circle">
-                  {<img src={imagePath(userImage)} alt="user img" />}
+                  {userImage?.length > 20 ? (
+                    <img src={userImage} alt="User" />
+                  ) : (
+                    <img src={imagePath(userImage)} alt="User Image" />
+                  )}{" "}
                 </div>
                 <label className="pImage">
                   <AiOutlineCamera className="uploadButton" />
