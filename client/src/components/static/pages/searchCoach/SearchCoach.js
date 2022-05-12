@@ -19,9 +19,7 @@ const SearchCoach = () => {
   const userId = useSelector((state) => state.auth.user.userid);
   const [servicesList, setServicesList] = useState([]);
   
-  const params = new Proxy(new URLSearchParams(location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
+  const params = new Proxy(new URLSearchParams(location.search), {get: (searchParams, prop) => searchParams.get(prop)});
   const paramsGender = params.gender && params.gender.split(",")
   const paramsServices = params.services && params.services.split(",")
   
@@ -397,11 +395,11 @@ const SearchCoach = () => {
                   );
                 })
               ) : (
-                <div className="no_data_found">
+                <div className="no_fav_data">
                   <span>No Coaches found</span>
                 </div>
               )}
-              <div className="load-more text-center">
+              <div className="load-more text-center mt-4">
                 <a className="btn btn-primary btn-sm" href="#;">
                   Load More
                 </a>

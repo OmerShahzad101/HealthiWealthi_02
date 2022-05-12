@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdVideoCall } from "react-icons/md";
 import { useSelector } from "react-redux";
 import image from "../../../../assets/img/defaultImg.jpg";
 import { postHttpRequest } from "../../../../axios";
+import imagePath from "../../../../utils/url/imagePath";
 
 const ChatRoom = () => {
-  const { recieverName, messages, conversationId } = useSelector(
-    (state) => state.chat
-  );
+  const { recieverName, messages, conversationId , recieverImage , recieverId} = useSelector((state) => state.chat);
   const { userid } = useSelector((state) => state.auth.user);
   const writeMessage = useRef();
 
@@ -23,7 +24,16 @@ const ChatRoom = () => {
       senderId: userid,
       conversationId,
     });
-    console.log(response, "respnse from backend of send message");
+    console.log(response, "response from backend of send message");
+    if(response){
+      postHttpRequest("front/notification/create", {
+        from: userid,
+        to: recieverId,
+        content: "send a message",
+        isRead: "false",
+        type: 3,
+      });
+    }
   };
 
   return (
@@ -34,16 +44,15 @@ const ChatRoom = () => {
           href="javascript:void(0)"
           className="back-user-list"
         >
-          <i className="material-icons">chevron_left</i>
+          <i className="material-icons"></i>
         </a>
         <div className="media">
           <div className="media-img-wrap">
             <div className="avatar avatar-online">
-              <img
-                src={image}
-                alt="User Image"
-                className="avatar-img rounded-circle"
-              />
+            { recieverImage?.length > 20 ? 
+              <img src={recieverImage} className="avatar-img rounded-circle" alt="User"/> : 
+              <img src={imagePath(recieverImage)} className="avatar-img rounded-circle" alt="User" />
+            }
             </div>
           </div>
           <div className="media-body">
@@ -57,17 +66,14 @@ const ChatRoom = () => {
             data-toggle="modal"
             data-target="#voice_call"
           >
-            <i className="material-icons">local_phone</i>
+            <FiPhoneCall size={22} />
           </a>
           <a
             href="javascript:void(0)"
             data-toggle="modal"
             data-target="#video_call"
           >
-            <i className="material-icons">videocam</i>
-          </a>
-          <a href="javascript:void(0)">
-            <i className="material-icons">more_vert</i>
+            <MdVideoCall size={28} />
           </a>
         </div>
       </div>

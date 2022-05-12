@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { Link, useHistory } from "react-router-dom";
-import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import { getHttpRequest, postHttpRequest , putHttpRequest } from "../../../../axios";
 import { setUser, setAccessToken } from "../../../../store/slices/auth";
 import validate from "../../../../utils/form-validation/authFormValidation";
 import {
@@ -25,21 +25,20 @@ const Login = (props) => {
     const aa = url.split("/").pop();
     if (aa.length > 5) {
       const googleAccessToken = url.split("=").pop();
-      console.log("googleAccessToken", googleAccessToken);
       if (googleAccessToken) {
-        console.log("googleAccessTokendcd", googleAccessToken);
+        postHttpRequest("/front/auth/verify", { googleAccessToken: googleAccessToken}).then((response) => {
+        if(accociatedCoach){
+          putHttpRequest("/front/client/edit", {accociatedCoach: accociatedCoach , _id : response.data.user._id})
+        }
 
-        postHttpRequest("/front/auth/verify", {
-          googleAccessToken: googleAccessToken,
-        }).then((response) => {
-          const userData = {
-            response: response.data.user,
-            res: response.data.user,
-          };
+        const userData = {
+          response: response.data.user,
+          res: response.data.user,
+        };
           dispatch(setUser(userData));
 
-          localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("user", JSON.stringify(userData));
+          localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("googleRefreshToken",response.data.user.googleRefreshToken);
 
           dispatch(setAccessToken(response.data.accessToken));
@@ -77,7 +76,7 @@ const Login = (props) => {
 
     try {
       let response = await postHttpRequest("/front/auth/login", loginData);
-
+      putHttpRequest("/front/client/edit", {accociatedCoach: accociatedCoach})
       if (!response) {
         Toast.fire({
           icon: "error",
@@ -97,20 +96,17 @@ const Login = (props) => {
 
       if (response.data.success) {
         setIsLoading(false);
-        let res = await getHttpRequest(
-          `/front/coach/get/${response?.data.data?._id}`
-        );
+        let res = await getHttpRequest(`/front/coach/get/${response?.data.data?._id}`);
         if (res) {
           const userData = {
             response: response.data.data,
             res: res?.data.coach,
           };
-
           dispatch(setUser(userData));
           localStorage.setItem("accessToken", response.data.data.accessToken);
           localStorage.setItem("user", JSON.stringify(userData));
           dispatch(setAccessToken(userData.response.accessToken));
-
+          
           if (response?.data?.data?.type === 1) {
             history.replace(CLIENT_PROFILE_SETTING);
           } else if (response?.data?.data?.type === 3) {

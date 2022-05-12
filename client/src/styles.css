@@ -7730,10 +7730,25 @@ input[type=number] {
 .notification-img{
   height: 50px !important;
   width: 50px;
-  margin: 10px;
   object-fit: cover;
 }
 .notifcation-bar{
   background-color: #b7c5d1;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.notifcation-bar sub{
+  position: absolute;
+    left: 54px;
+    bottom: 8px;
+}
+.noti-trash{
+  transition: all .3s ease;
+}
+.noti-trash:hover{
+  transition: all .3s ease;
+  cursor: pointer;
+  color: #d32986;
 }

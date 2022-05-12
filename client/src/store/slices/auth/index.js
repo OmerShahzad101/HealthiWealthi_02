@@ -1,26 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let usr = localStorage.getItem('user')
-console.log(usr, 'statteeeeeeeeeeeeeeee')
-usr = usr ? JSON.parse(usr) : null
-
+let usr = localStorage.getItem("user");
+usr = usr ? JSON.parse(usr) : null;
+let accessToken = localStorage.getItem("accessToken");
 
 const initialState = {
   user: {
-    userRole: usr ? usr.res?.type : null,
-    username: usr ? usr.res?.username : null,
-    userid: usr ? usr.res?._id : null,
-    UserEmail: usr ? usr.res?.email : null,
-    userRoleId: null,
+    accessToken: accessToken,
     permissions: [],
-    accessToken: usr ? usr.response?.accessToken : null,
-    googleRefreshToken: usr ? usr.response?.googleRefreshToken : null,
-    // acessPageDashboard: null,
+    userRoleId: null,
     Userabout: null,
-    firstName: usr ? usr.res?.firstname : null,
-    lastName: usr ? usr.res?.lastname : null,
     fileName: null,
     specialization: null,
+    city: usr ? usr.res?.city : null,
+    country: usr ? usr.res?.country : null,
+    userid: usr ? usr.res?._id : null,
+    userRole: usr ? usr.res?.type : null,
+    UserEmail: usr ? usr.res?.email : null,
+    lastName: usr ? usr.res?.lastname : null,
+    username: usr ? usr.res?.username : null,
+    firstName: usr ? usr.res?.firstname : null,
+    googleRefreshToken: usr ? usr.response?.googleRefreshToken : null,
+
   },
   clientProfile: {
     firstName: null,
@@ -67,6 +68,8 @@ export const authSlice = createSlice({
             lastName: res.lastname,
             specialization: res?.specialization,
             fileName: res?.fileName,
+            city: res?.city,
+            country: res?.country,
           },
           clientProfile: { ...state.clientProfile },
           coachProfile: { ...state.coachProfile },
@@ -126,14 +129,9 @@ export const authSlice = createSlice({
           firstName: res.firstname,
           lastName: res.lastname,
           specialization: res.specialization,
-          // gender: res.gender,
-          // bloodGroup: res.bloodgroup,
-          // phoneNumber: res.phone,
-          // about: res.about,
           city: res.city,
           state: res.state,
           country: res.country,
-          // postalCode: res.postalCode,
         },
       };
       return state;
@@ -160,6 +158,6 @@ export const {
   setDashboardName,
   setClientProfile,
   setCoachProfile,
-  setImage
+  setImage,
 } = authSlice.actions;
 export default authSlice.reducer;

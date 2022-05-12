@@ -5,9 +5,9 @@ const Channels = ({ channels }) => {
   return (
     <div className="chat-cont-left">
       <div className="chat-header">
-        <span>Chats</span>
+        <span>Healthi Wealthi</span>
         <a href="javascript:void(0)" className="chat-compose">
-          <i className="material-icons">control_point</i>
+          <i className="material-icons"></i>
         </a>
       </div>
       <form className="chat-search">

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {postHttpRequest} from "../../../../axios";
 import image from '../../../../assets/img/defaultImg.jpg';
 import {setChatWindow} from "../../../../store/slices/chat/chatSlice";
+import imagePath from "../../../../utils/url/imagePath";
 
 const Channel = ({user}) => {
 
@@ -10,21 +11,19 @@ const Channel = ({user}) => {
 
     const {userid} = useSelector((state) => state.auth.user)
 
-    const handleClick = async (id, name) => {
+    const handleClick = async (id, name , fileName) => {
         const {data} = await postHttpRequest('/front/chat/create', {senderId: userid, recieverId:id})
-        dispatch(setChatWindow({id, name, conversationId:data.conversationId, messages: data.chatMessages}))
-        console.log(data, 'conversation response')
+        dispatch(setChatWindow({id, name, fileName , conversationId:data.conversationId, messages: data.chatMessages}))
     }
 
     return (
-        <a onClick={() => handleClick(user._id, user.username)} href="javascript:void(0);" className="media">
+        <a onClick={() => handleClick(user._id, user.username , user.fileName)} href="javascript:void(0);" className="media">
             <div className="media-img-wrap">
                 <div className="avatar avatar-away">
-                    <img
-                        src={image}
-                        alt="User Image"
-                        className="avatar-img rounded-circle"
-                    />
+                { user.fileName?.length > 20 ? 
+                    <img src={user.fileName} className="avatar-img rounded-circle" alt="User"/> : 
+                    <img src={imagePath(user.fileName)} className="avatar-img rounded-circle" alt="User" />
+                }
                 </div>
             </div>
             <div className="media-body">

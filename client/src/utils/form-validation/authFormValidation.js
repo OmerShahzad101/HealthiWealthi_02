@@ -77,11 +77,11 @@ export default function validate(form) {
   }
   if ("message" in form) {
     if (!form.message) {
-      errors.message = "Subject is required";
+      errors.message = "Message is required";
     } else if (form.message.trim().length < 10) {
-      errors.message = "message should have at least 10 characters.";
+      errors.message = "Message should have at least 10 characters.";
     } else if (form.message.trim().length > 100) {
-      errors.message = "message should be lesser than 100 characters.";
+      errors.message = "Message should be lesser than 100 characters.";
     }
   }
   if ("lastname" in form) {

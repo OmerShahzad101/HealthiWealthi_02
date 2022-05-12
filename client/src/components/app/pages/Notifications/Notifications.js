@@ -34,20 +34,25 @@ const Notifications = () => {
       {notification && notification.length > 0 ? (
         notification.map((item, idx) => {
           return (
-            <>
-              <Link to="/app/appointments">
-                <p className="notifcation-bar" onClick={readNotification(item._id)}>
+           
+            <div className="notifcation-bar p-3 mb-2">
+              <Link to={item.type === 1 ? "/app/appointments" : "/app/chat"}>
+                <p className="m-0 position-relative" onClick={readNotification(item._id)}>
                   <img className="avatar-img rounded-circle notification-img" alt="User" src={item?.from_info[0]?.fileName ? mediaPath + item.from_info[0].fileName : mediaPath + "avatar.jpg" }/>
                   <strong> {item?.from_info[0].firstname}&nbsp;{item?.from_info[0].lastname}&nbsp;</strong>
-                  {item?.content}&nbsp;<sub>{moment(item.createdAt).fromNow()}</sub>
+                  <span className="mr-1">{item?.content}</span>
+                  <sub>{moment(item.createdAt).fromNow()}</sub>
                 </p>
               </Link>
-              <a onClick={(e)=> deleteNotification(item._id , e)}><FaTrash size={22}/></a>
-            </>
+              <span className="noti-trash" onClick={(e)=> deleteNotification(item._id , e)}><FaTrash size={22}/></span>
+            </div>
+              
+              
+            
           );
         })
       ) : (
-        <div className="no-appoinments">
+        <div className="no_fav_data">
           <p>You don't have any Notifications</p>
         </div>
       )}
