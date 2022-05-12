@@ -47,7 +47,6 @@ const ClientDashboard = (props) => {
                         <tbody>
                           {myAppoinment && myAppoinment.length > 0 ? (
                             myAppoinment.map((item, idx) => {
-                              debugger;
                               return (
                                 item?.client?.firstname && (
                                   <tr key={idx}>

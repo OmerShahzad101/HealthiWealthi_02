@@ -83,7 +83,6 @@ const LoginWithGoogle = () => {
   };
   const loginGmailHanlder = async (event) => {
     event.preventDefault();
-    debugger;
     const type = typeRef.current.value;
 
     const payload = {
@@ -114,7 +113,6 @@ const LoginWithGoogle = () => {
       }
 
       if (response.data.coach.isEmailVerified === true) {
-        debugger;
         setIsLoading(false);
         let res = await getHttpRequest(
           `/front/coach/get/${response?.data?.coach?._id}`

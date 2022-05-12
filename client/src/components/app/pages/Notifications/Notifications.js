@@ -35,8 +35,8 @@ const Notifications = () => {
         notification.map((item, idx) => {
           return (
            
-            <div className="notifcation-bar p-3">
-              <Link to="/app/appointments">
+            <div className="notifcation-bar p-3 mb-2">
+              <Link to={item.type === 1 ? "/app/appointments" : "/app/chat"}>
                 <p className="m-0 position-relative" onClick={readNotification(item._id)}>
                   <img className="avatar-img rounded-circle notification-img" alt="User" src={item?.from_info[0]?.fileName ? mediaPath + item.from_info[0].fileName : mediaPath + "avatar.jpg" }/>
                   <strong> {item?.from_info[0].firstname}&nbsp;{item?.from_info[0].lastname}&nbsp;</strong>

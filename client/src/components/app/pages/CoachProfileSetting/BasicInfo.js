@@ -243,7 +243,6 @@ const BasicInfo = () => {
     });
   };
   const handleChangeSelect2 = (e) => {
-    debugger;
     const alteredServices = e.map((item) => ({
       label: item.label,
       value: item.value,
@@ -259,7 +258,6 @@ const BasicInfo = () => {
   console.log("payload", profileData.services);
   function updateProfileHandler(event) {
     event.preventDefault();
-    debugger;
     payload = {
       ...profileData,
       services: JSON.stringify(profileData.services),
