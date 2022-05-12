@@ -19,9 +19,7 @@ const SearchCoach = () => {
   const userId = useSelector((state) => state.auth.user.userid);
   const [servicesList, setServicesList] = useState([]);
   
-  const params = new Proxy(new URLSearchParams(location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
+  const params = new Proxy(new URLSearchParams(location.search), {get: (searchParams, prop) => searchParams.get(prop)});
   const paramsGender = params.gender && params.gender.split(",")
   const paramsServices = params.services && params.services.split(",")
   

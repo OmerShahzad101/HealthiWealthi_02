@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { postHttpRequest } from "../../../../axios";
+import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import Toast from "../../../common/toast/Toast";
 
 const AddReviews = () => {
   const id = useSelector((state) => state.auth.user.userid);
+  const userid = useSelector((state) => state.auth.user.userid);
+  const [ coachDetail , setCoachDetail] = useState()
+  
+  useEffect(()=>{
+    getHttpRequest(`/front/client/get/${userid}`).then((res)=>{
+      setCoachDetail(res.data.client.accociatedCoach)
+    })
+  },[])
   const initialvalues = {
     score: "",
     title: "",
     comment: "",
     reviewBy: id,
-    reviewTo: id,
+    reviewTo: coachDetail?._id,
   };
   const [review, setReview] = useState(initialvalues);
   const handleChange = (e) => {
@@ -18,22 +26,33 @@ const AddReviews = () => {
     setReview({
       ...review,
       [name]: value,
+      reviewTo: coachDetail?._id,
     });
+
   };
+ 
 
   const addReview = () => {
-    console.log(review);
+    debugger;
+
     postHttpRequest("front/review/add-review", review).then((response) => {
       Toast.fire({
         icon: "success",
         title: response.data.message,
       });
     });
+    postHttpRequest("front/notification/create", {
+      from: userid,
+      to: coachDetail?._id,
+      content: "gives a review",
+      isRead: "false",
+      type: 7,
+    });
   };
   return (
     <div className="write-review col-md-7 col-lg-8 col-xl-9">
       <h4>
-        Write a review for <strong>Dr. Darren Elder</strong>
+        Write a review for <strong>{coachDetail?.firstname}&nbsp;{coachDetail?.lastname}</strong>
       </h4>
 
       {/* <!-- Write Review Form --> */}
