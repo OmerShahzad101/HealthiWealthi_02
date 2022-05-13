@@ -6,13 +6,13 @@ import Toast from "../../../common/toast/Toast";
 const AddReviews = () => {
   const id = useSelector((state) => state.auth.user.userid);
   const userid = useSelector((state) => state.auth.user.userid);
-  const [ coachDetail , setCoachDetail] = useState()
-  
-  useEffect(()=>{
-    getHttpRequest(`/front/client/get/${userid}`).then((res)=>{
-      setCoachDetail(res.data.client.accociatedCoach)
-    })
-  },[])
+  const [coachDetail, setCoachDetail] = useState();
+
+  useEffect(() => {
+    getHttpRequest(`/front/client/get/${userid}`).then((res) => {
+      setCoachDetail(res.data.client.accociatedCoach);
+    });
+  }, []);
   const initialvalues = {
     score: "",
     title: "",
@@ -28,14 +28,12 @@ const AddReviews = () => {
       [name]: value,
       reviewTo: coachDetail?._id,
     });
-
   };
- 
 
   const addReview = () => {
     debugger;
 
-    postHttpRequest("front/review/add-review", review).then((response) => {
+    postHttpRequest("front/review/create", review).then((response) => {
       Toast.fire({
         icon: "success",
         title: response.data.message,
@@ -52,7 +50,10 @@ const AddReviews = () => {
   return (
     <div className="write-review col-md-7 col-lg-8 col-xl-9">
       <h4>
-        Write a review for <strong>{coachDetail?.firstname}&nbsp;{coachDetail?.lastname}</strong>
+        Write a review for{" "}
+        <strong>
+          {coachDetail?.firstname}&nbsp;{coachDetail?.lastname}
+        </strong>
       </h4>
 
       {/* <!-- Write Review Form --> */}

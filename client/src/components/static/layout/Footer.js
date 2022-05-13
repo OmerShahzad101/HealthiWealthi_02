@@ -73,7 +73,7 @@ export default function Footer() {
 
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget footer-menu">
-                <h2 className="footer-title">For Client</h2>
+                <h2 className="footer-title">Links</h2>
                 <ul>
                   <li>
                     <Link to="/search-coach">
@@ -91,17 +91,6 @@ export default function Footer() {
                       <i className="fas fa-angle-double-right"></i> Register
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link to="/book-appointment">
-                      <i className="fas fa-angle-double-right"></i> Booking
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/client-dashboard">
-                      <i className="fas fa-angle-double-right"></i> Client
-                      Dashboard
-                    </Link>
-                  </li> */}
                 </ul>
               </div>
             </div>
@@ -167,7 +156,7 @@ export default function Footer() {
                 <div className="copyright-menu">
                   <ul className="policy-menu">
                     <li>
-                      <a href="#">Terms and Conditions</a>
+                      <Link to="/terms-and-conditions">Terms and Conditions</Link>
                     </li>
                     <li>
                       <a href="#">Policy</a>

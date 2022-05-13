@@ -12,6 +12,8 @@ export const SEARCH_COACH = "/search-coach";
 export const COACH_PROFILE = "/coach-profile/:coachId";
 export const PRICING = "/pricing";
 export const CMSPAGE = "/cmspage";
+export const TERMSANDCONDITION = "/terms-and-conditions";
+
 
 // Base Routes
 export const LOGIN = "/login";
