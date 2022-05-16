@@ -58,7 +58,17 @@ const ContactDetails = () => {
           return;
         }
         if (result.data.success === true) {
-          dispatch(setCoachProfile({ res: result.data.coach }));
+
+          const userData = {
+            response: result.data.coach,
+            res: result.data.coach,
+          };
+            dispatch(setUser(userData));
+        
+            localStorage.removeItem("user");
+            localStorage.setItem("user", JSON.stringify(userData));
+
+          // dispatch(setCoachProfile({ res: result.data.coach }));
           Toast.fire({
             icon: "success",
             title: result.data.message,
@@ -79,7 +89,7 @@ const ContactDetails = () => {
       });
     window.scrollTo(0, 0);
   }
-
+ 
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {
