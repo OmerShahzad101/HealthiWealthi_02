@@ -4,6 +4,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHttpRequest } from "../../../../axios";
 import moment from "moment";
+import { BsFillArrowUpRightSquareFill } from "react-icons/bs";
 
 const CoachDashboard = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
@@ -208,6 +209,7 @@ const CoachDashboard = () => {
                               <th>Client ID</th>
                               <th>Appt Time</th>
                               <th>Appt Date</th>
+                              <th>Meeting Link</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -245,6 +247,24 @@ const CoachDashboard = () => {
                                     <td>{idx + 1}</td>
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
+                                    <td>
+                                      {item?.status == "Cancelled" ? (
+                                        <BsFillArrowUpRightSquareFill
+                                          size={28}
+                                        />
+                                      ) : item?.status == "pending" ? (
+                                        <BsFillArrowUpRightSquareFill
+                                          size={28}
+                                        />
+                                      ) : (
+                                        <a href={item.meetingLink}>
+                                          <BsFillArrowUpRightSquareFill
+                                            size={28}
+                                            className="meet-icon"
+                                          />
+                                        </a>
+                                      )}
+                                    </td>
                                   </tr>
                                 ) : (
                                   ""
@@ -308,6 +328,7 @@ const CoachDashboard = () => {
                                     <td>{idx + 1}</td>
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
+                                  
                                   </tr>
                                 ) : (
                                   ""

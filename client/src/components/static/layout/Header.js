@@ -3,10 +3,7 @@ import { useEffect } from "react";
 import { CgPhone } from "react-icons/cg";
 import $ from "jquery";
 import { useSelector } from "react-redux";
-import {
-  CLIENT_DASHBOARD,
-  COACH_DASHBOARD,
-} from "../../../router/constants/ROUTES";
+import {CLIENT_DASHBOARD, COACH_DASHBOARD} from "../../../router/constants/ROUTES";
 
 export default function Header() {
   const location = useLocation();

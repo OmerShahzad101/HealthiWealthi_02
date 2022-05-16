@@ -30,7 +30,9 @@ export default function Footer() {
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget footer-about">
                 <div className="footer-logo">
-                  <img src="assets/img/Logo.svg" alt="logo" />
+                  <Link to="/">
+                    <img src="/assets/img/Logo.svg" alt="logo" />
+                  </Link>
                 </div>
                 <div className="footer-about-content">
                   <p>
@@ -73,7 +75,7 @@ export default function Footer() {
 
             <div className="col-lg-3 col-md-6">
               <div className="footer-widget footer-menu">
-                <h2 className="footer-title">Links</h2>
+                <h2 className="footer-title">Useful Links</h2>
                 <ul>
                   <li>
                     <Link to="/search-coach">
@@ -156,10 +158,12 @@ export default function Footer() {
                 <div className="copyright-menu">
                   <ul className="policy-menu">
                     <li>
-                      <Link to="/terms-and-conditions">Terms and Conditions</Link>
+                      <Link to="/terms-and-conditions">
+                        Terms and Conditions
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">Policy</a>
+                      <Link to="/privacy-policy">Policy</Link>
                     </li>
                   </ul>
                 </div>

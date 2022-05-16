@@ -13,6 +13,8 @@ export const COACH_PROFILE = "/coach-profile/:coachId";
 export const PRICING = "/pricing";
 export const CMSPAGE = "/cmspage";
 export const TERMSANDCONDITION = "/terms-and-conditions";
+export const PRIVACYPOLICY = "/privacy-policy";
+
 
 
 // Base Routes

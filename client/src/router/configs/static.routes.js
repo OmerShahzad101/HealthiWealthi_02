@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import withSuspense from '../../hoc/withSuspense';
-import { ROOT, ABOUT, CONTACT ,SEARCH_COACH, COACH_PROFILE, PRICING, CMSPAGE , TERMSANDCONDITION} from '../constants/ROUTES';
+import { ROOT, ABOUT, CONTACT ,SEARCH_COACH, COACH_PROFILE, PRICING, CMSPAGE , TERMSANDCONDITION , PRIVACYPOLICY} from '../constants/ROUTES';
 
 // Home
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ `../../components/static/pages/home/Home`));
@@ -35,6 +35,9 @@ const CmsPageWithSuspense = withSuspense(CmsPage);
 const TermsAndCondition = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/TermsAndCondition/TermsAndCondition'));
 const TermsAndConditioneWithSuspense = withSuspense(TermsAndCondition);
 
+//PrivacyPolicy
+const PrivacyPolicy = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/PrivacyPolicy/PrivacyPolicy'));
+const PrivacyPolicyeWithSuspense = withSuspense(PrivacyPolicy);
 
 // Route configurations for settings
 function getRouteConfigs() {
@@ -82,11 +85,17 @@ function getRouteConfigs() {
             element: <CmsPageWithSuspense />,
         },
         {
-            //cms pages
-             path: TERMSANDCONDITION,
-             exact: true,
-             element: <TermsAndConditioneWithSuspense />,
-         },
+            //TermsAndConditione
+            path: TERMSANDCONDITION,
+            exact: true,
+            element: <TermsAndConditioneWithSuspense />,
+        },
+        {
+            //PrivacyPolicy
+            path: PRIVACYPOLICY,
+            exact: true,
+            element: <PrivacyPolicyeWithSuspense />,
+        },
         {
             // NOT FOUND ROUTE
             path: '*',
