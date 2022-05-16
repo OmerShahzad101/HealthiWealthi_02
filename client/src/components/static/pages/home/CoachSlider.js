@@ -155,17 +155,17 @@ const CoachSlider = () => {
                               View Profile
                             </Link>
                           </div>
-                          {role === 1 ? (
+                          {role === 3 ? (
+                            ""
+                          ) : (
                             <div className="col-6">
                               <Link
-                                to={"/app/book-appointment/" + e?._id}
+                                to={ userId ? "/app/book-appointment/" + e?._id : "/login"}
                                 className="btn book-btn"
                               >
                                 Book Now
                               </Link>
                             </div>
-                          ) : (
-                            ""
                           )}
                         </div>
                       </div>

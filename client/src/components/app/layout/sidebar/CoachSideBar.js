@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { getHttpRequest } from "../../../../axios";
 import { useEffect } from "react";
 import { setImage } from "../../../../store/slices/auth";
+import { Toast  } from "../../../common/toast/Toast";
 
 const CoachSideBar = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const CoachSideBar = () => {
     const { data } = await getHttpRequest("front/coach/getImage");
     dispatch(setImage(data.user.fileName));
   };
+  
 
   useEffect(() => {
     getProfilePic();

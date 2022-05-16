@@ -6,6 +6,8 @@ import { getHttpRequest, postHttpRequest } from "../../../../axios";
 import { Tabs, Tab } from "react-bootstrap";
 import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
+import Reviews from "../../../app/pages/Reviews/Reviews";
+import moment from "moment";
 
 const CoachProfile = (props) => {
   const mediaPath = process.env.REACT_APP_IMG;
@@ -17,9 +19,13 @@ const CoachProfile = (props) => {
   const id = url.split("/").pop();
   const [coachList, setCoachList] = useState([]);
   const history = useHistory();
+  const [review, setReview] = useState();
 
   useEffect(async () => {
     $("html,body").animate({ scrollTop: 0 }, "slow");
+    await getHttpRequest(`front/review/get/${id}`).then((response) => {
+      setReview(response.data.review);
+    });
     let res = await getHttpRequest(`/front/coach/get/${id}`);
     if (res) {
       setCoachProfileData(res?.data?.coach);
@@ -312,11 +318,61 @@ const CoachProfile = (props) => {
                 </div>
               </Tab>
 
-
               {/* <!-- Reviews Content --> */}
               <Tab eventKey="review" title="Reviews">
-                <div role="tabpanel" id="doc_reviews" className="tab-pane">
-              
+                <div role="tabpanel" id="doc_reviews" className="tab-pane doc-review review-listing">
+                  <ul>
+                    <li>
+                      {console.log("review", review)}
+                      {review && review?.length > 0
+                        ? review?.map((item, idx) => {
+                            return (
+                              <div className="comment">
+                                <img
+                                  className="avatar rounded-circle"
+                                  alt="User Image"
+                                  src="/assets/img/patients/patient2.jpg"
+                                />
+                                <div className="comment-body">
+                                  <div className="meta-data">
+                                    <span className="comment-author">
+                                      {item?.reviewBy?.firstname}&nbsp;
+                                      {item?.reviewBy?.lastname}
+                                    </span>
+                                    <span className="comment-date">
+                                      {moment(item?.createdAt).fromNow()}
+                                    </span>
+                                    <div className="review-count rating">
+                                      <i className="fas fa-star filled"></i>
+                                      <i className="fas fa-star filled"></i>
+                                      <i className="fas fa-star filled"></i>
+                                      <i className="fas fa-star filled"></i>
+                                      <i className="fas fa-star filled"></i>
+                                    </div>
+                                  </div>
+                                  <strong> {item.title}</strong>
+                                  <p className="comment-content">
+                                    {" "}
+                                    {item.comment}
+                                  </p>
+                                  <div className="comment-reply">
+                                    <p className="recommend-btn">
+                                      <span>Recommend?</span>
+                                      <a href="#" className="like-btn">
+                                        <i className="far fa-thumbs-up"></i>Yes
+                                      </a>
+                                      <a href="#" className="dislike-btn">
+                                        <i className="far fa-thumbs-down"></i>No
+                                      </a>
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        : "else"}
+                    </li>
+                  </ul>
                 </div>
               </Tab>
               {/* <!-- /Reviews Content --> */}
