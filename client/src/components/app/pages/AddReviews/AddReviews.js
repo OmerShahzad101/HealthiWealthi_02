@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from "react";
+import ReactStars from "react-rating-stars-component";
 import { useSelector } from "react-redux";
-import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import {
+  getHttpRequest,
+  postHttpRequest,
+  putHttpRequest,
+} from "../../../../axios";
 import Toast from "../../../common/toast/Toast";
 
 const AddReviews = () => {
   const id = useSelector((state) => state.auth.user.userid);
   const userid = useSelector((state) => state.auth.user.userid);
   const [coachDetail, setCoachDetail] = useState();
+  const [review, setReview] = useState();
+  const [bool, setBool] = useState(false);
 
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`).then((res) => {
       setCoachDetail(res.data.client.accociatedCoach);
     });
+    
+    getHttpRequest(`/front/review/get/${userid}`).then((res) => {
+      setReview(res?.data?.review[0]);
+      // setCoachDetail((state) => {console.log(state); return state})
+    });
   }, []);
-  const initialvalues = {
-    score: "",
-    title: "",
-    comment: "",
-    reviewBy: id,
-    reviewTo: coachDetail?._id,
-  };
-  const [review, setReview] = useState(initialvalues);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReview({
       ...review,
       [name]: value,
       reviewTo: coachDetail?._id,
+      reviewBy: id,
     });
   };
 
   const addReview = () => {
-    debugger;
-
     postHttpRequest("front/review/create", review).then((response) => {
       Toast.fire({
         icon: "success",
@@ -47,6 +51,14 @@ const AddReviews = () => {
       type: 7,
     });
   };
+  const ratingChanged = (newRating) => {
+    setReview({
+      ...review,
+      score: newRating,
+      reviewTo: coachDetail?._id,
+      reviewBy: id,
+    });
+  };
   return (
     <div className="write-review col-md-7 col-lg-8 col-xl-9">
       <h4>
@@ -58,66 +70,21 @@ const AddReviews = () => {
 
       {/* <!-- Write Review Form --> */}
       <form>
-        <div className="form-group">
-          <div className="star-rating">
-            <input
-              id="star-5"
-              type="radio"
-              name="score"
-              value="5"
-              onChange={handleChange}
-            />
-            <label htmlFor="star-5" title="5 stars">
-              <i className="active fa fa-star"></i>
-            </label>
-            <input
-              id="star-4"
-              type="radio"
-              name="score"
-              value="4"
-              onChange={handleChange}
-            />
-            <label htmlFor="star-4" title="4 stars">
-              <i className="active fa fa-star"></i>
-            </label>
-            <input
-              id="star-3"
-              type="radio"
-              name="score"
-              value="3"
-              onChange={handleChange}
-            />
-            <label htmlFor="star-3" title="3 stars">
-              <i className="active fa fa-star"></i>
-            </label>
-            <input
-              id="star-2"
-              type="radio"
-              name="score"
-              value="2"
-              onChange={handleChange}
-            />
-            <label htmlFor="star-2" title="2 stars">
-              <i className="active fa fa-star"></i>
-            </label>
-            <input
-              id="star-1"
-              type="radio"
-              name="score"
-              value="1"
-              onChange={handleChange}
-            />
-            <label htmlFor="star-1" title="1 star">
-              <i className="active fa fa-star"></i>
-            </label>
-          </div>
-        </div>
+       
+  
+        <ReactStars
+          value={review?.score}
+          count={5}
+          onChange={ratingChanged}
+          size={24}
+          activeColor="#ffd700" 
+        />
         <div className="form-group">
           <label>Title of your review</label>
           <input
             onChange={handleChange}
             name="title"
-            value={review.title}
+            value={review?.title}
             className="form-control"
             type="text"
             placeholder="If you could say it in one sentence, what would you say?"
@@ -129,7 +96,7 @@ const AddReviews = () => {
           <textarea
             onChange={handleChange}
             name="comment"
-            value={review.comment}
+            value={review?.comment}
             id="review_desc"
             maxLength="100"
             className="form-control"

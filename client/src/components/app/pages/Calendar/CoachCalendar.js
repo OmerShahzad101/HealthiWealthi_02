@@ -12,12 +12,15 @@ const CoachCalendar = ({ availabilityTab }) => {
   const [selections, setSelections] = useState([]);
   const [dates, setDates] = useState([]);
   const [loadcalender, setLoadcalender] = useState(false);
+  const [refreshcalender, setRefreshcalender] = useState(false);
+
 
   function loadMoreEvents(calendarId, start, end) {
-    console.log("calendarId", calendarId, start, end);
+    // console.log("calendarId", calendarId, start, end);
   }
 
   useEffect(() => {
+
     getHttpRequest(`/front/schedule/get/${userid}`)
       .then((response) => {
         if (!response) {
@@ -46,7 +49,7 @@ const CoachCalendar = ({ availabilityTab }) => {
       .catch((e) => {
         console.log("Something went wrong...");
       });
-  }, []);
+  }, [refreshcalender]);
 
   return (
     availabilityTab === "availability" && (
@@ -83,36 +86,43 @@ const CoachCalendar = ({ availabilityTab }) => {
                         },
                       ]}
                       onChange={async (selections) => {
+                        // debugger
                         let dates = [];
                         selections.forEach(({ start, end }) => {
-                          console.log("Start:", start, "End:", end);
-                          // console.log( start.diff(end),"timeduff")
-                          dates.push(moment(start).format("MM/DD/YYYY"));
+                          var checkHours = moment.utc(moment(end, "HH:mm").diff(moment(start, "HH:mm"))).format("HH:mm")
+                          if(moment.duration(checkHours).asMinutes() % 60 == 0){
+                            dates.push(moment(start).format("MM/DD/YYYY"));
+                          }
+                          else{
+                            alert("Minimum Hour slot can be selected")
+                            window.location.reload()
+                          }
+                          
                         });
-          
+
                         var formData = {
                           userId: userid,
                           selections: JSON.stringify(selections),
                         };
 
-                        var response = await getHttpRequest(
-                          `front/schedule/get/${userid}`
+                        // var response = await getHttpRequest(
+                        //   `front/schedule/get/${userid}`
+                        // );
+                        // if (response) {
+                          
+                        // }
+                        var result = await postHttpRequest(
+                          "front/schedule/set",
+                          formData
                         );
-                        console.log(response, "responseOnChnage");
-                        if (response) {
-                          var result = await postHttpRequest(
-                            "front/schedule/set",
-                            formData
-                          );
-                          console.log(result, "result");
-                          if (result.status === 200) {
-                            Toast.fire({
-                              icon: "success",
-                              title: "Event registered successfully",
-                            });
-                          } else if (result.status === 500) {
-                            console.log("status500");
-                          }
+                        if (result.status === 200) {
+                          Toast.fire({
+                            icon: "success",
+                            title: "Event registered successfully",
+                          });
+                          setRefreshcalender(!refreshcalender)
+                        } else if (result.status === 500) {
+                          console.log("status500");
                         }
                       }}
                       onEventsRequested={({
