@@ -880,6 +880,7 @@ button.bg-danger:hover {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  border-radius: 50%;
 }
 .avatar-title {
   width: 100%;

@@ -41,7 +41,7 @@ const SearchCoach = () => {
     const { data } =  await getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`);
     if (data?.success === true) {
       console.log(data)
-      dispatch(setCoachesList(data.data));
+      dispatch(setCoachesList(data.data.searchedData));
     }
     setLoading(false)
   }, []);
@@ -93,7 +93,7 @@ const SearchCoach = () => {
     const { data } = await
       getHttpRequest(`front/search/get?name=${values.name}&gender=${values.gender}&services=${values.services}`) ;
     if (data?.success === true) {
-      dispatch(setCoachesList(data.data));
+      dispatch(setCoachesList(data.data.searchedData));
     }
 
     history.replace({

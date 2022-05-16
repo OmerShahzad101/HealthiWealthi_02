@@ -8,6 +8,7 @@ import Toast from "../../../common/toast/Toast";
 import { LOGIN } from "../../../../router/constants/ROUTES";
 import Reviews from "../../../app/pages/Reviews/Reviews";
 import moment from "moment";
+import ReactStars from "react-rating-stars-component";
 
 const CoachProfile = (props) => {
   const mediaPath = process.env.REACT_APP_IMG;
@@ -106,6 +107,7 @@ const CoachProfile = (props) => {
                   <p className="doc-department">
                     {coachProfileData.specialization}
                   </p>
+
                   <div className="clinic-details">
                     <p className="doc-location">
                       <i className="fas fa-map-marker-alt"></i>
@@ -320,57 +322,68 @@ const CoachProfile = (props) => {
 
               {/* <!-- Reviews Content --> */}
               <Tab eventKey="review" title="Reviews">
-                <div role="tabpanel" id="doc_reviews" className="tab-pane doc-review review-listing">
+                <div
+                  role="tabpanel"
+                  id="doc_reviews"
+                  className="tab-pane doc-review review-listing"
+                >
                   <ul>
                     <li>
-                      {console.log("review", review)}
-                      {review && review?.length > 0
-                        ? review?.map((item, idx) => {
-                            return (
-                              <div className="comment">
+                      {review && review?.length > 0 ? (
+                        review?.map((item, idx) => {
+                          return (
+                            <div className="comment">
+                              {item.reviewBy?.fileName?.length > 20 ? (
                                 <img
-                                  className="avatar rounded-circle"
+                                  className=" rounded-circle notification-img"
+                                  src={item.reviewBy?.fileName}
                                   alt="User Image"
-                                  src="/assets/img/patients/patient2.jpg"
                                 />
-                                <div className="comment-body">
-                                  <div className="meta-data">
-                                    <span className="comment-author">
-                                      {item?.reviewBy?.firstname}&nbsp;
-                                      {item?.reviewBy?.lastname}
-                                    </span>
-                                    <span className="comment-date">
-                                      {moment(item?.createdAt).fromNow()}
-                                    </span>
-                                    <div className="review-count rating">
-                                      <i className="fas fa-star filled"></i>
-                                      <i className="fas fa-star filled"></i>
-                                      <i className="fas fa-star filled"></i>
-                                      <i className="fas fa-star filled"></i>
-                                      <i className="fas fa-star filled"></i>
-                                    </div>
-                                  </div>
-                                  <strong> {item.title}</strong>
-                                  <p className="comment-content">
-                                    {" "}
-                                    {item.comment}
-                                  </p>
-                                  <div className="comment-reply">
-                                    <p className="recommend-btn">
-                                      <span>Recommend?</span>
-                                      <a href="#" className="like-btn">
-                                        <i className="far fa-thumbs-up"></i>Yes
-                                      </a>
-                                      <a href="#" className="dislike-btn">
-                                        <i className="far fa-thumbs-down"></i>No
-                                      </a>
-                                    </p>
-                                  </div>
+                              ) : (
+                                <img
+                                  className=" rounded-circle notification-img"
+                                  src={
+                                    item?.reviewBy?.fileName
+                                      ? mediaPath + item.reviewBy?.fileName
+                                      : mediaPath + "avatar.jpg"
+                                  }
+                                  alt="User"
+                                />
+                              )}
+                              <div className="comment-body">
+                                <div className="meta-data">
+                                  <span className="comment-author">
+                                    {item?.reviewBy?.firstname}&nbsp;
+                                    {item?.reviewBy?.lastname}
+                                  </span>
+                                  <span className="comment-date">
+                                    {moment(item?.createdAt).fromNow()}
+                                  </span>
+                                  {review ? (
+                                    <ReactStars
+                                      value={item.score}
+                                      count={5}
+                                      size={24}
+                                      activeColor="#ffd700"
+                                    />
+                                  ) : (
+                                    " "
+                                  )}
                                 </div>
+                                <strong> {item.title}</strong>
+                                <p className="comment-content">
+                                  {" "}
+                                  {item.comment}
+                                </p>
                               </div>
-                            );
-                          })
-                        : "else"}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div>
+                          <span>You Don't Have any Reviews</span>
+                        </div>
+                      )}
                     </li>
                   </ul>
                 </div>

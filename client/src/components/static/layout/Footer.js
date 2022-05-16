@@ -143,35 +143,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <div className="container-fluid">
-          <div className="copyright">
-            <div className="row">
-              <div className="col-md-6 col-lg-6">
-                <div className="copyright-text">
-                  <p className="mb-0">
-                    {/* <a href="templateshub.net">Templates Hub</a> */}
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-6">
-                <div className="copyright-menu">
-                  <ul className="policy-menu">
-                    <li>
-                      <Link to="/terms-and-conditions">
-                        Terms and Conditions
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/privacy-policy">Policy</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+   
     </footer>
   );
 }

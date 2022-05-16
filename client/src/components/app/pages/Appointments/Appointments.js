@@ -6,12 +6,15 @@ import {
   postHttpRequest,
   putHttpRequest,
 } from "../../../../axios";
+import imagePath from "../../../../utils/url/imagePath";
+
 
 const Appointments = () => {
   const coachId = useSelector((state) => state.auth.user.userid);
   const [appointments, setAppointments] = useState();
   const [appointmentStatus, setAppointmentStatus] = useState(false);
   const mediaPath = process.env.REACT_APP_IMG;
+  const userImage = useSelector((state) => state.auth.user.fileName);
 
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
@@ -27,7 +30,7 @@ const Appointments = () => {
       });
   }, [appointmentStatus]);
 
-  const updateBooking = async (value, _id , CliendId) => {
+  const updateBooking = async (value, _id, CliendId) => {
     const statusDetail = {
       bookingStatus: value,
       _id,
@@ -56,15 +59,23 @@ const Appointments = () => {
                 <div className="appointments">
                   <div className="appointment-list">
                     <div className="profile-info-widget">
-                      <img
-                        className="booking-doc-img resize"
-                        src={
-                          item?.client?.fileName
-                            ? mediaPath + item.client?.fileName
-                            : mediaPath + "avatar.jpg"
-                        }
-                        alt="User"
-                      />
+                      {item.client?.fileName?.length > 20 ? (
+                        <img
+                          className="booking-doc-img resize"
+                          src={item.client?.fileName}
+                          alt="User Image"
+                        />
+                      ) : (
+                        <img
+                          className="booking-doc-img resize"
+                          src={
+                            item?.client?.fileName
+                              ? mediaPath + item.client?.fileName
+                              : mediaPath + "avatar.jpg"
+                          }
+                          alt="User"
+                        />
+                      )}
                       <div className="profile-det-info">
                         <h3>
                           {" "}
@@ -102,13 +113,17 @@ const Appointments = () => {
                     <div className="appointment-action">
                       {/* <a href="#" className="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details"><i className="far fa-eye"></i> View</a> */}
                       <button
-                        onClick={() => updateBooking("Approved", item._id , item.client._id)}
+                        onClick={() =>
+                          updateBooking("Approved", item._id, item.client._id)
+                        }
                         className="btn btn-sm bg-success-light"
                       >
                         <i className="fas fa-check"></i> Accept
                       </button>
                       <button
-                        onClick={() => updateBooking("Cancelled", item._id ,  item.client._id)}
+                        onClick={() =>
+                          updateBooking("Cancelled", item._id, item.client._id)
+                        }
                         className="btn btn-sm bg-danger-light"
                       >
                         <i className="fas fa-times"></i> Cancel

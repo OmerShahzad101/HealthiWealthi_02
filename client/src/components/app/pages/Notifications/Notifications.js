@@ -8,9 +8,11 @@ import {
   putHttpRequest,
 } from "../../../../axios";
 import { FaTrash } from "react-icons/fa";
+import imagePath from "../../../../utils/url/imagePath";
 const Notifications = () => {
   const id = useSelector((state) => state.auth.user.userid);
   const mediaPath = process.env.REACT_APP_IMG;
+  const userImage = useSelector((state) => state.auth.user.fileName);
 
   const [notification, setNotification] = useState();
   useEffect(() => {
@@ -45,15 +47,24 @@ const Notifications = () => {
                   className="m-0 position-relative"
                   onClick={readNotification(item._id)}
                 >
-                  <img
+                  {item.from_info[0]?.fileName?.length > 20 ? (
+                    <img
+                      className="avatar-img rounded-circle notification-img"
+                      src={item.from_info[0]?.fileName}
+                      alt="User Image"
+                    />
+                  ) : (
+                    <img
                     className="avatar-img rounded-circle notification-img"
-                    alt="User"
-                    src={
-                      item?.from_info[0]?.fileName
-                        ? mediaPath + item.from_info[0].fileName
-                        : mediaPath + "avatar.jpg"
-                    }
-                  />
+                      src={
+                        item?.from_info[0]?.fileName
+                          ? mediaPath + item.from_info[0]?.fileName
+                          : mediaPath + "avatar.jpg"
+                      }
+                      alt="User"
+                    />
+                  )}
+
                   <strong>
                     {" "}
                     {item?.from_info[0].firstname}&nbsp;

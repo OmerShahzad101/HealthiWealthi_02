@@ -36,17 +36,20 @@ const CmsPage = () => {
   return (
     <div className="p-0 container-fluid">
       <div className="website-banner container-fluid"></div>
-      {isLoading ? 
-        <Spinner className="my-5" animation="grow" style={{display:"block", margin: "auto"}}/>
-       : 
+      {isLoading ? (
+        <Spinner
+          className="my-5"
+          animation="grow"
+          style={{ display: "block", margin: "auto" }}
+        />
+      ) : (
         <div className="our-team py-5 container">
           <div className="trending-property">
-            <p>WE HAVE PROFESSIONAL AGENTS</p>
             <h3>{cmsPage?.name}</h3>
           </div>
           <div dangerouslySetInnerHTML={{ __html: cmsPage?.content }} />
         </div>
-      }
+      )}
     </div>
   );
 };

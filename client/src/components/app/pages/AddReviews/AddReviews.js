@@ -13,16 +13,16 @@ const AddReviews = () => {
   const userid = useSelector((state) => state.auth.user.userid);
   const [coachDetail, setCoachDetail] = useState();
   const [review, setReview] = useState();
-  const [bool, setBool] = useState(false);
+  const [storeReview, setStoreReview] = useState();
 
   useEffect(() => {
     getHttpRequest(`/front/client/get/${userid}`).then((res) => {
       setCoachDetail(res.data.client.accociatedCoach);
     });
-    
+
     getHttpRequest(`/front/review/get/${userid}`).then((res) => {
       setReview(res?.data?.review[0]);
-      // setCoachDetail((state) => {console.log(state); return state})
+      setStoreReview(res?.data?.review[0]?.title);
     });
   }, []);
 
@@ -37,12 +37,19 @@ const AddReviews = () => {
   };
 
   const addReview = () => {
-    postHttpRequest("front/review/create", review).then((response) => {
-      Toast.fire({
-        icon: "success",
-        title: response.data.message,
-      });
-    });
+    storeReview
+      ? putHttpRequest("front/review/edit", review).then((response) => {
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          });
+        })
+      : postHttpRequest("front/review/create", review).then((response) => {
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          });
+        });
     postHttpRequest("front/notification/create", {
       from: userid,
       to: coachDetail?._id,
@@ -70,15 +77,23 @@ const AddReviews = () => {
 
       {/* <!-- Write Review Form --> */}
       <form>
-       
-  
-        <ReactStars
-          value={review?.score}
-          count={5}
-          onChange={ratingChanged}
-          size={24}
-          activeColor="#ffd700" 
-        />
+        {review ? (
+          <ReactStars
+            value={review.score}
+            count={5}
+            onChange={ratingChanged}
+            size={24}
+            activeColor="#ffd700"
+          />
+        ) : (
+          <ReactStars
+            
+            count={5}
+            onChange={ratingChanged}
+            size={24}
+            activeColor="#ffd700"
+          />
+        )}
         <div className="form-group">
           <label>Title of your review</label>
           <input
@@ -114,12 +129,13 @@ const AddReviews = () => {
           </div>
         </div>
         <div className="submit-section">
+          {console.log(storeReview)}
           <button
             type="button"
             onClick={addReview}
             className="btn btn-primary submit-btn"
           >
-            Add Review
+            {storeReview ? "Update Review" : "Add Review "}
           </button>
         </div>
       </form>

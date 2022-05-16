@@ -22,7 +22,9 @@ const CoachDashboard = () => {
   useEffect(() => {
     getHttpRequest(`/front/booking/get/${coachId}`)
       .then((response) => {
-        const newArr = response?.data?.BookingData.filter(item => item.status == "Approved")
+        const newArr = response?.data?.BookingData.filter(
+          (item) => item.status == "Approved"
+        );
         tabs(newArr);
       })
       .catch((e) => {
@@ -31,7 +33,7 @@ const CoachDashboard = () => {
   }, []);
 
   const tabs = (newArr) => {
-      newArr.map((item, idx) => {
+    newArr.map((item, idx) => {
       let currentDate = new Date();
       currentDate = moment(currentDate).format("DD-MM-YY");
       let itemDate = moment(item.bookingDate).format("DD-MM-YY");
@@ -151,8 +153,7 @@ const CoachDashboard = () => {
                             {upcomingAppointment &&
                             upcomingAppointment.length > 0 ? (
                               upcomingAppointment.map((item, idx) => {
-                                return item?.client?.firstname 
-                                   ? (
+                                return item?.client?.firstname ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -160,16 +161,25 @@ const CoachDashboard = () => {
                                           to="/client-profile"
                                           className="avatar avatar-sm mr-2"
                                         >
-                                          <img
-                                            className="avatar-img rounded-circle"
-                                            src={
-                                              item?.client?.fileName
-                                                ? mediaPath +
-                                                  item.client?.fileName
-                                                : mediaPath + "avatar.jpg"
-                                            }
-                                            alt="User"
-                                          />
+                                          {item.client?.fileName?.length >
+                                          20 ? (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={item.client?.fileName}
+                                              alt="User Image"
+                                            />
+                                          ) : (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={
+                                                item?.client?.fileName
+                                                  ? mediaPath +
+                                                    item.client?.fileName
+                                                  : mediaPath + "avatar.jpg"
+                                              }
+                                              alt="User"
+                                            />
+                                          )}
                                         </a>
                                         <div>
                                           &nbsp;
@@ -215,9 +225,7 @@ const CoachDashboard = () => {
                           <tbody>
                             {todayAppointment && todayAppointment.length > 0 ? (
                               todayAppointment.map((item, idx) => {
-                                
-                                return item?.client?.firstname 
-                                  ? (
+                                return item?.client?.firstname ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -225,16 +233,25 @@ const CoachDashboard = () => {
                                           to="/client-profile"
                                           className="avatar avatar-sm mr-2"
                                         >
-                                          <img
-                                            className="avatar-img rounded-circle"
-                                            src={
-                                              item?.client?.fileName
-                                                ? mediaPath +
-                                                  item.client?.fileName
-                                                : mediaPath + "avatar.jpg"
-                                            }
-                                            alt="User"
-                                          />
+                                          {item.client?.fileName?.length >
+                                          20 ? (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={item.client?.fileName}
+                                              alt="User Image"
+                                            />
+                                          ) : (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={
+                                                item?.client?.fileName
+                                                  ? mediaPath +
+                                                    item.client?.fileName
+                                                  : mediaPath + "avatar.jpg"
+                                              }
+                                              alt="User"
+                                            />
+                                          )}
                                         </a>
                                         <div>
                                           &nbsp;&nbsp;
@@ -297,8 +314,7 @@ const CoachDashboard = () => {
                           <tbody>
                             {pastAppointment && pastAppointment.length > 0 ? (
                               pastAppointment.map((item, idx) => {
-                                return item?.client?.firstname
-                                  ? (
+                                return item?.client?.firstname ? (
                                   <tr>
                                     <td>
                                       <h2 className="table-avatar">
@@ -306,16 +322,25 @@ const CoachDashboard = () => {
                                           to="/client-profile"
                                           className="avatar avatar-sm mr-2"
                                         >
-                                          <img
-                                            className="avatar-img rounded-circle"
-                                            src={
-                                              item?.client?.fileName
-                                                ? mediaPath +
-                                                  item.client?.fileName
-                                                : mediaPath + "avatar.jpg"
-                                            }
-                                            alt="User"
-                                          />
+                                          {item.client?.fileName?.length >
+                                          20 ? (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={item.client?.fileName}
+                                              alt="User"
+                                            />
+                                          ) : (
+                                            <img
+                                              className="booking-doc-img "
+                                              src={
+                                                item?.client?.fileName
+                                                  ? mediaPath +
+                                                    item.client?.fileName
+                                                  : mediaPath + "avatar.jpg"
+                                              }
+                                              alt="User"
+                                            />
+                                          )}
                                         </a>
                                         <div>
                                           &nbsp;&nbsp;
@@ -328,7 +353,6 @@ const CoachDashboard = () => {
                                     <td>{idx + 1}</td>
                                     <td>{item.slots}</td>
                                     <td>{item.bookingDate}</td>
-                                  
                                   </tr>
                                 ) : (
                                   ""

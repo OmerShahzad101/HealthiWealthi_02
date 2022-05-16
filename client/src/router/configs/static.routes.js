@@ -31,13 +31,6 @@ const PricingWithSuspense = withSuspense(Pricing);
 const CmsPage = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/cmsPages/CmsPage'));
 const CmsPageWithSuspense = withSuspense(CmsPage);
 
-//TermsAndCOndition
-const TermsAndCondition = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/TermsAndCondition/TermsAndCondition'));
-const TermsAndConditioneWithSuspense = withSuspense(TermsAndCondition);
-
-//PrivacyPolicy
-const PrivacyPolicy = lazy(() => import(/* webpackChunkName: "SearchCoach" */'../../components/static/pages/PrivacyPolicy/PrivacyPolicy'));
-const PrivacyPolicyeWithSuspense = withSuspense(PrivacyPolicy);
 
 // Route configurations for settings
 function getRouteConfigs() {
@@ -83,18 +76,6 @@ function getRouteConfigs() {
             path: CMSPAGE,
             exact: true,
             element: <CmsPageWithSuspense />,
-        },
-        {
-            //TermsAndConditione
-            path: TERMSANDCONDITION,
-            exact: true,
-            element: <TermsAndConditioneWithSuspense />,
-        },
-        {
-            //PrivacyPolicy
-            path: PRIVACYPOLICY,
-            exact: true,
-            element: <PrivacyPolicyeWithSuspense />,
         },
         {
             // NOT FOUND ROUTE
