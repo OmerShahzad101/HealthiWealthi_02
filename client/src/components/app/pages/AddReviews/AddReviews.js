@@ -86,13 +86,7 @@ const AddReviews = () => {
             activeColor="#ffd700"
           />
         ) : (
-          <ReactStars
-            
-            count={5}
-            onChange={ratingChanged}
-            size={24}
-            activeColor="#ffd700"
-          />
+         ""
         )}
         <div className="form-group">
           <label>Title of your review</label>

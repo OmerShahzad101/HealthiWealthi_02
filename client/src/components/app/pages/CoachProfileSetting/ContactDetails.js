@@ -38,7 +38,11 @@ const ContactDetails = () => {
   function updateProfileHandler(event) {
     event.preventDefault();
 
-    const payload = profileData;
+    let payload = profileData;
+    payload = {
+      ...profileData,
+      services: JSON.stringify(profileData.services),
+    };
     const errors = validate(payload);
 
     if (Object.keys(errors).length > 0) {
@@ -58,15 +62,14 @@ const ContactDetails = () => {
           return;
         }
         if (result.data.success === true) {
-
           const userData = {
             response: result.data.coach,
             res: result.data.coach,
           };
-            dispatch(setUser(userData));
-        
-            localStorage.removeItem("user");
-            localStorage.setItem("user", JSON.stringify(userData));
+          dispatch(setUser(userData));
+
+          localStorage.removeItem("user");
+          localStorage.setItem("user", JSON.stringify(userData));
 
           // dispatch(setCoachProfile({ res: result.data.coach }));
           Toast.fire({
@@ -89,7 +92,7 @@ const ContactDetails = () => {
       });
     window.scrollTo(0, 0);
   }
- 
+
   useEffect(() => {
     getHttpRequest(`/front/coach/get/${userid}`)
       .then((response) => {

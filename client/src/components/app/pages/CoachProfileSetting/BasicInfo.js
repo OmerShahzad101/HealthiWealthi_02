@@ -247,8 +247,8 @@ const BasicInfo = () => {
       label: item.label,
       value: item.value,
     }));
-    console.log(alteredServices);
-    console.log("hello tehre", JSON.stringify(alteredServices));
+    // console.log(alteredServices);
+    // console.log("hello tehre", JSON.stringify(alteredServices));
     // let some = JSON.stringify(alteredServices)
     setprofileData({
       ...profileData,
