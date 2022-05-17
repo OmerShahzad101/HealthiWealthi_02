@@ -4,7 +4,11 @@ import Slider from "react-slick";
 
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { getHttpRequest, postHttpRequest } from "../../../../axios";
+import {
+  getHttpRequest,
+  postHttpRequest,
+  putHttpRequest,
+} from "../../../../axios";
 import { useSelector } from "react-redux";
 import Toast from "../../../common/toast/Toast";
 import { CLIENT_DASHBOARD } from "../../../../router/constants/ROUTES";
@@ -105,6 +109,7 @@ const ClientCalendar = (props) => {
               bookingDate,
               meetingLink: response.data.meetLink,
             }).then((res) => {
+              putHttpRequest("/front/client/edit", {accociatedCoach: props.id});
               postHttpRequest("front/notification/create", {
                 from: userid,
                 to: props.id,
@@ -112,7 +117,6 @@ const ClientCalendar = (props) => {
                 isRead: "false",
                 type: 1,
               });
-              console.log(res);
               Toast.fire(
                 "Your Appoinment is Booked on ",
                 "Date: " + date + ", Time: " + timeStart + " to " + timeEnd,
